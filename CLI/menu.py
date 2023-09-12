@@ -25,6 +25,15 @@ class Menu():
         return user_input
     
     def navigate_next_menu(self, menu_option_selected: str):
+        """Navigate to thje next menu based on the user's selection
+        
+        This function takes a menu option and navigated to the next appropiate menu
+        based on the user's input. The function supports options "Help", "Config", 
+        "Show PCAP", and "Alert".
+
+        Args:
+            menu_option_selected (str): The menu option that the user has selected.
+        """
         
         # Omitted "Show PCAP X" because it's uncertain how we will allow user to identify or search for specific PCAP file.
         option_selected = self.get_user_input(menu_option_selected,{"Help","Config","Show PCAP","Alert"})
