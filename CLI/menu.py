@@ -1,3 +1,4 @@
+from config import ConfigureCLI
 
 class Menu():
     """A class for common functions the CLI will use across different menus.
@@ -43,7 +44,10 @@ class Menu():
                 # call class for help menu
                 pass
             case _ if option_selected == "Config":
-                # call class for help Config
+                print(">> Config")
+                path = input("Enter path to Configuration file")
+                ConfigureCLI.configure(path)
+                
                 pass
             case _ if option_selected == "Show PCAP":
                 # call class for help Show PCAP
