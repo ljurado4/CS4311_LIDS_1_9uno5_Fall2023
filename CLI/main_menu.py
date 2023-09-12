@@ -19,13 +19,13 @@ class MainMenu:
         menu = Menu()
 
         print("Main Menu")
-        next_menu = input(">>")
-
+        
         print(
             "name: John Doe\n"
             "IP: 192.168.1.100\n"
             "MAC: 00:1A:2B:3C:4D:5E\n"
             "PORT: 8080"
         )
+        next_menu = input(">>")
         menu.navigate_next_menu(next_menu)
 
