@@ -1,4 +1,4 @@
-from menu import menu 
+from menu import Menu 
 
 class MainMenu:
     """
@@ -16,7 +16,7 @@ class MainMenu:
         the next appropiate menu
         """
 
-        menu = menu.Menu()
+        menu = Menu()
 
         print("Main Menu")
         next_menu = input(">>")

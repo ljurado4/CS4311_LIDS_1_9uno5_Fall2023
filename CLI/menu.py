@@ -24,7 +24,7 @@ class Menu():
 
         return user_input
     
-    def navigate_next_menu(self, menu_option_selected: str):
+    def navigate_next_menu(self, menu_option_selected: str) -> None:
         """Navigate to thje next menu based on the user's selection
         
         This function takes a menu option and navigated to the next appropiate menu
