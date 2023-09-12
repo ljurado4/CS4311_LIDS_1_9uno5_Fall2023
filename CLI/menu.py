@@ -1,4 +1,4 @@
-from config import ConfigureCLI
+from config_menu import ConfigureCLI
 
 class Menu():
     """A class for common functions the CLI will use across different menus.
