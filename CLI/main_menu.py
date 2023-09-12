@@ -1,5 +1,11 @@
 
 class MainMenu:
-    
+
     def show_menu():
-        print("Main Menu")
+        print(
+            "name:\n"
+            "IP:\n"
+            "MAC:\n"
+            "PORT:\n"
+        )
+        
