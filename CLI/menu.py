@@ -1,4 +1,5 @@
 from config_menu import ConfigureCLI
+from help_menu import HelpMenu
 
 class Menu():
     """A class for common functions the CLI will use across different menus.
@@ -42,6 +43,8 @@ class Menu():
         match option_selected:
             case _ if option_selected == "Help":
                 # call class for help menu
+                menu = HelpMenu
+                menu.display_help
                 pass
             case _ if option_selected == "Config":
                 print(">> Config")
