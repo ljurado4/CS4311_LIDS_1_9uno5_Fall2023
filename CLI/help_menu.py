@@ -11,7 +11,7 @@ class HelpMenu:
         the user may use to access the desired page and displays the purpose of the page.
         The pages include Config, ShowPCAP, and Alert
         """
-        menu = Menu()
+        
         print("The following are system commands to change from the system windows and what each function does.")
         print("\tConfig: Parse the XML file and updates whitelist/blacklist, etc.")
         print("\tShowPCAP: Display information from the latest PCAP.")
