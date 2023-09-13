@@ -1,8 +1,8 @@
-import main_menu as menu
+import main_menu
 
 def main():
-    start_menu = menu()
-    menu.show_menu()
+    start_menu = main_menu.MainMenu()
+    start_menu.show_menu()
     
 
 if __name__ == "__main__":

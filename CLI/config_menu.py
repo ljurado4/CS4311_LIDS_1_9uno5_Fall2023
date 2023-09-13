@@ -1,4 +1,4 @@
-from menu import Menu
+import menu
 
 
 class ConfigureCLI:
@@ -8,6 +8,6 @@ class ConfigureCLI:
         
         #parse xml file and update
 
-        menu = Menu()
+        menu = menu.Menu()
         next_menu = input(">> ")
         menu.navigate_next_menu(next_menu)

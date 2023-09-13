@@ -1,4 +1,4 @@
-from menu import Menu 
+import menu
 
 class MainMenu:
     """
@@ -8,7 +8,7 @@ class MainMenu:
     to diffrent menu's based on user input.
     """
 
-    def show_menu():
+    def show_menu(self):
         """Displays the main menu options to the user.
         
         Presents the main menu promt. After taking input, it 
@@ -16,7 +16,7 @@ class MainMenu:
         the next appropiate menu
         """
 
-        menu = Menu()
+        
 
         print("Main Menu")
         
@@ -26,6 +26,7 @@ class MainMenu:
             "MAC: 00:1A:2B:3C:4D:5E\n"
             "PORT: 8080"
         )
-        next_menu = input(">>")
-        menu.navigate_next_menu(next_menu)
+        menu_helper = menu.Menu()
+        next_menu = menu_helper.get_user_input(">> ",menu_helper.choice_set)
+        menu_helper.navigate_next_menu(next_menu)
 

@@ -7,6 +7,9 @@ class Menu():
     This class provides utility methods for obtaining and validating user input
     when navigating through diffrent menu options in CLI.
     """
+    def __init__(self) -> None:
+         # Omitted "Show PCAP X" because it's uncertain how we will allow user to identify or search for specific PCAP file.
+        self.choice_set = {"Help","Config","Show PCAP","Alert"}
     
     def get_user_input(self, message: str,valid_input: set) -> str:
         """Gets user input and validates input
@@ -15,7 +18,7 @@ class Menu():
             message (str): Message to be displayed to the user.
             valid_input (set): A set of valid inputs the user can enter on the terminal.
         """
-        user_input = input(message+"\n")
+        user_input = input(message)
         
         #Incorrect user input 
         while user_input not in valid_input:
@@ -37,26 +40,28 @@ class Menu():
             menu_option_selected (str): The menu option that the user has selected.
         """
         
-        # Omitted "Show PCAP X" because it's uncertain how we will allow user to identify or search for specific PCAP file.
-        option_selected = self.get_user_input(menu_option_selected,{"Help","Config","Show PCAP","Alert"})
-        
-        match option_selected:
-            case _ if option_selected == "Help":
+    
+  
+        match menu_option_selected:
+            case _ if menu_option_selected == "Help":
                 # call class for help menu
-                menu = HelpMenu
-                menu.display_help
-                pass
-            case _ if option_selected == "Config":
+                menu = HelpMenu()
+                menu.display_help()
+            case _ if menu_option_selected == "Config":
                 print(">> Config")
                 path = input("Enter path to Configuration file")
                 ConfigureCLI.configure(path)
                 
                 pass
-            case _ if option_selected == "Show PCAP":
+            case _ if menu_option_selected == "Show PCAP":
                 # call class for help Show PCAP
                 pass
-            case _ if option_selected == "Alert":
+            case _ if menu_option_selected == "Alert":
                 # call class for Alert menu
                 pass
+            case _ if menu_option_selected == "Exit":
+                print("Exiting")
+                exit()
+                
 
         
