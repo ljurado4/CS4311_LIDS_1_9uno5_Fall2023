@@ -9,6 +9,7 @@ class Menu():
     
     This class provides utility methods for obtaining and validating user input
     when navigating through diffrent menu options in CLI.
+    It also stores shared system configuration attributes.
     """
     host_name = ""
     ip_address = ""
@@ -23,6 +24,16 @@ class Menu():
         
     @classmethod
     def update_system_config(cls,hostname, ip_address, mac_address, open_ports, whitelisted_ips):
+        """
+        Updates the shared system configuration attributes.
+
+        Args:
+            hostname (str): The system's hostname.
+            ip_address (str): The system's IP address.
+            mac_address (str): The system's MAC address.
+            open_ports (list): A list of open ports on the system.
+            whitelisted_ips (list): A list of IPs that are whitelisted for the system.
+        """
         cls.host_name = hostname
         cls.ip_address = ip_address
         cls.mac_address = mac_address
