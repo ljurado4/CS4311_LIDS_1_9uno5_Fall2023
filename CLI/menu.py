@@ -10,7 +10,7 @@ class Menu():
     """
     def __init__(self) -> None:
          # Omitted "Show PCAP X" because it's uncertain how we will allow user to identify or search for specific PCAP file.
-        self.choice_set = {"Help","Config","Show PCAP","Alert"}
+        self.choice_set = {"Help","Config","Show PCAP","Alert","Exit"}
     
     def get_user_input(self, message: str,valid_input: set) -> str:
         """Gets user input and validates input
