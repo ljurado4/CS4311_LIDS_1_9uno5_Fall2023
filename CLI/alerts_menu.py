@@ -1,11 +1,11 @@
 import menu
-import tabulate
+from tabulate import tabulate
 
 
 class Alerts_CLI:
 
 
-    def display_Alerts(alertList):
+    def display_Alerts(self,alertList):
         
         header  = ["LVL","Time","IP","Port","Description"]
 
@@ -15,6 +15,6 @@ class Alerts_CLI:
         
         print(table)
         
-        menu = menu.Menu()
+        menu_instance = menu.Menu()
         next_menu = input(">>")
-        menu.navigate_next_menu(next_menu)
+        menu_instance.navigate_next_menu(next_menu)

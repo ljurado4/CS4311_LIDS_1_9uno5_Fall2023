@@ -1,7 +1,8 @@
-import config_menu
+import config_parser
 import help_menu
 import pcap_menu
 import alerts_menu
+import main_menu
 
 class Menu():
     """A class for common functions the CLI will use across different menus.
@@ -9,9 +10,25 @@ class Menu():
     This class provides utility methods for obtaining and validating user input
     when navigating through diffrent menu options in CLI.
     """
+    host_name = ""
+    ip_address = ""
+    mac_address = ""
+    open_ports = []
+    whitelisted_ips = []
+    
+    
     def __init__(self) -> None:
          # Omitted "Show PCAP X" because it's uncertain how we will allow user to identify or search for specific PCAP file.
-        self.choice_set = {"Help","Config","Show PCAP","Alert","Exit"}
+        self.choice_set = {"Help","Config","Show PCAP","Alert","Exit","Start Menu"}
+        
+    @classmethod
+    def update_system_config(cls,hostname, ip_address, mac_address, open_ports, whitelisted_ips):
+        cls.host_name = hostname
+        cls.ip_address = ip_address
+        cls.mac_address = mac_address
+        cls.open_ports = open_ports
+        cls.whitelisted_ips = whitelisted_ips
+    
     
     def get_user_input(self, message: str,valid_input: set) -> str:
         """Gets user input and validates input
@@ -45,14 +62,19 @@ class Menu():
     
   
         match menu_option_selected:
+            case _ if menu_option_selected == "Start Menu":
+                main_menu_instance = main_menu.MainMenu()
+                main_menu_instance.show_menu()
+
             case _ if menu_option_selected == "Help":
                 # call class for help menu
                 menu = help_menu.HelpMenu()
                 menu.display_help()
             case _ if menu_option_selected == "Config":
                 print(">> Config")
-                path = input("Enter path to Configuration file")
-                config_menu.ConfigureCLI.configure(path)
+                path = input(">> Enter configuration file name\n")
+                configuration = config_parser.ConfigureCLI()
+                configuration.configure(path)
             case _ if menu_option_selected == "Show PCAP":
                 # call class for help Show PCAP
                 pcap_menu_display = pcap_menu.PcapMenu()
@@ -67,7 +89,8 @@ class Menu():
                     [1, "11.6578", "192.128.0.1", 80, "fail login attempt"],
                     [2, "11.6578", "193.124.0.3", 4040, "Unknown host ping"],
                 ]
-                alerts_menu.display_Alerts(alertList)
+                alert_men = alerts_menu.Alerts_CLI()
+                alert_men.display_Alerts(alertList)
             case _ if menu_option_selected == "Exit":
                 print("Exiting")
                 exit()

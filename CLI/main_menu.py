@@ -15,12 +15,13 @@ class MainMenu:
         prints details and then uses the 'menu' module to navigate to
         the next appropriate menu.
         """
-        print("Main Menu")
+
+        menu_instance = menu.Menu()
         print(
-            "name: John Doe\n"
-            "IP: 192.168.1.100\n"
-            "MAC: 00:1A:2B:3C:4D:5E\n"
-            "PORT: 8080"
+            f'name: {menu_instance.host_name}\n'
+            f'IP: {menu_instance.ip_address}\n'
+            f'MAC: {menu_instance.mac_address}\n'
+            f'PORT(s): {" ".join(menu_instance.open_ports)}\n'
         )
 
         # Assuming 'menu.Menu()' creates an instance of the menu class.
