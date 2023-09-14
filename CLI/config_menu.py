@@ -1,13 +1,12 @@
-import menu
-
+# config_menu.py
 
 class ConfigureCLI:
     
-    def configure(path_config_file: str) -> None:
+    def configure(self, path_config_file: str) -> None:
+        from menu import Menu  # Move the import inside the function
 
-        
         #parse xml file and update
 
-        menu = menu.Menu()
+        menu_instance = Menu()
         next_menu = input(">> ")
-        menu.navigate_next_menu(next_menu)
+        menu_instance.navigate_next_menu(next_menu)
