@@ -33,7 +33,3 @@ class MainMenu:
         menu_instance.navigate_next_menu(next_menu_choice)
 
 
-# Testing MainMenu
-if __name__ == "__main__":
-    main_menu_instance = MainMenu()
-    main_menu_instance.show_menu()

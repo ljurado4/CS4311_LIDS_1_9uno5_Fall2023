@@ -14,7 +14,7 @@ class HelpMenu:
         
         print("The following are system commands to change from the system windows and what each function does.")
         print("\tConfig: Parse the XML file and updates whitelist/blacklist, etc.")
-        print("\tShowPCAP: Display information from the latest PCAP.")
+        print("\tShow PCAP: Display information from the latest PCAP.")
         print("\tAlert: Displays the Alerts.")
         menu_helper = menu.Menu()
         next_menu = menu_helper.get_user_input(">> ",menu_helper.choice_set)

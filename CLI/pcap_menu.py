@@ -1,4 +1,4 @@
-# pcap_menu.py
+import menu
 
 class PcapMenu:
     
@@ -23,3 +23,8 @@ class PcapMenu:
         print("12:34:56\t192.168.1.1\t192.168.1.2\tTCP\t64\tSample PCAP Description")
         
         # You can extend this display method to fetch and display real PCAP data as per [SRS 3.1.1-19]
+
+        menu_instance = menu.Menu()
+        next_menu = input(">> ")
+        menu_instance.navigate_next_menu(next_menu)
+
