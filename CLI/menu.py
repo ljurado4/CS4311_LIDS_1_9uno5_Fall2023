@@ -1,6 +1,7 @@
 import config_menu
 import help_menu
 import pcap_menu
+import alerts_menu
 
 class Menu():
     """A class for common functions the CLI will use across different menus.
@@ -59,7 +60,14 @@ class Menu():
             
             case _ if menu_option_selected == "Alert":
                 # call class for Alert menu
-                pass
+                print(">> Alert")
+                alertList = [
+                    [2, "11.6578", "192.128.0.1", 80, "Unknown host ping"],
+                    [3, "11.6578", "193.127.0.2", 27, "port scan"],
+                    [1, "11.6578", "192.128.0.1", 80, "fail login attempt"],
+                    [2, "11.6578", "193.124.0.3", 4040, "Unknown host ping"],
+                ]
+                alerts_menu.display_Alerts(alertList)
             case _ if menu_option_selected == "Exit":
                 print("Exiting")
                 exit()
