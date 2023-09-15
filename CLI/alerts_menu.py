@@ -1,4 +1,5 @@
 import menu
+#  Install 'tabulate' using `pip install tabulate`
 from tabulate import tabulate
 
 
