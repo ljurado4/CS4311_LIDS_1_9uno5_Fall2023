@@ -3,9 +3,9 @@
 class ConfigureCLI:
     
     def configure(self, path_config_file: str) -> None:
-        from menu import Menu  # Move the import inside the function
-
-        #parse xml file and update
+        """Configure the CLI based on an XML file."""
+        from menu import Menu  # Local import to avoid circular dependencies
+        # Parse xml file and update configurations here
 
         menu_instance = Menu()
         next_menu = input(">> ")
