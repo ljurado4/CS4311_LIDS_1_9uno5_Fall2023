@@ -15,16 +15,16 @@ class PcapMenu:
             "Time": "2023-09-16 12:01:23.456990",
             "Source": "192.168.1.100",
             "Destination": "192.168.1.2",
-            "Protocol": "TCP",
+            "Protocol": "UDP",
             "Length": 64,
-            "Description": "TCP Handshake SYN, ACK"
+            "Description": "UPD Handshake SYN, ACK"
         }
     ]
     
     def __init__(self) -> None:
         self.menu_helper = menu.Menu()
         self.valid_search_commands = [
-            "Time", "Source", "Protocol", "Length", "Description"]
+            "Time", "Source","Destination","Protocol", "Length", "Description"]
 
     def navigate_next_menu(self):
         menu_helper = menu.Menu()
@@ -42,7 +42,7 @@ class PcapMenu:
         """
         header = self.valid_search_commands
         
-        data = list(pcap_dictionary.values())
+        data = [list(pcap_dictionary.values())]
         
         table = tabulate(data, header, tablefmt="fancy_grid")
 
@@ -114,12 +114,13 @@ class PcapMenu:
                     
                     # Wrong search command
                     if not valid_search_command:
+                        print("Invalid search command")
                         pcap_search_type = self.menu_helper.get_user_input(
-                                "Invalid search command", self.valid_search_commands)
+                                "Enter search command \n", self.valid_search_commands)
                 
                 # TODO: Allow users to 'exit' to leave or 'menu' to return to the main menu.
                 
-                self.display_search(user_input,pcap_search_type)
+                self.display_matching_pcaps(user_input,pcap_search_type)
                 
                 self.navigate_next_menu()
             
