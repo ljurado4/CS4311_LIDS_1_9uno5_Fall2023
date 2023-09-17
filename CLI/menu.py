@@ -17,11 +17,9 @@ class Menu():
     open_ports = []
     whitelisted_ips = []
     
-    
     def __init__(self) -> None:
-         # Omitted "Show PCAP X" because it's uncertain how we will allow user to identify or search for specific PCAP file.
-        self.choice_set = {"Help","Config","Show PCAP","Alert","Exit","Start Menu"}
-        
+        self.choice_set = {"Help", "Config", "Show PCAP", "Alert", "Exit","All PCAPs"}
+
     @classmethod
     def update_system_config(cls,hostname, ip_address, mac_address, open_ports, whitelisted_ips):
         """
@@ -40,25 +38,39 @@ class Menu():
         cls.open_ports = open_ports
         cls.whitelisted_ips = whitelisted_ips
     
-    
-    def get_user_input(self, message: str,valid_input: set) -> str:
-        """Gets user input and validates input
+    def is_pcap_command(self, user_input: str) -> bool:
+        """Checks if the given user input contains the "Show PCAP" command.
 
         Args:
-            message (str): Message to be displayed to the user.
-            valid_input (set): A set of valid inputs the user can enter on the terminal.
+            user_input (str): The input string from the user.
+
+        Returns:
+            bool: True if "Show PCAP" is present in the user_input False otherwise
         """
+        return "Show PCAP" in user_input or "All PCAPs" in user_input
+
+    def get_user_input(self, message: str, valid_input: set) -> str:
+        """Gets and validates user input."""
         user_input = input(message)
         
-        #Incorrect user input 
+        if self.is_pcap_command(user_input):
+            return user_input
+            
+        
         while user_input not in valid_input:
             print("Wrong input valid inputs are")
             for val_input in valid_input:
                 print(val_input)
             user_input = input(message)
-
+            if "Show PCAP" in user_input:
+                return user_input
+                    
+            if self.is_pcap_command(user_input):
+                return user_input
+        
         return user_input
     
+
     def navigate_next_menu(self, menu_option_selected: str) -> None:
         """Navigate to thje next menu based on the user's selection
         
@@ -86,10 +98,11 @@ class Menu():
                 path = input(">> Enter configuration file name\n")
                 configuration = config_parser.ConfigureCLI()
                 configuration.configure(path)
-            case _ if menu_option_selected == "Show PCAP":
+    
+            case _ if self.is_pcap_command(menu_option_selected):
                 # call class for help Show PCAP
                 pcap_menu_display = pcap_menu.PcapMenu()
-                pcap_menu_display.display()
+                pcap_menu_display.handle_pcap_search(menu_option_selected)
             
             case _ if menu_option_selected == "Alert":
                 # call class for Alert menu
@@ -106,5 +119,3 @@ class Menu():
                 print("Exiting")
                 exit()
                 
-
-        
