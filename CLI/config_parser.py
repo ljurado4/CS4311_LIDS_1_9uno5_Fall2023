@@ -44,6 +44,6 @@ class ConfigureCLI:
             menu_instance.update_system_config(name,ip,mac,ports,whitelist)
             
         #move to next menu selection 
-        menu_instance = menu.Menu()
-        next_menu = input(">> ")
-        menu_instance.navigate_next_menu(next_menu)
+        menu_helper = menu.Menu()
+        next_menu = menu_helper.get_user_input(">> ",menu_helper.choice_set)
+        menu.Menu().navigate_next_menu(next_menu)
