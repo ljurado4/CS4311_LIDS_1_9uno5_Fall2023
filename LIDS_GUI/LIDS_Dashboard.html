@@ -1,128 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LIDS Dashboard</title>
 </head>
+
 <style>
-    body{
-        background-color: #909090;
-        overflow: hidden;
+    body {
+        font-family: 'Comic Sans MS', 'Comic Sans', cursive;
+        background-color: white;
+        margin: 0%;
     }
-    .displayBoxHeader {
-        margin-left: 0;
-        font-weight: bold;
-        background: #909090;
-        height:5%;
-        width: 100%;
-        border-style: solid;
-        border-color:black;
-        text-align: center;
-    }
-    .displayBox{
-        background: lightgray;
-        height:45%;
-        width: 100%;
-        border-style: solid;
-        border-color:black;
-        vertical-align: middle;
-        overflow-x: auto;
-        text-align: left;
-    }
-    .disconnectButton{
+
+    .disconnectButton {
         background: lightgray;
         width: 100px;
         height: 30px;
         border: black;
         border-radius: 25px;
         display: inline-block;
+        margin: 5%;
     }
+
     .header {
-        background: #909090;
-        border: black;
-        border-bottom-width: 3px;
-        border-top-width: 0px;
-        border-left-width: 0px;
-        border-right-width: 0px;
-        border-style: solid;
-        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: rgb(173, 173, 173);
         height: auto;
         position: relative;
-        margin: 0%;
         font-size: 20px;
     }
-    .dashboardBody{
-        background: #909090;
-        bottom: 0px;
-        top: 0%;
-        right: 0%;
-        left: 0%;
-        height: max-content;
+
+    .leftSidebar {
         height: 100vh;
-    }
-    .leftSidebar{
-        background: #909090;
-        height: 100vh;
-        width: 10%;
+        width: 5%;
         align-items: center;
         border: none;
         text-align: center;
-        display: inline-block;
         vertical-align: middle;
-
+        float: left;
     }
-    .leftSidebarButton{
+
+    .leftSidebarButton {
         background: #909090;
         border: none;
         margin-top: 25%;
         left: 25%;
     }
-    .dashboardButtonAction:hover{
-        border-width: 3px;
-        border-style: solid;
-        border-color: black;
+
+    .dashboardButtonAction:hover {
+        background: rgb(255, 255, 255);
     }
-    .leftSidebarImages{
+
+    .leftSidebarImages {
         mix-blend-mode: multiply;
-        height: 50px;
-        width: 50px;
+        height: 50%;
+        width: 50%;
     }
-    .rightSidebar{
-        background: #909090;
-        height: 100vh;
-        width: 29%;
-        align-items: center;
-        border: none;
-        text-align: center;
-        display: inline-block;
-        vertical-align: middle;
-        border: black;
-    }
-    .middleBlock{
-        display: inline-block;
-        width: 60%;
-        border: black;
-        border-style: solid;
-        border-right-width: 3px;
-        border-left-width: 3px;
-        border-bottom: none;
-        border-top: none;
-        height: 100vh;
-        vertical-align: middle;
-    }
-    body {
-        margin: 0;
-    }
+
+    /* General Table Styles */
     table {
         overflow-y: auto;
         display: block;
         border-collapse: collapse;
         border: 1px solid rgb(173, 173, 173);
-        /* Rounded corners for the table */
-        max-width: 100%;
-        max-height: 100vh;
+        border-radius: 10px;
+        max-width: 80%;
+        max-height: 90vh;
+        margin-bottom: 10px;
     }
 
     th,
@@ -134,23 +83,42 @@
     }
 
     th {
-        background-color: rgb(223, 223, 223);
+        background-color: rgb(173, 173, 173);
         text-align: center;
+        border-bottom: 2px solid rgb(173, 173, 173);
     }
 
-    .sort-button {
-        text-align: right;
-        margin-bottom: 5px;
-        margin-top: 10px;
-        width: 80%;
-        margin-left: 5%;
+
+    .table-container {
+        justify-content: space-between;
+        margin: 0 auto;
+        width: 95%;
+        margin-top: 1%;
+    }
+
+    table.notifications,
+    table.errors {
+        max-height: 30vh;
+        margin-left: 65vw;
+        width: 20vw;
+    }
+
+    table.alertbox {
+        width: 70%;
         position: relative;
     }
 
-    /* Dropdown button styling */
-    .dropdown {
-        
+    .sort-button {
+        position: absolute;
+        right: 0;
+        z-index: 1;
     }
+
+
+    .dropdown {
+        position: relative;
+    }
+
 
     .dropdown-options {
         position: absolute;
@@ -158,6 +126,7 @@
         right: 0;
         display: none;
         min-width: 10px;
+        z-index: 1;
         box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
         background-color: white;
         border: 1px solid rgb(173, 173, 173);
@@ -176,51 +145,54 @@
     .dropdown-options button:hover {
         background-color: #f5f5f5;
     }
-    .headerTitle{
-        display: inline-block;
-        width: 50%;
-        height: 100%;
+
+    .headerTitle {
+        flex: 1;
+        text-align: center;
+        margin: 0;
         text-align: right;
     }
-    .connectedDisplay{
-        display: inline-block;
-        height: 100%;
+
+    .connectedDisplay {
         width: 40%;
         text-align: right;
+        margin-right: 10px;
+    }
+
+    .table-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 </style>
+
 <body>
-    <!-- -->
-    <!--Handles the header of the dashboard, it displays its connectivity-->
     <div class="header">
-            <!--Div used to spaarate title from the text to its right-->
-            <div class="headerTitle" id = "headerTitle">LIDS 000.000.00:000</div>
-            <!--div used to contain connected display and siconnect button-->
-            <div class = "connectedDisplay"id="connectedDisplay">Connected 
-                <img style="mix-blend-mode: multiply;height: 25px;width: 50px;vertical-align:text-bottom;"src="connected_logo.png">
-                 <!--form handles when user clicks to disconnect-->
-                <form style = "display:inline-block"id="disconnectButtonForm">
-                    <input class="disconnectButton dashboardButtonAction" type="submit" value="Disconnect">
-                </form>
-            </div>
-    </div>
-    <!--used to contain the nut/box button, display box div, notifications div and error div-->
-    <div class="dashboardBody">
-         <!--contains everything on the left of dashboard below header, omainly buttons for now-->
-        <div class="leftSidebar" id="leftSidebar">
-            <!--From handles when user click on gear button-->
-            <form id="configFileForm">
-                <input type="image" class = "leftSidebarButton dashboardButtonAction leftSidebarImages"  src="Config_File_Button_IMG.png">
+        <div class="headerTitle" id="headerTitle">LIDS 000.000.00:000</div>
+        <div class="connectedDisplay" id="connectedDisplay">Connected
+            <img style="mix-blend-mode: multiply;height: 25px;width: 50px;vertical-align:text-bottom;"
+                src="connected_logo.png">
+            <form style="display:inline-block" id="disconnectButtonForm">
+                <input class="disconnectButton dashboardButtonAction" type="submit" value="Disconnect">
             </form>
-            <br style="line-height: 20px;">
-            <!--Form handles when user wants to see intrusions-->
-            <form id="middleBlockDisplayForm">
-                <input type="image" class = "leftSidebarButton dashboardButtonAction leftSidebarImages" src="Display_Box_Buttons.png" img class="leftSidebarImages">
-            </form>   
         </div>
-        <!--div for middle table containing info-->
-        <div class="middleBlock" id="middleBlock">
-            <table id="alertBoxTable">
+    </div>
+
+    <div class="leftSidebar" id="leftSidebar">
+        <form id="configFileForm">
+            <input type="image" class="leftSidebarButton dashboardButtonAction leftSidebarImages"
+                src="Config_File_Button_IMG.png">
+        </form>
+        <br style="line-height: 20px;">
+        <form id="middleBlockDisplayForm">
+            <input type="image" class="leftSidebarButton dashboardButtonAction leftSidebarImages"
+                src="Display_Box_Buttons.png" img class="leftSidebarImages">
+        </form>
+    </div>
+
+    <div class="table-container">
+        <div id="middle-content">
+            <table class="alertbox" id="alertBoxTable">
                 <thead>
                     <tr>
                         <th>Lvl</th>
@@ -228,21 +200,23 @@
                         <th>IP</th>
                         <th>Port</th>
                         <th style="width: 100vw;">
-                            <div><p style="display: inline-block;vertical-align: middle;">Description</p></div>
-                            <div style = "display: inline-block;vertical-align: middle;" class="dropdown sort-button">
-                                <button id="sortByButton" onclick="toggleDropdown()">Sort by</button>
-                                <div class="dropdown-options" id="sortByDropdownContent">
-                                    <button onclick="sortTable(0); toggleDropdown()">Lvl</button>
-                                    <button onclick="sortTable(1); toggleDropdown()">Time</button>
-                                    <button onclick="sortTable(2); toggleDropdown()">IP</button>
-                                    <button onclick="removeSort(); toggleDropdown()">None</button>
+                            Description
+                            <!-- Moved the sort-button here -->
+                            <div class="sort-button">
+                                <div class="dropdown">
+                                    <button id="sortByButton" onclick="toggleDropdown()">Sort by</button>
+                                    <div class="dropdown-options" id="sortByDropdownContent">
+                                        <button onclick="sortTable(0); toggleDropdown()">Lvl</button>
+                                        <button onclick="sortTable(1); toggleDropdown()">Time</button>
+                                        <button onclick="sortTable(2); toggleDropdown()">IP</button>
+                                        <button onclick="removeSort(); toggleDropdown()">None</button>
+                                    </div>
                                 </div>
                             </div>
-                        </th>    
-                    </tr>  
+                        </th>
+                    </tr>
                 </thead>
                 <tbody>
-                    <!-- Many notifications for test purposes delete if you want -->
                     <tr>
                         <td>1</td>
                         <td>12:30:45</td>
@@ -265,7 +239,14 @@
                         <td>Some description</td>
                     </tr>
                     <tr>
-                        <td>2</td>
+                        <td>1</td>
+                        <td>12:30:45</td>
+                        <td>192.168.1.1</td>
+                        <td>8080</td>
+                        <td>Some description</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
                         <td>12:30:45</td>
                         <td>192.168.1.1</td>
                         <td>8080</td>
@@ -279,7 +260,14 @@
                         <td>Some description</td>
                     </tr>
                     <tr>
-                        <td>2</td>
+                        <td>1</td>
+                        <td>12:30:45</td>
+                        <td>192.168.1.1</td>
+                        <td>8080</td>
+                        <td>Some description</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
                         <td>12:30:45</td>
                         <td>192.168.1.1</td>
                         <td>8080</td>
@@ -293,7 +281,14 @@
                         <td>Some description</td>
                     </tr>
                     <tr>
-                        <td>2</td>
+                        <td>1</td>
+                        <td>12:30:45</td>
+                        <td>192.168.1.1</td>
+                        <td>8080</td>
+                        <td>Some description</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
                         <td>12:30:45</td>
                         <td>192.168.1.1</td>
                         <td>8080</td>
@@ -307,7 +302,14 @@
                         <td>Some description</td>
                     </tr>
                     <tr>
-                        <td>2</td>
+                        <td>1</td>
+                        <td>12:30:45</td>
+                        <td>192.168.1.1</td>
+                        <td>8080</td>
+                        <td>Some description</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
                         <td>12:30:45</td>
                         <td>192.168.1.1</td>
                         <td>8080</td>
@@ -321,7 +323,14 @@
                         <td>Some description</td>
                     </tr>
                     <tr>
-                        <td>2</td>
+                        <td>1</td>
+                        <td>12:30:45</td>
+                        <td>192.168.1.1</td>
+                        <td>8080</td>
+                        <td>Some description</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
                         <td>12:30:45</td>
                         <td>192.168.1.1</td>
                         <td>8080</td>
@@ -333,73 +342,106 @@
                         <td>192.168.1.1</td>
                         <td>8080</td>
                         <td>Some description</td>
-                    </tr><tr>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>12:30:45</td>
+                        <td>192.168.1.1</td>
+                        <td>8080</td>
+                        <td>Some description</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>12:30:45</td>
+                        <td>192.168.1.1</td>
+                        <td>8080</td>
+                        <td>Some description</td>
+                    </tr>
+                    <tr>
                         <td>2</td>
                         <td>12:30:45</td>
                         <td>192.168.1.1</td>
                         <td>8080</td>
                         <td>Some description</td>
-                    </tr><tr>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>12:30:45</td>
+                        <td>192.168.1.1</td>
+                        <td>8080</td>
+                        <td>Some description</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>12:30:45</td>
+                        <td>192.168.1.1</td>
+                        <td>8080</td>
+                        <td>Some description</td>
+                    </tr>
+                    <tr>
                         <td>2</td>
                         <td>12:30:45</td>
                         <td>192.168.1.1</td>
                         <td>8080</td>
                         <td>Some description</td>
-                    </tr><tr>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>12:30:45</td>
+                        <td>192.168.1.1</td>
+                        <td>8080</td>
+                        <td>Some description</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>12:30:45</td>
+                        <td>192.168.1.1</td>
+                        <td>8080</td>
+                        <td>Some description</td>
+                    </tr>
+                    <tr>
                         <td>2</td>
                         <td>12:30:45</td>
                         <td>192.168.1.1</td>
                         <td>8080</td>
                         <td>Some description</td>
-                    </tr><tr>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>12:30:45</td>
+                        <td>192.168.1.1</td>
+                        <td>8080</td>
+                        <td>Some description</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>12:30:45</td>
+                        <td>192.168.1.1</td>
+                        <td>8080</td>
+                        <td>Some description</td>
+                    </tr>
+                    <tr>
                         <td>2</td>
                         <td>12:30:45</td>
                         <td>192.168.1.1</td>
                         <td>8080</td>
                         <td>Some description</td>
-                    </tr><tr>
-                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
                         <td>12:30:45</td>
                         <td>192.168.1.1</td>
                         <td>8080</td>
                         <td>Some description</td>
-                    </tr><tr>
-                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
                         <td>12:30:45</td>
                         <td>192.168.1.1</td>
                         <td>8080</td>
                         <td>Some description</td>
-                    </tr><tr>
-                        <td>2</td>
-                        <td>12:30:45</td>
-                        <td>192.168.1.1</td>
-                        <td>8080</td>
-                        <td>Some description</td>
-                    </tr><tr>
-                        <td>2</td>
-                        <td>12:30:45</td>
-                        <td>192.168.1.1</td>
-                        <td>8080</td>
-                        <td>Some description</td>
-                    </tr><tr>
-                        <td>2</td>
-                        <td>12:30:45</td>
-                        <td>192.168.1.1</td>
-                        <td>8080</td>
-                        <td>Some description</td>
-                    </tr><tr>
-                        <td>2</td>
-                        <td>12:30:45</td>
-                        <td>192.168.1.1</td>
-                        <td>8080</td>
-                        <td>Some description</td>
-                    </tr><tr>
-                        <td>2</td>
-                        <td>12:30:45</td>
-                        <td>192.168.1.1</td>
-                        <td>8080</td>
-                        <td>Some description</td>
-                    </tr><tr>
+                    </tr>
+                    <tr>
                         <td>2</td>
                         <td>12:30:45</td>
                         <td>192.168.1.1</td>
@@ -409,86 +451,44 @@
                 </tbody>
             </table>
         </div>
-         <!--handles the right sidebar contining notifications, errors and diconect button-->
-        <div class = "rightSidebar" id = "rightSidebar">
-            <div class="displayBoxHeader">Notifications</div>
-            <!--display the notifications, can handle overflow of error notifications, notifications are currently hardcoded-->
-            <div class="displayBox" id="notificationsDisplayBox"> 
-                <p>
-                    Notification 1
-                    <br>
-                    Notification 2
-                    <br>
-                    Notification 3
-                    <br>
-                    Notification 4
-                    <br>
-                    Notification 5
-                    <br>
-                    Notification 6
-                    <br>
-                    Notification 7
-                    <br>
-                    Notification 8
-                    <br>
-                    Notification 9
-                    <br>
-                    Notification 10
-                    <br>
-                    Notification 11
-                    <br>
-                    Notification 12
-                    <br>
-                </p>
-            </div>
-            <div class="displayBoxHeader">Errors</div>
-            <!--display the errors, can handle overflow of error notifications, error notifications are currently hardcoded-->
-            <div class="displayBox" id="errorDisplayBox"> 
-                <p>
-                    Error1
-                    <br>
-                    Error2
-                    <br>
-                    Error3
-                    <br>
-                    Error4
-                    <br>
-                    Error5
-                    <br>
-                    Error6
-                    <br>
-                    Error7
-                    <br>
-                    Error8
-                    <br>
-                    Error9    
-                    <br>
-                    Error10
-                    <br>
-                    Error11
-                    <br>
-                    Error12
-                    <br>
-                    Error13
-                    <br>
-                    Error14
-                    <br>
-                    Error15
-                    <br>
-                    Error16
-                    <br>
-                    Error17
-                    <br>
-                    Error18
-                    <br>
-                    Error19
-                </p>
-            </div>
-        </div>
+
+        <table class="notifications" id="notificationsTable">
+            <thead>
+                <tr>
+                    <th style="width: 100vw;">Notifications</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Notification 1</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="errors" id="errorsTable">
+            <thead>
+                <tr>
+                    <th style="width: 100vw;">Errors</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Error 1</td>
+                </tr>
+            </tbody>
+        </table>
+
     </div>
-     <!-- Adding jQuery and Bootstrap JS for dropdown functionality -->
-     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="LIDS_Dashboard.js"></script>
+
+    <script>
+        function replaceMiddleContent(newContent) {
+            document.getElementById('middle-content').innerHTML = newContent;
+        }
+    </script>
 </body>
+
 </html>
