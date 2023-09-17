@@ -1,19 +1,11 @@
 # main_cli.py
 
-from menu import Menu
+import menu
 
 def main():
-    main_menu = Menu()
-
-    while True:
-        print("\nMain Menu:")
-        for option in main_menu.choice_set:
-            print(f"- {option}")
-        print("- All PCAPs")  # Add this line
-        
-        valid_choices = main_menu.choice_set | {"All PCAPs"}  # Updated valid choices
-        user_choice = main_menu.get_user_input(">> ", valid_choices)
-        main_menu.navigate_next_menu(user_choice)
+    menu_helper = menu.Menu()
+    next_menu = menu_helper.get_user_input(">> ",menu_helper.choice_set)
+    menu_helper.navigate_next_menu(next_menu)
 
 if __name__ == "__main__":
     main()
