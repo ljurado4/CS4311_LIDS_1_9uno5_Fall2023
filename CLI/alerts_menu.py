@@ -16,6 +16,7 @@ class Alerts_CLI:
         
         print(table)
         
-        menu_instance = menu.Menu()
-        next_menu = input(">>")
-        menu_instance.navigate_next_menu(next_menu)
+        menu_helper = menu.Menu()
+        next_menu = menu_helper.get_user_input(">> ",menu_helper.choice_set)
+        menu_helper.navigate_next_menu(next_menu)
+        

@@ -38,35 +38,18 @@ class Menu():
         cls.open_ports = open_ports
         cls.whitelisted_ips = whitelisted_ips
     
-    def is_pcap_command(self, user_input: str) -> bool:
-        """Checks if the given user input contains the "Show PCAP" command.
-
-        Args:
-            user_input (str): The input string from the user.
-
-        Returns:
-            bool: True if "Show PCAP" is present in the user_input False otherwise
-        """
-        return "Show PCAP" in user_input or "All PCAPs" in user_input
 
     def get_user_input(self, message: str, valid_input: set) -> str:
         """Gets and validates user input."""
         user_input = input(message)
         
-        if self.is_pcap_command(user_input):
-            return user_input
-            
         
         while user_input not in valid_input:
             print("Wrong input valid inputs are")
             for val_input in valid_input:
                 print(val_input)
             user_input = input(message)
-            if "Show PCAP" in user_input:
-                return user_input
-                    
-            if self.is_pcap_command(user_input):
-                return user_input
+
         
         return user_input
     
@@ -86,26 +69,33 @@ class Menu():
   
         match menu_option_selected:
             case _ if menu_option_selected == "Start Menu":
+                print('\n' * 24)
+                print(">> Start Menu")
                 main_menu_instance = main_menu.MainMenu()
                 main_menu_instance.show_menu()
 
             case _ if menu_option_selected == "Help":
-                # call class for help menu
+                print('\n' * 24)
+                print(">> Help Menu")
                 menu = help_menu.HelpMenu()
                 menu.display_help()
             case _ if menu_option_selected == "Config":
-                print(">> Config")
+                print('\n' * 24)
+                print(">> Configuring System")
                 path = input(">> Enter configuration file name\n")
                 configuration = config_parser.ConfigureCLI()
                 configuration.configure(path)
     
-            case _ if self.is_pcap_command(menu_option_selected):
+            case _ if menu_option_selected == "Show PCAP" or menu_option_selected == "All PCAPs":
                 # call class for help Show PCAP
+                print('\n' * 24)
+                print(">> PCAP info")
                 pcap_menu_display = pcap_menu.PcapMenu()
                 pcap_menu_display.handle_pcap_search(menu_option_selected)
             
             case _ if menu_option_selected == "Alert":
                 # call class for Alert menu
+                print('\n' * 24)
                 print(">> Alert")
                 alertList = [
                     [2, "11.6578", "192.128.0.1", 80, "Unknown host ping"],
