@@ -10,9 +10,10 @@
 
 <style>
     body {
-        font-family: 'Comic Sans MS', 'Comic Sans', cursive;
+        font-family: 'Lato', sans-serif;
         background-color: white;
         margin: 0%;
+        vertical-align: top;
     }
 
     .disconnectButton {
@@ -27,7 +28,6 @@
 
     .header {
         display: flex;
-        justify-content: space-between;
         align-items: center;
         background: rgb(173, 173, 173);
         height: auto;
@@ -43,6 +43,7 @@
         text-align: center;
         vertical-align: middle;
         float: left;
+        display: inline-block;
     }
 
     .leftSidebarButton {
@@ -65,13 +66,11 @@
     /* General Table Styles */
     table {
         overflow-y: auto;
-        display: block;
         border-collapse: collapse;
         border: 1px solid rgb(173, 173, 173);
         border-radius: 10px;
-        max-width: 80%;
-        max-height: 90vh;
-        margin-bottom: 10px;
+        max-height: 92vh;
+        margin-top: 0%;
     }
 
     th,
@@ -91,26 +90,39 @@
 
     .table-container {
         justify-content: space-between;
-        margin: 0 auto;
-        width: 95%;
-        margin-top: 1%;
+        width: 70%;
+        max-height: 60vh;
+        margin: 1% 0% 1vh 0%;
+        display: inline-block;
+        flex-direction: column;
+        align-items: center;
     }
 
-    table.notifications,
-    table.errors {
-        max-height: 30vh;
-        margin-left: 65vw;
+    .notifications,
+    .errors {
+        display: inline-block;
+        height: 45.5vh;
         width: 20vw;
     }
 
     table.alertbox {
-        width: 70%;
+        width: 100%;
         position: relative;
+        display: block;
     }
 
     .sort-button {
         position: absolute;
         right: 0;
+        top: -1px;
+        z-index: 2;
+    }
+
+
+    .filter-button {
+        position: absolute;
+        right: 0;
+        top: 20px;
         z-index: 1;
     }
 
@@ -143,7 +155,7 @@
     }
 
     .dropdown-options button:hover {
-        background-color: #f5f5f5;
+        background-color: #b9b9b9;
     }
 
     .headerTitle {
@@ -159,16 +171,18 @@
         margin-right: 10px;
     }
 
-    .table-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+    .rightSidebar {
+        width: 24%;
+        display: inline-block;
+        margin-top: 1%;
+        vertical-align: top;
+        text-align: center;
     }
 </style>
 
 <body>
     <div class="header">
-        <div class="headerTitle" id="headerTitle">LIDS 000.000.00:000</div>
+        <div class="headerTitle" id="headerTitle">LIDS</div>
         <div class="connectedDisplay" id="connectedDisplay">Connected
             <img style="mix-blend-mode: multiply;height: 25px;width: 50px;vertical-align:text-bottom;"
                 src="connected_logo.png">
@@ -191,267 +205,277 @@
     </div>
 
     <div class="table-container">
-        <div id="middle-content">
-            <table class="alertbox" id="alertBoxTable">
-                <thead>
-                    <tr>
-                        <th>Lvl</th>
-                        <th>Time</th>
-                        <th>IP</th>
-                        <th>Port</th>
-                        <th style="width: 100vw;">
-                            Description
-                            <!-- Moved the sort-button here -->
-                            <div class="sort-button">
-                                <div class="dropdown">
-                                    <button id="sortByButton" onclick="toggleDropdown()">Sort by</button>
-                                    <div class="dropdown-options" id="sortByDropdownContent">
-                                        <button onclick="sortTable(0); toggleDropdown()">Lvl</button>
-                                        <button onclick="sortTable(1); toggleDropdown()">Time</button>
-                                        <button onclick="sortTable(2); toggleDropdown()">IP</button>
-                                        <button onclick="removeSort(); toggleDropdown()">None</button>
-                                    </div>
+        <table class="alertbox" id="alertBoxTable">
+            <thead>
+                <tr>
+                    <th>Lvl</th>
+                    <th>Time</th>
+                    <th>IP</th>
+                    <th>Port</th>
+                    <th style="width: 100vw;">
+                        Description
+
+                        <div class="sort-button">
+                            <div class="dropdown">
+                                <button id="sortByButton" onclick="toggleDropdown()">Sort by</button>
+                                <div class="dropdown-options" id="sortByDropdownContent">
+                                    <button onclick="sortTable(0); toggleDropdown()">Lvl</button>
+                                    <button onclick="sortTable(1); toggleDropdown()">Time</button>
+                                    <button onclick="sortTable(2); toggleDropdown()">IP</button>
+                                    <button onclick="removeSort(); toggleDropdown()">None</button>
                                 </div>
                             </div>
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>12:30:45</td>
-                        <td>192.168.1.1</td>
-                        <td>8080</td>
-                        <td>Some description</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>12:30:45</td>
-                        <td>192.168.1.1</td>
-                        <td>8080</td>
-                        <td>Some description</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>12:30:45</td>
-                        <td>192.168.1.1</td>
-                        <td>8080</td>
-                        <td>Some description</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>12:30:45</td>
-                        <td>192.168.1.1</td>
-                        <td>8080</td>
-                        <td>Some description</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>12:30:45</td>
-                        <td>192.168.1.1</td>
-                        <td>8080</td>
-                        <td>Some description</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>12:30:45</td>
-                        <td>192.168.1.1</td>
-                        <td>8080</td>
-                        <td>Some description</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>12:30:45</td>
-                        <td>192.168.1.1</td>
-                        <td>8080</td>
-                        <td>Some description</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>12:30:45</td>
-                        <td>192.168.1.1</td>
-                        <td>8080</td>
-                        <td>Some description</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>12:30:45</td>
-                        <td>192.168.1.1</td>
-                        <td>8080</td>
-                        <td>Some description</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>12:30:45</td>
-                        <td>192.168.1.1</td>
-                        <td>8080</td>
-                        <td>Some description</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>12:30:45</td>
-                        <td>192.168.1.1</td>
-                        <td>8080</td>
-                        <td>Some description</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>12:30:45</td>
-                        <td>192.168.1.1</td>
-                        <td>8080</td>
-                        <td>Some description</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>12:30:45</td>
-                        <td>192.168.1.1</td>
-                        <td>8080</td>
-                        <td>Some description</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>12:30:45</td>
-                        <td>192.168.1.1</td>
-                        <td>8080</td>
-                        <td>Some description</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>12:30:45</td>
-                        <td>192.168.1.1</td>
-                        <td>8080</td>
-                        <td>Some description</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>12:30:45</td>
-                        <td>192.168.1.1</td>
-                        <td>8080</td>
-                        <td>Some description</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>12:30:45</td>
-                        <td>192.168.1.1</td>
-                        <td>8080</td>
-                        <td>Some description</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>12:30:45</td>
-                        <td>192.168.1.1</td>
-                        <td>8080</td>
-                        <td>Some description</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>12:30:45</td>
-                        <td>192.168.1.1</td>
-                        <td>8080</td>
-                        <td>Some description</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>12:30:45</td>
-                        <td>192.168.1.1</td>
-                        <td>8080</td>
-                        <td>Some description</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>12:30:45</td>
-                        <td>192.168.1.1</td>
-                        <td>8080</td>
-                        <td>Some description</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>12:30:45</td>
-                        <td>192.168.1.1</td>
-                        <td>8080</td>
-                        <td>Some description</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>12:30:45</td>
-                        <td>192.168.1.1</td>
-                        <td>8080</td>
-                        <td>Some description</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>12:30:45</td>
-                        <td>192.168.1.1</td>
-                        <td>8080</td>
-                        <td>Some description</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>12:30:45</td>
-                        <td>192.168.1.1</td>
-                        <td>8080</td>
-                        <td>Some description</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>12:30:45</td>
-                        <td>192.168.1.1</td>
-                        <td>8080</td>
-                        <td>Some description</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>12:30:45</td>
-                        <td>192.168.1.1</td>
-                        <td>8080</td>
-                        <td>Some description</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>12:30:45</td>
-                        <td>192.168.1.1</td>
-                        <td>8080</td>
-                        <td>Some description</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>12:30:45</td>
-                        <td>192.168.1.1</td>
-                        <td>8080</td>
-                        <td>Some description</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>12:30:45</td>
-                        <td>192.168.1.1</td>
-                        <td>8080</td>
-                        <td>Some description</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>12:30:45</td>
-                        <td>192.168.1.1</td>
-                        <td>8080</td>
-                        <td>Some description</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>12:30:45</td>
-                        <td>192.168.1.1</td>
-                        <td>8080</td>
-                        <td>Some description</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>12:30:45</td>
-                        <td>192.168.1.1</td>
-                        <td>8080</td>
-                        <td>Some description</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
+                        </div>
+                        <div class="filter-button">
+                            <div class="dropdown">
+                                <button id="filterButton" onclick="toggleDropdown()">Filter</button>
+                                <div class="dropdown-options" id="sortByDropdownContent">
+                                    <button onclick="sortTable(0); toggleDropdown()">Lvl</button>
+                                    <button onclick="sortTable(1); toggleDropdown()">Time</button>
+                                    <button onclick="sortTable(2); toggleDropdown()">IP</button>
+                                    <button onclick="removeSort(); toggleDropdown()">None</button>
+                                </div>
+                            </div>
+                        </div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>12:30:45</td>
+                    <td>192.168.1.1</td>
+                    <td>8080</td>
+                    <td>Some description</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>12:30:45</td>
+                    <td>192.168.1.1</td>
+                    <td>8080</td>
+                    <td>Some description</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>12:30:45</td>
+                    <td>192.168.1.1</td>
+                    <td>8080</td>
+                    <td>Some description</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>12:30:45</td>
+                    <td>192.168.1.1</td>
+                    <td>8080</td>
+                    <td>Some description</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>12:30:45</td>
+                    <td>192.168.1.1</td>
+                    <td>8080</td>
+                    <td>Some description</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>12:30:45</td>
+                    <td>192.168.1.1</td>
+                    <td>8080</td>
+                    <td>Some description</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>12:30:45</td>
+                    <td>192.168.1.1</td>
+                    <td>8080</td>
+                    <td>Some description</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>12:30:45</td>
+                    <td>192.168.1.1</td>
+                    <td>8080</td>
+                    <td>Some description</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>12:30:45</td>
+                    <td>192.168.1.1</td>
+                    <td>8080</td>
+                    <td>Some description</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>12:30:45</td>
+                    <td>192.168.1.1</td>
+                    <td>8080</td>
+                    <td>Some description</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>12:30:45</td>
+                    <td>192.168.1.1</td>
+                    <td>8080</td>
+                    <td>Some description</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>12:30:45</td>
+                    <td>192.168.1.1</td>
+                    <td>8080</td>
+                    <td>Some description</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>12:30:45</td>
+                    <td>192.168.1.1</td>
+                    <td>8080</td>
+                    <td>Some description</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>12:30:45</td>
+                    <td>192.168.1.1</td>
+                    <td>8080</td>
+                    <td>Some description</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>12:30:45</td>
+                    <td>192.168.1.1</td>
+                    <td>8080</td>
+                    <td>Some description</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>12:30:45</td>
+                    <td>192.168.1.1</td>
+                    <td>8080</td>
+                    <td>Some description</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>12:30:45</td>
+                    <td>192.168.1.1</td>
+                    <td>8080</td>
+                    <td>Some description</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>12:30:45</td>
+                    <td>192.168.1.1</td>
+                    <td>8080</td>
+                    <td>Some description</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>12:30:45</td>
+                    <td>192.168.1.1</td>
+                    <td>8080</td>
+                    <td>Some description</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>12:30:45</td>
+                    <td>192.168.1.1</td>
+                    <td>8080</td>
+                    <td>Some description</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>12:30:45</td>
+                    <td>192.168.1.1</td>
+                    <td>8080</td>
+                    <td>Some description</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>12:30:45</td>
+                    <td>192.168.1.1</td>
+                    <td>8080</td>
+                    <td>Some description</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>12:30:45</td>
+                    <td>192.168.1.1</td>
+                    <td>8080</td>
+                    <td>Some description</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>12:30:45</td>
+                    <td>192.168.1.1</td>
+                    <td>8080</td>
+                    <td>Some description</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>12:30:45</td>
+                    <td>192.168.1.1</td>
+                    <td>8080</td>
+                    <td>Some description</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>12:30:45</td>
+                    <td>192.168.1.1</td>
+                    <td>8080</td>
+                    <td>Some description</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>12:30:45</td>
+                    <td>192.168.1.1</td>
+                    <td>8080</td>
+                    <td>Some description</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>12:30:45</td>
+                    <td>192.168.1.1</td>
+                    <td>8080</td>
+                    <td>Some description</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>12:30:45</td>
+                    <td>192.168.1.1</td>
+                    <td>8080</td>
+                    <td>Some description</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>12:30:45</td>
+                    <td>192.168.1.1</td>
+                    <td>8080</td>
+                    <td>Some description</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>12:30:45</td>
+                    <td>192.168.1.1</td>
+                    <td>8080</td>
+                    <td>Some description</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>12:30:45</td>
+                    <td>192.168.1.1</td>
+                    <td>8080</td>
+                    <td>Some description</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>12:30:45</td>
+                    <td>192.168.1.1</td>
+                    <td>8080</td>
+                    <td>Some description</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="rightSidebar" class="rightSidebar">
         <table class="notifications" id="notificationsTable">
             <thead>
                 <tr>
@@ -477,7 +501,6 @@
                 </tr>
             </tbody>
         </table>
-
     </div>
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
