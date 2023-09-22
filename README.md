@@ -46,14 +46,16 @@ LIDS is a Local Intrusion Detection System designed to monitor network activity 
         ```
         source env/bin/activate
         ```
-
     ```
-3. Install Flask and Required Packages.
+3. **Install Flask and Required Packages**.
     ```
-    pip install -r requirements.txt
     * Install Flask
+    ```
       pip3 install flask
-
+    ```
+    * Install other required packages for the project
+    ```
+      pip install -r requirements.txt
     ```
 ---
 
