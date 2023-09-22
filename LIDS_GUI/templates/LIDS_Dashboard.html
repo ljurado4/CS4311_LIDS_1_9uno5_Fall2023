@@ -5,193 +5,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/lids_dashboard.css">
     <title>LIDS Dashboard</title>
 </head>
 
-<style>
-    .xmlFileTextArea{
-        height: 91vh;
-        border-radius: 3px;
-        width: 100%;
-        overflow: auto;
-    }
-    body {
-        font-family: 'Lato', sans-serif;
-        background-color: white;
-        margin: 0%;
-        vertical-align: top;
-    }
-
-    .disconnectButton {
-        background: lightgray;
-        width: 100px;
-        height: 30px;
-        border: black;
-        border-radius: 25px;
-        display: inline-block;
-        margin: 5%;
-    }
-
-    .header {
-        display: flex;
-        align-items: center;
-        background: rgb(173, 173, 173);
-        height: auto;
-        position: relative;
-        font-size: 20px;
-    }
-
-    .leftSidebar {
-        height: 100vh;
-        width: 5%;
-        align-items: center;
-        border: none;
-        text-align: center;
-        vertical-align: middle;
-        float: left;
-        display: inline-block;
-    }
-
-    .leftSidebarButton {
-        background: #909090;
-        border: none;
-        margin-top: 25%;
-        left: 25%;
-    }
-
-    .dashboardButtonAction:hover {
-        background: rgb(255, 255, 255);
-    }
-
-    .leftSidebarImages {
-        mix-blend-mode: multiply;
-        height: 50%;
-        width: 50%;
-    }
-
-    /* General Table Styles */
-    table {
-        overflow-y: auto;
-        border-collapse: collapse;
-        border: 1px solid rgb(173, 173, 173);
-        border-radius: 10px;
-        max-height: 92vh;
-        margin-top: 0%;
-    }
-
-    th,
-    td {
-        border: 1px solid rgb(173, 173, 173);
-        padding: 8px;
-        text-align: left;
-        word-wrap: break-word;
-    }
-
-    th {
-        background-color: rgb(173, 173, 173);
-        text-align: center;
-        border-bottom: 2px solid rgb(173, 173, 173);
-    }
-
-
-    .table-container {
-        justify-content: space-between;
-        width: 70%;
-        max-height: 60vh;
-        margin: 1% 0% 1vh 0%;
-        display: inline-block;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .notifications,
-    .errors {
-        display: inline-block;
-        height: 45.5vh;
-        width: 20vw;
-    }
-
-    table.alertbox {
-        width: 100%;
-        position: relative;
-        display: block;
-    }
-
-    .sort-button {
-        position: absolute;
-        right: 0;
-        top: -1px;
-        z-index: 2;
-    }
-
-
-    .filter-button {
-        position: absolute;
-        right: 0;
-        top: 20px;
-        z-index: 1;
-    }
-
-
-    .dropdown {
-        position: relative;
-    }
-
-
-    .dropdown-options {
-        position: absolute;
-        top: 100%;
-        right: 0;
-        display: none;
-        min-width: 10px;
-        z-index: 1;
-        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
-        background-color: white;
-        border: 1px solid rgb(173, 173, 173);
-        border-radius: 5px;
-    }
-
-    .dropdown-options button {
-        display: block;
-        width: 100%;
-        text-align: center;
-        border: none;
-        background: none;
-        padding: 8px 12px;
-    }
-
-    .dropdown-options button:hover {
-        background-color: #b9b9b9;
-    }
-
-    .headerTitle {
-        flex: 1;
-        text-align: center;
-        margin: 0;
-        text-align: right;
-    }
-
-    .connectedDisplay {
-        width: 40%;
-        text-align: right;
-        margin-right: 10px;
-    }
-
-    .rightSidebar {
-        width: 24%;
-        display: inline-block;
-        margin-top: 1%;
-        vertical-align: top;
-        text-align: center;
-    }
-</style>
 
 <body>
     <div class="header">
         <div class="headerTitle" id="headerTitle">LIDS</div>
         <div class="connectedDisplay" id="connectedDisplay">Connected
             <img style="mix-blend-mode: multiply;height: 25px;width: 50px;vertical-align:text-bottom;"
-                src="connected_logo.png">
+            src="../static/img/Display_Box_Buttons.png">
             <form style="display:inline-block" id="disconnectButtonForm">
                 <input class="disconnectButton dashboardButtonAction" type="submit" value="Disconnect">
             </form>
@@ -201,12 +25,12 @@
     <div class="leftSidebar" id="leftSidebar">
         <form id="configFileForm">
             <input type="image" class="leftSidebarButton dashboardButtonAction leftSidebarImages"
-                src="Config_File_Button_IMG.png">
+            src="../static/img/Display_Box_Buttons.png">
         </form>
         <br style="line-height: 20px;">
         <form id="alertsTableForm">
             <input type="image" class="leftSidebarButton dashboardButtonAction leftSidebarImages"
-                src="Display_Box_Buttons.png" img class="leftSidebarImages">
+            src="../static/img/Display_Box_Buttons.png">
         </form>
     </div>
 
@@ -511,8 +335,7 @@
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="LIDS_Dashboard.js"></script>
-
+    <script src="../static/LIDS_Dashboard.js"></script>    
     <script>
         function replaceMiddleContent(newContent) {
             document.getElementById('middle-content').innerHTML = newContent;
