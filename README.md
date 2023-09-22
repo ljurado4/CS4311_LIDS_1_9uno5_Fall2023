@@ -28,19 +28,24 @@ LIDS is a Local Intrusion Detection System designed to monitor network activity 
     ```
     cd CS4311_LIDS_19uno5_Fall2023
     ```
-3. Set Up a Virtual Environment
-    ```
-    * Install virtualenv
+3. **Set Up a Virtual Environment**:
+    * Install `virtualenv`:
+      ```
       pip3 install virtualenv
-    * Create a new enviroment
+      ```
+    * Create a new environment:
+      ```
       virtualenv env
-    * Activate the virtual enviroment
-      *On Windows using CMD
+      ```
+    * Activate the virtual environment:
+      - On Windows using CMD:
+        ```
         .\env\Scripts\activate.bat
-      * On Mac or Linux
+        ```
+      - On Mac or Linux:
+        ```
         source env/bin/activate
-
-
+        ```
 
     ```
 3. Install Flask and Required Packages.
