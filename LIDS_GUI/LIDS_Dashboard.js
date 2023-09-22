@@ -1,21 +1,29 @@
-//get forms
+//get forms for event listeners
+const middleContainer = document.getElementById("middleContainer")
 const configFileForm = document.querySelector("#configFileForm")
-const middleBlockForm = document.querySelector("#middleBlockDisplayForm")
+const alertsTableFrom = document.querySelector("#alertsTableForm")
 const disconnectForm = document.querySelector("#disconnectButtonForm")
-//handles event when user wants to see config file in middle block of gui
+
+//state variables for html
+let alertsTableState = middleContainer.innerHTML
+//formatting xml file output
+let xmlConfigState = "<textarea class = \"xmlFileTextArea\">File Name: "  + window.localStorage.getItem("xmlFileName") + "\n" + window.localStorage.getItem("xmlFile") + "</textarea>"
+
+//froms for event listeners
+
+//handles event when user wants to see config file
 configFileForm.addEventListener("submit", (event) => {
     event.preventDefault()
-    console.log("Hello1")
-    //get uplloaded file
-    const fileUploaded = sessionStorage.getItem("XMLFILE")
-    console.log(fileUploaded)
-    var middleBlock = document.getElementById("middleBlock")
-    middleBlock.src = fileUploaded
+    
+    alertsTableState = middleContainer.innerHTML
+    middleContainer.innerHTML = xmlConfigState
 })
-//handles event when user wants to see intrusions displayed
-middleBlockForm.addEventListener("submit", (event) => {
+//handles event when user wants to see alerts displayed
+alertsTableFrom.addEventListener("submit", (event) => {
     event.preventDefault()
-    console.log("Hello2")
+    xmlConfigState = middleContainer.innerHTML
+    middleContainer.innerHTML = alertsTableState
+    
 })
 //hadles the disconnection of the device
 disconnectForm.addEventListener("submit", (event) => {

@@ -9,6 +9,12 @@
 </head>
 
 <style>
+    .xmlFileTextArea{
+        height: 91vh;
+        border-radius: 3px;
+        width: 100%;
+        overflow: auto;
+    }
     body {
         font-family: 'Lato', sans-serif;
         background-color: white;
@@ -198,13 +204,13 @@
                 src="Config_File_Button_IMG.png">
         </form>
         <br style="line-height: 20px;">
-        <form id="middleBlockDisplayForm">
+        <form id="alertsTableForm">
             <input type="image" class="leftSidebarButton dashboardButtonAction leftSidebarImages"
                 src="Display_Box_Buttons.png" img class="leftSidebarImages">
         </form>
     </div>
 
-    <div class="table-container">
+    <div class="table-container" id = "middleContainer">
         <table class="alertbox" id="alertBoxTable">
             <thead>
                 <tr>
