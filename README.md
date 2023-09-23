@@ -56,6 +56,11 @@ LIDS is a Local Intrusion Detection System designed to monitor network activity 
     ```
       pip install -r requirements.txt
     ```
+4. **Install Pyshark**.
+    * Install Pyshark
+    ```
+      pip install pyshark
+    ```
 ---
 
 ### Usage
