@@ -28,6 +28,19 @@ fileInput.onchange = async () => {
     users[i.toString()] = currUser 
     
   }
+    // Sends data to back-end 
+    fetch('http://localhost:5000/configuration_data', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(users)
+  })
+  .then(response => response.json()) 
+  .then(data => {
+    console.log(data.message); 
+    
+    
     //needs work - tranferring data to the backend, change any code necessary
     //console.log(users)
     //comment line below to not change screen and stay in corruent page to print data
@@ -36,4 +49,10 @@ fileInput.onchange = async () => {
     window.localStorage.setItem("xmlFile",loadedFile)
 
     window.location = "LIDS_Dashboard"
+
+  })
+  .catch(error => {
+      console.error('Error:', error);
+  });
+
 }
