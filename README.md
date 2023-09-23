@@ -70,7 +70,9 @@ python3 main_cli.py --config_file=your_config.xml
 
 #### Web UI
 
-Start the Flask server by navigating to the `DB` folder and running:
+Once the environment is active:
+1. Navigate to the project folder.
+2. Start the Flask server by running `app.py`.
 
 ```bash
 python3 server.py
