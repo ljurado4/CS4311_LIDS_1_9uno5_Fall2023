@@ -12,5 +12,11 @@ def index():
 def dashboard():
     return render_template('LIDS_Dashboard.html')
 
+
+@app.route('/LIDS_Main')
+def lids_main():
+    return render_template('LIDS_Main.html')
+
+
 if __name__ == "__main__":
     app.run(debug=True)
