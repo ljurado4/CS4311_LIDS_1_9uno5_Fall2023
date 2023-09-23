@@ -35,5 +35,5 @@ fileInput.onchange = async () => {
     window.localStorage.setItem("xmlFileName",selectedFile.name)
     window.localStorage.setItem("xmlFile",loadedFile)
 
-    window.location = "LIDS_Dashboard.html"
+    window.location = "LIDS_Dashboard"
 }
