@@ -1,8 +1,16 @@
 import menu
 from tabulate import tabulate
-
+import packets
+"""
+NOTE: Include that tabulate needs to be installed from command terminal
+"""
 class PcapMenu:
-    packet_data = [
+    packet_data = []
+
+    packet_data = packets.PackTime()
+    packet_data.add_packets(5)
+    """
+    [
         {
             "Time": "2023-09-16 12:01:23.456789",
             "Source": "192.168.1.2",
@@ -52,7 +60,7 @@ class PcapMenu:
             "Description": "HTTP 200 OK Response"
         }
     ]
-        
+    """
     def __init__(self) -> None:
         self.menu_helper = menu.Menu()
         self.valid_search_commands = [
