@@ -25,7 +25,7 @@ def lids_main():
 def upload_xml_data():
     data = request.json
     print("DATA",data)
-    # Process the data as required
+ 
     return jsonify({"message": "Data processed!"})
 
 if __name__ == "__main__":
