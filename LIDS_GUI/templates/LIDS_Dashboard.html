@@ -30,7 +30,7 @@
         <br style="line-height: 20px;">
         <form id="alertsTableForm">
             <input type="image" class="leftSidebarButton dashboardButtonAction leftSidebarImages"
-            src="../static/img/Display_Box_Buttons.png">
+            src="../static/img/Config_File_Button_IMG.png">
         </form>
     </div>
 
@@ -71,6 +71,26 @@
                 </tr>
             </thead>
             <tbody>
+                <table>
+                    <thead>
+                        <tr>
+                        {% for key in data_packet[0] %}
+                            <th>{{ key }}</th>
+                        {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for packet in data_packet %}
+                        <tr>
+                            {% for value in packet.values() %}
+                            <td>{{ value }}</td>
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            
+               <!-- 
                 <tr>
                     <td>1</td>
                     <td>12:30:45</td>
@@ -302,6 +322,7 @@
                     <td>8080</td>
                     <td>Some description</td>
                 </tr>
+                -->
             </tbody>
         </table>
     </div>
