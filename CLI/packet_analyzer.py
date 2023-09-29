@@ -10,7 +10,7 @@ class PacketAnalyzer:
         self.Port = Port
 
     def analyze_packet(self):
-        # Check for specific conditions using other classes
+        # Check for each error 
         if self.ip_check(self.IP) == False:
             self.create_alert("Unknown IP")
         if self.port_scan_check() == True:
@@ -24,16 +24,16 @@ class PacketAnalyzer:
 
     def port_scan_check(self):
 
-        #call port scan check have it return a boolean indicating if there is an error
+        #call port scan check and have it return a boolean indicating if there is an error
 
-        return False  # Replace with your condition check
+        return False 
 
     def login_attempts(self):
         
         #call login attempts and have it return a boolean indicating if there is an error
 
-        return False  # Replace with your condition check
-
+        return False  
+    
     def create_alert(self,description):
         # Call the AlertsManager class to create an alert
         alerts_manager = AlertManager()
