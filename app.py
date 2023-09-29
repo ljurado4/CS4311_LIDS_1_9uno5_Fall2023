@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, jsonify
+from backend import lids_agent_connector
 from flask_cors import CORS
 
 # Command  .\env\Scripts\activate.bat
@@ -74,8 +75,9 @@ def lids_main():
 @app.route('/configuration_data', methods=['POST'])
 def upload_xml_data():
     data = request.json
-    print("DATA",data)
- 
+    # print(data)
+    # connect_agent = lids_agent_connector.AgentConnector(data)
+    
     return jsonify({"message": "Data processed!"})
 
 if __name__ == "__main__":
