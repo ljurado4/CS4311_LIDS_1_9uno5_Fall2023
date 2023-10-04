@@ -8,7 +8,12 @@ class PcapMenu:
     packet_data = []
 
     packet_data = packets.PackTime()
-    packet_data.add_packets(5)
+    """
+    NOTE: The line below will only capture a set # of
+    packets, Used only for testing, review packets.py 
+    and refactor for practical use
+    """
+    packet_data.run_sniffer()
     """
     [
         {
