@@ -84,7 +84,7 @@ class PackTime:
     on differing threads
     """
     def run_sniffer(self):
-        packet_handler_thread = th.Thread(target=packet_handler)
+        packet_handler_thread = th.Thread(target=self.packet_handler)
 
         packet_handler_thread.start()
 
