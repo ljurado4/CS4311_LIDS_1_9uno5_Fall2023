@@ -37,31 +37,29 @@ LIDS is a Local Intrusion Detection System designed to monitor network activity 
       ```
       virtualenv env
       ```
-    * 
-    * Activate the virtual environment:
-      - On Windows using CMD:
-        ```
-        .\env\Scripts\activate.bat
-        ```
-      - On Mac or Linux:
-        ```
-        source env/bin/activate
-        ```
-    ```
-3. **Install Flask and Required Packages**.
+4. **Install Flask and Required Packages**.
     * Install Flask
     ```
       pip3 install flask
     ```
     * Install Flask-CORS:
-      ```
+    ```
       pip3 install flask-cors
-      ```
+    ```
     * Install other required packages for the project
     ```
       pip install -r requirements.txt
     ```
-4. **Install Pyshark**.
+5. **Activate the virtual environment**
+    * On Windows using CMD:
+    ```
+      .\env\Scripts\activate.bat
+    ```
+    * On Mac or Linux:
+    ```
+      source env/bin/activate
+    ```
+6. **Install Pyshark**.
     * Install Pyshark
     ```
       pip install pyshark
