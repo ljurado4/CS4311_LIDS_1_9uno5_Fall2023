@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LIDS-D</title>
+    <link rel="stylesheet" href="LIDS-D.css">
+</head>
+<body>
+    <ul class="nav">
+        <li class="nav"><a class="nav" href="LIDS-D_Alerts_View.html">Alerts</a></li>
+        <li class="nav"><a class="nav" href="LIDS-D_Config_Server_View.html">Configuration</a></li>
+        <li class="nav"><a class="nav" href="LIDS-D_Network_Info_View.html">Network Info</a></li>
+    </ul>
+    <div class="contentBlock" id = "contentBlock">
+        <div class = "configBrowseDiv">
+            <p class = "configBrowseDivText">please provide a configuration file for this system<p>
+            <label class = "configBrowseButton" for = "browseButton">
+                Browse
+                <input type = "file" style = "display:none" accept="text/xml" id = "browseButton">
+            </label>
+            </div>
+            <div class = "previousCofigFileDiv">
+            <br>
+            <p class = "previousCofigFileDivText">Or select a previous configuration file</p>
+        </div>
+    </div>
+    <script src="LIDS-D_RTB.js"></script>
+</body>
+</html>
