@@ -1,5 +1,6 @@
 from ipChecker import ip_Checker
 from alerts_manager import AlertManager
+from loginCheck import loginCheck
 
 class PacketAnalyzer:
     def __init__(self, packet, level, time, IP, Port):
@@ -15,7 +16,7 @@ class PacketAnalyzer:
             self.create_alert("Unknown IP")
         if self.port_scan_check() == True:
             self.create_alert("Port Scan")
-        if self.login_attempts() == True:
+        if self.login_attempts(self.packet) == True:
             self.create_alert("Failed Login Attempts")
 
     def ip_check(self,IP):
@@ -28,11 +29,10 @@ class PacketAnalyzer:
 
         return False 
 
-    def login_attempts(self):
+    def login_attempts(self,packet):
         
-        #call login attempts and have it return a boolean indicating if there is an error
-
-        return False  
+        loginChecker = loginCheck()
+        return loginChecker.failedPssWrd(packet)
     
     def create_alert(self,description):
         # Call the AlertsManager class to create an alert

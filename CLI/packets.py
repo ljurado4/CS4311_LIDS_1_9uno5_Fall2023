@@ -3,6 +3,8 @@ from datetime import datetime
 import threading as th
 from threading import Semaphore
 
+from packet_analyzer import PacketAnalyzer
+
 """
 NOTE: Used Python 3.11 because interpreter could 
 not resolve the pyshark import
@@ -75,6 +77,10 @@ class PackTime:
             #Something along the lines of
             #if alertDetector(in_packet):
             #pull packet and move elsewhere
+
+            analyzer = PacketAnalyzer()
+            analyzer.analyze_packet(packet,"1",packet["Time"], packet["Source"],"123" )
+
             self.cap_sem.release()
             print("Packet: ", packet)
 
@@ -99,4 +105,15 @@ class PackTime:
             #################
             self.cap_sem.release()
 
+        packet_handler_thread.start()
 
+        for in_packet in self.capture.sniff_continuously():
+            self.cap_sem.acquire()
+            self.create_packet(in_packet)
+            self.process_sem.release()
+            #################
+            self.packets_captured += 1
+            if self.packets_captured >= 5:
+                break
+            #################
+            self.cap_sem.release()
