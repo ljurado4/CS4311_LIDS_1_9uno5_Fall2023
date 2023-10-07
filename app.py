@@ -35,7 +35,7 @@ def dashboard():
             client_socket = ClientSocketIO(host=ip_address, port=int(port_number),wait_for_connection=False)
             print("connection Succesfull")
         except Exception as e:
-            print("Connection failed")
+            flash(f'Failed connection server at IP: {ip_address} Port: {port_number}.')
             
     
     alert_data =     [
