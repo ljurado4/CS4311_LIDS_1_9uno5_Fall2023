@@ -2,6 +2,7 @@ import pyshark
 from datetime import datetime
 import threading as th
 from threading import Semaphore
+import ipChecker
 
 """
 NOTE: Used Python 3.11 because interpreter could 
@@ -75,6 +76,13 @@ class PackTime:
             #Something along the lines of
             #if alertDetector(in_packet):
             #pull packet and move elsewhere
+            
+            #Check the packet to see if the packet
+            in_whitelist = ipChecker.ip_Checker.ip_in_List(packet["Source"],packet["Destination"])
+            #checks if in_whitelist, then performs something
+            if in_whitelist:
+                #TODO: Do something with the alert
+                break
             self.cap_sem.release()
             print("Packet: ", packet)
 

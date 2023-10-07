@@ -25,9 +25,12 @@ class ip_Checker:
                 whitelist = whitelist_element.text
 
                 self.whitelist_values.extend(whitelist.split(','))    
-        
-    def ip_in_List(self, packet_ip):
-        if (str(packet_ip) not in self.whitelist_values):
+    
+    """
+    Returns True if the packet is in the whitelist
+    """
+    def ip_in_List(self, src_ip,dst_ip):
+        if (str(src_ip) not in self.whitelist_values or str(dst_ip) not in self.whitelist_values):
             return False
         else:
             return True
