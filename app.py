@@ -1,6 +1,11 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, flash
+from socketIO_client_nexus import SocketIO as ClientSocketIO
 from backend import lids_agent_connector
 from flask_cors import CORS
+import logging
+import secrets
+
+logging.basicConfig(level=logging.DEBUG)
 
 # Command  .\env\Scripts\activate.bat
 
@@ -8,12 +13,31 @@ app = Flask(__name__,template_folder='LIDS_GUI/templates',static_folder='LIDS_GU
 
 CORS(app)
 
+app.secret_key = secrets.token_urlsafe(16)
+
+
 @app.route('/')
 def index():
     return render_template('LIDS_Main.html')
 
-@app.route('/LIDS_Dashboard')
+
+@app.route('/LIDS_Dashboard', methods=['GET', 'POST'])
 def dashboard():
+    global client_socket
+    if request.method == 'POST':
+        logging.debug("POST request received")
+        ip_address = request.form.get('IPInput')
+        port_number = request.form.get('PortInput')
+        print("ip_address",ip_address)
+        print("port_number",port_number)
+        logging.debug("Attempting to establish socket connection")
+        try:
+            client_socket = ClientSocketIO(host=ip_address, port=int(port_number),wait_for_connection=False)
+            print("connection Succesfull")
+        except Exception as e:
+            print("Connection failed")
+            
+    
     alert_data =     [
     {
         "Time": "2023-09-16 12:01:23.456789",
@@ -80,6 +104,8 @@ def upload_xml_data():
     
     
     return jsonify({"message": "Data processed!"})
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)

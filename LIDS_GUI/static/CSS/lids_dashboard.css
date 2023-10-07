@@ -24,10 +24,34 @@ body {
 .header {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     background: rgb(173, 173, 173);
     height: auto;
     position: relative;
     font-size: 20px;
+    padding: 10px 20px;
+}
+
+form {
+    display: flex;
+    align-items: center;
+    gap: 10px;  
+}
+
+#ConnectButton {
+    background: lightgray;
+    width: 100px;
+    height: 30px;
+    border: 1px solid black;  
+    border-radius: 25px;
+    display: inline-block;
+    margin: 5%;
+}
+
+#IPAdressForm, #PortNumberForm {
+    padding: 8px;
+    border: 1px solid #AAA;
+    border-radius: 4px;
 }
 
 .leftSidebar {
