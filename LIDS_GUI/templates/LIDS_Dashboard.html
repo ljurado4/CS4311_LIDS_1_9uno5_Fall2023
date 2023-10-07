@@ -114,6 +114,12 @@
                 <tr>
                     <td>Notification 1</td>
                 </tr>
+                {% for message in get_flashed_messages(category_filter=['success']) %}
+                <tr>
+                    <td>{{ message }}</td>
+                </tr>
+                {% endfor %}
+                </tr>
             </tbody>
         </table>
 
@@ -127,6 +133,11 @@
                 <tr>
                     <td>Error 1</td>
                 </tr>
+                {% for message in get_flashed_messages(category_filter=['error']) %}
+                <tr>
+                    <td>{{ message }}</td>
+                </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>

@@ -33,9 +33,9 @@ def dashboard():
         logging.debug("Attempting to establish socket connection")
         try:
             client_socket = ClientSocketIO(host=ip_address, port=int(port_number),wait_for_connection=False)
-            print("connection Succesfull")
+            flash(f'Successfully connection to server at IP: {ip_address} Port: {port_number}.', 'success')
         except Exception as e:
-            flash(f'Failed connection server at IP: {ip_address} Port: {port_number}.')
+            flash(f'Failed connection server at IP: {ip_address} Port: {port_number}.', 'error')
             
     
     alert_data =     [
