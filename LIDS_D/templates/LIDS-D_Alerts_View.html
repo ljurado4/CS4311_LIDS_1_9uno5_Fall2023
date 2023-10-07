@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LIDS-D</title>
+    <link rel="stylesheet" href="../static/css/LIDS-D.css">
+</head>
+<body>
+    <div class="contentBlock" id = "contentBlock">
+        <p class = "alertsTitle">Sort Alerts By:</p>
+        <br>
+        <div class = "VASortButtons">
+            <button class = "sortButtons">Date</button>
+            <button class = "sortButtons">Priority Level</button>
+            <button class = "sortButtons">Protocol</button>
+            <button class = "sortButtons">Source</button>
+        </div>
+        <br>
+        <table class = "alertsTable">
+            <tr>
+                <th>Level</th>
+                <th>Time</th>
+                <th>IP</th>
+                <th>Port</th>
+                <th>Protocol</th>
+                <th>Description</th>
+            </tr>
+        </table>
+    </div>
+    <div class="righTabBar">
+        <form class="rightTabBarFroms" id="MaliciousPacketCount">
+            <input class="rightTabBarButtons" type="submit" value="Malicious Packet Count">
+        </form>
+        <br>
+        <form class="rightTabBarFroms" id="ConfigServer">
+            <input class="rightTabBarButtons" type="submit" value="Configure Server">
+        </form>
+        <br>
+        <form class="rightTabBarFroms" id="ViewAlerts">
+            <input class="rightTabBarButtons" type="submit" value="View Alerts">
+        </form>
+        <br>
+        <form class="rightTabBarFroms" id="NetworkInfo">
+            <input class="rightTabBarButtons" type="submit" value="Network Information">
+        </form>   
+        <br>
+        <form id="NetworkMapButton">
+            <input class="networkMapButton" type="submit"  value="View Network Map">
+        </form>
+    </div>
+    <script src="../static/js/LIDS-D_RTB.js"></script>
+</body>
+</html>

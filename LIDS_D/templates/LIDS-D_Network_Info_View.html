@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LIDS-D</title>
+    <link rel="stylesheet" href="../static/css/LIDS-D.css">
+</head>
+<style>
+    
+</style>
+<body>
+    
+    <div class = "contentBlock" style="font-size: 0;" id = "contentBlock">
+        <div class="devicesDisplayBox" id="recognizedDevices">
+            <p class="networkHeader">Recognized Devices</p>
+            <table class="devicesTable">
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>IP</th>
+                    <th>Connection Status</th>
+                </tr>
+            </table>
+        </div>
+        <div class = "devicesDisplayBox" id="unkownDevices">
+            <p class="networkHeader">Unkown Devices</p>
+            <table class="devicesTable">
+                <tr>
+                    <th>IP</th>
+                    <th>Port</th>
+                    <th>Protocol</th>
+                </tr>
+            </table>
+        </div>
+        <p style="width:100%;background-color:lightgray;font-size:15px;margin: 0;text-align: left;">Alerts</p>
+        <table class = "alertsTable">
+            <tr>
+                <th>Level</th>
+                <th>Time</th>
+                <th>IP</th>
+                <th>Port</th>
+                <th>Protocol</th>
+                <th>Description</th>
+            </tr>
+        </table>
+    </div>
+    <div class="righTabBar">
+        <form class="rightTabBarFroms" id="MaliciousPacketCount">
+            <input class="rightTabBarButtons" type="submit" value="Malicious Packet Count">
+        </form>
+        <br>
+        <form class="rightTabBarFroms" id="ConfigServer">
+            <input class="rightTabBarButtons" type="submit" value="Configure Server">
+        </form>
+        <br>
+        <form class="rightTabBarFroms" id="ViewAlerts">
+            <input class="rightTabBarButtons" type="submit" value="View Alerts">
+        </form>
+        <br>
+        <form class="rightTabBarFroms" id="NetworkInfo">
+            <input class="rightTabBarButtons" type="submit" value="Network Information">
+        </form>   
+        <br>
+        <form id="NetworkMapButton">
+            <input class="networkMapButton" type="submit"  value="View Network Map">
+        </form>
+    </div>
+    <script src="../static/js/LIDS-D_RTB.js"></script>
+</body>
+</html>
