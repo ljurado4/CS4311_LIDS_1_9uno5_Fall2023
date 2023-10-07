@@ -1,8 +1,8 @@
 from flask import Flask, render_template
 
-app = Flask(__name__)
 
 
+app = Flask(__name__,template_folder='LIDS_D/templates',static_folder='LIDS_D/static')
 
 @app.route('/')
 def index():
