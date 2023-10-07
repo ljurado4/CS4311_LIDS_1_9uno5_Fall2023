@@ -8,19 +8,10 @@
     <link rel="stylesheet" href="LIDS-D.css">
 </head>
 <body>
-    <div class="contentBlock" id = "contentBlock">
-        <div class = "configBrowseDiv">
-            <p class = "configBrowseDivText">please provide a configuration file for this system<p>
-            <label class = "configBrowseButton" for = "browseButton">
-                Browse
-                <input type = "file" style = "display:none" accept="text/xml" id = "browseButton">
-            </label>
-            </div>
-            <br>
-            <div class="scrollableContainer" style="text-align: left;  padding-left: 50px;" id = "previousFilesSelection">
-                <p class = "previousCofigFileDivText">Or select a previous configuration file</p>
-            </div>
-        </div>
+    
+    <div class="contentBlock" style="align-items: center;" id = "contentBlock">
+        <p style="vertical-align: middle;">Config File has been successfully uploaded</p>
+        <button class = "sortButtons" style="height: 100px;width: 200px;" onclick="startServer()">Start Server</button>
     </div>
     <div class="righTabBar">
         <button class="rightTabBarButtons" id = "mpd"></button>
@@ -36,6 +27,5 @@
         </form>
     </div>
     <script src="LIDS-D.js"></script>
-    <script src="config.js"></script>
 </body>
 </html>
