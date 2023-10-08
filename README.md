@@ -1,4 +1,5 @@
 # CS4311_LIDS_Team1_9uno5_Fall2023
+
 CS4311 Software Engineering: Design and Implementation Team 1 9UNO 5
 
 LIDS (Local Intrusion Detection System)
@@ -13,8 +14,8 @@ LIDS is a Local Intrusion Detection System designed to monitor network activity 
 2. [Usage](#usage)
     - [CLI](#cli)
     - [Web UI](#web-ui)
-4. [Troubleshooting](#troubleshooting)
-5. [Contributing](#contributing)
+3. [Troubleshooting](#troubleshooting)
+4. [Contributing](#contributing)
 
 ---
 
@@ -37,8 +38,8 @@ LIDS is a Local Intrusion Detection System designed to monitor network activity 
       ```
       virtualenv env
       ```
-4. **Install Flask and Required Packages**.
-    * Install Flask
+4. **Install Flask and Required Packages**:
+    * Install Flask:
     ```
       pip3 install flask
     ```
@@ -46,11 +47,19 @@ LIDS is a Local Intrusion Detection System designed to monitor network activity 
     ```
       pip3 install flask-cors
     ```
-    * Install other required packages for the project
+    * Install other required packages for the project:
     ```
-      pip install -r requirements.txt
+      pip3 install -r requirements.txt
     ```
-5. **Activate the virtual environment**
+5. **Install Pyshark**:
+   
+   Given the changes made in `packets.py`, it's crucial to install the Pyshark library. Pyshark allows Python to interface with Wireshark for packet analysis.
+    * Install Pyshark:
+    ```
+      pip3 install pyshark
+    ```
+
+6. **Activate the virtual environment**:
     * On Windows using CMD:
     ```
       .\env\Scripts\activate.bat
@@ -59,11 +68,7 @@ LIDS is a Local Intrusion Detection System designed to monitor network activity 
     ```
       source env/bin/activate
     ```
-6. **Install Pyshark**.
-    * Install Pyshark
-    ```
-      pip install pyshark
-    ```
+
 ---
 
 ### Usage
@@ -74,7 +79,6 @@ To interact with LIDS via CLI, navigate to the CLI folder and run the following 
 
 ```bash
 python3 main_cli.py --config_file=your_config.xml
-```
 
 #### Web UI
 
