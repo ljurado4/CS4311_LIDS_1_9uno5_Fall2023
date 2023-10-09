@@ -10,6 +10,8 @@ CORS(app)
 configuration = {}
 connected_agents = 0
 
+device_connected = []
+
 @app.route('/')
 def index():
     return render_template('LIDS-D_Config_server_View.html')
@@ -29,7 +31,8 @@ def server_details():
 
 @app.route('/LIDS-D_Network_Info_View')
 def network_info_view():
-    return render_template('LIDS-D_Network_Info_View.html') 
+    global device_connected
+    return render_template('LIDS-D_Network_Info_View.html',clients=device_connected) 
 
 @app.route('/LIDS-D_Alerts_View')
 def alerts_view():
@@ -48,6 +51,7 @@ def upload_xml_data():
 @socketio.on('connect')
 def handle_connect():
     global connected_agents
+    global device_connected
     is_ip_whitelisted = False
     client_ip = request.remote_addr
     print("Attempting to connect",client_ip)
@@ -62,11 +66,23 @@ def handle_connect():
     
     connected_agents += 1
     print(f'Client {client_ip} connected')
+    
+    device_connected.append({
+        "id": str(len(device_connected) + 1),  
+        "name": f"Client {len(device_connected) + 1}", 
+        "ip": client_ip,
+        "status": "connected"
+    })
+    
     socketio.emit('update_agent_count', connected_agents)
 
 @socketio.on('disconnect')
 def handle_disconnect():
+    global device_connected
     global connected_agents
+    
+    client_ip = request.remote_addr
+    connected_clients = [client for client in device_connected if client['ip'] != client_ip]
 
     connected_agents -= 1
 
