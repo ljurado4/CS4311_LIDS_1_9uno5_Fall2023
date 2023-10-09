@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, jsonify, flash
 from socketIO_client import SocketIO
+import socketio
 from backend import lids_agent_connector
 from flask_cors import CORS
 import logging
@@ -15,6 +16,7 @@ CORS(app)
 
 app.secret_key = secrets.token_urlsafe(16)
 
+sio = socketio.Client()
 
 @app.route('/')
 def index():
@@ -32,7 +34,8 @@ def dashboard():
         print("port_number",port_number)
         logging.debug("Attempting to establish socket connection")
         try:
-            client_socket = SocketIO(host=ip_address, port=int(port_number),wait_for_connection=False)
+            # client_socket = SocketIO(host=ip_address, port=int(port_number),wait_for_connection=False)
+            sio.connect(f'http://{ip_address}:{port_number}')
             flash(f'Successfully connection to server at IP: {ip_address} Port: {port_number}.', 'success')
         except Exception as e:
             flash(f'Failed connection server at IP: {ip_address} Port: {port_number}.', 'error')

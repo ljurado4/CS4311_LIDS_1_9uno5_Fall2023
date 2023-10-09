@@ -47,13 +47,17 @@ def upload_xml_data():
 @socketio.on('connect')
 def handle_connect():
 
+    is_ip_whitelisted = False
     client_ip = request.remote_addr
-
+    print("Attempting to connect",client_ip)
     for k,dic in configuration.items():
         white_lst = dic['whitelist']
-        if client_ip not in white_lst:
-            return False  
-
+        if client_ip in white_lst:
+            print("Found IP")
+            is_ip_whitelisted = True  
+    
+    if not is_ip_whitelisted:
+        return False
     print(f'Client {client_ip} connected')
 
 if __name__ == '__main__':

@@ -12,7 +12,7 @@
         <ip>10.0.0.2</ip>
         <mac>09-22-20-11-00-00</mac>
         <ports>22</ports>
-        <whitelist>10.0.0.1,10.0.0.3,10.0.0.5</whitelist>
+        <whitelist>10.0.0.1,10.0.0.3,10.0.0.5,127.0.0.1</whitelist>
     </system>
     <system>
         <name>Ericka</name>
