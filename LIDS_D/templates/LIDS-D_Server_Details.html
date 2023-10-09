@@ -7,7 +7,9 @@
     <div class="contentBlock" style="text-align: left;" id = "contentBlock">
             <p style="vertical-align: middle;margin-left: 30%;margin-top: 20%;">
                 Server Started: 
-                <button class = "sortButtons" style="margin-left: 100px;">Stop Server</button>
+                <form action="/stop_server" method="post">
+                    <button type="submit" class="sortButtons" style="margin-left: 100px;">Stop Server</button>
+                </form>
             </p>
             <p class="agent-info">Agents Connected: <span id="agent_count">0</span></p>
             <p style="vertical-align: middle;margin-left: 30%;">LIDS-D External Storage Capacity:</p>

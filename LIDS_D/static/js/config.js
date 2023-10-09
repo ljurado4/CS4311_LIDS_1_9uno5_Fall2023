@@ -69,13 +69,13 @@ function succesfulFileSubmition(selectedFile,loadedFile){
     window.localStorage.setItem("xmlFileName",selectedFile.name)
     window.localStorage.setItem("xmlFile",loadedFile)
 
-    window.location = "LIDS-D_Start_Server"
+    window.location = "start_server_ui"
 
   })
   .catch(error => {
       console.error('Error:', error);
   });
-  window.location = "LIDS-D_Start_Server"
+  window.location = "start_server_ui"
 }
 
 //this will only be done when a user inputs file

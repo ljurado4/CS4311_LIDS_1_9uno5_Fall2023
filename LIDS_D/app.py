@@ -9,7 +9,7 @@ CORS(app)
 
 configuration = {}
 connected_agents = 0
-
+start_server = False
 device_connected = []
 
 @app.route('/')
@@ -21,9 +21,17 @@ def index():
 def config_server():
     return render_template('LIDS-D_Config_server_View.html')
 
-@app.route('/LIDS-D_Start_Server')
-def start_server():
+
+@app.route('/start_server_ui')
+def start_server_interface():
     return render_template('LIDS-D_Start_Server.html')
+
+@app.route('/start_socket_server', methods=['POST'])
+def start_socket_server_action():
+    global start_server
+    start_server = True
+    return jsonify({"message": "Server started"})
+
 
 @app.route('/LIDS-D_Server_Details')
 def server_details():
@@ -46,12 +54,17 @@ def upload_xml_data():
     configuration = request.json
     print(configuration)
     
-    return jsonify({"Data processed"})
+    return "Data Processed"
 
 @socketio.on('connect')
 def handle_connect():
     global connected_agents
     global device_connected
+    global start_server
+    
+    if not start_server:
+        return False
+
     is_ip_whitelisted = False
     client_ip = request.remote_addr
     print("Attempting to connect",client_ip)
@@ -78,6 +91,7 @@ def handle_connect():
 
 @socketio.on('disconnect')
 def handle_disconnect():
+    print("Disconnecting")
     global device_connected
     global connected_agents
     
@@ -87,6 +101,8 @@ def handle_disconnect():
     connected_agents -= 1
 
     socketio.emit('update_agent_count', connected_agents)
+    socketio.emit('update_client_list', connected_clients)
+
 
 
 if __name__ == '__main__':
