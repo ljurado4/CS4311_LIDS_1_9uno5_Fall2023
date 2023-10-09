@@ -7,6 +7,6 @@ document.getElementById("mpd").innerHTML = "Malicious Packet Count:\n" + malicio
 //handles the start of th server
 function startServer(){
     //needs to be implemented
-    window.location = "LIDS-D_Server_Details.html"
+    window.location = "LIDS-D_Server_Details"
   }
   

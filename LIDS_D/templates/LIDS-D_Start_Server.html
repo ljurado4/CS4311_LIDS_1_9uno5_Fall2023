@@ -1,31 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LIDS-D</title>
-    <link rel="stylesheet" href="../static/css/LIDS-D.css">
-</head>
+    {% include 'head.html' %}
 <body>
     
     <div class="contentBlock" style="align-items: center;" id = "contentBlock">
         <p style="vertical-align: middle;">Config File has been successfully uploaded</p>
         <button class = "sortButtons" style="height: 100px;width: 200px;" onclick="startServer()">Start Server</button>
     </div>
-    <div class="righTabBar">
-        <button class="rightTabBarButtons" id = "mpd"></button>
-        <br>
-        <a href="LIDS-D_Config_Server_View.html"><button class="rightTabBarButtons">Configure Server</button></a>
-        <br>
-        <a href="LIDS-D_Alerts_View.html"><button class="rightTabBarButtons">View Alerts</button></a>
-        <br> 
-        <a href="LIDS-D_Network_Info_View.html"><button class="rightTabBarButtons">Network Info</button></a>
-        <br>
-        <form id="NetworkMapButton">
-            <input class="networkMapButton" type="submit"  value="View Network Map">
-        </form>
-    </div>
+    {% include 'sidebar.html' %}
     <script src="../static/js/LIDS-D.js"></script>
 </body>
 </html>

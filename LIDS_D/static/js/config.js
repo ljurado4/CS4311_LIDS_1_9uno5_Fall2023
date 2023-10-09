@@ -50,32 +50,32 @@ function succesfulFileSubmition(selectedFile,loadedFile){
     
   }
     // Sends data to back-end 
-  //   fetch('http://localhost:5000/configuration_data', {
-  //     method: 'POST',
-  //     headers: {
-  //         'Content-Type': 'application/json'
-  //     },
-  //     body: JSON.stringify(users)
-  // })
-  // .then(response => response.json()) 
-  // .then(data => {
-  //   console.log(data.message); 
+    fetch('configuration_data', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(users)
+  })
+  .then(response => response.json()) 
+  .then(data => {
+    console.log(data.message); 
     
     
-    //needs work - tranferring data to the backend, change any code necessary
-    //console.log(users)
-    //comment line below to not change screen and stay in corruent page to print data
+    // needs work - tranferring data to the backend, change any code necessary
+    console.log(users)
+    // comment line below to not change screen and stay in corruent page to print data
     //store file name and contents to use in next page
     window.localStorage.setItem("xmlFileName",selectedFile.name)
     window.localStorage.setItem("xmlFile",loadedFile)
 
-    //window.location = "LIDS-D_Start_Server.html"
+    window.location = "LIDS-D_Start_Server"
 
-  // })
-  // .catch(error => {
-  //     console.error('Error:', error);
-  // });
-  window.location = "LIDS-D_Start_Server.html"
+  })
+  .catch(error => {
+      console.error('Error:', error);
+  });
+  window.location = "LIDS-D_Start_Server"
 }
 
 //this will only be done when a user inputs file
@@ -97,11 +97,10 @@ browseButton.onchange = async () => {
       succesfulFileSubmition(selectedFile,loadedFile)
     } else {
       txt = "Upload canceled";
-      window.location = "LIDS-D_Config_Server_View.html"
+      window.location = "LIDS-D_Config_Server_View"
     }
   }else{
     //case if new file name
     succesfulFileSubmition(selectedFile,loadedFile)
   }
 }
-
