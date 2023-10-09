@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     {% include 'head.html' %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
 <body>
     
     <div class="contentBlock" style="text-align: left;" id = "contentBlock">
@@ -8,9 +9,7 @@
                 Server Started: 
                 <button class = "sortButtons" style="margin-left: 100px;">Stop Server</button>
             </p>
-            <p style="vertical-align: middle;margin-left: 30%;">
-                Agents Connected:
-            </p>
+            <p class="agent-info">Agents Connected: <span id="agent_count">0</span></p>
             <p style="vertical-align: middle;margin-left: 30%;">LIDS-D External Storage Capacity:</p>
     </div>
     {% include 'sidebar.html' %}

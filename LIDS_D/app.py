@@ -8,6 +8,7 @@ socketio = SocketIO(app)
 CORS(app)
 
 configuration = {}
+connected_agents = 0
 
 @app.route('/')
 def index():
@@ -46,7 +47,7 @@ def upload_xml_data():
 
 @socketio.on('connect')
 def handle_connect():
-
+    global connected_agents
     is_ip_whitelisted = False
     client_ip = request.remote_addr
     print("Attempting to connect",client_ip)
@@ -58,7 +59,19 @@ def handle_connect():
     
     if not is_ip_whitelisted:
         return False
+    
+    connected_agents += 1
     print(f'Client {client_ip} connected')
+    socketio.emit('update_agent_count', connected_agents)
+
+@socketio.on('disconnect')
+def handle_disconnect():
+    global connected_agents
+
+    connected_agents -= 1
+
+    socketio.emit('update_agent_count', connected_agents)
+
 
 if __name__ == '__main__':
     app.run(debug=True,port=5001)

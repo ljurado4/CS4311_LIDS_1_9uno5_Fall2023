@@ -154,3 +154,7 @@ button.prevFileButton{
     background-color: white;
 }
 
+.agent-info {
+    vertical-align: middle;
+    margin-left: 30%;
+}

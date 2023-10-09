@@ -25,11 +25,6 @@ alertsTableFrom.addEventListener("submit", (event) => {
     middleContainer.innerHTML = alertsTableState
     
 })
-//hadles the disconnection of the device
-disconnectForm.addEventListener("submit", (event) => {
-    event.preventDefault()
-    window.location = "LIDS_Main"
-})
 function toggleDropdown() {
     let dropdownContent = document.getElementById("sortByDropdownContent");
     if (dropdownContent.style.display === "none" || !dropdownContent.style.display) {

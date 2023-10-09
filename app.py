@@ -110,5 +110,13 @@ def upload_xml_data():
 
 
 
+@app.route('/disconnect', methods=['POST'])
+def disconnect():
+    print("Disconnecting from server")
+    global sio
+    sio.disconnect()
+    return render_template('LIDS_Main.html')
+
+
 if __name__ == "__main__":
     app.run(debug=True)
