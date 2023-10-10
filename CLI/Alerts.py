@@ -6,3 +6,6 @@ class Alerts:
         self.IP = IP
         self.Port = Port
         self.description = description
+    
+    def __str__(self):
+        return f"Level: {self.level}, Time: {self.time}, IP: {self.IP}, Port: {self.Port}, Description: {self.description}"
