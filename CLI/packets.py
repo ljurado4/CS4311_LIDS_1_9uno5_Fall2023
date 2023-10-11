@@ -3,6 +3,7 @@ from datetime import datetime
 import threading as th
 from threading import Semaphore
 import ipChecker
+import Alerts
 
 """
 NOTE: Used Python 3.11 because interpreter could 
@@ -14,6 +15,7 @@ With Python311 and Python311\Scripts in PATH, use 'pip install pyshark'
 """
 class PackTime:
     packet_list = []
+    alert_list = []
     ################
     #Delete when alert logic is ready, only exits to 
     #limit packets for testing
@@ -36,11 +38,15 @@ class PackTime:
             if 'TCP' in in_packet:
                 protocol = 'TCP'
                 flags = in_packet.tcp.flags
+                src_port = in_packet.tcp.srcport
+                dst_port = in_packet.tcp.dstport
                 if 'SYN' in flags:
                     description = 'TCP Handshake SYN'
                 else:
                     description = 'Other TCP Packet'
             elif 'UDP' in in_packet:
+                src_port = in_packet.tcp.srcport
+                dst_port = in_packet.tcp.dstport
                 protocol = 'UDP'
                 description = 'UDP Packet'
             elif 'ICMP' in in_packet:
@@ -58,6 +64,7 @@ class PackTime:
                 "Length": packet_length,
                 "Description": description
             }
+            self.add_alert(severity= "Medium",time= time,IP = src,Port=dst_port,description = description)
             self.packet_list.append(temp_packet_dict)
 
     """
@@ -78,14 +85,17 @@ class PackTime:
             #pull packet and move elsewhere
             
             #Check the packet to see if the packet
-            in_whitelist = ipChecker.ip_Checker.ip_in_List(packet["Source"],packet["Destination"])
+            not_in_whitelist = ipChecker.ip_Checker.ip_in_List(packet["Source"],packet["Destination"])
             #checks if in_whitelist, then performs something
-            if in_whitelist:
+            if not_in_whitelist:
                 #TODO: Do something with the alert
                 break
             self.cap_sem.release()
             print("Packet: ", packet)
 
+    def add_alert(self,severity, time, IP, Port, description):
+        alert_to_add = Alerts(severity, time, IP, Port, description)
+        self.alert_list.append(alert_to_add)
     """
     Used as driver code of the class, starts
     sniffing the network using previous classes
