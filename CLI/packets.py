@@ -17,7 +17,7 @@ class PackTime:
     packet_list = []
     alert_list = []
     ################
-    #Delete when alert logic is ready, only exits to 
+    #Delete when alert logic is ready, only exists to 
     #limit packets for testing
     packets_captured = 0
     #################
@@ -66,7 +66,7 @@ class PackTime:
             }
             self.add_alert(severity= "Medium",time= time,IP = src,Port=dst_port,description = description)
             self.packet_list.append(temp_packet_dict)
-
+        
     """
     packet_handler will dequeue a packet from the list and will use the alert logic
     to analyze the packet and determine if it is an alert
@@ -93,6 +93,9 @@ class PackTime:
             self.cap_sem.release()
             print("Packet: ", packet)
 
+    """
+    Creates alert object and appends to alert_list List
+    """
     def add_alert(self,severity, time, IP, Port, description):
         alert_to_add = Alerts(severity, time, IP, Port, description)
         self.alert_list.append(alert_to_add)

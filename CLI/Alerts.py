@@ -6,14 +6,15 @@ class Alerts:
         self.IP = IP
         self.port = Port
         self.description = description
-
+    
+    #Used to turn the Alert object into a dictionary
     def to_dict(self,alert):
         alertDict = {
             "Level":alert.level,
             "Time":alert.time,
-            "": alert.IP,
-            "": alert.port,
-            "": alert.description,
+            "Source": alert.IP,
+            "Port": alert.port,
+            "Description": alert.description,
         }
         return alertDict
     

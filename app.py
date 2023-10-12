@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, jsonify
 from backend import lids_agent_connector
 from flask_cors import CORS
+from CLI.packets import PackTime
 
 # Command  .\env\Scripts\activate.bat
 
@@ -14,7 +15,11 @@ def index():
 
 @app.route('/LIDS_Dashboard')
 def dashboard():
-    alert_data =     [
+    #Ideally, gets the packet list to be displayed
+    #TODO: Confirm if we want packets or alerts
+    alert_data = PackTime.packet_list
+    """
+    [
     {
         "Time": "2023-09-16 12:01:23.456789",
         "Source": "192.168.1.2",
@@ -64,6 +69,7 @@ def dashboard():
         "Description": "HTTP 200 OK Response"
     }
 ]
+"""
     return render_template('LIDS_Dashboard.html',data_packet=alert_data)
 
 
@@ -79,6 +85,7 @@ def upload_xml_data():
     # connect_agent = lids_agent_connector.AgentConnector(data)
     
     return jsonify({"message": "Data processed!"})
+
 
 if __name__ == "__main__":
     app.run(debug=True)
