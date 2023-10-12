@@ -17,8 +17,16 @@ def index():
 def dashboard():
     #Ideally, gets the packet list to be displayed
     #TODO: Confirm if we want packets or alerts
-    alert_data = PackTime.packet_list
+        #PackTime.packet_list
+    
+    packet_manager = PackTime()
+    packet_manager.run_sniffer()
+
+    pkt_list = packet_manager.packet_list
+    print(pkt_list)
+    #TODO: Make the list from packets work here
     """
+    alert_data = pkt_list
     [
     {
         "Time": "2023-09-16 12:01:23.456789",
@@ -68,9 +76,10 @@ def dashboard():
         "Length": 256,
         "Description": "HTTP 200 OK Response"
     }
-]
-"""
-    return render_template('LIDS_Dashboard.html',data_packet=alert_data)
+    ]
+    """
+                                                #data_packet=alert_data
+    return render_template('LIDS_Dashboard.html',data_packet=pkt_list)
 
 
 @app.route('/LIDS_Main')

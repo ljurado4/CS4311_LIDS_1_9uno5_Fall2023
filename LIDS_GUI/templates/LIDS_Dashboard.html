@@ -82,7 +82,7 @@
                     <tbody>
                         {% for packet in data_packet %}
                         <tr>
-                            {% for value in packet.values() %}
+                            {% for key, value in packet.items() %}
                             <td>{{ value }}</td>
                             {% endfor %}
                         </tr>

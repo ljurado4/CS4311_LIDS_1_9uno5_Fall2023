@@ -1,9 +1,9 @@
-import pyshark
+import pyshark 
 from datetime import datetime
 import threading as th
 from threading import Semaphore
-import ipChecker
-import Alerts
+from CLI.Alerts import Alerts
+#from CLI.Alerts 
 
 """
 NOTE: Used Python 3.11 because interpreter could 
@@ -79,17 +79,7 @@ class PackTime:
                 self.cap_sem.release()
                 break
             packet = self.packet_list.pop(0)
-            # Add alert detecting logic here
-            #Something along the lines of
-            #if alertDetector(in_packet):
-            #pull packet and move elsewhere
-            
-            #Check the packet to see if the packet
-            not_in_whitelist = ipChecker.ip_Checker.ip_in_List(packet["Source"],packet["Destination"])
-            #checks if in_whitelist, then performs something
-            if not_in_whitelist:
-                #TODO: Do something with the alert
-                break
+            #Use packet_analyzer for alert logic
             self.cap_sem.release()
             print("Packet: ", packet)
 
@@ -119,5 +109,8 @@ class PackTime:
                 break
             #################
             self.cap_sem.release()
+    #may add or change to export alerts, depending on packet_analyzer implementation
+    def export_packets(self):
+        return self.packet_list
 
 
