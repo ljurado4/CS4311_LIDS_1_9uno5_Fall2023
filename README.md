@@ -83,7 +83,7 @@ Once the environment is active:
 2. Start the Flask server by running `app.py`. (FYI macOS will require you to still run python3)
 
 ```bash
-python app.py
+python3 app.py
 ```
 
 Once the server is running, access the Web UI by navigating to `http://127.0.0.1:5000` in your web browser.
