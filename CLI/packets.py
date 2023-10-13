@@ -3,6 +3,7 @@ from datetime import datetime
 import threading as th
 from threading import Semaphore
 from CLI.Alerts import Alerts
+import asyncio
 #from CLI.Alerts 
 
 """
@@ -72,16 +73,20 @@ class PackTime:
     to analyze the packet and determine if it is an alert
     """
     def packet_handler(self):
-        while True:
-            self.process_sem.acquire()
-            self.cap_sem.acquire()
-            if not self.packet_list:
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        async def handle_packets():
+            while True:
+                await self.process_sem.acquire()
+                self.cap_sem.acquire()
+                if not self.packet_list:
+                    self.cap_sem.release()
+                    break
+                packet = self.packet_list.pop(0)
+                #Use packet_analyzer for alert logic
                 self.cap_sem.release()
-                break
-            packet = self.packet_list.pop(0)
-            #Use packet_analyzer for alert logic
-            self.cap_sem.release()
-            print("Packet: ", packet)
+                print("Packet: ", packet)
+        loop.run_until_complete(handle_packets)
 
     """
     Creates alert object and appends to alert_list List
@@ -89,6 +94,17 @@ class PackTime:
     def add_alert(self,severity, time, IP, Port, description):
         alert_to_add = Alerts(severity, time, IP, Port, description)
         self.alert_list.append(alert_to_add)
+
+    def start_file_cap(self,pcap_file):
+        capture = pyshark.FileCapture(pcap_file)
+        for in_packet in capture:
+            self.cap_sem.acquire()
+            packet = self.create_packet(in_packet)
+            self.packet_list.append(packet)
+            self.process_sem.release()
+            self.cap_sem.release()
+        capture.close()
+
     """
     Used as driver code of the class, starts
     sniffing the network using previous classes
@@ -96,13 +112,29 @@ class PackTime:
     """
     def run_sniffer(self):
 
-        pcap_file_paths = ["C/Users/velas/OneDrive/Documents/PCAPs/traffic/7-17-EN.pcapng","C:/Users/velas/OneDrive/Documents/PCAPs/traffic/AA_Day1_Traffic.pcapng","C:/Users/velas/OneDrive/Documents/PCAPs/traffic/cvi.pcapng","C:/Users/velas/OneDrive/Documents/PCAPs/traffic/eth0-LDV-wireshark.pcapng","C:/Users/velas/OneDrive/Documents/PCAPs/traffic/nmap scan.pcapng","C:/Users/velas/OneDrive/Documents/PCAPs/traffic/sv_day1traffic.pcapng","C:/Users/velas/OneDrive/Documents/PCAPs/traffic/vd_07.17.23.pcapng"]
+        pcap_file_paths = ["C\\Users\\velas\\OneDrive\\Documents\\PCAPs\\traffic\\7-17-EN.pcapng",
+                           "C:\\Users\\velas\\OneDrive\\Documents\\PCAPs\\traffic\\AA_Day1_Traffic.pcapng",
+                           "C:\\Users\\velas\\OneDrive\\Documents\\PCAPs\\traffic\\cvi.pcapng",
+                           "C:\\Users\\velas\\OneDrive\\Documents\\PCAPs\\traffic\\eth0-LDV-wireshark.pcapng",
+                           "C:\\Users\\velas\\OneDrive\\Documents\\PCAPs\\traffic\\nmap scan.pcapng",
+                           "C:\\Users\\velas\\OneDrive\\Documents\\PCAPs\\traffic\\sv_day1traffic.pcapng",
+                           "C:\\Users\\velas\\OneDrive\\Documents\\PCAPs\\traffic\\vd_07.17.23.pcapng"]
 
-        packet_handler_thread = th.Thread(target=self.packet_handler)
+        
+
+        packet_handler_thread = th.Thread(target=self.packet_handler())
         packet_handler_thread.start()
         #capture = pyshark.LiveCapture()                                                     
 
+        capture_threads = []
         for pcap_file in pcap_file_paths:
+            capture_thread = th.Thread(target=self.start_file_cap,args=(pcap_file))
+            capture_threads.append(capture_thread)
+            capture_thread.start()
+        for thread in capture_threads:
+            thread.join()
+            """
+            capture_thread = th.Thread(target=)
             capture = pyshark.FileCapture(pcap_file)
             
             for in_packet in capture:
@@ -112,7 +144,8 @@ class PackTime:
                 self.process_sem.release()
                 self.cap_sem.release()
             capture.close()  
-
+            """
+        self.process_sem.release()
         # Notify the packet_handler thread that no more packets are coming
         packet_handler_thread.join()
 
