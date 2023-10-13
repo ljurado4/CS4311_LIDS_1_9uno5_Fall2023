@@ -31,8 +31,11 @@ class PackTime:
     cap_sem = Semaphore(1)
     process_sem = Semaphore(0)
 
+    packet_analyzer = PacketAnalyzer()
+
     def __init__(self):
         self.pack_time = None
+        self.packetAnalyzer = PacketAnalyzer 
     """
     create_packet will take in a packet and format the packet to be 
     enqueued to the global list of packets
@@ -46,19 +49,26 @@ class PackTime:
             if 'TCP' in in_packet:
                 protocol = 'TCP'
                 flags = in_packet.tcp.flags
+                src_port = in_packet.tcp.srcport
+                dst_port = in_packet.tcp.dstport
                 if 'SYN' in flags:
                     description = 'TCP Handshake SYN'
                 else:
                     description = 'Other TCP Packet'
             elif 'UDP' in in_packet:
+                src_port = in_packet.udp.srcport
+                dst_port = in_packet.udp.dstport
                 protocol = 'UDP'
                 description = 'UDP Packet'
             elif 'ICMP' in in_packet:
                 protocol = 'ICMP'
                 description = 'ICMP Packet'
+                dst_port = "123"
+                
             else:
                 protocol = 'Other'
                 description = "Unknown/Other Protocol"
+                dst_port = "123"
             packet_length = int(in_packet.length)
             temp_packet_dict = {
                 "Time": time,
@@ -66,7 +76,8 @@ class PackTime:
                 "Destination": dst,
                 "Protocol": protocol,
                 "Length": packet_length,
-                "Description": description
+                "Description": description,
+                "Port": dst_port
             }
             self.packet_list.append(temp_packet_dict)
 
@@ -100,10 +111,9 @@ class PackTime:
                     self.ipList.append(packet["Source"])
                     lvl = "1"
             if type(packet) == dict:
-                analyzer = PacketAnalyzer(packet,lvl,time, packet["Source"],"123")
-                analyzer.analyze_packet()
+                self.packet_analyzer.analyze_packet(lvl, time, packet["Source"], packet["Port"])
 
-
+                
             self.cap_sem.release()
 
     """

@@ -1,17 +1,14 @@
     
 class portDetection:
-    def port_scan_callback(self, pkt):
-        if "IP" in pkt and "TCP" in pkt:
-            src_ip = pkt.ip.src
-            dst_ip = pkt.ip.dst
-            dst_port = int(pkt.tcp.dstport)
+    def __init__(self):
+        self.connection_count = {}
 
-            if dst_ip == self.target_ip:
-                if src_ip not in self.scanned_ports:
-                    self.scanned_ports[src_ip] = [dst_port]
-                else:
-                    if dst_port - 1 not in self.scanned_ports[src_ip]:
-                        self.scanned_ports[src_ip].append(dst_port)
-                        return True
-                    else:
-                        return False
+    def update_connection_count(self, ip, port, threshold):
+        key = f"{ip}:{port}"
+        if key in self.connection_count:
+            self.connection_count[key] += 1
+            if self.connection_count[key] > threshold:
+                return True
+        else:
+            self.connection_count[key] = 1
+        return False
