@@ -26,7 +26,7 @@ LIDS is a Local Intrusion Detection System designed to monitor network activity 
 git clone https://github.com/ljurado4/CS4311_LIDS_19uno5_Fall2023.git
 
 2. Navigate to the project directory.
-cd CS4311_LIDS_19uno5_Fall2023
+
 
 3. **Set Up a Virtual Environment**:
    - Install `virtualenv`:

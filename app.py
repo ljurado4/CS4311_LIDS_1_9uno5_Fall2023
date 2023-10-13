@@ -3,6 +3,8 @@ from flask import Flask, render_template, request, jsonify
 from backend.db import db, migrate
 from backend import lids_agent_connector
 from flask_cors import CORS
+from backend.db import db, migrate
+
 
 app = Flask(__name__, template_folder='LIDS_GUI/templates', static_folder='LIDS_GUI/static')
 
