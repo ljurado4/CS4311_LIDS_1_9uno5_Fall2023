@@ -70,7 +70,9 @@ python3 main_cli.py --config_file=your_config.xml
 Once the environment is active:
 1. Navigate to the project folder.
 2. Start the Flask server by running `app.py`. (FYI macOS will require you to still run python3)
-python app.py
+
+python3 app.py
+=======
 
 Once the server is running, access the Web UI by navigating to `http://127.0.0.1:5000` in your web browser.
 
