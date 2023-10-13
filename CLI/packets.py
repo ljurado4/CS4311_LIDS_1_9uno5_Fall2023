@@ -1,4 +1,4 @@
-import pyshark 
+import pyshark
 from datetime import datetime
 import threading as th
 from threading import Semaphore
@@ -95,11 +95,29 @@ class PackTime:
     on differing threads
     """
     def run_sniffer(self):
+
+        pcap_file_paths = ["C/Users/velas/OneDrive/Documents/PCAPs/traffic/7-17-EN.pcapng","C:/Users/velas/OneDrive/Documents/PCAPs/traffic/AA_Day1_Traffic.pcapng","C:/Users/velas/OneDrive/Documents/PCAPs/traffic/cvi.pcapng","C:/Users/velas/OneDrive/Documents/PCAPs/traffic/eth0-LDV-wireshark.pcapng","C:/Users/velas/OneDrive/Documents/PCAPs/traffic/nmap scan.pcapng","C:/Users/velas/OneDrive/Documents/PCAPs/traffic/sv_day1traffic.pcapng","C:/Users/velas/OneDrive/Documents/PCAPs/traffic/vd_07.17.23.pcapng"]
+
         packet_handler_thread = th.Thread(target=self.packet_handler)
-
         packet_handler_thread.start()
+        #capture = pyshark.LiveCapture()                                                     
 
-        for in_packet in self.capture.sniff_continuously():
+        for pcap_file in pcap_file_paths:
+            capture = pyshark.FileCapture(pcap_file)
+            
+            for in_packet in capture:
+                self.cap_sem.acquire()
+                packet = self.create_packet(in_packet)
+                self.packet_list.append(packet)
+                self.process_sem.release()
+                self.cap_sem.release()
+            capture.close()  
+
+        # Notify the packet_handler thread that no more packets are coming
+        packet_handler_thread.join()
+
+        """
+        for in_packet in capture.sniff_continuously():
             self.cap_sem.acquire()
             self.create_packet(in_packet)
             self.process_sem.release()
@@ -109,6 +127,7 @@ class PackTime:
                 break
             #################
             self.cap_sem.release()
+        """
     #may add or change to export alerts, depending on packet_analyzer implementation
     def export_packets(self):
         return self.packet_list

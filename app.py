@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, jsonify
 from backend import lids_agent_connector
 from flask_cors import CORS
 from CLI.packets import PackTime
+import pyshark
 
 # Command  .\env\Scripts\activate.bat
 
@@ -22,7 +23,7 @@ def dashboard():
     packet_manager = PackTime()
     packet_manager.run_sniffer()
 
-    pkt_list = packet_manager.packet_list
+    pkt_list = packet_manager.export_packets()
     print(pkt_list)
     #TODO: Make the list from packets work here
     """
