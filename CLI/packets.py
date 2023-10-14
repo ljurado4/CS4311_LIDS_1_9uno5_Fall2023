@@ -28,59 +28,60 @@ class PackTime:
     def __init__(self):
         self.pack_time = None
         self.thread1 = th.Thread(target=self.packet_handler)
-        self.thread2 = th.Thread(target = self.start_file_cap,args=("C:\\Users\\velas\\OneDrive\\Documents\\PCAPs\\traffic\\AA_Day1_Traffic.pcapng",))
+        self.thread2 = th.Thread(target = self.start_file_cap,args=("C:\\Users\\velas\\OneDrive\\Documents\\PCAPs\\traffic\\cvi.pcapng",))
 
     """
     create_packet will take in a packet and format the packet to be 
     enqueued to the global list of packets
     """
     def create_packet(self,in_packet):
+        print("Debug line 38 packet.py")
         time = datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")
-        if 'IP' in in_packet:
+        src, dst = None, None
+        if hasattr(in_packet, 'ip'):
             src = in_packet.ip.src
             dst = in_packet.ip.dst
-            if 'TCP' in in_packet:
-                protocol = 'TCP'
-                flags = in_packet.tcp.flags
-                src_port = in_packet.tcp.srcport
-                dst_port = in_packet.tcp.dstport
-                if 'SYN' in flags:
-                    description = 'TCP Handshake SYN'
-                else:
-                    description = 'Other TCP Packet'
-            elif 'UDP' in in_packet:
-                src_port = in_packet.tcp.srcport
-                dst_port = in_packet.tcp.dstport
-                protocol = 'UDP'
-                description = 'UDP Packet'
-            elif 'ICMP' in in_packet:
-                protocol = 'ICMP'
-                description = 'ICMP Packet'
+        elif hasattr(in_packet, 'ipv6'):
+            src = in_packet.ipv6.src
+            dst = in_packet.ipv6.dst
+        elif hasattr(in_packet, 'ipv4'):
+            src = in_packet.ipv4.src
+            dst = in_packet.ipv4.dst
+        protocol, description = 'Unknown', 'Unknown Protocol'
+        if hasattr(in_packet, 'tcp'):
+            protocol = 'TCP'
+            if 'SYN' in in_packet.tcp.flags:
+                description = 'TCP Handshake SYN'
             else:
-                protocol = 'Other'
-                description = "Unknown/Other Protocol"
-            packet_length = int(in_packet.length)
-            temp_packet_dict = {
-                "Time": time,
-                "Source": src,
-                "Destination": dst,
-                "Protocol": protocol,
-                "Length": packet_length,
-                "Description": description
-            }
-            self.add_alert(severity= "Medium",time= time,IP = src,Port=dst_port,description = description)
-            self.packet_list.append(temp_packet_dict)
+                description = 'Other TCP Packet'
+        elif hasattr(in_packet, 'udp'):
+            protocol = 'UDP'
+            description = 'UDP Packet'
+        elif hasattr(in_packet, 'icmp'):
+            protocol = 'ICMP'
+            description = 'ICMP Packet'
         
+
+        packet_length = int(in_packet.length)
+        
+      
+        temp_packet_dict = {
+            "Time": time,
+            "Source": src,
+            "Destination": dst,
+            "Protocol": protocol,
+            "Length": packet_length,
+            "Description": description
+        }
+        
+        print("Temp packet")
+        #print(temp_packet_dict)
+        self.packet_list.append(temp_packet_dict)
     """
     packet_handler will dequeue a packet from the list and will use the alert logic
     to analyze the packet and determine if it is an alert
     """
-    async def packet_handler(self):
-        #print("packet handler")
-        #loop = asyncio.new_event_loop()
-        #asyncio.set_event_loop(loop)
-        #async def handle_packets():
-        
+    def packet_handler(self):
         while True:
             self.flag_sem.acquire()
             self.queue_sem.acquire()
@@ -89,27 +90,23 @@ class PackTime:
                 break
             packet = self.packet_list.pop(0)
             #Use packet_analyzer for alert logic
-            #self.queue_sem.release()
-            print("Packet: ", packet)
-        #loop.run_until_complete(handle_packets())
-        
-    """
-    Creates alert object and appends to alert_list List
-    """
-    def add_alert(self,severity, time, IP, Port, description):
-        alert_to_add = Alerts(severity, time, IP, Port, description)
-        self.alert_list.append(alert_to_add)
 
-    async def start_file_cap(self,pcap_file):
+    def start_file_cap(self,pcap_file):
         #print("starting file cap")
-        
+        asyncio.set_event_loop(asyncio.new_event_loop())
         capture = pyshark.FileCapture(pcap_file)
+        #packets_counted = 0
         for in_packet in capture:
             self.queue_sem.acquire()
             packet = self.create_packet(in_packet)
-            print(in_packet)
+            #print(in_packet)
+            #print(packet)
             self.packet_list.append(packet)
-            self.flag_sem.release()
+            print(self.packet_list)
+            #packets_counted +=1
+            #print(packets_counted)
+            #for loop got stuck, commented this out and it ran forever
+            #self.flag_sem.release()
             self.queue_sem.release()
         capture.close()
         
