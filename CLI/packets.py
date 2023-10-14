@@ -28,7 +28,7 @@ class PackTime:
     def __init__(self):
         self.pack_time = None
         self.thread1 = th.Thread(target=self.packet_handler)
-        self.thread2 = th.Thread(target = self.start_file_cap,args=("C:\\Users\\velas\\OneDrive\\Documents\\PCAPs\\traffic\\cvi.pcapng",))
+        self.thread2 = th.Thread(target = self.start_file_cap,args=("C:\\Users\\velas\\OneDrive\\Documents\\PCAPs\\traffic\\nmap scan.pcapng",))
 
     """
     create_packet will take in a packet and format the packet to be 
@@ -90,24 +90,32 @@ class PackTime:
                 break
             packet = self.packet_list.pop(0)
             #Use packet_analyzer for alert logic
+            self.queue_sem.release()
 
     def start_file_cap(self,pcap_file):
         #print("starting file cap")
         asyncio.set_event_loop(asyncio.new_event_loop())
         capture = pyshark.FileCapture(pcap_file)
-        #packets_counted = 0
-        for in_packet in capture:
+        print(capture[0])
+        #print("hello cello")
+        packets_counted = 0
+        capture.load_packets()
+        packet_amount = len(capture)
+        print(packet_amount)
+        for i in range(packet_amount):
             self.queue_sem.acquire()
-            packet = self.create_packet(in_packet)
+            packet = self.create_packet(capture[i])
             #print(in_packet)
             #print(packet)
             self.packet_list.append(packet)
-            print(self.packet_list)
-            #packets_counted +=1
+            #print(self.packet_list)
+            print(capture[i])
+            packets_counted +=1
             #print(packets_counted)
             #for loop got stuck, commented this out and it ran forever
-            #self.flag_sem.release()
+            self.flag_sem.release()
             self.queue_sem.release()
+
         capture.close()
         
 
