@@ -4,6 +4,7 @@ import threading as th
 from threading import Semaphore
 from CLI.Alerts import Alerts
 import asyncio
+import CLI.packet_analyzer
 #from CLI.Alerts 
 
 """
@@ -35,9 +36,9 @@ class PackTime:
     enqueued to the global list of packets
     """
     def create_packet(self,in_packet):
-        print("Debug line 38 packet.py")
+        #print("Debug line 38 packet.py")
         time = datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")
-        src, dst = None, None
+        src, dst = "0.0.0.0", "0.0.0.0"
         if hasattr(in_packet, 'ip'):
             src = in_packet.ip.src
             dst = in_packet.ip.dst
@@ -60,10 +61,8 @@ class PackTime:
         elif hasattr(in_packet, 'icmp'):
             protocol = 'ICMP'
             description = 'ICMP Packet'
-        
-
-        packet_length = int(in_packet.length)
-        
+    
+        packet_length = int(in_packet.length)    
       
         temp_packet_dict = {
             "Time": time,
@@ -73,9 +72,8 @@ class PackTime:
             "Length": packet_length,
             "Description": description
         }
-        
-        print("Temp packet")
-        #print(temp_packet_dict)
+        #print("Temp packet")
+        print(temp_packet_dict)
         self.packet_list.append(temp_packet_dict)
     """
     packet_handler will dequeue a packet from the list and will use the alert logic
@@ -89,27 +87,33 @@ class PackTime:
                 self.queue_sem.release()
                 break
             packet = self.packet_list.pop(0)
+            #packet_analyzer.PacketAnalyzer.ip_check()
             #Use packet_analyzer for alert logic
             self.queue_sem.release()
+            #ANALYZE OUT HERE NOT IN QUEUE SEM
 
     def start_file_cap(self,pcap_file):
-        #print("starting file cap")
         asyncio.set_event_loop(asyncio.new_event_loop())
         capture = pyshark.FileCapture(pcap_file)
-        print(capture[0])
-        #print("hello cello")
+        #print(capture[0])
         packets_counted = 0
         capture.load_packets()
         packet_amount = len(capture)
         print(packet_amount)
-        for i in range(packet_amount):
+        for i in range(25):
             self.queue_sem.acquire()
             packet = self.create_packet(capture[i])
             #print(in_packet)
-            #print(packet)
+            #packet_analyzer.PacketAnalyzer.ip_check(packet)
+            # print("Iteration: ", i)
+            # print(packet)
+            # print(capture[i])
+            # if packet is None:
+            #     continue
+            # print(type(packet))
             self.packet_list.append(packet)
             #print(self.packet_list)
-            print(capture[i])
+            #print(capture[i])
             packets_counted +=1
             #print(packets_counted)
             #for loop got stuck, commented this out and it ran forever
@@ -117,7 +121,12 @@ class PackTime:
             self.queue_sem.release()
 
         capture.close()
-        
+        print(self.packet_list)
+        print(type(self.packet_list[0]))
+        print(type(self.packet_list[1]))
+        print(type(self.packet_list[2]))
+        print(type(self.packet_list[3]))
+        print(type(self.packet_list[4]))
 
     """
     Used as driver code of the class, starts

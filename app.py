@@ -22,8 +22,8 @@ def dashboard():
         #PackTime.packet_list
     
     packet_manager = PackTime()
-    packet_manager.thread1.start()
     packet_manager.thread2.start()
+    packet_manager.thread1.start()
 
     print("after threads")
     pkt_list = packet_manager.export_packets()

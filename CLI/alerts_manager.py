@@ -1,4 +1,4 @@
-from Alerts import Alerts
+from CLI.Alerts import Alerts
 
 class AlertManager:
     def __init__(self):

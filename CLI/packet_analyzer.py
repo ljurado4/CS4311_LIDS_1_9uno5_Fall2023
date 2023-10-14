@@ -1,5 +1,5 @@
-from ipChecker import ip_Checker
-from alerts_manager import AlertManager
+from CLI.ipChecker import ip_Checker
+from CLI.alerts_manager import AlertManager
 
 class PacketAnalyzer:
     def __init__(self, packet, level, time, IP, Port):
