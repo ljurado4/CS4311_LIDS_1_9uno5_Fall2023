@@ -24,17 +24,17 @@ function startServer() {
 }
 
   
-// function createSocket() {
-//     var socketUrl = window.location.protocol + '//' + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
-//     var socket = io.connect(socketUrl);
+function createSocket() {
+    var socketUrl = window.location.protocol + '//' + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
+    var socket = io.connect(socketUrl);
 
-//     socket.on('update_agent_count', function(count) {
-//         document.getElementById('agent_count').innerText = count;
-//     });
-// }
+    socket.on('update_agent_count', function(count) {
+        document.getElementById('agent_count').innerText = count;
+    });
+}
 
 
-// window.onload = createSocket;
+
 
 // var socket = io.connect(window.location.origin);
 
@@ -62,35 +62,35 @@ function startServer() {
 
 
 
-function socketConnection() {
-    var socketUrl = window.location.protocol + '//' + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
-    var socket = io.connect(socketUrl);
+// function socketConnection() {
+//     var socketUrl = window.location.protocol + '//' + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
+//     var socket = io.connect(socketUrl);
 
-    socket.on('update_agent_count', function(count) {
-        document.getElementById('agent_count').innerText = count;
-    });
+//     socket.on('update_agent_count', function(count) {
+//         document.getElementById('agent_count').innerText = count;
+//     });
 
-    socket.on('update_client_list', function(clients) {
-        let tableBody = document.querySelector('.devicesTable tbody');
-        tableBody.innerHTML = ''; 
+//     socket.on('update_client_list', function(clients) {
+//         let tableBody = document.querySelector('.devicesTable tbody');
+//         tableBody.innerHTML = ''; 
 
         
-        clients.forEach(client => {
-            let row = tableBody.insertRow();
+//         clients.forEach(client => {
+//             let row = tableBody.insertRow();
             
-            let idCell = row.insertCell(0);
-            idCell.textContent = client.id;
+//             let idCell = row.insertCell(0);
+//             idCell.textContent = client.id;
 
-            let nameCell = row.insertCell(1);
-            nameCell.textContent = client.name;
+//             let nameCell = row.insertCell(1);
+//             nameCell.textContent = client.name;
 
-            let ipCell = row.insertCell(2);
-            ipCell.textContent = client.ip;
+//             let ipCell = row.insertCell(2);
+//             ipCell.textContent = client.ip;
 
-            let statusCell = row.insertCell(3);
-            statusCell.textContent = client.status;
-        });
-    });
-}
+//             let statusCell = row.insertCell(3);
+//             statusCell.textContent = client.status;
+//         });
+//     });
+// }
 
-window.onload = socketConnection;
+// window.onload = socketConnection;
