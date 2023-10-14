@@ -45,6 +45,11 @@ pip3 install flask-cors
    - Install other required packages for the project:
 pip3 install -r requirements.txt
 
+   - Install the Flask-SQLAlchemy package:
+
+pip3 install Flask-SQLAlchemy
+pip3 install Flask-Migrate
+
 5. **Install Pyshark**:
    - Install Pyshark:
 pip3 install pyshark
@@ -98,3 +103,9 @@ flask db migrate -m "Your message about the migration"
 3. Apply Migrations to the Database:
 To update your database schema according to the generated script, run:
 flask db upgrade
+
+
+Install the Flask-SQLAlchemy package:
+
+pip3 install Flask-SQLAlchemy
+pip3 install Flask-Migrate
