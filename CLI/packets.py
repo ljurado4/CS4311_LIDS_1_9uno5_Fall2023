@@ -16,17 +16,20 @@ With Python311 and Python311\Scripts in PATH, use 'pip install pyshark'
 """
 class PackTime:
     packet_list = []
-    alert_list = []
+    #alert_list = []
     ################
     #Delete when alert logic is ready, only exists to 
     #limit packets for testing
     packets_captured = 0
     #################
-    cap_sem = Semaphore(1)
-    process_sem = Semaphore(0)
+    queue_sem = Semaphore(1)
+    flag_sem = Semaphore(0)
 
     def __init__(self):
         self.pack_time = None
+        self.thread1 = th.Thread(target=self.packet_handler,args=())
+        self.thread2 = th.Thread(target = self.start_file_cap,args=("C:\\Users\\velas\\OneDrive\\Documents\\PCAPs\\traffic\\AA_Day1_Traffic.pcapng"))
+
     """
     create_packet will take in a packet and format the packet to be 
     enqueued to the global list of packets
@@ -73,20 +76,20 @@ class PackTime:
     to analyze the packet and determine if it is an alert
     """
     def packet_handler(self):
-        loop = asyncio.new_event_loop()
-        asyncio.set_event_loop(loop)
-        async def handle_packets():
-            while True:
-                await self.process_sem.acquire()
-                self.cap_sem.acquire()
-                if not self.packet_list:
-                    self.cap_sem.release()
-                    break
-                packet = self.packet_list.pop(0)
-                #Use packet_analyzer for alert logic
-                self.cap_sem.release()
-                print("Packet: ", packet)
-        loop.run_until_complete(handle_packets)
+        #loop = asyncio.new_event_loop()
+        #asyncio.set_event_loop(loop)
+        #async def handle_packets():
+        while True:
+            self.flag_sem.acquire()
+            self.queue_sem.acquire()
+            if not self.packet_list:
+                self.queue_sem.release()
+                break
+            packet = self.packet_list.pop(0)
+            #Use packet_analyzer for alert logic
+            #self.queue_sem.release()
+            print("Packet: ", packet)
+        #loop.run_until_complete(handle_packets())
 
     """
     Creates alert object and appends to alert_list List
@@ -98,11 +101,12 @@ class PackTime:
     def start_file_cap(self,pcap_file):
         capture = pyshark.FileCapture(pcap_file)
         for in_packet in capture:
-            self.cap_sem.acquire()
+            self.queue_sem.acquire()
             packet = self.create_packet(in_packet)
+            print(in_packet)
             self.packet_list.append(packet)
-            self.process_sem.release()
-            self.cap_sem.release()
+            self.flag_sem.release()
+            self.queue_sem.release()
         capture.close()
 
     """
@@ -110,7 +114,7 @@ class PackTime:
     sniffing the network using previous classes
     on differing threads
     """
-    def run_sniffer(self):
+    def run_sniffer(self,):
 
         pcap_file_paths = ["C\\Users\\velas\\OneDrive\\Documents\\PCAPs\\traffic\\7-17-EN.pcapng",
                            "C:\\Users\\velas\\OneDrive\\Documents\\PCAPs\\traffic\\AA_Day1_Traffic.pcapng",
@@ -119,8 +123,6 @@ class PackTime:
                            "C:\\Users\\velas\\OneDrive\\Documents\\PCAPs\\traffic\\nmap scan.pcapng",
                            "C:\\Users\\velas\\OneDrive\\Documents\\PCAPs\\traffic\\sv_day1traffic.pcapng",
                            "C:\\Users\\velas\\OneDrive\\Documents\\PCAPs\\traffic\\vd_07.17.23.pcapng"]
-
-        
 
         packet_handler_thread = th.Thread(target=self.packet_handler())
         packet_handler_thread.start()
@@ -138,28 +140,28 @@ class PackTime:
             capture = pyshark.FileCapture(pcap_file)
             
             for in_packet in capture:
-                self.cap_sem.acquire()
+                self.queue_sem.acquire()
                 packet = self.create_packet(in_packet)
                 self.packet_list.append(packet)
-                self.process_sem.release()
-                self.cap_sem.release()
+                self.flag_sem.release()
+                self.queue_sem.release()
             capture.close()  
             """
-        self.process_sem.release()
+        self.flag_sem.release()
         # Notify the packet_handler thread that no more packets are coming
         packet_handler_thread.join()
 
         """
         for in_packet in capture.sniff_continuously():
-            self.cap_sem.acquire()
+            self.queue_sem.acquire()
             self.create_packet(in_packet)
-            self.process_sem.release()
+            self.flag_sem.release()
             #################
             self.packets_captured += 1
             if self.packets_captured >= 5:
                 break
             #################
-            self.cap_sem.release()
+            self.queue_sem.release()
         """
     #may add or change to export alerts, depending on packet_analyzer implementation
     def export_packets(self):

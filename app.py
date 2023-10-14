@@ -16,13 +16,16 @@ def index():
 
 @app.route('/LIDS_Dashboard')
 def dashboard():
+    print("before threads")
     #Ideally, gets the packet list to be displayed
     #TODO: Confirm if we want packets or alerts
         #PackTime.packet_list
     
     packet_manager = PackTime()
-    packet_manager.run_sniffer()
-
+    packet_manager.thread1.run()
+    
+    packet_manager.thread2.run()
+    print("after threads")
     pkt_list = packet_manager.export_packets()
     print(pkt_list)
     #TODO: Make the list from packets work here
@@ -91,7 +94,7 @@ def lids_main():
 @app.route('/configuration_data', methods=['POST'])
 def upload_xml_data():
     data = request.json
-    # print(data)
+    print(data)
     # connect_agent = lids_agent_connector.AgentConnector(data)
     
     return jsonify({"message": "Data processed!"})

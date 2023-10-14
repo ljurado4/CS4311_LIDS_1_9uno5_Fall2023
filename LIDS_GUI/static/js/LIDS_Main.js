@@ -47,7 +47,8 @@ fileInput.onchange = async () => {
     //store file name and contents to use in next page
     window.localStorage.setItem("xmlFileName",selectedFile.name)
     window.localStorage.setItem("xmlFile",loadedFile)
-
+    
+    console.log("Something, a random string")
     window.location = "LIDS_Dashboard"
 
   })
