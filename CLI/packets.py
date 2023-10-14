@@ -27,8 +27,8 @@ class PackTime:
 
     def __init__(self):
         self.pack_time = None
-        self.thread1 = th.Thread(target=self.packet_handler,args=())
-        self.thread2 = th.Thread(target = self.start_file_cap,args=("C:\\Users\\velas\\OneDrive\\Documents\\PCAPs\\traffic\\AA_Day1_Traffic.pcapng"))
+        self.thread1 = th.Thread(target=self.packet_handler)
+        self.thread2 = th.Thread(target = self.start_file_cap,args=("C:\\Users\\velas\\OneDrive\\Documents\\PCAPs\\traffic\\AA_Day1_Traffic.pcapng",))
 
     """
     create_packet will take in a packet and format the packet to be 
@@ -75,10 +75,12 @@ class PackTime:
     packet_handler will dequeue a packet from the list and will use the alert logic
     to analyze the packet and determine if it is an alert
     """
-    def packet_handler(self):
+    async def packet_handler(self):
+        #print("packet handler")
         #loop = asyncio.new_event_loop()
         #asyncio.set_event_loop(loop)
         #async def handle_packets():
+        
         while True:
             self.flag_sem.acquire()
             self.queue_sem.acquire()
@@ -90,7 +92,7 @@ class PackTime:
             #self.queue_sem.release()
             print("Packet: ", packet)
         #loop.run_until_complete(handle_packets())
-
+        
     """
     Creates alert object and appends to alert_list List
     """
@@ -98,7 +100,9 @@ class PackTime:
         alert_to_add = Alerts(severity, time, IP, Port, description)
         self.alert_list.append(alert_to_add)
 
-    def start_file_cap(self,pcap_file):
+    async def start_file_cap(self,pcap_file):
+        #print("starting file cap")
+        
         capture = pyshark.FileCapture(pcap_file)
         for in_packet in capture:
             self.queue_sem.acquire()
@@ -108,6 +112,7 @@ class PackTime:
             self.flag_sem.release()
             self.queue_sem.release()
         capture.close()
+        
 
     """
     Used as driver code of the class, starts
