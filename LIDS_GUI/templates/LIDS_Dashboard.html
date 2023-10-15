@@ -1,3 +1,4 @@
+<!-- LIDS_Dashboard.html-->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -45,7 +46,7 @@
         </form>
     </div>
 
-    <div class="table-container" id = "middleContainer">
+    <div class="table-container" id="middleContainer">
         <table class="alertbox" id="alertBoxTable">
             <thead>
                 <tr>
@@ -80,27 +81,8 @@
                         </div>
                     </th>
                 </tr>
-            </thead>
             <tbody>
-                <table>
-                    <thead>
-                        <tr>
-                        {% for key in data_packet[0] %}
-                            <th>{{ key }}</th>
-                        {% endfor %}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for packet in data_packet %}
-                        <tr>
-                            {% for value in packet.values() %}
-                            <td>{{ value }}</td>
-                            {% endfor %}
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>         
-
+              
             </tbody>
         </table>
     </div>
@@ -146,11 +128,8 @@
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="../static/js/LIDS_Dashboard.js"></script>    
-    <script>
-        function replaceMiddleContent(newContent) {
-            document.getElementById('middle-content').innerHTML = newContent;
-        }
-    </script>
+    <script src="../static/js/LIDS_Table.js"></script>    
+
 </body>
 
 </html>
