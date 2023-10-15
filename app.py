@@ -96,7 +96,7 @@ def dashboard():
             # client_socket = SocketIO(host=ip_address, port=int(port_number),wait_for_connection=False)
             sio.connect(f'http://{ip_address}:{port_number}')
             flash(f'Successfully connection to server at IP: {ip_address} Port: {port_number}.', 'success')
-            sio.emit("Send Alerts","Data")
+            sio.emit("Send Alerts",alert_data)
         except Exception as e:
             flash(f'Failed connection server at IP: {ip_address} Port: {port_number}.', 'error')
         
