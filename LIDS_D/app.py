@@ -5,12 +5,22 @@ from flask_socketio import SocketIO
 
 app = Flask(__name__)
 socketio = SocketIO(app)
-CORS(app)
-
+CORS(app, resources={r"/*": {"origins": "*"}})
+# sio = SocketIO(app)
 configuration = {}
-connected_agents = 0
+connected_agents = -1
 start_server = False
 device_connected = []
+
+
+@socketio.on('Send Alerts')
+def handle_response(alert):
+    print("Reveiced alerts",alert)
+
+@socketio.on('request_data')
+def send_device_connected_data():
+    global device_connected
+    socketio.emit('update_data', device_connected)
 
 @app.route('/')
 def index():
@@ -32,7 +42,6 @@ def start_socket_server_action():
     start_server = True
     return jsonify({"message": "Server started"})
 
-
 @app.route('/LIDS-D_Server_Details')
 def server_details():
     return render_template('LIDS-D_Server_Details.html')
@@ -40,6 +49,8 @@ def server_details():
 @app.route('/LIDS-D_Network_Info_View')
 def network_info_view():
     global device_connected
+    print("On LIDS-D_Network")
+    print("device_connected",device_connected)
     return render_template('LIDS-D_Network_Info_View.html',clients=device_connected) 
 
 @app.route('/LIDS-D_Alerts_View')
@@ -79,7 +90,7 @@ def handle_connect():
     
     connected_agents += 1
     print(f'Client {client_ip} connected')
-    
+    print(f'Agents connected {connected_agents}')
     device_connected.append({
         "id": str(len(device_connected) + 1),  
         "name": f"Client {len(device_connected) + 1}", 
@@ -88,6 +99,9 @@ def handle_connect():
     })
     
     socketio.emit('update_agent_count', connected_agents)
+    socketio.emit('update_data', device_connected)
+
+
 
 @socketio.on('disconnect')
 def handle_disconnect():
@@ -96,13 +110,12 @@ def handle_disconnect():
     global connected_agents
     
     client_ip = request.remote_addr
-    connected_clients = [client for client in device_connected if client['ip'] != client_ip]
+    device_connected = [client for client in device_connected if client['ip'] != client_ip]
 
     connected_agents -= 1
 
     socketio.emit('update_agent_count', connected_agents)
-    socketio.emit('update_client_list', connected_clients)
-
+    socketio.emit('update_data', device_connected)
 
 
 if __name__ == '__main__':
