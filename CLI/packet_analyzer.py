@@ -1,42 +1,43 @@
-#packet_analyser.py
-
 from ipChecker import ip_Checker
 from alerts_manager import AlertManager
+from loginCheck import loginCheck
+from PortChecker import PortDetection
 
 class PacketAnalyzer:
-    def __init__(self, packet, level, time, IP, Port):
-        self.packet = packet
-        self.level = level
-        self.time = time
-        self.IP = IP
-        self.Port = Port
+     
+    def __init__(self):
+        self.packetAnalyzer = None
+        self.iC = ip_Checker()
+        self.getAlerts = AlertManager()
+        self.portCheck = PortDetection()
 
-    def analyze_packet(self):
+
+    def analyze_packet(self,lvl,time,IP,port):
         # Check for each error 
-        if self.ip_check(self.IP) == False:
-            self.create_alert("Unknown IP")
-        if self.port_scan_check() == True:
-            self.create_alert("Port Scan")
-        if self.login_attempts() == True:
-            self.create_alert("Failed Login Attempts")
+        if self.ip_check(IP) == False:
+            self.create_alert(lvl,time,IP,port,"Unknown IP")
+            print("IP Alert Error")
+        if self.port_scan_check(IP,port) == True:
+            self.create_alert(lvl,time,IP,port,"Port Scan")
+            print("Port Scan Error")
+        if self.login_attempts(self) == True:
+            self.create_alert(lvl,time,IP,port,"Failed Login Attempts")
 
     def ip_check(self,IP):
-        ip_check = ip_Checker()
-        return ip_check.ip_in_list(IP)
 
-    def port_scan_check(self):
+        return self.iC.ip_in_List(IP)
 
-        #call port scan check and have it return a boolean indicating if there is an error
 
-        return False 
+    def port_scan_check(self,IP,port):
 
-    def login_attempts(self):
-        
-        #call login attempts and have it return a boolean indicating if there is an error
+        return self.portCheck.update_connection_count(IP,port,1)
 
-        return False  
+    def login_attempts(self,packet):
+        return False
     
-    def create_alert(self,description):
+    def create_alert(self,lvl,time,IP,port,description):
         # Call the AlertsManager class to create an alert
-        alerts_manager = AlertManager()
-        alerts_manager.create_alert(self.level,self.time,self.IP,self.Port,description)
+        self.getAlerts.create_alert(lvl,time,IP,port,description)
+        alerts = self.getAlerts.get_alerts()
+        for alert in alerts:
+            print(alert)
