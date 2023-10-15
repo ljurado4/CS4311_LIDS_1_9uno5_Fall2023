@@ -100,18 +100,18 @@ class PackTime:
             #pull packet and move elsewhere
 
             time = datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")
-            if type(packet) == dict:
-                if packet["Source"] in self.ipDouble:
-                    lvl = "3"
+            #if type(packet) == dict:
+             #   if packet["Source"] in self.ipDouble:
+              #      lvl = "3"
                 
-                elif packet["Source"] in self.ipList:
-                    lvl = "2"
-                    self.ipDouble.append(packet["Source"])
-                else:
-                    self.ipList.append(packet["Source"])
-                    lvl = "1"
+               # elif packet["Source"] in self.ipList:
+                #    lvl = "2"
+                 #   self.ipDouble.append(packet["Source"])
+                #else:
+                 #   self.ipList.append(packet["Source"])
+                  #  lvl = "1"
             if type(packet) == dict:
-                self.packet_analyzer.analyze_packet(lvl, time, packet["Source"], packet["Port"])
+                self.packet_analyzer.analyze_packet(time, packet["Source"], packet["Port"])
 
                 
             self.cap_sem.release()
@@ -122,7 +122,7 @@ class PackTime:
     on differing threads
     """
 
-    
+
     def run_sniffer(self):
 
         pcap_file_paths = ["C:\\Users\\jandr\\OneDrive\\Documents\\7-17-EN.pcapng","C:\\Users\\jandr\\OneDrive\\Documents\\AA_Day1_Traffic.pcapng","C:\\Users\\jandr\\OneDrive\\Documents\\cvi.pcapng","C:\\Users\\jandr\\OneDrive\\Documents\\eth0-LDV-wireshark.pcapng","C:\\Users\\jandr\\OneDrive\\Documents\\7-17-EN.pcapng","C:\\Users\\jandr\\OneDrive\\Documents\\nmap scan.pcapng", "C:\\Users\\jandr\\OneDrive\\Documents\\sv_day1traffic.pcapng","C:\\Users\\jandr\\OneDrive\\Documents\\vd_.07..17.23.pcapng"]
