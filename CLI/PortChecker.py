@@ -1,8 +1,5 @@
-
-
-
-
-class PortDetection:
+    
+class portDetection:
     def __init__(self):
         self.connection_count = {}
 
@@ -10,7 +7,7 @@ class PortDetection:
         key = f"{ip}:{port}"
         if key in self.connection_count:
             self.connection_count[key] += 1
-            if self.connection_count[key] >= threshold:  # Change to >= to include the threshold value
+            if self.connection_count[key] > threshold:
                 return True
         else:
             self.connection_count[key] = 1

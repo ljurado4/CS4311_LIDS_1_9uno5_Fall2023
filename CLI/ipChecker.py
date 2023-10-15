@@ -1,11 +1,45 @@
 #ipChecker.py
 
 import xml.etree.ElementTree as ET
+
 import os
+import sys
+
+#current_directory = os.getcwd()
+#parent_directory = os.path.dirname(current_directory)
+#file_path = os.path.join(parent_directory, 'app.py')
+
+#import sys
+#sys.path.append('file_path')  # Add the path to the directory containing the module
+
+#from .. import app
+
+#import app
+
+#current_directory = os.path.dirname(os.path.abspath(__file__))
+
+# Get the parent directory (my_repo directory)
+#parent_directory = os.path.abspath(os.path.join(current_directory, '..'))
+
+# Add the parent directory to sys.path
+#sys.path.append(parent_directory)
+
+# Now you can import app.py as a module
+#import app
 
 class ip_Checker:
     
     def __init__(self):
+        
+        #self.data = app.upload_xml_data()
+
+        #ip_addresses = []
+
+        #for system_data in data['network']['system']:
+         #   whitelist_ips = system_data['whitelist'].split(',')
+          #  ip_addresses.extend(whitelist_ips)
+    
+        
         
         #Get path to xml file 
         current_directory = os.getcwd()

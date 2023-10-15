@@ -10,8 +10,6 @@ import glob
 
 from packet_analyzer import PacketAnalyzer
 
-pyshark.tshark.tshark_path = "/Applications/Wireshark.app/Contents/MacOS/tshark"
-
 """
 NOTE: Used Python 3.11 because interpreter could 
 not resolve the pyshark import
@@ -123,9 +121,11 @@ class PackTime:
     sniffing the network using previous classes
     on differing threads
     """
+
+    
     def run_sniffer(self):
 
-        pcap_file_paths = ["/Users/shas/git/traffic/7-17-EN.pcapng","/Users/shas/git/traffic/AA_Day1_Traffic.pcapng","/Users/shas/git/traffic/cvi.pcapng","/Users/shas/git/traffic/eth0-LDV-wireshark.pcapng","/Users/shas/git/traffic/7-17-EN.pcapng","/Users/shas/git/traffic/nmap scan.pcapng", "/Users/shas/git/traffic/sv_day1traffic.pcapng","/Users/shas/git/traffic/vd_07.17.23.pcapng"]
+        pcap_file_paths = ["C:\\Users\\jandr\\OneDrive\\Documents\\7-17-EN.pcapng","C:\\Users\\jandr\\OneDrive\\Documents\\AA_Day1_Traffic.pcapng","C:\\Users\\jandr\\OneDrive\\Documents\\cvi.pcapng","C:\\Users\\jandr\\OneDrive\\Documents\\eth0-LDV-wireshark.pcapng","C:\\Users\\jandr\\OneDrive\\Documents\\7-17-EN.pcapng","C:\\Users\\jandr\\OneDrive\\Documents\\nmap scan.pcapng", "C:\\Users\\jandr\\OneDrive\\Documents\\sv_day1traffic.pcapng","C:\\Users\\jandr\\OneDrive\\Documents\\vd_.07..17.23.pcapng"]
 
         packet_handler_thread = th.Thread(target=self.packet_handler)
         packet_handler_thread.start()

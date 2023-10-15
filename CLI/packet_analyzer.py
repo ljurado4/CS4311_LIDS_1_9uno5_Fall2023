@@ -1,7 +1,7 @@
 from ipChecker import ip_Checker
 from alerts_manager import AlertManager
 from loginCheck import loginCheck
-from PortChecker import PortDetection
+from PortChecker import portDetection
 
 class PacketAnalyzer:
      
@@ -9,17 +9,15 @@ class PacketAnalyzer:
         self.packetAnalyzer = None
         self.iC = ip_Checker()
         self.getAlerts = AlertManager()
-        self.portCheck = PortDetection()
+        self.portCheck = portDetection()
 
 
     def analyze_packet(self,lvl,time,IP,port):
         # Check for each error 
         if self.ip_check(IP) == False:
             self.create_alert(lvl,time,IP,port,"Unknown IP")
-            print("IP Alert Error")
         if self.port_scan_check(IP,port) == True:
             self.create_alert(lvl,time,IP,port,"Port Scan")
-            print("Port Scan Error")
         if self.login_attempts(self) == True:
             self.create_alert(lvl,time,IP,port,"Failed Login Attempts")
 
@@ -39,5 +37,5 @@ class PacketAnalyzer:
         # Call the AlertsManager class to create an alert
         self.getAlerts.create_alert(lvl,time,IP,port,description)
         alerts = self.getAlerts.get_alerts()
-        for alert in alerts:
-            print(alert)
+        #for alert in alerts:
+         #   print(alert)
