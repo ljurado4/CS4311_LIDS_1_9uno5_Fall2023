@@ -107,42 +107,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="../static/js/LIDS_Dashboard.js"></script>    
     <script src="../static/js/LIDS_Table.js"></script>    
-    <script>
-        function replaceMiddleContent(newContent) {
-            document.getElementById('middle-content').innerHTML = newContent;
-        }
-    </script>
-    <script>
-        $(document).ready(function() {
-            // Function to update the alerts table
-            function updateAlertsTable() {
-                $.ajax({
-                    url: '/get_alerts_data',
-                    method: 'GET',
-                    dataType: 'json',
-                    success: function(data) {
-                        let tableContent = '';
-                        data.forEach(function(row) {
-                            tableContent += '<tr>';
-                            for(let key in row) {
-                                tableContent += '<td>' + row[key] + '</td>';
-                            }
-                            tableContent += '</tr>';
-                        });
-                        $('#alertBoxTable tbody').html(tableContent);
-                    }
-                });
-            }
 
-            // Call the function immediately and then set an interval to call it every 5 seconds
-            updateAlertsTable();
-            setInterval(updateAlertsTable, 5000);
-        });
-        
-        function replaceMiddleContent(newContent) {
-            document.getElementById('middle-content').innerHTML = newContent;
-        }
-    </script>
 </body>
 
 </html>

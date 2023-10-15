@@ -20,7 +20,7 @@ CORS(app)
 def index():
     return render_template('LIDS_Main.html')
 
-@app.route('/get_alerts_data', methods=['GET'])
+@app.route('/get_alerts', methods=['GET'])
 def get_latest_alerts():
     getter = alerts_manager.AlertManager().sharedAlerts
     # print("inside get_latest_alerts")
