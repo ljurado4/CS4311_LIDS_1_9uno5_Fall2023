@@ -1,6 +1,6 @@
 #alerts_manager.py
 
-from Alerts import Alerts
+from backend import Alerts
 
 
 class AlertManager:
@@ -11,7 +11,7 @@ class AlertManager:
         self.alerts = []
 
     def create_alert(self, level, time, IP, Port, description):
-        alert = Alerts(level, time, IP, Port, description)
+        alert = Alerts.Alerts(level, time, IP, Port, description)
         self.alerts.append(alert)
         self.sharedAlerts.append(alert)
 

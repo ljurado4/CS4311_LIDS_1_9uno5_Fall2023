@@ -1,5 +1,5 @@
 import unittest
-from PortChecker import PortDetection  # Import the portDetection class from your actual module
+from backend.PortChecker import PortDetection  # Import the portDetection class from your actual module
 
 
 class TestPortDetection(unittest.TestCase):

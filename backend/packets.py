@@ -2,13 +2,12 @@ import pyshark
 from datetime import datetime
 import threading as th
 from threading import Semaphore
-from alerts_manager import AlertManager
-
+import os
 import os
 import glob
-
-
-from packet_analyzer import PacketAnalyzer
+import asyncio
+from . import packet_analyzer
+import time
 
 """
 NOTE: Used Python 3.11 because interpreter could 
@@ -31,11 +30,11 @@ class PackTime:
     cap_sem = Semaphore(1)
     process_sem = Semaphore(0)
 
-    packet_analyzer = PacketAnalyzer()
+    packet_analyzer = packet_analyzer.PacketAnalyzer()
 
     def __init__(self):
         self.pack_time = None
-        self.packetAnalyzer = PacketAnalyzer 
+        self.packetAnalyzer = packet_analyzer.PacketAnalyzer 
     """
     create_packet will take in a packet and format the packet to be 
     enqueued to the global list of packets
@@ -124,28 +123,49 @@ class PackTime:
 
     
     def run_sniffer(self):
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
 
-        pcap_file_paths = ["C:\\Users\\jandr\\OneDrive\\Documents\\7-17-EN.pcapng","C:\\Users\\jandr\\OneDrive\\Documents\\AA_Day1_Traffic.pcapng","C:\\Users\\jandr\\OneDrive\\Documents\\cvi.pcapng","C:\\Users\\jandr\\OneDrive\\Documents\\eth0-LDV-wireshark.pcapng","C:\\Users\\jandr\\OneDrive\\Documents\\7-17-EN.pcapng","C:\\Users\\jandr\\OneDrive\\Documents\\nmap scan.pcapng", "C:\\Users\\jandr\\OneDrive\\Documents\\sv_day1traffic.pcapng","C:\\Users\\jandr\\OneDrive\\Documents\\vd_.07..17.23.pcapng"]
+        try:
+            # Base directory where all the pcapng files are located
+            base_dir = os.path.expanduser("C:\\Users\\User\\Documents\\traffic\\traffic")
 
-        packet_handler_thread = th.Thread(target=self.packet_handler)
-        packet_handler_thread.start()
+            # List of pcapng filenames
+            pcap_files = [
+                "7-17-EN.pcapng",
+                "AA_Day1_Traffic.pcapng",
+                "cvi.pcapng",
+                "eth0-LDV-wireshark.pcapng",
+                "7-17-EN.pcapng",
+                "nmap scan.pcapng",
+                "sv_day1traffic.pcapng",
+                "vd_.07..17.23.pcapng"
+            ]
 
-        for pcap_file in pcap_file_paths:
-            capture = pyshark.FileCapture(pcap_file)
-            
-            for in_packet in capture:
-                self.cap_sem.acquire()
-                packet = self.create_packet(in_packet)
-                self.packet_list.append(packet)
-                self.process_sem.release()
-                self.cap_sem.release()
+            # Construct full paths
+            pcap_file_paths = [os.path.join(base_dir, filename) for filename in pcap_files]
+
+            packet_handler_thread = th.Thread(target=self.packet_handler)
+            packet_handler_thread.start()
+
+            for pcap_file in pcap_file_paths:
+                capture = pyshark.FileCapture(pcap_file)
+                
+                for in_packet in capture:
+                    self.cap_sem.acquire()
+                    packet = self.create_packet(in_packet)
+                    self.packet_list.append(packet)
+                    self.process_sem.release()
+                    self.cap_sem.release()
+                    time.sleep(1)
 
 
-            capture.close()  # Close the capture for this file
+                capture.close()  # Close the capture for this file
 
-        # Notify the packet_handler thread that no more packets are coming
-        packet_handler_thread.join()
-
+            # Notify the packet_handler thread that no more packets are coming
+            packet_handler_thread.join()
+        finally:
+            loop.close()
         
         
         

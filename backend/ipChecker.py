@@ -42,11 +42,11 @@ class ip_Checker:
         
         
         #Get path to xml file 
-        current_directory = os.getcwd()
-        parent_directory = os.path.dirname(current_directory)
-        file_path = os.path.join(parent_directory, 'Sample.xml')  
-        
-        
+
+        current_file_directory = os.path.dirname(os.path.abspath(__file__))
+        parent_directory = os.path.dirname(current_file_directory)
+        file_path = os.path.join(parent_directory, 'Sample.xml')
+
         # Parse the XML file
         tree = ET.parse(file_path)
         root = tree.getroot()
