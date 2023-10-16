@@ -12,16 +12,18 @@ class PacketAnalyzer:
         self.portCheck = PortChecker.portDetection()
 
 
-    def analyze_packet(self,lvl,time,IP,port):
+    def analyze_packet(self,packet,identifier,time,IP,port):
         # Check for each error 
-        if self.ip_check(IP) == False:
-            self.create_alert(lvl,time,IP,port,"Unknown IP")
-            # print("here")
-        if self.port_scan_check(IP,port) == True:
-            self.create_alert(lvl,time,IP,port,"Port Scan")
-            # print("here")
         if self.login_attempts(self) == True:
-            self.create_alert(lvl,time,IP,port,"Failed Login Attempts")
+            self.create_alert(packet,identifier,3,time,IP,port,"Failed Login Attempts")
+            # print("here")
+        res = self.port_scan_check(IP,port)
+        if res == "threshold2":
+            self.create_alert(packet,identifier,3,time,IP,port,"Port Scan")
+        elif res == "threshold1":
+            self.create_alert(packet,identifier,2,time,IP,port,"Port Scan")
+        elif self.ip_check(IP) == False:
+            self.create_alert(packet,identifier,1,time,IP,port,"Unknown IP")
             # print("here")
 
     def ip_check(self,IP):
@@ -31,14 +33,15 @@ class PacketAnalyzer:
 
     def port_scan_check(self,IP,port):
 
-        return self.portCheck.update_connection_count(IP,port,1)
+        return self.portCheck.update_connection_count(IP,port,1,2)
 
     def login_attempts(self,packet):
         return False
     
-    def create_alert(self,lvl,time,IP,port,description):
+    def create_alert(self,packet,identifier,lvl,time,IP,port,description):
         # Call the AlertsManager class to create an alert
         self.getAlerts.create_alert(lvl,time,IP,port,description)
+        self.getAlerts.ident_list(packet,identifier)
         alerts = self.getAlerts.get_alerts()
         #for alert in alerts:
          #   print(alert)
