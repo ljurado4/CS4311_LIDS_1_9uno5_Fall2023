@@ -24,8 +24,13 @@ if __name__ == "__main__":
     
     getter = alerts_manager.AlertManager().sharedAlerts
 
+    getter2 = alerts_manager.AlertManager().identifierList
+
 
     for alert in getter:
         print(alert)
+    
+    for packet in getter2:
+        print(packet)
     
     

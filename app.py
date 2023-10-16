@@ -63,7 +63,8 @@ def get_latest_alerts():
             'Source': alert.IP,
             'Port': alert.Port,
             'Description': alert.description,
-            'Level': alert.level
+            'Level': alert.level,
+            'identifier': alert.identifier
         }
         for alert in getter
     ]

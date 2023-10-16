@@ -2,7 +2,8 @@
 
 import menu
 from tabulate import tabulate
-import packets
+from backend import packets
+
 """
 NOTE: Include that tabulate needs to be installed from command terminal
 """

@@ -24,6 +24,7 @@ class PackTime:
     checker = False
     ipList = []
     ipDouble = []
+    identifier = 0
     ################
     #Delete when alert logic is ready, only exits to 
     #limit packets for testing
@@ -101,18 +102,19 @@ class PackTime:
             #pull packet and move elsewhere
 
             time = datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")
-            if type(packet) == dict:
-                if packet["Source"] in self.ipDouble:
-                    lvl = "3"
+            #if type(packet) == dict:
+             #   if packet["Source"] in self.ipDouble:
+              #      lvl = "3"
                 
-                elif packet["Source"] in self.ipList:
-                    lvl = "2"
-                    self.ipDouble.append(packet["Source"])
-                else:
-                    self.ipList.append(packet["Source"])
-                    lvl = "1"
+               # elif packet["Source"] in self.ipList:
+                #    lvl = "2"
+                 #   self.ipDouble.append(packet["Source"])
+                #else:
+                 #  self.ipList.append(packet["Source"])
+                  #  lvl = "1"
             if type(packet) == dict:
-                self.packet_analyzer.analyze_packet(lvl, time, packet["Source"], packet["Port"])
+                self.identifier += 1
+                self.packet_analyzer.analyze_packet(packet,self.identifier,time, packet["Source"], packet["Port"])
 
                 
             self.cap_sem.release()
@@ -130,8 +132,7 @@ class PackTime:
 
         try:
             # Base directory where all the pcapng files are located
-            base_dir = os.path.expanduser("C:\\Users\\User\\Documents\\traffic\\traffic")
-
+            base_dir = os.path.expanduser("C:\\Users\\jandr\\OneDrive\\Documents\\traffic")
             # List of pcapng filenames
             pcap_files = [
                 "7-17-EN.pcapng",
