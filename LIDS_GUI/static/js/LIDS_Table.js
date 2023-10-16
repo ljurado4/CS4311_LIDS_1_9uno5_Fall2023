@@ -1,10 +1,10 @@
-//LIDs_Table.js
+//LIDS_Table.js
 document.addEventListener("DOMContentLoaded", function () {
     fetchLatestAlerts();
 
     setInterval(fetchLatestAlerts, 5000);
 
-    // event listener to the "Sort Alerts" button
+    // Event listener for the "Sort Alerts" button
     document.getElementById("sortAlertsButton").addEventListener("click", function () {
         sortAlertsByLevel();
     });
@@ -41,18 +41,33 @@ function populateTable(alerts) {
         portCell.textContent = alert.Port;
         descriptionCell.textContent = alert.Description;
         identifierCell.textContent = alert.identifier;
+
+        // Add a "Show PCAP" button to open PCAP data in a separate window
+        let pcapCell = row.insertCell(6);
+        let showPcapButton = document.createElement("button");
+        showPcapButton.textContent = "Show PCAP";
+        showPcapButton.addEventListener("click", function () {
+            showPcapData(alert.PCAPData);
+        });
+        pcapCell.appendChild(showPcapButton);
     });
 }
 
 function sortAlertsByLevel() {
-    // Add this code to send a request to the server to sort alerts by level
+    // send a request to the server to sort alerts by level
     fetch("/sort_alerts?sort_by=lvl")
         .then(response => response.json())
         .then(data => {
-            // Update the frontend with sorted data (you can call populateTable again)
+            //frontend with sorted data (you can call populateTable again)
             populateTable(data);
         })
         .catch(error => {
             console.error("There was an error sorting alerts by level!", error);
         });
+}
+
+function showPcapData(pcapData) {
+    // new window and display the PCAP data
+    const pcapWindow = window.open("", "PCAP Data", "width=600,height=400");
+    pcapWindow.document.write(`<pre>${pcapData}</pre>`);
 }
