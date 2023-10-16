@@ -1,4 +1,3 @@
-//LIDS_Table.js
 document.addEventListener("DOMContentLoaded", function () {
     fetchLatestAlerts();
 
@@ -47,7 +46,7 @@ function populateTable(alerts) {
         let showPcapButton = document.createElement("button");
         showPcapButton.textContent = "Show PCAP";
         showPcapButton.addEventListener("click", function () {
-            showPcapData(alert.PCAPData);
+            showPcapData(alert.PCAPData); // Pass the PCAP data here
         });
         pcapCell.appendChild(showPcapButton);
     });
@@ -67,7 +66,15 @@ function sortAlertsByLevel() {
 }
 
 function showPcapData(pcapData) {
-    // new window and display the PCAP data
+    // Open a new window
     const pcapWindow = window.open("", "PCAP Data", "width=600,height=400");
-    pcapWindow.document.write(pcapData); // Remove <pre> tags around pcapData
+    
+    // Check if the pcapData is a string (text)
+    if (typeof pcapData === 'string') {
+        // Display the text in the new window
+        pcapWindow.document.write("<pre>" + pcapData + "</pre>");
+    } else {
+        // Handle other data types or formats if needed
+        pcapWindow.document.write("Invalid PCAP Data");
+    }
 }

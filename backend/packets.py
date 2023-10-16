@@ -118,8 +118,7 @@ class PackTime:
             loop.close()
 
 def show_pcap_data(pcap_data):
-    temp_file_path = "temp_pcap.html"
-    with open(temp_file_path, 'w') as temp_file:
-        temp_file.write(pcap_data)
+    with open('temp_pcap.html', 'w') as temp_file:
+        temp_file.write(f'<pre>{pcap_data}</pre>')
 
-    webbrowser.open(temp_file_path)
+    webbrowser.open('temp_pcap.html')
