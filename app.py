@@ -1,9 +1,13 @@
 #app.py
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, flash
 from backend import lids_agent_connector
 from flask_cors import CORS
 from backend import packets,alerts_manager
 import threading
+import logging
+import socketio
+import secrets
+
 
 
 app = Flask(__name__, template_folder='LIDS_GUI/templates', static_folder='LIDS_GUI/static')
@@ -22,10 +26,7 @@ sio = socketio.Client()
 def index():
     return render_template('LIDS_Main.html')
 
-@sio.on('Send Alerts')
-def handle_response(alert):
-    print("SEnding data",alert)
-    
+
     
     
     
@@ -42,29 +43,20 @@ def dashboard():
         logging.debug("Attempting to establish socket connection")
 
         try:
-            # client_socket = SocketIO(host=ip_address, port=int(port_number),wait_for_connection=False)
+            
             sio.connect(f'http://{ip_address}:{port_number}')
             flash(f'Successfully connection to server at IP: {ip_address} Port: {port_number}.', 'success')
-            sio.emit("Send Alerts",alert_data)
         except Exception as e:
             flash(f'Failed connection server at IP: {ip_address} Port: {port_number}.', 'error')
-        
-        
 
-    # ale = alert()
-    
-    
-    
-    # ale.list_alerts
-    
-    return render_template('LIDS_Dashboard.html',data_packet=alert_data)
+        
+    return render_template('LIDS_Dashboard.html')
 
 
 @app.route('/get_alerts', methods=['GET'])
 def get_latest_alerts():
     getter = alerts_manager.AlertManager().sharedAlerts
-    # print("inside get_latest_alerts")
-    # print("getter",getter)
+
     alert_data = [
         {
             'Time': alert.time,
@@ -75,13 +67,12 @@ def get_latest_alerts():
         }
         for alert in getter
     ]
+    if sio.connected:
+        sio.emit("Alert Data",alert_data)
     return jsonify(alert_data)
 
 
-@app.route('/LIDS_Dashboard')
-def dashboard():
-    return render_template('LIDS_Dashboard.html')
-    
+
 @app.route('/LIDS_Main')
 def lids_main(): 
     return render_template('LIDS_Main.html')
@@ -89,10 +80,7 @@ def lids_main():
 @app.route('/configuration_data', methods=['POST'])
 def upload_xml_data():
     data = request.json
-    # For future connection purposes
-    # connect_agent = lids_agent_connector.AgentConnector(data)
-    
-    # Alert(data)
+
     return jsonify({"message": "Data processed!"})
 
 

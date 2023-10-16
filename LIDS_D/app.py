@@ -11,11 +11,23 @@ configuration = {}
 connected_agents = -1
 start_server = False
 device_connected = []
+alert_data = []
 
 
-@socketio.on('Send Alerts')
+@socketio.on('Alert Data')
 def handle_response(alert):
-    print("Reveiced alerts",alert)
+    global alert_data
+    # print(alert)
+    alert_data.append(alert)
+    
+
+
+@app.route('/update_alert_data_table',methods=['GET'])
+def update_alert_table():
+    global alert_data
+    flattened_data = [alert for sublist in alert_data for alert in sublist]
+    
+    return jsonify(flattened_data)
 
 @socketio.on('request_data')
 def send_device_connected_data():

@@ -35,10 +35,10 @@
 // }
 
 document.addEventListener("DOMContentLoaded", function() {
-    // Fetch the latest alerts immediately and populate the table
+    
     fetchLatestAlerts();
 
-    // Set an interval to fetch the latest alerts every 5 seconds
+    
     setInterval(fetchLatestAlerts, 5000);
 });
 
