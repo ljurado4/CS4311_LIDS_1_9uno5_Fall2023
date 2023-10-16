@@ -20,10 +20,15 @@ function updateTable(data) {
         const portCell = row.insertCell(3);
         portCell.id = `alert${index + 1}-port`;
         portCell.textContent = alert.Port; 
+
+        const identifierCell = row.insertCell(4);
+        identifierCell.id = `alert${index + 1}-identifier`;
+        identifierCell.textContent = alert.Port; 
+        
         
 
         
-        const descriptionCell = row.insertCell(4);
+        const descriptionCell = row.insertCell(5);
         descriptionCell.innerHTML = `<button id="alert${index + 1}-button" class="alertDescriptionButton" onclick="displayAlert(this.id)">${alert.Description}</button>`; 
     });
 }
