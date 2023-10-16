@@ -11,8 +11,8 @@ class AlertManager:
     def __init__(self):
         self.alerts = []
 
-    def create_alert(self, level, time, IP, Port, description):
-        alert = Alerts.Alerts(level, time, IP, Port, description)
+    def create_alert(self, level, time, IP, Port, description,identifier):
+        alert = Alerts.Alerts(level, time, IP, Port, description,identifier)
         self.alerts.append(alert)
         self.sharedAlerts.append(alert)
     

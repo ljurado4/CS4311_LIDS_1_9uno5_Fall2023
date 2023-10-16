@@ -40,7 +40,7 @@ class PacketAnalyzer:
     
     def create_alert(self,packet,identifier,lvl,time,IP,port,description):
         # Call the AlertsManager class to create an alert
-        self.getAlerts.create_alert(lvl,time,IP,port,description)
+        self.getAlerts.create_alert(lvl,time,IP,port,description,identifier)
         self.getAlerts.ident_list(packet,identifier)
         alerts = self.getAlerts.get_alerts()
         #for alert in alerts:
