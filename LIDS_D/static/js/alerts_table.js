@@ -1,3 +1,4 @@
+// alert_table.js
 function updateTable(data) {
     const tableBody = document.querySelector('#TableID tbody');
     tableBody.innerHTML = '';

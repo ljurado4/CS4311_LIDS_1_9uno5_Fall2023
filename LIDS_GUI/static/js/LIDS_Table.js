@@ -1,9 +1,13 @@
-document.addEventListener("DOMContentLoaded", function() {
-    
+//LIDs_Table.js
+document.addEventListener("DOMContentLoaded", function () {
     fetchLatestAlerts();
 
-    
     setInterval(fetchLatestAlerts, 5000);
+
+    // event listener to the "Sort Alerts" button
+    document.getElementById("sortAlertsButton").addEventListener("click", function () {
+        sortAlertsByLevel();
+    });
 });
 
 function fetchLatestAlerts() {
@@ -30,7 +34,6 @@ function populateTable(alerts) {
         let portCell = row.insertCell(3);
         let identifierCell = row.insertCell(4);
         let descriptionCell = row.insertCell(5);
-        
 
         levelCell.textContent = alert.Level;
         timeCell.textContent = alert.Time;
@@ -39,4 +42,17 @@ function populateTable(alerts) {
         descriptionCell.textContent = alert.Description;
         identifierCell.textContent = alert.identifier;
     });
+}
+
+function sortAlertsByLevel() {
+    // Add this code to send a request to the server to sort alerts by level
+    fetch("/sort_alerts?sort_by=lvl")
+        .then(response => response.json())
+        .then(data => {
+            // Update the frontend with sorted data (you can call populateTable again)
+            populateTable(data);
+        })
+        .catch(error => {
+            console.error("There was an error sorting alerts by level!", error);
+        });
 }

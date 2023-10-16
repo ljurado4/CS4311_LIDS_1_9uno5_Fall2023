@@ -1,3 +1,4 @@
+// agent_counter.js
 function createSocket() {
     var socketUrl = window.location.protocol + '//' + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
     var socket = io.connect(socketUrl);

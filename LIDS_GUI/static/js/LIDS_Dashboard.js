@@ -1,3 +1,4 @@
+//LIDS_Dashboard.js
 //get forms for event listeners
 const middleContainer = document.getElementById("middleContainer")
 const configFileForm = document.querySelector("#configFileForm")

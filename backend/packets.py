@@ -132,7 +132,7 @@ class PackTime:
 
         try:
             # Base directory where all the pcapng files are located
-            base_dir = os.path.expanduser("C:\\Users\\User\\Documents\\traffic\\traffic")
+            base_dir = os.path.expanduser("/Users/lizbethjurado/Git/traffic")
             # List of pcapng filenames
             pcap_files = [
                 "7-17-EN.pcapng",

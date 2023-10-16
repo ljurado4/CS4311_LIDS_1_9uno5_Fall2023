@@ -1,3 +1,5 @@
+//config.js
+
 let browseButton = document.getElementById("browseButton")
 
 //if new local storage create object to save files

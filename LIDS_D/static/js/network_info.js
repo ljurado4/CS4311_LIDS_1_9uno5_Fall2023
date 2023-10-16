@@ -1,3 +1,4 @@
+//network_info.js
 // Connect to the Flask SocketIO server
 var socketUrl = window.location.protocol + '//' + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
 var socket = io.connect(socketUrl);
