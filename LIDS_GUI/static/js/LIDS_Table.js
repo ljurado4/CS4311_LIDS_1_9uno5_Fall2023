@@ -69,5 +69,5 @@ function sortAlertsByLevel() {
 function showPcapData(pcapData) {
     // new window and display the PCAP data
     const pcapWindow = window.open("", "PCAP Data", "width=600,height=400");
-    pcapWindow.document.write(`<pre>${pcapData}</pre>`);
+    pcapWindow.document.write(pcapData); // Remove <pre> tags around pcapData
 }
