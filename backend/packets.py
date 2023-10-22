@@ -84,7 +84,7 @@ class PackTime:
         asyncio.set_event_loop(loop)
 
         try:
-            base_dir = os.path.expanduser("/Users/lizbethjurado/Git/traffic")
+            base_dir = os.path.expanduser("/media/sf_SW2/traffic")
             pcap_files = [
                 "7-17-EN.pcapng",
                 "AA_Day1_Traffic.pcapng",

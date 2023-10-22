@@ -1,7 +1,7 @@
 // agent_counter.js
 function createSocket() {
     var socketUrl = window.location.protocol + '//' + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
-    var socket = io.connect(socketUrl);
+    var socket = io.connect(socketUrl + '/lids-d');
 
 
     socket.on('update_agent_count', function(count) {
