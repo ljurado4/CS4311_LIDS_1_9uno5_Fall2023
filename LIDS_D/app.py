@@ -1,5 +1,3 @@
-#app.py
-
 from flask import Flask, render_template, request, jsonify
 from flask_cors import CORS
 from flask_socketio import SocketIO
@@ -9,9 +7,10 @@ socketio = SocketIO(app)
 CORS(app, resources={r"/*": {"origins": "*"}})
 
 configuration = {}
-connected_agents = -1
+connected_agents = 0
 start_server = False
-device_connected = []
+recognized_device_connected = []
+unrecognized_device_connected = []
 alert_data = []
 
 
@@ -19,14 +18,9 @@ alert_data = []
 def handle_response(alert):
     global alert_data
     alert_data.append(alert)
+    socketio.emit('new_alert_data', alert, namespace='/lids-d')
 
 
-@app.route('/update_alert_data_table', methods=['GET'])
-def update_alert_table():
-    global alert_data
-    flattened_data = [alert for sublist in alert_data for alert in sublist]
-
-    return jsonify(flattened_data)
 
 
 @app.route('/sort_alerts', methods=['GET'])
@@ -45,11 +39,6 @@ def sort_alerts():
     
     return jsonify(flattened_data)
 
-
-@socketio.on('request_data')
-def send_device_connected_data():
-    global device_connected
-    socketio.emit('update_data', device_connected)
 
 
 @app.route('/')
@@ -81,10 +70,10 @@ def server_details():
 
 @app.route('/LIDS-D_Network_Info_View')
 def network_info_view():
-    global device_connected
+
     print("On LIDS-D_Network")
-    print("device_connected", device_connected)
-    return render_template('LIDS-D_Network_Info_View.html', clients=device_connected)
+  
+    return render_template('LIDS-D_Network_Info_View.html')
 
 
 @app.route('/LIDS-D_Alerts_View')
@@ -96,60 +85,106 @@ def alerts_view():
 def upload_xml_data():
     global configuration
     configuration = request.json
-    print(configuration)
+    # print(configuration)
 
     return "Data Processed"
 
 
-@socketio.on('connect')
-def handle_connect():
+
+@socketio.on('connect', namespace='/lids-d')
+def lids_client_namespace_connect():
     global connected_agents
-    global device_connected
+    
+    print("LIDS-D socket connection")
+    
+    devices = {
+        'recognized_devices': recognized_device_connected,
+        'unrecognized_devices': unrecognized_device_connected
+    }
+    socketio.emit('update_agent_count', connected_agents, namespace='/lids-d')
+    socketio.emit('update_devices', devices, namespace='/lids-d')
+
+    return True
+
+
+@socketio.on('connect')
+def handle_LIDS_connect():
+    global connected_agents 
     global start_server
+    global recognized_device_connected, unrecognized_device_connected
     
     if not start_server:
         return False
 
-    is_ip_whitelisted = False
+    is_ip_whitelisted  = False
+    
     client_ip = request.remote_addr
     print("Attempting to connect", client_ip)
+    
     for k, dic in configuration.items():
+        
         white_lst = dic['whitelist']
+        
         if client_ip in white_lst:
-            print("Found IP")
-            is_ip_whitelisted = True  
-    
+            is_ip_whitelisted  = True
+            recognized_device_connected.append({
+                "id": str(len(recognized_device_connected) + 1),
+                "name": f"Client {len(recognized_device_connected) + 1}",
+                "ip": client_ip,
+                "status": "connected"
+            })
+            break
+       
     if not is_ip_whitelisted:
-        return False
-    
+        unrecognized_device_connected.append({
+                "id": str(len(unrecognized_device_connected) + 1),
+                "name": f"Client {len(unrecognized_device_connected) + 1}",
+                "ip": client_ip,
+                "status": "connected"
+            })
+                
     connected_agents += 1
     print(f'Client {client_ip} connected')
     print(f'Agents connected {connected_agents}')
-    device_connected.append({
-        "id": str(len(device_connected) + 1),
-        "name": f"Client {len(device_connected) + 1}",
-        "ip": client_ip,
-        "status": "connected"
-    })
+
     
-    socketio.emit('update_agent_count', connected_agents)
-    socketio.emit('update_data', device_connected)
+    devices = {
+        'recognized_devices': recognized_device_connected,
+        'unrecognized_devices': unrecognized_device_connected
+    }
+    print("devices",devices)
+    socketio.emit('update_agent_count', connected_agents, namespace='/lids-d')
+    socketio.emit('update_devices', devices, namespace='/lids-d')
+    
+    
+    return True
 
 
 @socketio.on('disconnect')
 def handle_disconnect():
     print("Disconnecting")
-    global device_connected
+    global recognized_device_connected, unrecognized_device_connected
     global connected_agents
     
     client_ip = request.remote_addr
-    device_connected = [client for client in device_connected if client['ip'] != client_ip]
+    
+    recognized_device_connected = [client for client in recognized_device_connected if client['ip'] != client_ip]
+
+    unrecognized_device_connected = [client for client in unrecognized_device_connected if client['ip'] != client_ip]
 
     connected_agents -= 1
-
-    socketio.emit('update_agent_count', connected_agents)
-    socketio.emit('update_data', device_connected)
-
+    
+    
+    
+    devices = {
+        'recognized_devices': recognized_device_connected,
+        'unrecognized_devices': unrecognized_device_connected
+    }
+    print("devices",devices)
+    socketio.emit('update_agent_count', connected_agents, namespace='/lids-d')
+    socketio.emit('update_devices', devices, namespace='/lids-d')
+    
+    
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5001)

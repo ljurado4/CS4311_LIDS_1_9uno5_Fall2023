@@ -1,4 +1,7 @@
-// alert_table.js
+
+var socketUrl = window.location.protocol + '//' + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
+var socket = io.connect(socketUrl + '/lids-d');
+
 function updateTable(data) {
     const tableBody = document.querySelector('#TableID tbody');
     tableBody.innerHTML = '';
@@ -25,24 +28,16 @@ function updateTable(data) {
         const identifierCell = row.insertCell(4);
         identifierCell.id = `alert${index + 1}-identifier`;
         identifierCell.textContent = alert.Port; 
-        
-        
 
-        
         const descriptionCell = row.insertCell(5);
         descriptionCell.innerHTML = `<button id="alert${index + 1}-button" class="alertDescriptionButton" onclick="displayAlert(this.id)">${alert.Description}</button>`; 
     });
 }
 
-function fetchLatestAlerts() {
-    fetch('/update_alert_data_table')
-        .then(response => response.json())
-        .then(data => {
-            updateTable(data);
-        })
-        .catch(error => console.error(error));
-}
+// Socket.IO event listener for the 'new_alert_data' event
+socket.on('new_alert_data', function(data) {
+    updateTable(data);
+});
 
+// Initial fetch to get the latest alerts
 fetchLatestAlerts();
-
-setInterval(fetchLatestAlerts, 5000);
