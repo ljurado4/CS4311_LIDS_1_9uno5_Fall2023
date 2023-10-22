@@ -4,15 +4,15 @@
     {% include 'head.html' %}
 <body>
     
-    <div class="contentBlock" style="text-align: left;" id = "contentBlock">
-            <p style="vertical-align: middle;margin-left: 30%;margin-top: 20%;">
+    <div class="contentBlock"  id = "contentBlock">
+            <p class="server-info">
                 Server Started: 
                 <form action="/shutdown" method="post">
-                    <button onclick="shutdownServer()">Shutdown LIDS-D Server</button>
+                    <button onclick="shutdownServer()">Shutdown Server</button>
                 </form>  
             </p>
             <p class="agent-info">Agents Connected: <span id="agent_count">0</span></p>
-            <p style="vertical-align: middle;margin-left: 30%;">LIDS-D External Storage Capacity:</p>
+            <p class="storage-capacity" >LIDS-D External Storage Capacity:</p>
     </div>
     {% include 'sidebar.html' %}
     <script src="../static/js/LIDS-D.js"></script>
