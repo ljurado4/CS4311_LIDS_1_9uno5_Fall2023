@@ -184,7 +184,24 @@ def handle_disconnect():
     socketio.emit('update_agent_count', connected_agents, namespace='/lids-d')
     socketio.emit('update_devices', devices, namespace='/lids-d')
     
+
+
+@app.route('/shutdown', methods=['POST'])
+def shutdown():
+    global start_server, configuration ,connected_agents
+    global recognized_device_connected, unrecognized_device_connected
+    global alert_data
     
+    configuration = {}
+    connected_agents = 0
+    start_server = False
+    recognized_device_connected = []
+    unrecognized_device_connected = []
+    alert_data = []
+    start_server = False 
+
+    print("shutting down")
+    return render_template('LIDS-D_Config_server_View.html')
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5001)
