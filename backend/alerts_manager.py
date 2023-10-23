@@ -9,8 +9,8 @@ class AlertManager:
     def __init__(self):
         self.alerts = []
 
-    def create_alert(self, level, time, IP, Port, description, identifier, pcap_data):
-        alert = Alerts.Alerts(level, time, IP, Port, description, identifier)
+    def create_alert(self, pcap_data, time, identifier, level, sourceIP, sourcePort,destIP,destPort,typeAlert,description):
+        alert = Alerts.Alerts(time, identifier, level, sourceIP, sourcePort, destIP, destPort, typeAlert, description)
         alert.PCAPData = pcap_data  # Set the PCAPData property
         self.alerts.append(alert)
         self.sharedAlerts.append(alert)

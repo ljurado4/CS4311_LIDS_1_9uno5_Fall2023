@@ -46,21 +46,24 @@ class PackTime:
             elif 'ICMP' in in_packet:
                 protocol = 'ICMP'
                 description = 'ICMP Packet'
+                src_port = "321"
                 dst_port = "123"
             else:
                 protocol = 'Other'
                 description = "Unknown/Other Protocol"
+                src_port = "321"
                 dst_port = "123"
             packet_length = int(in_packet.length)
             pcap_data = str(in_packet)  # Capture PCAP data as a string
             temp_packet_dict = {
                 "Time": time,
-                "Source": src,
-                "Destination": dst,
+                "SourceIP": src,
+                "DestinationIP": dst,
                 "Protocol": protocol,
                 "Length": packet_length,
                 "Description": description,
-                "Port": dst_port,
+                "SourcePort": src_port,
+                "DestinationPort": dst_port,
                 "PCAPData": pcap_data  # Add the actual PCAP data here
             }
             self.packet_list.append(temp_packet_dict)
@@ -76,7 +79,7 @@ class PackTime:
             time = datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")
             if type(packet) == dict:
                 self.identifier += 1
-                self.packet_analyzer.analyze_packet(packet, self.identifier, time, packet["Source"], packet["Port"])
+                self.packet_analyzer.analyze_packet(packet,time, self.identifier,packet["SourceIP"],packet["SourcePort"],packet["DestinationIP"],packet["DestinationPort"])
             self.cap_sem.release()
 
     def run_sniffer(self):
@@ -84,7 +87,7 @@ class PackTime:
         asyncio.set_event_loop(loop)
 
         try:
-            base_dir = os.path.expanduser("/media/sf_SW2/traffic")
+            base_dir = os.path.expanduser("C:\\Users\\jandr\\OneDrive\\Documents\\traffic")
             pcap_files = [
                 "7-17-EN.pcapng",
                 "AA_Day1_Traffic.pcapng",
