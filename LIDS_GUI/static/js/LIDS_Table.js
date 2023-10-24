@@ -27,22 +27,29 @@ function populateTable(alerts) {
     alerts.forEach(alert => {
         let row = tbody.insertRow();
 
-        let levelCell = row.insertCell(0);
-        let timeCell = row.insertCell(1);
-        let ipCell = row.insertCell(2);
-        let portCell = row.insertCell(3);
-        let identifierCell = row.insertCell(4);
-        let descriptionCell = row.insertCell(5);
+        let timeCell = row.insertCell(0);
+        let identifierCell = row.insertCell(1);
+        let levelCell = row.insertCell(2);
+        let sourceIPCell = row.insertCell(3);
+        let sourcePortCell = row.insertCell(4);
+        let DestinationIPCell = row.insertCell(5);
+        let DestinationPortCell = row.insertCell(6);
+        let typeAlertCell = row.insertCell(7);
+        let descriptionCell = row.insertCell(8);
 
-        levelCell.textContent = alert.Level;
         timeCell.textContent = alert.Time;
-        ipCell.textContent = alert.Source;
-        portCell.textContent = alert.Port;
+        identifierCell.textContent = alert.Identifier
+        levelCell.textContent = alert.Level;
+        sourceIPCell.textContent = alert.SourceIP
+        sourcePortCell.textContent = alert.SourcePort
+        DestinationIPCell.textContent = alert.DestIP
+        DestinationPortCell.textContent = alert.DestPort
+        typeAlertCell.textContent = alert.TypeAlert
         descriptionCell.textContent = alert.Description;
-        identifierCell.textContent = alert.identifier;
+  
 
         // Add a "Show PCAP" button to open PCAP data in a separate window
-        let pcapCell = row.insertCell(6);
+        let pcapCell = row.insertCell(9);
         let showPcapButton = document.createElement("button");
         showPcapButton.textContent = "Show PCAP";
         showPcapButton.addEventListener("click", function () {

@@ -87,34 +87,19 @@ class PackTime:
         asyncio.set_event_loop(loop)
 
         try:
-            base_dir = os.path.expanduser("C:\\Users\\jandr\\OneDrive\\Documents\\traffic")
-            pcap_files = [
-                "7-17-EN.pcapng",
-                "AA_Day1_Traffic.pcapng",
-                "cvi.pcapng",
-                "eth0-LDV-wireshark.pcapng",
-                "7-17-EN.pcapng",
-                "nmap scan.pcapng",
-                "sv_day1traffic.pcapng",
-                "vd_.07..17.23.pcapng"
-            ]
-            pcap_file_paths = [os.path.join(base_dir, filename) for filename in pcap_files]
 
             packet_handler_thread = th.Thread(target=self.packet_handler)
             packet_handler_thread.start()
 
-            for pcap_file in pcap_file_paths:
-                capture = pyshark.FileCapture(pcap_file)
+            capture = pyshark.LiveCapture(interface="enp0s3")
+            for in_packet in capture:
 
-                for in_packet in capture:
-                    self.cap_sem.acquire()
-                    packet = self.create_packet(in_packet)
-                    self.packet_list.append(packet)
-                    self.process_sem.release()
-                    self.cap_sem.release()
-                    time.sleep(1)
+                self.cap_sem.acquire()
+                packet = self.create_packet(in_packet)
+                self.packet_list.append(packet)
+                self.process_sem.release()
+                self.cap_sem.release()
 
-                capture.close()
 
             packet_handler_thread.join()
         finally:

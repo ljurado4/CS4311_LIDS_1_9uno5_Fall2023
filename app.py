@@ -60,14 +60,19 @@ def get_latest_alerts():
     alert_data = [
         {
             'Time': alert.time,
-            'Source': alert.IP,
-            'Port': alert.Port,
-            'Description': alert.description,
+            'Identifier': alert.identifier,
             'Level': alert.level,
-            'identifier': alert.identifier
+            'SourceIP': alert.sourceIP,
+            'SourcePort': alert.sourcePort,
+            'DestIP': alert.destIP,
+            'DestPort': alert.destPort,
+            'TypeAlert': alert.typeAlert,
+            'Description': alert.description,
         }
         for alert in getter
     ]
+    # for alert in getter:
+    #     print("alert",alert)
     if sio.connected:
         sio.emit("Alert Data",alert_data)
     return jsonify(alert_data)
