@@ -1,0 +1,66 @@
+<!-- LIDS-D_Network_Info_View.html-->
+<!DOCTYPE html>
+<html lang="en">
+    {% include 'head.html' %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+<style>
+    
+</style>
+<body>
+    
+    <div class = "contentBlock" style="font-size: 0;" id = "contentBlock">
+        <div style="width: 100%;height:55vh;display:flex;" id = "topContainer">
+            <div class="devicesDisplayBox" style="width:150vh;" id="recognizedDevices">
+                <p class="networkHeader">Recognized Devices</p>
+                <div class="scrollableContainer">
+                    <table class="devicesTable">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>IP</th>
+                                <th>Connection Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        
+                        </tbody>
+                    </table>
+                </div>
+                
+            </div>  
+            <div class = "devicesDisplayBox" style="width: 100%;" id="unkownDevices">
+                <p class="networkHeader">Unkown Devices</p>
+                <div class="scrollableContainer">
+                    <table class="devicesTable">
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>IP</th>
+                            <th>Connection Status</th>
+                        </tr>
+                       
+                    </table>
+                </div>
+            </div>
+        </div>
+        <p style="width:100%;background-color:lightgray;font-size:30px;margin: 0;text-align: center;border-bottom: solid;">Alerts</p>
+        <div class="scrollableContainer">
+            <table class = "alertsTable">
+                <tr>
+                    <th>Level</th>
+                    <th>Time</th>
+                    <th>IP</th>
+                    <th>Port</th>
+                    <th>Protocol</th>
+                    <th>Description</th>
+                </tr>
+               
+                </tr>
+            </table>
+        </div>
+    </div>
+    {% include 'sidebar.html' %}
+    <script src="../static/js/network_info.js"></script>
+</body>
+</html>

@@ -1,3 +1,4 @@
+//LIDS_Dashboard.js
 //get forms for event listeners
 const middleContainer = document.getElementById("middleContainer")
 const configFileForm = document.querySelector("#configFileForm")
@@ -24,11 +25,6 @@ alertsTableFrom.addEventListener("submit", (event) => {
     xmlConfigState = middleContainer.innerHTML
     middleContainer.innerHTML = alertsTableState
     
-})
-//hadles the disconnection of the device
-disconnectForm.addEventListener("submit", (event) => {
-    event.preventDefault()
-    window.location = "LIDS_Main"
 })
 function toggleDropdown() {
     let dropdownContent = document.getElementById("sortByDropdownContent");

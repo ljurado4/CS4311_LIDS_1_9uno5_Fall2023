@@ -1,0 +1,25 @@
+<!-- LIDS-D_Config_Server_View.html-->
+<!DOCTYPE html>
+<html lang="en">
+    {% include 'head.html' %}
+<body>
+    <div class="contentBlock" id = "contentBlock">
+        <div class = "configBrowseDiv">
+            <p class = "configBrowseDivText">please provide a configuration file for this system<p>
+            <label class = "configBrowseButton" for = "browseButton">
+                Browse
+                <input type = "file" style = "display:none" accept="text/xml" id = "browseButton">
+            </label>
+            </div>
+            <br>
+            <div class="scrollableContainer" style="text-align: left;  padding-left: 50px;" id = "previousFilesSelection">
+                <p class = "previousCofigFileDivText">Or select a previous configuration file</p>
+            </div>
+        </div>
+    </div>
+    {% include 'sidebar.html' %}
+    "]"
+    <script src="../static/js/LIDS-D.js"></script>
+    <script src="../static/js/config.js"></script>
+</body>
+</html>

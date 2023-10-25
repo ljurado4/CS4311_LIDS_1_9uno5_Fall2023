@@ -1,5 +1,6 @@
-import menu
-#  Install 'tabulate' using `pip install tabulate`
+#alerts_menu.py
+
+#  Install 'tabulate' using `pip3 install tabulate`
 from tabulate import tabulate
 
 

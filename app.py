@@ -1,103 +1,102 @@
-from flask import Flask, render_template, request, jsonify
+#app.py
+from flask import Flask, render_template, request, jsonify, flash
 from backend import lids_agent_connector
 from flask_cors import CORS
-from CLI.packets import PackTime
-import pyshark
+from backend import packets,alerts_manager
+import threading
+import logging
+import socketio
+import secrets
 
-# Command  .\env\Scripts\activate.bat
 
-app = Flask(__name__,template_folder='LIDS_GUI/templates',static_folder='LIDS_GUI/static')
+
+app = Flask(__name__, template_folder='LIDS_GUI/templates', static_folder='LIDS_GUI/static')
+
+pack_time = packets.PackTime()
+thread = threading.Thread(target=pack_time.run_sniffer)
+thread.start()
+
 
 CORS(app)
+app.secret_key = secrets.token_urlsafe(16)
+
+sio = socketio.Client()
 
 @app.route('/')
 def index():
     return render_template('LIDS_Main.html')
 
-@app.route('/LIDS_Dashboard')
-def dashboard():
-    print("before threads")
-    #Ideally, gets the packet list to be displayed
-    #TODO: Confirm if we want packets or alerts
-        #PackTime.packet_list
-    
-    packet_manager = PackTime()
-    packet_manager.thread2.start()
-    packet_manager.thread1.start()
 
-    print("after threads")
-    pkt_list = packet_manager.export_packets()
-    print(pkt_list)
-    #TODO: Make the list from packets work here
-    """
-    alert_data = pkt_list
-    [
-    {
-        "Time": "2023-09-16 12:01:23.456789",
-        "Source": "192.168.1.2",
-        "Destination": "192.168.1.100",
-        "Protocol": "TCP",
-        "Length": 64,
-        "Description": "TCP Handshake SYN"
-    },
-    {
-        "Time": "2023-09-16 12:01:23.456990",
-        "Source": "192.168.1.100",
-        "Destination": "192.168.1.2",
-        "Protocol": "UDP",
-        "Length": 64,
-        "Description": "UDP Handshake SYN, ACK"
-    },
-    {
-        "Time": "2023-09-16 12:02:00.000000",
-        "Source": "192.168.1.3",
-        "Destination": "192.168.1.101",
-        "Protocol": "ICMP",
-        "Length": 32,
-        "Description": "Ping Request"
-    },
-    {
-        "Time": "2023-09-16 12:02:00.100000",
-        "Source": "192.168.1.101",
-        "Destination": "192.168.1.3",
-        "Protocol": "ICMP",
-        "Length": 32,
-        "Description": "Ping Reply"
-    },
-    {
-        "Time": "2023-09-16 12:02:05.678910",
-        "Source": "192.168.1.4",
-        "Destination": "192.168.1.5",
-        "Protocol": "TCP",
-        "Length": 128,
-        "Description": "HTTP GET Request"
-    },
-    {
-        "Time": "2023-09-16 12:02:05.789123",
-        "Source": "192.168.1.5",
-        "Destination": "192.168.1.4",
-        "Protocol": "TCP",
-        "Length": 256,
-        "Description": "HTTP 200 OK Response"
-    }
+    
+    
+    
+@app.route('/LIDS_Dashboard', methods=['GET', 'POST'])
+def dashboard():
+    global client_socket
+    global alert_data
+    if request.method == 'POST':
+        logging.debug("POST request received")
+        ip_address = request.form.get('IPInput')
+        port_number = request.form.get('PortInput')
+        print("ip_address",ip_address)
+        print("port_number",port_number)
+        logging.debug("Attempting to establish socket connection")
+
+        try:
+            
+            sio.connect(f'http://{ip_address}:{port_number}')
+            flash(f'Successfully connection to server at IP: {ip_address} Port: {port_number}.', 'success')
+        except Exception as e:
+            flash(f'Failed connection server at IP: {ip_address} Port: {port_number}.', 'error')
+
+        
+    return render_template('LIDS_Dashboard.html')
+
+
+@app.route('/get_alerts', methods=['GET'])
+def get_latest_alerts():
+    getter = alerts_manager.AlertManager().sharedAlerts
+
+    alert_data = [
+        {
+            'Time': alert.time,
+            'Identifier': alert.identifier,
+            'Level': alert.level,
+            'SourceIP': alert.sourceIP,
+            'SourcePort': alert.sourcePort,
+            'DestIP': alert.destIP,
+            'DestPort': alert.destPort,
+            'TypeAlert': alert.typeAlert,
+            'Description': alert.description,
+        }
+        for alert in getter
     ]
-    """
-                                                #data_packet=alert_data
-    return render_template('LIDS_Dashboard.html',data_packet=pkt_list)
+    # for alert in getter:
+    #     print("alert",alert)
+    if sio.connected:
+        sio.emit("Alert Data",alert_data)
+    return jsonify(alert_data)
+
 
 
 @app.route('/LIDS_Main')
 def lids_main(): 
     return render_template('LIDS_Main.html')
 
-
 @app.route('/configuration_data', methods=['POST'])
 def upload_xml_data():
     data = request.json
-    print(data)
-    # connect_agent = lids_agent_connector.AgentConnector(data)
-    
+
     return jsonify({"message": "Data processed!"})
+
+
+
+@app.route('/disconnect', methods=['POST'])
+def disconnect():
+    print("Disconnecting from server")
+    global sio
+    sio.disconnect()
+    return render_template('LIDS_Main.html')
 
 
 if __name__ == "__main__":

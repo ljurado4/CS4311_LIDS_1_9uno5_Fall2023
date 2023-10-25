@@ -1,3 +1,4 @@
+/* lids_dashboard.css */
 .xmlFileTextArea{
     height: 91vh;
     border-radius: 3px;
@@ -24,10 +25,34 @@ body {
 .header {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     background: rgb(173, 173, 173);
     height: auto;
     position: relative;
     font-size: 20px;
+    padding: 10px 20px;
+}
+
+form {
+    display: flex;
+    align-items: center;
+    gap: 10px;  
+}
+
+#ConnectButton {
+    background: lightgray;
+    width: 100px;
+    height: 30px;
+    border: 1px solid black;  
+    border-radius: 25px;
+    display: inline-block;
+    margin: 5%;
+}
+
+#IPAdressForm, #PortNumberForm {
+    padding: 8px;
+    border: 1px solid #AAA;
+    border-radius: 4px;
 }
 
 .leftSidebar {
@@ -68,12 +93,15 @@ table {
     margin-top: 0%;
 }
 
-th,
-td {
+th,td {
     border: 1px solid rgb(173, 173, 173);
     padding: 8px;
     text-align: left;
     word-wrap: break-word;
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 th {
@@ -86,11 +114,12 @@ th {
 .table-container {
     justify-content: space-between;
     width: 70%;
-    max-height: 60vh;
+    max-height: 80vh;
     margin: 1% 0% 1vh 0%;
     display: inline-block;
     flex-direction: column;
     align-items: center;
+    overflow-x: auto;
 }
 
 .notifications,
@@ -101,9 +130,11 @@ th {
 }
 
 table.alertbox {
-    width: 100%;
+    width: 70%; /* adjusted width */
     position: relative;
     display: block;
+    overflow-x: visible;
+    margin: 1% 0% 1vh 5%; /* Adjust margin for positioning */
 }
 
 .sort-button {
@@ -172,4 +203,10 @@ table.alertbox {
     margin-top: 1%;
     vertical-align: top;
     text-align: center;
+}
+
+
+#alertBoxTable {
+    width: 100%;
+    overflow-x: auto;
 }

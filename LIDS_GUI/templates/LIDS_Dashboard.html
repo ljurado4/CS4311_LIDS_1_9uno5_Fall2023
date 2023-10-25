@@ -1,3 +1,4 @@
+<!-- LIDS_Dashboard.html-->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,14 +10,18 @@
     <title>LIDS Dashboard</title>
 </head>
 
-
 <body>
     <div class="header">
+        <form action="/LIDS_Dashboard" method="post">
+            <input type="text" name="IPInput" placeholder="IP Address" id="IPAdressForm">
+            <input type="text" name="PortInput" placeholder="Port Number" id="PortNumberForm">
+            <input type="submit" value="Connect" id="ConnectButton">
+        </form>
         <div class="headerTitle" id="headerTitle">LIDS</div>
         <div class="connectedDisplay" id="connectedDisplay">Connected
             <img style="mix-blend-mode: multiply;height: 25px;width: 50px;vertical-align:text-bottom;"
-            src="../static/img/Display_Box_Buttons.png">
-            <form style="display:inline-block" id="disconnectButtonForm">
+                src="../static/img/Display_Box_Buttons.png">
+            <form action="/disconnect" method="post" style="display:inline-block" id="disconnectButtonForm">
                 <input class="disconnectButton dashboardButtonAction" type="submit" value="Disconnect">
             </form>
         </div>
@@ -25,23 +30,28 @@
     <div class="leftSidebar" id="leftSidebar">
         <form id="configFileForm">
             <input type="image" class="leftSidebarButton dashboardButtonAction leftSidebarImages"
-            src="../static/img/Display_Box_Buttons.png">
+                src="../static/img/Display_Box_Buttons.png">
         </form>
         <br style="line-height: 20px;">
         <form id="alertsTableForm">
             <input type="image" class="leftSidebarButton dashboardButtonAction leftSidebarImages"
-            src="../static/img/Config_File_Button_IMG.png">
+                src="../static/img/Config_File_Button_IMG.png">
         </form>
     </div>
-
-    <div class="table-container" id = "middleContainer">
+    
+    <div class="table-container" id="middleContainer">
+       
         <table class="alertbox" id="alertBoxTable">
             <thead>
                 <tr>
-                    <th>Lvl</th>
                     <th>Time</th>
-                    <th>IP</th>
-                    <th>Port</th>
+                    <th>Identifier</th>
+                    <th>Level</th>
+                    <th>Source IP</th>
+                    <th>Source Port</th>
+                    <th>Destination IP</th>
+                    <th>Destination Port</th>
+                    <th>Alert Type</th>
                     <th style="width: 100vw;">
                         Description
 
@@ -56,276 +66,16 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="filter-button">
-                            <div class="dropdown">
-                                <button id="filterButton" onclick="toggleDropdown()">Filter</button>
-                                <div class="dropdown-options" id="sortByDropdownContent">
-                                    <button onclick="sortTable(0); toggleDropdown()">Lvl</button>
-                                    <button onclick="sortTable(1); toggleDropdown()">Time</button>
-                                    <button onclick="sortTable(2); toggleDropdown()">IP</button>
-                                    <button onclick="removeSort(); toggleDropdown()">None</button>
-                                </div>
-                            </div>
-                        </div>
                     </th>
                 </tr>
             </thead>
             <tbody>
-                <table>
-                    <thead>
-                        <tr>
-                        {% for key in data_packet[0] %}
-                            <th>{{ key }}</th>
-                        {% endfor %}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for packet in data_packet %}
-                        <tr>
-                            {% for key, value in packet.items() %}
-                            <td>{{ value }}</td>
-                            {% endfor %}
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            
-               <!-- 
-                <tr>
-                    <td>1</td>
-                    <td>12:30:45</td>
-                    <td>192.168.1.1</td>
-                    <td>8080</td>
-                    <td>Some description</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>12:30:45</td>
-                    <td>192.168.1.1</td>
-                    <td>8080</td>
-                    <td>Some description</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>12:30:45</td>
-                    <td>192.168.1.1</td>
-                    <td>8080</td>
-                    <td>Some description</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>12:30:45</td>
-                    <td>192.168.1.1</td>
-                    <td>8080</td>
-                    <td>Some description</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>12:30:45</td>
-                    <td>192.168.1.1</td>
-                    <td>8080</td>
-                    <td>Some description</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>12:30:45</td>
-                    <td>192.168.1.1</td>
-                    <td>8080</td>
-                    <td>Some description</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>12:30:45</td>
-                    <td>192.168.1.1</td>
-                    <td>8080</td>
-                    <td>Some description</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>12:30:45</td>
-                    <td>192.168.1.1</td>
-                    <td>8080</td>
-                    <td>Some description</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>12:30:45</td>
-                    <td>192.168.1.1</td>
-                    <td>8080</td>
-                    <td>Some description</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>12:30:45</td>
-                    <td>192.168.1.1</td>
-                    <td>8080</td>
-                    <td>Some description</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>12:30:45</td>
-                    <td>192.168.1.1</td>
-                    <td>8080</td>
-                    <td>Some description</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>12:30:45</td>
-                    <td>192.168.1.1</td>
-                    <td>8080</td>
-                    <td>Some description</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>12:30:45</td>
-                    <td>192.168.1.1</td>
-                    <td>8080</td>
-                    <td>Some description</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>12:30:45</td>
-                    <td>192.168.1.1</td>
-                    <td>8080</td>
-                    <td>Some description</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>12:30:45</td>
-                    <td>192.168.1.1</td>
-                    <td>8080</td>
-                    <td>Some description</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>12:30:45</td>
-                    <td>192.168.1.1</td>
-                    <td>8080</td>
-                    <td>Some description</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>12:30:45</td>
-                    <td>192.168.1.1</td>
-                    <td>8080</td>
-                    <td>Some description</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>12:30:45</td>
-                    <td>192.168.1.1</td>
-                    <td>8080</td>
-                    <td>Some description</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>12:30:45</td>
-                    <td>192.168.1.1</td>
-                    <td>8080</td>
-                    <td>Some description</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>12:30:45</td>
-                    <td>192.168.1.1</td>
-                    <td>8080</td>
-                    <td>Some description</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>12:30:45</td>
-                    <td>192.168.1.1</td>
-                    <td>8080</td>
-                    <td>Some description</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>12:30:45</td>
-                    <td>192.168.1.1</td>
-                    <td>8080</td>
-                    <td>Some description</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>12:30:45</td>
-                    <td>192.168.1.1</td>
-                    <td>8080</td>
-                    <td>Some description</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>12:30:45</td>
-                    <td>192.168.1.1</td>
-                    <td>8080</td>
-                    <td>Some description</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>12:30:45</td>
-                    <td>192.168.1.1</td>
-                    <td>8080</td>
-                    <td>Some description</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>12:30:45</td>
-                    <td>192.168.1.1</td>
-                    <td>8080</td>
-                    <td>Some description</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>12:30:45</td>
-                    <td>192.168.1.1</td>
-                    <td>8080</td>
-                    <td>Some description</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>12:30:45</td>
-                    <td>192.168.1.1</td>
-                    <td>8080</td>
-                    <td>Some description</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>12:30:45</td>
-                    <td>192.168.1.1</td>
-                    <td>8080</td>
-                    <td>Some description</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>12:30:45</td>
-                    <td>192.168.1.1</td>
-                    <td>8080</td>
-                    <td>Some description</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>12:30:45</td>
-                    <td>192.168.1.1</td>
-                    <td>8080</td>
-                    <td>Some description</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>12:30:45</td>
-                    <td>192.168.1.1</td>
-                    <td>8080</td>
-                    <td>Some description</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>12:30:45</td>
-                    <td>192.168.1.1</td>
-                    <td>8080</td>
-                    <td>Some description</td>
-                </tr>
-                -->
             </tbody>
         </table>
+   
     </div>
+    
+    
     <div id="rightSidebar" class="rightSidebar">
         <table class="notifications" id="notificationsTable">
             <thead>
@@ -336,6 +86,12 @@
             <tbody>
                 <tr>
                     <td>Notification 1</td>
+                </tr>
+                {% for message in get_flashed_messages(category_filter=['success']) %}
+                <tr>
+                    <td>{{ message }}</td>
+                </tr>
+                {% endfor %}
                 </tr>
             </tbody>
         </table>
@@ -350,18 +106,19 @@
                 <tr>
                     <td>Error 1</td>
                 </tr>
+                {% for message in get_flashed_messages(category_filter=['error']) %}
+                <tr>
+                    <td>{{ message }}</td>
+                </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="../static/js/LIDS_Dashboard.js"></script>    
-    <script>
-        function replaceMiddleContent(newContent) {
-            document.getElementById('middle-content').innerHTML = newContent;
-        }
-    </script>
+    <script src="../static/js/LIDS_Dashboard.js"></script>
+    <script src="../static/js/LIDS_Table.js"></script>
 </body>
 
 </html>

@@ -1,23 +1,24 @@
+// LIDS_Main.js
 const fileInput = document.getElementById('myFile');
 fileInput.onchange = async () => {
 
-  //get uploaded file
+  // get uploaded file
   const selectedFile = fileInput.files[0];
   let reader = new FileReader()
   reader.readAsText(selectedFile)
-  //get everything from the file
+  // get everything from the file
   let loadedFile = ""
-  //wait for the file to load
+  // wait for the file to load
   await new Promise(resolve => reader.onload = () => resolve());
   loadedFile = reader.result
   let parser, xmlDoc;
 
-  //xml parser
+  // xml parser
   parser = new DOMParser();
-  xmlDoc = parser.parseFromString(loadedFile,"text/xml");
+  xmlDoc = parser.parseFromString(loadedFile, "text/xml");
 
   let users = new Object()
-  //save data in an object
+  // save data in an object
   for(let i = 0;i < xmlDoc.getElementsByTagName("system").length;i++){
     let currUser = new Object()
     currUser["name"] = xmlDoc.getElementsByTagName("system")[i].getElementsByTagName("name")[0].childNodes[0].nodeValue
@@ -41,14 +42,13 @@ fileInput.onchange = async () => {
     console.log(data.message); 
     
     
-    //needs work - tranferring data to the backend, change any code necessary
-    //console.log(users)
-    //comment line below to not change screen and stay in corruent page to print data
-    //store file name and contents to use in next page
-    window.localStorage.setItem("xmlFileName",selectedFile.name)
-    window.localStorage.setItem("xmlFile",loadedFile)
-    
-    console.log("Something, a random string")
+    // needs work - transferring data to the backend, change any code necessary
+    // console.log(users)
+    // comment line below to not change screen and stay on the current page to print data
+    // store file name and contents to use in the next page
+    window.localStorage.setItem("xmlFileName", selectedFile.name)
+    window.localStorage.setItem("xmlFile", loadedFile)
+
     window.location = "LIDS_Dashboard"
 
   })
