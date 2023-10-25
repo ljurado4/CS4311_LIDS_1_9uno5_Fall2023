@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     fetchLatestAlerts();
 
-    setInterval(fetchLatestAlerts, 5000);
+    setInterval(fetchLatestAlerts, 20000);
 
     // Event listener for the "Sort Alerts" button
     document.getElementById("sortAlertsButton").addEventListener("click", function () {
