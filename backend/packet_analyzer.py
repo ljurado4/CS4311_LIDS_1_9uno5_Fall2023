@@ -11,7 +11,7 @@ class PacketAnalyzer:
         # Check for each error 
         if self.login_attempts(packet) == True:
             self.create_alert(packet, time, identifier, 3, sourceIP, sourcePort,destIP,destPort,"Failed Login Error","Multiple failed logins detected")
-        res = self.port_scan_check(sourceIP, destPort)
+        res = self.port_scan_check(sourceIP, destPort, time)
         if res == "threshold2":
             self.create_alert(packet, time, identifier, 3, sourceIP, sourcePort,destIP,destPort,"Port Scan Error","Port Scan surpassing threshold2")
         elif res == "threshold1":
@@ -22,8 +22,11 @@ class PacketAnalyzer:
     def ip_check(self, IP):
         return self.iC.ip_in_List(IP)
 
-    def port_scan_check(self, IP, port):
-        return self.portCheck.update_connection_count(IP, port, 1, 2)
+    def port_scan_check(self, IP, destPort, timeOF):
+        threshold1 = -1
+        threshold2 = 0
+        timeAllowed = 700
+        return self.portCheck.port_Checking(IP, destPort, timeOF, timeAllowed, threshold1, threshold2)
 
     def login_attempts(self, packet):
         # Implement your login attempts logic here

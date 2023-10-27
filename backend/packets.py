@@ -76,7 +76,8 @@ class PackTime:
                 self.cap_sem.release()
                 break
             packet = self.packet_list.pop(0)
-            time = datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")
+            time0 = datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")
+            time = datetime.strptime(time0,"%Y-%m-%d %H:%M:%S.%f")
             if type(packet) == dict:
                 self.identifier += 1
                 self.packet_analyzer.analyze_packet(packet,time, self.identifier,packet["SourceIP"],packet["SourcePort"],packet["DestinationIP"],packet["DestinationPort"])
