@@ -94,6 +94,7 @@ def upload_xml_data():
 @socketio.on('connect', namespace='/lids-d')
 def lids_client_namespace_connect():
     global connected_agents
+    global recognized_device_connected, unrecognized_device_connected
     
     print("LIDS-D socket connection")
     
@@ -129,18 +130,19 @@ def handle_LIDS_connect():
             is_ip_whitelisted  = True
             recognized_device_connected.append({
                 "id": str(len(recognized_device_connected) + 1),
-                "name": f"Client {len(recognized_device_connected) + 1}",
+                "name": dic["name"],
                 "ip": client_ip,
                 "status": "connected"
             })
             break
-       
+    
+    client_protocol = request.environ.get('REMOTE_PORT')
     if not is_ip_whitelisted:
         unrecognized_device_connected.append({
-                "id": str(len(unrecognized_device_connected) + 1),
-                "name": f"Client {len(unrecognized_device_connected) + 1}",
-                "ip": client_ip,
-                "status": "connected"
+                "ip": request.remote_addr,
+                "port": "NA" if not client_protocol else client_protocol,
+                "protocol": request.environ.get('HTTP_UPGRADE', 'http')
+                
             })
                 
     connected_agents += 1

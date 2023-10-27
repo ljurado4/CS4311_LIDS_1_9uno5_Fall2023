@@ -36,10 +36,14 @@ socket.on('update_devices', function(data) {
         var cell1 = row.insertCell(0);
         var cell2 = row.insertCell(1);
         var cell3 = row.insertCell(2);
-        var cell4 = row.insertCell(3);
-        cell1.innerHTML = device.id;
-        cell2.innerHTML = device.name;
-        cell3.innerHTML = device.ip;
-        cell4.innerHTML = device.status;
+
+        cell1.innerHTML = device.ip;
+        cell2.innerHTML = device.port;
+        cell3.innerHTML = device.protocol;
+
+
+        console.log("device.port",device.port);
+        console.log("device.ip",device.ip);
+
     }
 });
