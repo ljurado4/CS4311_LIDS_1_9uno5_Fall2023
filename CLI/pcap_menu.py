@@ -2,7 +2,7 @@
 
 import menu
 from tabulate import tabulate
-from backend import packets
+from backend.packets import PackTime
 
 """
 NOTE: Include that tabulate needs to be installed from command terminal
@@ -73,6 +73,8 @@ class PcapMenu:
         self.menu_helper = menu.Menu()
         self.valid_search_commands = [
             "Time", "Source","Destination","Protocol", "Length", "Description"]
+        self.valid_filter_options = [
+            "High Severity", "Medium Severity", "Low Severity"]
 
     def navigate_next_menu(self):
         menu_helper = menu.Menu()
@@ -141,6 +143,31 @@ class PcapMenu:
         else:
             # Print a message if no matching pcap is found
             print("Unable to locate the specified PCAP file")
+
+    def display_filtered_pcaps(self,filter_command: list):
+        #[command like High severity, number of packets to view]
+        command = filter_command[0]
+        max_pcaps = filter_command[-1]
+
+        filtered_pcaps = []
+
+        for pcap in self.packet_data:
+            for attribute, value in pcap.items():
+                # Check if the current attribute matches the search command and its value matches the target value
+                if attribute == command and value >= max_pcaps:
+                    filtered_pcaps.append(pcap)
+                    value += 1
+                    break
+
+
+
+    def print_filter_options():
+        print("The filter option are as follows:")
+        print("High Severity - displays only the level 3 alerts")
+        print("Medium Severity - displays only the level 2 alerts")
+        print("Low Severity - displays only the level 1 alerts")
+        #Add more as needed
+
         
 
 
@@ -171,6 +198,16 @@ class PcapMenu:
                 
                 self._print_pcap_table(self.packet_data)
                 self.navigate_next_menu()
+            
+            case _ if "Filter" in user_input:
+                self.print_filter_options()
+                pcap_filter_type = self.menu_helper.get_user_input("Please enter your filter option",self.valid_filter_options)
+                pcap_filter_max = input("Enter number of packets to filter")
+                            #[command like High severity, number of packets to view]
+                pcap_filter = [pcap_filter_type,pcap_filter_max]
+                self.display_filtered_pcaps(pcap_filter)
+                self.navigate_next_menu()
+
             
             
 

@@ -1,6 +1,12 @@
 #menu.py
 
 import config_parser
+"""
+from CLI.help_menu import HelpMenu
+from CLI.pcap_menu import PcapMenu
+from CLI.alerts_menu import Alerts_CLI
+from CLI.main_menu import MainMenu
+"""
 import help_menu
 import pcap_menu
 import alerts_menu
