@@ -45,6 +45,15 @@ class PackTime:
             elif 'ICMP' in in_packet:
                 protocol = 'ICMP'
                 description = 'ICMP Packet'
+            elif 'SSH' in in_packet:
+                protocol = 'SSH'
+                description = 'SSH'
+            elif 'RDP' in in_packet:
+                protocol = 'RDP'
+                description = 'RDP'
+            elif 'FTP' in in_packet:
+                protocol = 'FTP'
+                description = 'FTP'
             else:
                 protocol = 'Other'
                 description = "Unknown/Other Protocol"
