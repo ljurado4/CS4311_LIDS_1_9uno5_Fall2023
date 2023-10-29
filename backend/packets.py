@@ -149,7 +149,7 @@ class PackTime:
             
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
-
+        print('before sniff')
         try:
 
             packet_handler_thread = th.Thread(target=self.packet_handler)

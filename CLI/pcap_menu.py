@@ -1,15 +1,12 @@
-#File: pcap_menu.py
-#
-# Description: This file contains the implementation of the PcapMenu class, which is responsible for displaying and searching network packet data in a tabulated format. It provides functions to display all packets or filter packets based on specific criteria.
-#
-# @ Author:Benjamin Hansen
-# @ Modifier: Lizbeth Jurado
-
+#pcap_menu.py
 import sys
 import os
-import webbrowser
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+import menu
 from tabulate import tabulate
-from backend.packets import PackTime
+#import packets
+from backend import packets
+from backend import alerts_manager
 
 from menu import Menu
 
@@ -23,6 +20,8 @@ class PcapMenu(Menu):
             "Time", "Source","Destination","Protocol", "Length", "Description"]
         self.valid_filter_options = [
             "High Severity", "Medium Severity", "Low Severity"]
+        self.identifier_list = alerts_manager.AlertManager.identifierList
+        self.alert_list = alerts_manager.AlertManager.sharedAlerts
 
 
     def handle_pcap_search(self):
@@ -59,7 +58,6 @@ class PcapMenu(Menu):
                     matching_pcaps.append(pcap)
                     break  
 
-      
         if matching_pcaps:
             self._print_pcap_table(matching_pcaps)
         else:
@@ -83,7 +81,7 @@ class PcapMenu(Menu):
 
 
 
-    def print_filter_options():
+    def print_filter_options(self):
         print("The filter option are as follows:")
         print("High Severity - displays only the level 3 alerts")
         print("Medium Severity - displays only the level 2 alerts")
@@ -93,43 +91,30 @@ class PcapMenu(Menu):
         
 
 
-    def handle_pcap_search(self, user_input: str):
+    def handle_pcap_search(self, identifier: str):
         """Parses the user command to determine the PCAP search criteria and then 
         calls the appropriate function to retrieve PCAP data.
 
         Args:
             user_input (str): The command string from the user.
         """
+        found = False
+        for dict in self.identifier_list:
+            if identifier in dict:
+                print(dict[identifier])
+                found = True
+                break
+        if not found:
+            pass
+    
+    def print_ident(self):
+        print("IDENTIFIERS")
+        print(self.identifier_list)
 
-        match user_input:
-
-            case _ if "Show" in user_input:
-                
-       
-                pcap_search_type = self.menu_helper.get_user_input(
-                            "Enter your search type (e.g. protocol ) \n", self.valid_search_commands)
-                
-                pcap_search_value = input("Enter value for search\n")
-                pcap_search = [pcap_search_type,pcap_search_value]
-                
-                self.display_matching_pcaps(pcap_search)
-                
-                self.navigate_next_menu()
-            
-            case _ if "All" in user_input:
-                
-                self._print_pcap_table(self.packet_data)
-                self.navigate_next_menu()
-            
-            case _ if "Filter" in user_input:
-                self.print_filter_options()
-                pcap_filter_type = self.menu_helper.get_user_input("Please enter your filter option",self.valid_filter_options)
-                pcap_filter_max = input("Enter number of packets to filter")
-                            #[command like High severity, number of packets to view]
-                pcap_filter = [pcap_filter_type,pcap_filter_max]
-                self.display_filtered_pcaps(pcap_filter)
-                self.navigate_next_menu()
-
+    def print_alerts(self):
+        print("BEGIN ALERTS")
+        print(self.alert_list)
+    
             
             
 

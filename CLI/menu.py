@@ -17,6 +17,7 @@ import help_menu
 import pcap_menu
 import alerts_menu
 import main_menu
+from backend import alerts_manager
 
 class Menu():
     """A class for common functions the CLI will use across different menus.
