@@ -1,6 +1,7 @@
 #app.py
 from flask import Flask, render_template, request, jsonify
-from backend.db import db, migrate
+from backend.db import db  # Import 'db' from your package
+from backend.models import Alert  # Import your 'Alert' model
 from backend import lids_agent_connector
 from flask_cors import CORS
 
@@ -12,7 +13,6 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 CORS(app)
 db.init_app(app)
-migrate.init_app(app, db)
 
 @app.route('/')
 def index():

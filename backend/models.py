@@ -2,7 +2,7 @@
 #database tables
 
 from datetime import datetime
-from . import db
+from .db import db
 
 class Alert(db.Model):
     id = db.Column(db.Integer, primary_key=True)

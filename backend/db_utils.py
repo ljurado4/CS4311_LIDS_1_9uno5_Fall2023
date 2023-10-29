@@ -1,7 +1,7 @@
 #db_utils.py
 #functions related to the database
 
-from . import db
+from .db import db
 from .models import Alert
 
 def add_alert(level, IP, Port, description):
@@ -14,3 +14,4 @@ def get_all_alerts():
 
 def get_alert_by_id(alert_id):
     return Alert.query.get(alert_id)
+
