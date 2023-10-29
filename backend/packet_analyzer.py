@@ -30,7 +30,8 @@ class PacketAnalyzer:
 
     def login_attempts(self, packet):
         # Implement your login attempts logic here
-        return False
+        if 'SSH' in packet.protocol or 'RDP' in packet.protocol or 'FTP' in packet.protocol:
+            return True
 
     def create_alert(self, packet, time, identifier, level, sourceIP, sourcePort,destIP,destPort,typeAlert,description):
         # Capture PCAP data as a string from the packet
