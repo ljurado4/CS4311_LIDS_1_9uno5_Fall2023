@@ -36,8 +36,37 @@ class PackTime:
         if 'IP' in in_packet:
             src = in_packet.ip.src
             dst = in_packet.ip.dst
-            # TODO: packet cretaion
+            if 'TCP' in in_packet:
+                protocol = 'TCP'
+                flags = in_packet.tcp.flags
+                if 'SYN' in flags:
+                    description = 'TCP Handshake SYN'
+                else:
+                    description = 'Other TCP Packet'
+            elif 'UDP' in in_packet:
+                protocol = 'UDP'
+                description = 'UDP Packet'
+            elif 'ICMP' in in_packet:
+                protocol = 'ICMP'
+                description = 'ICMP Packet'
+            else:
+                protocol = 'Other'
+                description = "Unknown/Other Protocol"
+            packet_length = int(in_packet.length)
+            temp_packet_dict = {
+                "Time": time,
+                "Source": src,
+                "Destination": dst,
+                "Protocol": protocol,
+                "Length": packet_length,
+                "Description": description
+            }
+            self.packet_list.append(temp_packet_dict)
 
+    """
+    packet_handler will dequeue a packet from the list and will use the alert logic
+    to analyze the packet and determine if it is an alert
+    """
     def packet_handler(self):
         while True:
             self.process_sem.acquire()
