@@ -2,6 +2,7 @@
 
 #  Install 'tabulate' using `pip3 install tabulate`
 from tabulate import tabulate
+import menu
 
 
 class Alerts_CLI:

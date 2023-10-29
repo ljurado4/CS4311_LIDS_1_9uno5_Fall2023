@@ -1,25 +1,29 @@
 #pcap_menu.py
-
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import menu
 from tabulate import tabulate
-from backend.packets import PackTime
+#import packets
+from backend import packets
+from backend import alerts_manager
 
 """
 NOTE: Include that tabulate needs to be installed from command terminal
 """
 class PcapMenu:
-    packet_data = []
 
-    packet_data = packets.PackTime()
     """
     NOTE: The line below will only capture a set # of
     packets, Used only for testing, review packets.py 
     and refactor for practical use
     """
-    packet_data.run_sniffer()
+    #packet_data.run_sniffer()
+    
     """
-    [
+    packet_data = [
         {
+            "Severity" : "Medium Severity",
             "Time": "2023-09-16 12:01:23.456789",
             "Source": "192.168.1.2",
             "Destination": "192.168.1.100",
@@ -28,6 +32,7 @@ class PcapMenu:
             "Description": "TCP Handshake SYN"
         },
         {
+            "Severity" : "Low Severity",
             "Time": "2023-09-16 12:01:23.456990",
             "Source": "192.168.1.100",
             "Destination": "192.168.1.2",
@@ -36,6 +41,7 @@ class PcapMenu:
             "Description": "UDP Handshake SYN, ACK"
         },
         {
+            "Severity" : "High Severity",
             "Time": "2023-09-16 12:02:00.000000",
             "Source": "192.168.1.3",
             "Destination": "192.168.1.101",
@@ -44,6 +50,7 @@ class PcapMenu:
             "Description": "Ping Request"
         },
         {
+            "Severity" : "Medium Severity",
             "Time": "2023-09-16 12:02:00.100000",
             "Source": "192.168.1.101",
             "Destination": "192.168.1.3",
@@ -52,6 +59,7 @@ class PcapMenu:
             "Description": "Ping Reply"
         },
         {
+            "Severity" : "High Severity",
             "Time": "2023-09-16 12:02:05.678910",
             "Source": "192.168.1.4",
             "Destination": "192.168.1.5",
@@ -60,21 +68,24 @@ class PcapMenu:
             "Description": "HTTP GET Request"
         },
         {
+            "Severity" : "Low Severity",
             "Time": "2023-09-16 12:02:05.789123",
             "Source": "192.168.1.5",
             "Destination": "192.168.1.4",
             "Protocol": "TCP",
             "Length": 256,
             "Description": "HTTP 200 OK Response"
-        }
-    ]
+        }]
     """
+    
     def __init__(self) -> None:
         self.menu_helper = menu.Menu()
         self.valid_search_commands = [
             "Time", "Source","Destination","Protocol", "Length", "Description"]
         self.valid_filter_options = [
             "High Severity", "Medium Severity", "Low Severity"]
+        self.identifier_list = alerts_manager.AlertManager.identifierList
+        self.alert_list = alerts_manager.AlertManager.sharedAlerts
 
     def navigate_next_menu(self):
         menu_helper = menu.Menu()
@@ -90,29 +101,11 @@ class PcapMenu:
         Args:
         - pcap_dictionary (dict): Dictionary containing pcap data.
         """
-        # header = self.valid_search_commands
         
-        # data = [list(pcap_dictionary.values())]
-        
-        # table = tabulate(data, header, tablefmt="fancy_grid")
-
-        # print(table)
         header = self.valid_search_commands
         data = [list(pcap.values()) for pcap in pcap_dictionary]
         table = tabulate(data, headers=header, tablefmt="fancy_grid")
         print(table)
-
-        
-    # def display_all_pcaps(self):
-    #     """
-    #     Display all pcap entries
-    #     """
-
-    #     header = self.valid_search_commands
-    #     data = [list(pcap.values()) for pcap in self.packet_data]
-    #     table = tabulate(data, headers=header, tablefmt="fancy_grid")
-    #     print(table)
-        
 
     
     def display_matching_pcaps(self, search_command: list):
@@ -137,7 +130,6 @@ class PcapMenu:
                     matching_pcaps.append(pcap)
                     break  
 
-      
         if matching_pcaps:
             self._print_pcap_table(matching_pcaps)
         else:
@@ -161,7 +153,7 @@ class PcapMenu:
 
 
 
-    def print_filter_options():
+    def print_filter_options(self):
         print("The filter option are as follows:")
         print("High Severity - displays only the level 3 alerts")
         print("Medium Severity - displays only the level 2 alerts")
@@ -171,43 +163,30 @@ class PcapMenu:
         
 
 
-    def handle_pcap_search(self, user_input: str):
+    def handle_pcap_search(self, identifier: str):
         """Parses the user command to determine the PCAP search criteria and then 
         calls the appropriate function to retrieve PCAP data.
 
         Args:
             user_input (str): The command string from the user.
         """
+        found = False
+        for dict in self.identifier_list:
+            if identifier in dict:
+                print(dict[identifier])
+                found = True
+                break
+        if not found:
+            pass
+    
+    def print_ident(self):
+        print("IDENTIFIERS")
+        print(self.identifier_list)
 
-        match user_input:
-
-            case _ if "Show" in user_input:
-                
-       
-                pcap_search_type = self.menu_helper.get_user_input(
-                            "Enter your search type (e.g. protocol ) \n", self.valid_search_commands)
-                
-                pcap_search_value = input("Enter value for search\n")
-                pcap_search = [pcap_search_type,pcap_search_value]
-                
-                self.display_matching_pcaps(pcap_search)
-                
-                self.navigate_next_menu()
-            
-            case _ if "All" in user_input:
-                
-                self._print_pcap_table(self.packet_data)
-                self.navigate_next_menu()
-            
-            case _ if "Filter" in user_input:
-                self.print_filter_options()
-                pcap_filter_type = self.menu_helper.get_user_input("Please enter your filter option",self.valid_filter_options)
-                pcap_filter_max = input("Enter number of packets to filter")
-                            #[command like High severity, number of packets to view]
-                pcap_filter = [pcap_filter_type,pcap_filter_max]
-                self.display_filtered_pcaps(pcap_filter)
-                self.navigate_next_menu()
-
+    def print_alerts(self):
+        print("BEGIN ALERTS")
+        print(self.alert_list)
+    
             
             
 

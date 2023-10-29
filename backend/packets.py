@@ -85,13 +85,13 @@ class PackTime:
     def run_sniffer(self):
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
-
+        print('before sniff')
         try:
 
             packet_handler_thread = th.Thread(target=self.packet_handler)
             packet_handler_thread.start()
-
-            capture = pyshark.LiveCapture(interface="enp0s3")
+                                        #interface="enp0s3"
+            capture = pyshark.LiveCapture()
             for in_packet in capture:
 
                 self.cap_sem.acquire()

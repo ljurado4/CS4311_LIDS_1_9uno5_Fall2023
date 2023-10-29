@@ -11,6 +11,7 @@ import help_menu
 import pcap_menu
 import alerts_menu
 import main_menu
+from backend import alerts_manager
 
 class Menu():
     """A class for common functions the CLI will use across different menus.
@@ -98,6 +99,11 @@ class Menu():
                 # call class for help Show PCAP
                 print('\n' * 24)
                 print(">> PCAP info")
+                alert_manager = alerts_manager.AlertManager()
+                print("IDENT")
+                print(alert_manager.identifierList)
+                print("ALERTS")
+                print(alert_manager.sharedAlerts)
                 pcap_menu_display = pcap_menu.PcapMenu()
                 pcap_menu_display.handle_pcap_search(menu_option_selected)
             
