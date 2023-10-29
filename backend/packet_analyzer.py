@@ -16,8 +16,8 @@ class PacketAnalyzer:
             self.create_alert(packet, time, identifier, 3, sourceIP, sourcePort,destIP,destPort,"Port Scan Error","Port Scan surpassing threshold2")
         elif res == "threshold1":
             self.create_alert(packet, time, identifier, 2, sourceIP, sourcePort,destIP,destPort,"Port Scan Error","Port Scan surpassing threshold1")
-        elif self.ip_check(sourceIP) == False:
-            self.create_alert(packet, time, identifier, 1, sourceIP, sourcePort,destIP,destPort,"Unknown IP Error","Source IP detected that is not appart of approved IP list")
+        #elif self.ip_check(sourceIP) == False:
+        #    self.create_alert(packet, time, identifier, 1, sourceIP, sourcePort,destIP,destPort,"Unknown IP Error","Source IP detected that is not appart of approved IP list")
 
     def ip_check(self, IP):
         return self.iC.ip_in_List(IP)
