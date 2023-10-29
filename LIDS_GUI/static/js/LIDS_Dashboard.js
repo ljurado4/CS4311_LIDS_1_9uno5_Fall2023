@@ -1,3 +1,4 @@
+//LIDS_Dashboard.js
 //get forms for event listeners
 const middleContainer = document.getElementById("middleContainer")
 const configFileForm = document.querySelector("#configFileForm")
@@ -25,11 +26,6 @@ alertsTableFrom.addEventListener("submit", (event) => {
     middleContainer.innerHTML = alertsTableState
     
 })
-//hadles the disconnection of the device
-disconnectForm.addEventListener("submit", (event) => {
-    event.preventDefault()
-    window.location = "LIDS_Main"
-})
 function toggleDropdown() {
     let dropdownContent = document.getElementById("sortByDropdownContent");
     if (dropdownContent.style.display === "none" || !dropdownContent.style.display) {
@@ -46,12 +42,21 @@ function sortTable(n) {
     rows.forEach(row => table.tBodies[0].appendChild(row));
 }
 
-$(document).ready(function () {
-    $.getJSON("https://api.ipify.org?format=json", data => {
-        $("#headerTitle").text((i, originalText) => originalText += " " + data.ip);
+    // Fetch the IP of the user when the document is ready
+    $(document).ready(() => {
+        $.getJSON("https://api.ipify.org?format=json", (data) => {
+            $("#headerTitle").text((i, originalText) => originalText + " " + data.ip);
+        });
     });
+
+    // Function to remove sorting and reload the page
+    function removeSort() {
+        location.reload();
+    }
+
+    // Expose functions that you need globally. 
+    window.toggleDropdown = toggleDropdown;
+    window.sortTable = sortTable;
+    window.removeSort = removeSort;
 });
 
-function removeSort() {
-    location.reload();
-}
