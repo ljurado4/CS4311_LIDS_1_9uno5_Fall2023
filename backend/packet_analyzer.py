@@ -29,8 +29,8 @@ class PacketAnalyzer:
         return self.portCheck.port_Checking(IP, destPort, timeOF, timeAllowed, threshold1, threshold2)
 
     def login_attempts(self, packet):
-        # Implement your login attempts logic here
-        return False
+         if 'SSH' or 'FTP' or 'RDP' in packet:
+            return True
 
     def create_alert(self, packet, time, identifier, level, sourceIP, sourcePort,destIP,destPort,typeAlert,description):
         # Capture PCAP data as a string from the packet
