@@ -1,4 +1,5 @@
 from . import ipChecker, alerts_manager, loginCheck, PortChecker
+from datetime import datetime
 
 class PacketAnalyzer:
     def __init__(self):
@@ -22,10 +23,11 @@ class PacketAnalyzer:
     def ip_check(self, IP):
         return self.iC.ip_in_List(IP)
 
-    def port_scan_check(self, IP, destPort, timeOF):
+    def port_scan_check(self, IP, destPort, time):
         threshold1 = -1
         threshold2 = 0
         timeAllowed = 700
+        timeOF = datetime.strptime(time,"%Y-%m-%d %H:%M:%S.%f")
         return self.portCheck.port_Checking(IP, destPort, timeOF, timeAllowed, threshold1, threshold2)
 
     def login_attempts(self, packet):
