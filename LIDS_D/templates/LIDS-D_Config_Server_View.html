@@ -1,24 +1,33 @@
-<!-- LIDS-D_Config_Server_View.html-->
+<!--
+   ######################################################################
+   # File: LIDS-D_Config_Server_View.html
+   #
+   # Version: [4.0]
+   #
+   # Description: This HTML file represents the view for configuring the LIDS-D server. It provides options to browse for a new configuration file or select a previous configuration file.
+   #
+   # Modification History:
+   # [11/01/23] - [3.0] - [Lizbeth Jurado] - [File Description and Organization Set Up]
+   ######################################################################
+-->
 <!DOCTYPE html>
 <html lang="en">
     {% include 'head.html' %}
 <body>
-    <div class="contentBlock" id = "contentBlock">
-        <div class = "configBrowseDiv">
-            <p class = "configBrowseDivText">please provide a configuration file for this system<p>
-            <label class = "configBrowseButton" for = "browseButton">
+    <div class="contentBlock" id="contentBlock">
+        <div class="configBrowseDiv">
+            <p class="configBrowseDivText">Please provide a configuration file for this system</p>
+            <label class="configBrowseButton" for="browseButton">
                 Browse
-                <input type = "file" style = "display:none" accept="text/xml" id = "browseButton">
+                <input type="file" style="display:none" accept="text/xml" id="browseButton">
             </label>
-            </div>
-            <br>
-            <div class="scrollableContainer" style="text-align: left;  padding-left: 50px;" id = "previousFilesSelection">
-                <p class = "previousCofigFileDivText">Or select a previous configuration file</p>
-            </div>
+        </div>
+        <br>
+        <div class="scrollableContainer" style="text-align: left;  padding-left: 50px;" id="previousFilesSelection">
+            <p class="previousCofigFileDivText">Or select a previous configuration file</p>
         </div>
     </div>
     {% include 'sidebar.html' %}
-    "]"
     <script src="../static/js/LIDS-D.js"></script>
     <script src="../static/js/config.js"></script>
 </body>

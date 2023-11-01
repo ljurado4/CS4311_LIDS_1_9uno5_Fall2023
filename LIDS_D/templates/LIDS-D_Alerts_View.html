@@ -1,10 +1,21 @@
-<!-- LIDS-D_Alerts_View.html-->
+<!--
+   ######################################################################
+   # File: LIDS-D_Alerts_View.html
+   #
+   # Version: [4.0]
+   #
+   # Description: This HTML file represents the view for displaying alerts in the LIDS-D application. It includes the structure for sorting, exporting alerts, and displaying the alert table.
+   #
+   # Modification History:
+   # [11/01/23] - [3.0] - [Lizbeth Jurado] - [File Description and Organization Set Up]
+   ######################################################################
+-->
 <!DOCTYPE html>
 <html lang="en">
     {% include 'head.html' %}
 <body>
-    <div class="contentBlock" id = "contentBlock">
-        <button class="open-button" onclick="openForm()">Eport Alerts</button>
+    <div class="contentBlock" id="contentBlock">
+        <button class="open-button" onclick="openForm()">Export Alerts</button>
 
         <div class="form-popup" id="myForm">
             <form  class="form-container" style="text-align: center;">
@@ -14,8 +25,7 @@
                     <option value="csv">csv</option>
                     <option value="xml">xml</option>
                     <option value="json">json</option>
-                
-                  </select>
+                </select>
                 <br>
                 <button class="sortButtons" style="width: 30%;height: 10%;margin-top: 10%;" onclick="exportAlerts(event)">Export All</button>
                 <br>
@@ -23,16 +33,16 @@
             </form>
         </div>
         
-        <div class = "alertsTitle">
+        <div class="alertsTitle">
             <p style="display: inline-block; margin-left: 35%;">Sort Alerts By:</p>
         </div>
         
         <br>
-        <div class = "VASortButtons">
-            <button class = "sortButtons">Date</button>
-            <button class = "sortButtons">Priority Level</button>
-            <button class = "sortButtons">Protocol</button>
-            <button class = "sortButtons">Source</button>
+        <div class="VASortButtons">
+            <button class="sortButtons">Date</button>
+            <button class="sortButtons">Priority Level</button>
+            <button class="sortButtons">Protocol</button>
+            <button class="sortButtons">Source</button>
         </div>
         <br>
 
@@ -61,7 +71,6 @@
                             <button id="alert1-button" class="alertDescriptionButton" onclick="displayAlert(this.id)"></button>
                         </td>
                     </tr>
-                    
                 </tbody>
             </table>
         </div>
@@ -69,7 +78,6 @@
     
     {% include 'sidebar.html' %}
   
-
     <script src="../static/js/LIDS-D.js"></script>
     <script src="../static/js/alerts_table.js"></script>
 </body>

@@ -1,4 +1,15 @@
-<!-- LIDS-D_Network_Info_View.html-->
+<!--
+   ######################################################################
+   # File: LIDS-D_Network_Info_View.html
+   #
+   # Version: [4.0]
+   #
+   # Description: This HTML file represents the view for displaying network information in the LIDS-D application. It includes sections for recognized devices, unknown devices, and alerts, along with tables to display the relevant data.
+   #
+   # Modification History:
+   # [11/01/23] - [3.0] - [Lizbeth Jurado] - [File Description and Organization Set Up]
+   ######################################################################
+-->
 <!DOCTYPE html>
 <html lang="en">
     {% include 'head.html' %}
@@ -8,8 +19,8 @@
 </style>
 <body>
     
-    <div class = "contentBlock" style="font-size: 0;" id = "contentBlock">
-        <div style="width: 100%;height:55vh;display:flex;" id = "topContainer">
+    <div class="contentBlock" style="font-size: 0;" id="contentBlock">
+        <div style="width: 100%;height:55vh;display:flex;" id="topContainer">
             <div class="devicesDisplayBox" style="width:150vh;" id="recognizedDevices">
                 <p class="networkHeader">Recognized Devices</p>
                 <div class="scrollableContainer">
@@ -29,8 +40,8 @@
                 </div>
                 
             </div>  
-            <div class = "devicesDisplayBox" style="width: 100%;" id="unkownDevices">
-                <p class="networkHeader">Unkown Devices</p>
+            <div class="devicesDisplayBox" style="width: 100%;" id="unkownDevices">
+                <p class="networkHeader">Unknown Devices</p>
                 <div class="scrollableContainer">
                     <table class="devicesTable">
                         <thead>
@@ -49,7 +60,7 @@
         </div>
         <p style="width:100%;background-color:lightgray;font-size:30px;margin: 0;text-align: center;border-bottom: solid;">Alerts</p>
         <div class="scrollableContainer">
-            <table class = "alertsTable">
+            <table class="alertsTable">
                 <tr>
                     <th>Level</th>
                     <th>Time</th>
