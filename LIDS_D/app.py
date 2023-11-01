@@ -1,5 +1,19 @@
+
+   ######################################################################
+   # File: app.py
+   #
+   # Version: [4.0]
+   #
+   # Description: This Python script represents [Brief Description of the Script's Purpose].
+   #
+   # Modification History:
+   # [11/01/23] - [3.0] - [Lizbeth Jurado] - [File Description and Organization Set Up]     
+   ######################################################################
+
+
 from flask import Flask, render_template, request, jsonify
 from flask_cors import CORS
+
 from flask_socketio import SocketIO
 
 app = Flask(__name__)
