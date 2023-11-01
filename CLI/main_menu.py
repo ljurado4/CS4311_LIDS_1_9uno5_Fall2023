@@ -1,6 +1,8 @@
 ################################################################################
 # File: main_menu.py
-# Version: 3.0
+#
+# Version: [4.0]
+#
 # Description: This file contains the implementation of the MainMenu class, which
 #              represents the main menu of the CLI (Command Line Interface) for
 #              LIDS (Local Intrusion Detection System). It provides functions to
@@ -9,6 +11,7 @@
 #
 # Modification History:
 # [11/01/23] - [3.0] - [Lizbeth Jurado] - [File Description and Organization Set Up]
+#
 # Tasks:
 # - [Task 1]: Implement the 'show_menu' method to display the main menu options and
 #             navigate to the next appropriate menu.

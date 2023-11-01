@@ -1,6 +1,8 @@
 ################################################################################
 # File: menu.py
-# Version: 3.0
+#
+# Version: [4.0]
+#
 # Description: This file contains the implementation of the Menu class, which
 #              provides common functions for the CLI (Command Line Interface) to
 #              use across different menus in the LIDS (Local Intrusion Detection
@@ -9,6 +11,7 @@
 #
 # Modification History:
 # [11/01/23] - [3.0] - [Lizbeth Jurado] - [File Description and Organization Set Up]
+#
 # Tasks:
 # - [Task 1]: Implement the 'update_system_config' class method to update shared
 #             system configuration attributes.

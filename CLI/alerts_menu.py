@@ -1,11 +1,14 @@
 ################################################################################
 # File: alerts_menu.py
-# Version: [3.0]
+#
+# Version: [4.0]
+#
 # Description: This file contains the implementation of the Alerts_CLI class,
 #              which is responsible for displaying alerts in a CLI interface.
 #
 # Modification History:
 # [11/01/2023] - [3.0] - [Lizbeth Jurado] - [File Description and Organization Set Up]
+#
 # Tasks:
 # - [Task 1]: Implement the display_Alerts method to display alerts in a tabular format.
 # - [Task 2]: Add functionality to get user input for navigating to the next menu.

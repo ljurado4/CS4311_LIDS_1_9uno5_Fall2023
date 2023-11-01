@@ -1,6 +1,8 @@
 ################################################################################
 # File: pcap_menu.py
-# Version: 3.0
+#
+# Version: [4.0]
+#
 # Description: This file contains the implementation of the PcapMenu class, which
 #              is responsible for displaying and searching network packet data in
 #              a tabulated format. It provides functions to display all packets
@@ -8,6 +10,7 @@
 #
 # Modification History:
 # [11/01/23] - [3.0] - [Lizbeth Jurado] - [File Description and Organization Set Up]
+#
 # Tasks:
 # - [Task 1]: Implement the '_print_pcap_table' method to print pcap data in a tabulated format.
 # - [Task 2]: Implement the 'display_matching_pcaps' method to display pcaps that match the search criteria.
