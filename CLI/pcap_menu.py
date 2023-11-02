@@ -33,7 +33,7 @@ class PcapMenu:
     packets, Used only for testing, review packets.py 
     and refactor for practical use
     """
-    packet_data.run_sniffer()
+    # packet_data.run_sniffer()
     
     def __init__(self) -> None:
         self.menu_helper = menu.Menu()
