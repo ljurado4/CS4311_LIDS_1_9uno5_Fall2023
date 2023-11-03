@@ -1,12 +1,13 @@
 /* ######################################################################
    # File: alerts_table.js
    #
-   # Version: [4.0]
+   # Version: [5.0]
    #
    # Description: This file is esponsible for handling and displaying alerts data in an HTML table format.
    #
    # Modification History:
-   # [11/01/23] - [3.0] - [Lizbeth Jurado] - [File Description and Organization Set Up]
+   # [11/01/23] - [5.0] - [Lizbeth Jurado] - [File Description and Organization Set Up]
+   #
    ###################################################################### */
 
 // Construct the socket URL based on the current location

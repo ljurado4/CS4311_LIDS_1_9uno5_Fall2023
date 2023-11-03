@@ -1,7 +1,7 @@
 /*##################################################################
 # File: LIDS_Main.js
 #
-# Version: [4.0]
+# Version: [5.0]
 #
 # Description: JavaScript file for handling file upload and data processing in the LIDS Dashboard web application.
 #
@@ -14,6 +14,7 @@
 # - [Task 3]: Extract and organize data from the XML file
 # - [Task 4]: Send the extracted data to the backend
 # - [Task 5]: Handle the response from the backend
+#
 ################################################################## */
 
 const fileInput = document.getElementById('myFile');

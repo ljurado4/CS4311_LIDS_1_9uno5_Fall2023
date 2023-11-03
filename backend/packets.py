@@ -1,4 +1,45 @@
-#packets.py
+##################################################################
+# File: packets.py
+#
+# Version: [5.0]
+#
+# Description: 
+# The packets.py module defines the PackTime class for capturing
+# and processing network packets in real-time using pyshark. It
+# creates packet dictionaries, manages packet processing through
+# threads, and uses semaphores for thread synchronization.
+#
+# Modification History:
+# [11/02/23] - [5.0] - [Lizbeth Jurado] - [File Description and Organization Set Up]
+#
+# Tasks:
+# - [Task 1]: Establish real-time packet capturing with pyshark.
+# - [Task 2]: Define a packet creation method to convert captured packets
+#             into a standardized dictionary format.
+# - [Task 3]: Implement threading for simultaneous packet capturing and
+#             processing.
+# - [Task 4]: Integrate packet_analyzer module to analyze each captured
+#             packet.
+# - [Task 5]: Use semaphores to handle thread synchronization between
+#             packet capturing and processing.
+# - [Task 6]: Parse various protocols like TCP, UDP, ICMP, SSH, RDP, FTP
+#             and handle them accordingly.
+# - [Task 7]: Store packets in a list and manage the addition and removal
+#             of packets in a thread-safe manner.
+# - [Task 8]: Display PCAP data in a temporary HTML file for easy viewing.
+# - [Task 9]: Clean up and closing of threads and event loops when the
+#             sniffer is stopped.
+# - [Task 10]: Ensure error handling is robust to deal with potential
+#              packet capturing and parsing issues.
+# - [Task 11]: Test the performance of the sniffer and optimize for
+#              low-latency packet processing.
+# - [Task 12]: Document the functions and classes, including their
+#              interactions within the system, for maintenance purposes.
+# - [Task 13]: Write unit tests to cover the functionality of the packet
+#              handling and analyzing features.
+#
+#
+##################################################################
 
 import pyshark
 from datetime import datetime

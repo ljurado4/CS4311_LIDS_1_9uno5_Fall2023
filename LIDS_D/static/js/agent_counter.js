@@ -1,14 +1,15 @@
 /* ######################################################################
    # File: agent_counter.js
    #
-   # Version: [4.0]
+   # Version: [5.0]
    #
    # Description: This JavaScript file is responsible for creating a socket connection to a specific
    # namespace ('lids-d') and listening for the 'update_agent_count' event. When the event is received,
    # it updates the agent count displayed in the HTML document.
    #
    # Modification History:
-   # [11/01/23] - [3.0] - [Lizbeth Jurado] - [File Description and Organization Set Up]
+   # [11/01/23] - [5.0] - [Lizbeth Jurado] - [File Description and Organization Set Up]
+   #
    ###################################################################### */
 
 // Function to create a socket connection

@@ -1,7 +1,7 @@
 ################################################################################
 # File: menu.py
 #
-# Version: [4.0]
+# Version: [5.0]
 #
 # Description: This file contains the implementation of the Menu class, which
 #              provides common functions for the CLI (Command Line Interface) to
@@ -10,7 +10,7 @@
 #              user input and stores shared system configuration attributes.
 #
 # Modification History:
-# [11/01/23] - [3.0] - [Lizbeth Jurado] - [File Description and Organization Set Up]
+# [11/01/23] - [5.0] - [Lizbeth Jurado] - [File Description and Organization Set Up]
 #
 # Tasks:
 # - [Task 1]: Implement the 'update_system_config' class method to update shared
@@ -18,6 +18,7 @@
 # - [Task 2]: Implement the 'get_user_input' method to get and validate user input.
 # - [Task 3]: Implement the 'navigate_next_menu' method to navigate to the next
 #             appropriate menu based on user input.
+#
 ################################################################################
 
 import config_parser

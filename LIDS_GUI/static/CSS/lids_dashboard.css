@@ -1,12 +1,12 @@
 /*##################################################################
 # File: lids_dashboard.css
 #
-# Version: [4.0]
+# Version: [5.0]
 $
 # Description: Styles for the LIDS-D Dashboard Web Application
 #
 # Modification History:
-# [11/01/23] - [3.0] - [Lizbeth Jurado] - [File Description and Organization Set Up]     
+# [11/01/23] - [5.0] - [Lizbeth Jurado] - [File Description and Organization Set Up]     
 #
 # Tasks:
 # - [Task 1]: Define styles for XML File Text Area
@@ -22,7 +22,7 @@ $
 # - [Task 11]: Style connected display
 # - [Task 12]: Define right sidebar styles
 # - [Task 13]: Specify alert box table styles
-
+#
 ################################################################## */
 
 .xmlFileTextArea{

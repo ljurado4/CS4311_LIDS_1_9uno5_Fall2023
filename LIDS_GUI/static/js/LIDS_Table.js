@@ -1,7 +1,7 @@
 /*##################################################################
 # File: LIDS_Table.js
 #
-# Version: [4.0]
+# Version: [5.0]
 #
 # Description: This JavaScript file is responsible for handling the 
 display of alerts in a table format within the LIDS Dashboard web application.
@@ -17,6 +17,7 @@ display of alerts in a table format within the LIDS Dashboard web application.
 # - [Task 5]: Populate the table with the fetched alert data.
 # - [Task 6]: Provide functionality to open PCAP (Packet Capture) data in a separate window for each alert.
 # - [Task 7]: Handle potential errors that may occur during the alert fetching process.
+#
 ################################################################## */
 document.addEventListener("DOMContentLoaded", function () {
     fetchLatestAlerts();

@@ -1,7 +1,7 @@
 /*######################################################################
 # File: LIDS_Dashboard.js
 #
-# Version: [4.0]
+# Version: [5.0]
 #
 # Description: JavaScript file for managing the LIDS Dashboard web application.
 #

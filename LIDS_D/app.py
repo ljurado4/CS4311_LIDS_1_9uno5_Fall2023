@@ -1,14 +1,18 @@
-
-   ######################################################################
-   # File: app.py
-   #
-   # Version: [4.0]
-   #
-   # Description: This Python script represents [Brief Description of the Script's Purpose].
-   #
-   # Modification History:
-   # [11/01/23] - [3.0] - [Lizbeth Jurado] - [File Description and Organization Set Up]     
-   ######################################################################
+######################################################################
+# File: app.py
+#
+# Version: [5.0]
+#
+# Description: This app.py file serves as the main server script for a Local
+# Intrusion Detection System (LIDS) web application built with Flask, a Python 
+# web framework. It uses Flask-SocketIO for real-time communication between the 
+# server and clients and Flask-CORS for handling Cross-Origin Resource Sharing (CORS), 
+# allowing the web application to accept requests from different origins.
+#
+# Modification History:
+# [11/01/23] - [5.0] - [Lizbeth Jurado] - [File Description and Organization Set Up]    
+# 
+######################################################################
 
 
 from flask import Flask, render_template, request, jsonify

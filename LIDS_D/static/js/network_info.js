@@ -2,13 +2,14 @@
    ######################################################################
    # File: network_info.js
    #
-   # Version: [4.0]
+   # Version: [5.0]
    #
    # Description: This JavaScript file handles socket communication for devices in the LIDS-D application. It receives updates about recognized and unrecognized devices, 
    # and updates the user interface accordingly.
    #
    # Modification History:
-   # [11/01/23] - [3.0] - [Lizbeth Jurado] - [File Description and Organization Set Up]
+   # [11/01/23] - [5.0] - [Lizbeth Jurado] - [File Description and Organization Set Up]
+   #
    ######################################################################
 */
 

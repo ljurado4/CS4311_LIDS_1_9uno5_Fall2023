@@ -2,7 +2,7 @@
    ######################################################################
    # File: LIDS-D.js
    #
-   # Version: [4.0]
+   # Version: [5.0]
    #
    # Description: This JavaScript file manages various functionalities related to LIDS-D, including:
    #   - Counting malicious packets
@@ -11,7 +11,8 @@
    #   - Displaying alert details
    #
    # Modification History:
-   # [11/01/23] - [3.0] - [Lizbeth Jurado] - [File Description and Organization Set Up]
+   # [11/01/23] - [5.0] - [Lizbeth Jurado] - [File Description and Organization Set Up]
+   #
    ######################################################################
 */
 
