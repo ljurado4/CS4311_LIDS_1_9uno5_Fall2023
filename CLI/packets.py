@@ -1,4 +1,26 @@
-#packets.py
+################################################################################
+# File: packets.py
+#
+# Version: [5.0]
+#
+# Description: This file contains the implementation of the PackTime class, which
+#              is responsible for capturing, processing, and analyzing network
+#              packets. It includes methods for capturing live packets, processing
+#              PCAP files, and detecting network alerts.
+#
+# Modification History:
+# [11/01/23] - [5.0] - [Lizbeth Jurado] - [File Description and Organization Set Up]
+#
+# Tasks:
+# - [Task 1]: Implement the 'alertDetector' method to detect network alerts.
+# - [Task 2]: Implement the 'create_packet' method to create custom packets.
+# - [Task 3]: Implement the 'packet_handler' method to handle packets, including
+#             alert detection and processing.
+# - [Task 4]: Implement the 'process_pcap_files' method to process PCAP files.
+# - [Task 5]: Implement the 'run_sniffer' method to capture live packets and
+#             initiate packet processing.
+#
+################################################################################
 
 import pyshark
 from datetime import datetime
@@ -15,7 +37,7 @@ class PackTime:
     def __init__(self):
         self.pack_time = None
         base_path = "/Users/lizbethjurado/Git/CS4311_LIDS_19uno5_Fall2023/Traffic/" 
-        #TODO: find a way to store files in github repo, giving too larger error even with installing Git LFS
+        # TODO: Find a way to store files in a GitHub repo, giving too large error even with installing Git LFS
         self.files = [
             base_path + "7-17-EN.pcapng",
             base_path + "AA_Day1_Traffic.pcapng",
@@ -27,7 +49,7 @@ class PackTime:
         ]
 
     def alertDetector(self, packet):
-        # TODO: Implement  alert detection
+        # TODO: Implement alert detection
         
         return False
 
@@ -36,37 +58,8 @@ class PackTime:
         if 'IP' in in_packet:
             src = in_packet.ip.src
             dst = in_packet.ip.dst
-            if 'TCP' in in_packet:
-                protocol = 'TCP'
-                flags = in_packet.tcp.flags
-                if 'SYN' in flags:
-                    description = 'TCP Handshake SYN'
-                else:
-                    description = 'Other TCP Packet'
-            elif 'UDP' in in_packet:
-                protocol = 'UDP'
-                description = 'UDP Packet'
-            elif 'ICMP' in in_packet:
-                protocol = 'ICMP'
-                description = 'ICMP Packet'
-            else:
-                protocol = 'Other'
-                description = "Unknown/Other Protocol"
-            packet_length = int(in_packet.length)
-            temp_packet_dict = {
-                "Time": time,
-                "Source": src,
-                "Destination": dst,
-                "Protocol": protocol,
-                "Length": packet_length,
-                "Description": description
-            }
-            self.packet_list.append(temp_packet_dict)
+            # TODO: Packet creation logic
 
-    """
-    packet_handler will dequeue a packet from the list and will use the alert logic
-    to analyze the packet and determine if it is an alert
-    """
     def packet_handler(self):
         while True:
             self.process_sem.acquire()
@@ -78,12 +71,12 @@ class PackTime:
 
             # Alert detecting logic
             if self.alertDetector(packet):
-                # If packet is suspicious, pull packet and move elsewhere
+                # If a packet is suspicious, pull the packet and take appropriate action
                 # For demonstration purposes, we'll print an alert message
                 print(f"Alert! Suspicious packet detected: {packet}")
                 # TODO: Handle this packet accordingly (e.g., move to another list, notify user, etc.)
             else:
-                # If packet is not suspicious, process as usual
+                # If the packet is not suspicious, process it as usual
                 print("Packet: ", packet)
 
             self.cap_sem.release()
@@ -92,7 +85,7 @@ class PackTime:
         for file in self.files:
             cap = pyshark.FileCapture(file)
             for packet in cap:
-                # existing packet handling logic
+                # Existing packet handling logic
       
                 print(packet)
 
@@ -111,5 +104,5 @@ class PackTime:
           
             self.cap_sem.release()
 
-        # after processing live traffic process the pcap files
+        # After processing live traffic, process the PCAP files
         self.process_pcap_files()

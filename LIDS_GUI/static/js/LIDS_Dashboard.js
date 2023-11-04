@@ -1,4 +1,26 @@
-//LIDS_Dashboard.js
+/*######################################################################
+# File: LIDS_Dashboard.js
+#
+# Version: [5.0]
+#
+# Description: JavaScript file for managing the LIDS Dashboard web application.
+#
+# Modification History:
+# [11/01/23] - [3.0] - [Lizbeth Jurado] - [File Description and Organization Set Up]
+#
+# Tasks:
+# - [Task 1]: Get forms and define state variables
+# - [Task 2]: Handle events for showing the configuration file
+# - [Task 3]: Handle events for displaying alerts table
+# - [Task 4]: Define functions for toggling dropdowns
+# - [Task 5]: Define a function to filter alerts by level
+# - [Task 6]: Define a function for sorting the alerts table
+# - [Task 7]: Fetch the user's IP address and display it in the header
+# - [Task 8]: Define a function to remove sorting and reload the page
+# - [Task 9]: Expose necessary functions globally
+#
+######################################################################*/
+
 // Get forms for event listeners
 const middleContainer = document.getElementById("middleContainer");
 const configFileForm = document.querySelector("#configFileForm");

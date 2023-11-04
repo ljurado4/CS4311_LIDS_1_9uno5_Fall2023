@@ -1,4 +1,32 @@
-#app.py
+##################################################################
+# File: app.py
+#
+# Version: [5.0]
+#
+# Description:
+# This script serves as the core application server for a Flask-based
+# web interface of a Local Intrusion Detection System (LIDS). It manages
+# web routes, handles interactions with the backend for packet sniffing,
+# provides a dashboard for real-time alerts, and allows configuration through
+# a web GUI. The server also integrates with socket.io for live data streaming.
+#
+# Modification History:
+# [11/02/23] - [5.0] - [Lizbeth Jurado] - [File Description and Organization Set Up]
+#
+# Tasks:
+# - [Task 1]: Set up the Flask application and configure cross-origin resource sharing (CORS).
+# - [Task 2]: Initialize the packet sniffer in a separate thread.
+# - [Task 3]: Define routes for the main index and dashboard, and handle their logic.
+# - [Task 4]: Create a route to retrieve and send the latest alerts via socket.io.
+# - [Task 5]: Implement a route for handling configuration data upload.
+# - [Task 6]: Establish a route to handle the disconnection logic.
+# - [Task 7]: Ensure proper error handling and user feedback through flash messages.
+# - [Task 8]: Start the Flask server with the necessary debug configuration.
+# - [Task 9]: Maintain the server code with logging for debug purposes.
+#
+##################################################################
+
+
 from flask import Flask, render_template, request, jsonify, flash
 from backend import lids_agent_connector
 from flask_cors import CORS
