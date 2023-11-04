@@ -8,10 +8,10 @@ from alerts_menu import Alerts_CLI
 from menu import Menu
 
 # Import the PortDetection class from the PortChecker module
-from backend.PortChecker import portDetection
+from backend.PortChecker import PortDetection
 
 # Instantiate the PortDetection class
-port_checker = portDetection()
+port_checker = PortDetection()
 
 stop_streaming = False
 input_buffer = []

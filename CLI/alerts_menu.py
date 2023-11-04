@@ -29,7 +29,7 @@ from backend import packets,alerts_manager
 
 class Alerts_CLI:
     def __init__(self):
-        self.alert_thread = threading.Thread(target=self.display_alerts)
+        self.alert_thread = threading.Thread(target=self.display_Alerts)
          # Make the thread a daemon so it doesn't block program exit
         self.alert_thread.daemon = True 
 
