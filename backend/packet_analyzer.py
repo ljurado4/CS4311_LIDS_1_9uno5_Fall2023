@@ -48,7 +48,7 @@ class PacketAnalyzer:
         self.packetAnalyzer = None
         self.iC = ipChecker.ip_Checker()
         self.getAlerts = alerts_manager.AlertManager()
-        self.portCheck = PortChecker.portDetection()
+        self.portCheck = PortChecker.PortDetection()
 
     def analyze_packet(self, packet, time, identifier, sourceIP, sourcePort,destIP,destPort):
         # Check for each error 
