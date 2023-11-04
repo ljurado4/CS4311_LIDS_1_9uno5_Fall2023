@@ -28,7 +28,6 @@
 
 
 from flask import Flask, render_template, request, jsonify, flash
-from backend import lids_agent_connector
 from flask_cors import CORS
 from backend import packets,alerts_manager
 import threading
