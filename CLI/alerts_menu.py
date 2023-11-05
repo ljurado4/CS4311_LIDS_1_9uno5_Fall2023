@@ -15,6 +15,8 @@
 #
 ################################################################################
 
+# File: alerts_menu.py
+
 import sys
 import os
 
@@ -24,47 +26,33 @@ import menu
 # Install 'tabulate' using `pip3 install tabulate`
 from tabulate import tabulate
 import threading
-from backend import packets,alerts_manager
-
+from backend import packets, alerts_manager
 
 class Alerts_CLI:
     def __init__(self):
         self.alert_thread = threading.Thread(target=self.display_Alerts)
-         # Make the thread a daemon so it doesn't block program exit
-        self.alert_thread.daemon = True 
+        self.alert_thread.daemon = True
 
-    def display_Alerts(self,alertList):
-        
-        print("Alerts")
-        
-        
-        # Todo 1
-        # Consider moving this after configurations.
-        # To access alerts post-sniffer run on a thread, use this.
-        # Ensure this runs throughout the CLI program, even if the user navigates other menus.
-        # Find a way to always run a thread post-file execution or explore alternative methods.
-        
-        pack_time = packets.PackTime()
-        thread = threading.Thread(target=pack_time.run_sniffer)
-        thread.start()
-        
-     
-        # get alerts 
-        getter = alerts_manager.AlertManager().sharedAlerts
-        
-        
-        # Display alerts
-        # Todo 2
-        # Goal: Continuously display alerts in this menu without user intervention.
-        # Problems:
-        # 1. How can we accept input without disrupting the alert display?
-        # 2. How do we prevent user input in the terminal from mixing with the alerts or getting overridden by new data?
+    def display_Alerts(self):
+        while True:
+            # Fetch alerts and format them into a string
+            alerts = self.get_alerts()  # Implement get_alerts() to fetch alerts as needed
+            alert_string = "\n".join(alerts)  # Convert alerts to a string with line breaks
 
-        
-        
-        menu_helper = menu.Menu()
-        
-        
-        next_menu = menu_helper.get_user_input(">> ",menu_helper.choice_set)
-        
-        menu_helper.navigate_next_menu(next_menu)
+            # You can print the alerts to the console if needed
+            print(alert_string)
+
+            # Sleep for a while before checking for alerts again
+            time.sleep(1)
+
+    def get_alerts(self):
+        # Implement this method to fetch alerts from the alerts_manager or any other source
+        # Return a list of alert messages
+        alerts = []  # Initialize an empty list to store alert messages
+
+        # Example: Fetch alerts from some source and append them to the list
+        alerts.append("Alert 1: Some message")
+        alerts.append("Alert 2: Another message")
+
+        return alerts  # Return the list of alert messages
+        pass
