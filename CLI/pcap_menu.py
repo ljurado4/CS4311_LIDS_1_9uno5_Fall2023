@@ -1,7 +1,23 @@
-#pcap_menu.py
-import sys
-import os
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+################################################################################
+# File: pcap_menu.py
+#
+# Version: [5.0]
+#
+# Description: This file contains the implementation of the PcapMenu class, which
+#              is responsible for displaying and searching network packet data in
+#              a tabulated format. It provides functions to display all packets
+#              or filter packets based on specific criteria.
+#
+# Modification History:
+# [11/01/23] - [5.0] - [Lizbeth Jurado] - [File Description and Organization Set Up]
+#
+# Tasks:
+# - [Task 1]: Implement the '_print_pcap_table' method to print pcap data in a tabulated format.
+# - [Task 2]: Implement the 'display_matching_pcaps' method to display pcaps that match the search criteria.
+# - [Task 3]: Implement the 'handle_pcap_search' method to parse user commands and retrieve PCAP data.
+#
+################################################################################
+
 import menu
 from tabulate import tabulate
 #import packets
@@ -10,7 +26,7 @@ from backend import alerts_manager
 #from backend import db 
 
 """
-NOTE: Include that tabulate needs to be installed from command terminal
+NOTE: Include that tabulate needs to be installed from the command terminal
 """
 class PcapMenu:
 
@@ -19,65 +35,7 @@ class PcapMenu:
     packets, Used only for testing, review packets.py 
     and refactor for practical use
     """
-    #packet_data.run_sniffer()
-    
-    """
-    packet_data = [
-        {
-            "Severity" : "Medium Severity",
-            "Time": "2023-09-16 12:01:23.456789",
-            "Source": "192.168.1.2",
-            "Destination": "192.168.1.100",
-            "Protocol": "TCP",
-            "Length": 64,
-            "Description": "TCP Handshake SYN"
-        },
-        {
-            "Severity" : "Low Severity",
-            "Time": "2023-09-16 12:01:23.456990",
-            "Source": "192.168.1.100",
-            "Destination": "192.168.1.2",
-            "Protocol": "UDP",
-            "Length": 64,
-            "Description": "UDP Handshake SYN, ACK"
-        },
-        {
-            "Severity" : "High Severity",
-            "Time": "2023-09-16 12:02:00.000000",
-            "Source": "192.168.1.3",
-            "Destination": "192.168.1.101",
-            "Protocol": "ICMP",
-            "Length": 32,
-            "Description": "Ping Request"
-        },
-        {
-            "Severity" : "Medium Severity",
-            "Time": "2023-09-16 12:02:00.100000",
-            "Source": "192.168.1.101",
-            "Destination": "192.168.1.3",
-            "Protocol": "ICMP",
-            "Length": 32,
-            "Description": "Ping Reply"
-        },
-        {
-            "Severity" : "High Severity",
-            "Time": "2023-09-16 12:02:05.678910",
-            "Source": "192.168.1.4",
-            "Destination": "192.168.1.5",
-            "Protocol": "TCP",
-            "Length": 128,
-            "Description": "HTTP GET Request"
-        },
-        {
-            "Severity" : "Low Severity",
-            "Time": "2023-09-16 12:02:05.789123",
-            "Source": "192.168.1.5",
-            "Destination": "192.168.1.4",
-            "Protocol": "TCP",
-            "Length": 256,
-            "Description": "HTTP 200 OK Response"
-        }]
-    """
+    # packet_data.run_sniffer()
     
     def __init__(self) -> None:
         self.menu_helper = menu.Menu()
@@ -93,8 +51,6 @@ class PcapMenu:
         next_menu = menu_helper.get_user_input(">> ",menu_helper.choice_set)
         menu_helper.navigate_next_menu(next_menu)
         
-    
-    
     def _print_pcap_table(self, pcap_dictionary: dict):
         """
         Print a tabulated representation of the given pcap data.
@@ -102,13 +58,11 @@ class PcapMenu:
         Args:
         - pcap_dictionary (dict): Dictionary containing pcap data.
         """
-        
         header = self.valid_search_commands
         data = [list(pcap.values()) for pcap in pcap_dictionary]
         table = tabulate(data, headers=header, tablefmt="fancy_grid")
         print(table)
 
-    
     def display_matching_pcaps(self, search_command: list):
         """
         Display pcaps that match the given search command and target value.
@@ -118,10 +72,8 @@ class PcapMenu:
          search_command (str): The specific command to match.
 
         """
-        
         target_value = search_command[-1]
         search = search_command[0]
-
         matching_pcaps = []
 
         for pcap in self.packet_data:
@@ -136,33 +88,6 @@ class PcapMenu:
         else:
             # Print a message if no matching pcap is found
             print("Unable to locate the specified PCAP file")
-
-    def display_filtered_pcaps(self,filter_command: list):
-        #[command like High severity, number of packets to view]
-        command = filter_command[0]
-        max_pcaps = filter_command[-1]
-
-        filtered_pcaps = []
-
-        for pcap in self.packet_data:
-            for attribute, value in pcap.items():
-                # Check if the current attribute matches the search command and its value matches the target value
-                if attribute == command and value >= max_pcaps:
-                    filtered_pcaps.append(pcap)
-                    value += 1
-                    break
-
-
-
-    def print_filter_options(self):
-        print("The filter option are as follows:")
-        print("High Severity - displays only the level 3 alerts")
-        print("Medium Severity - displays only the level 2 alerts")
-        print("Low Severity - displays only the level 1 alerts")
-        #Add more as needed
-
-        
-
 
     def handle_pcap_search(self, identifier: str):
         """Parses the user command to determine the PCAP search criteria and then 
@@ -184,23 +109,15 @@ class PcapMenu:
         print("IDENTIFIERS")
         print(self.identifier_list)
 
-    def print_alerts(self):
-        print("BEGIN ALERTS")
-        print(self.alert_list)
-    
+        match user_input:
+            case _ if "Show" in user_input:
+                pcap_search_type = self.menu_helper.get_user_input(
+                            "Enter your search type (e.g., protocol) \n", self.valid_search_commands)
+                pcap_search_value = input("Enter value for search\n")
+                pcap_search = [pcap_search_type, pcap_search_value]
+                self.display_matching_pcaps(pcap_search)
+                self.navigate_next_menu()
             
-            
-
-                
-                            
-
-
-
-
-                    
-                    
-                        
-                    
-                
-                
-        
+            case _ if "All" in user_input:
+                self._print_pcap_table(self.packet_data)
+                self.navigate_next_menu()

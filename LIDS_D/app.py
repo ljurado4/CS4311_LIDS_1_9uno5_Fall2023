@@ -1,5 +1,23 @@
+######################################################################
+# File: app.py
+#
+# Version: [5.0]
+#
+# Description: This app.py file serves as the main server script for a Local
+# Intrusion Detection System (LIDS) web application built with Flask, a Python 
+# web framework. It uses Flask-SocketIO for real-time communication between the 
+# server and clients and Flask-CORS for handling Cross-Origin Resource Sharing (CORS), 
+# allowing the web application to accept requests from different origins.
+#
+# Modification History:
+# [11/01/23] - [5.0] - [Lizbeth Jurado] - [File Description and Organization Set Up]    
+# 
+######################################################################
+
+
 from flask import Flask, render_template, request, jsonify
 from flask_cors import CORS
+
 from flask_socketio import SocketIO
 
 app = Flask(__name__)
@@ -94,6 +112,7 @@ def upload_xml_data():
 @socketio.on('connect', namespace='/lids-d')
 def lids_client_namespace_connect():
     global connected_agents
+    global recognized_device_connected, unrecognized_device_connected
     
     print("LIDS-D socket connection")
     
@@ -129,18 +148,19 @@ def handle_LIDS_connect():
             is_ip_whitelisted  = True
             recognized_device_connected.append({
                 "id": str(len(recognized_device_connected) + 1),
-                "name": f"Client {len(recognized_device_connected) + 1}",
+                "name": dic["name"],
                 "ip": client_ip,
                 "status": "connected"
             })
             break
-       
+    
+    client_protocol = request.environ.get('REMOTE_PORT')
     if not is_ip_whitelisted:
         unrecognized_device_connected.append({
-                "id": str(len(unrecognized_device_connected) + 1),
-                "name": f"Client {len(unrecognized_device_connected) + 1}",
-                "ip": client_ip,
-                "status": "connected"
+                "ip": request.remote_addr,
+                "port": "NA" if not client_protocol else client_protocol,
+                "protocol": request.environ.get('HTTP_UPGRADE', 'http')
+                
             })
                 
     connected_agents += 1

@@ -1,7 +1,28 @@
+/*##################################################################
+# File: LIDS_Table.js
+#
+# Version: [5.0]
+#
+# Description: This JavaScript file is responsible for handling the 
+display of alerts in a table format within the LIDS Dashboard web application.
+#
+# Modification History:
+# [11/01/23] - [3.0] - [Lizbeth Jurado] - [File Description and Organization Set Up]
+#
+# Tasks:
+# - [Task 1]: Initialize and fetch the latest alerts when the document is loaded.
+# - [Task 2]: Set up a periodic interval to refresh and fetch the latest alerts every 20 seconds.
+# - [Task 3]: Implement an event listener for the "Sort Alerts" button, enabling the sorting of alerts by level.
+# - [Task 4]: Fetch the latest alerts from the backend server.
+# - [Task 5]: Populate the table with the fetched alert data.
+# - [Task 6]: Provide functionality to open PCAP (Packet Capture) data in a separate window for each alert.
+# - [Task 7]: Handle potential errors that may occur during the alert fetching process.
+#
+################################################################## */
 document.addEventListener("DOMContentLoaded", function () {
     fetchLatestAlerts();
 
-    setInterval(fetchLatestAlerts, 5000);
+    setInterval(fetchLatestAlerts, 20000);
 
     // Event listener for the "Sort Alerts" button
     document.getElementById("sortAlertsButton").addEventListener("click", function () {

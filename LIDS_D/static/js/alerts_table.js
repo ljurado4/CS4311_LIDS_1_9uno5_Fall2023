@@ -1,14 +1,35 @@
+/* ######################################################################
+   # File: alerts_table.js
+   #
+   # Version: [5.0]
+   #
+   # Description: This file is esponsible for handling and displaying alerts data in an HTML table format.
+   #
+   # Modification History:
+   # [11/01/23] - [5.0] - [Lizbeth Jurado] - [File Description and Organization Set Up]
+   #
+   ###################################################################### */
 
+// Construct the socket URL based on the current location
 var socketUrl = window.location.protocol + '//' + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
+
+// Connect to the 'lids-d' socket.io namespace
 var socket = io.connect(socketUrl + '/lids-d');
 
+// Function to update the HTML table with alert data
 function updateTable(data) {
+    // Get the table body element
     const tableBody = document.querySelector('#TableID tbody');
+    
+    // Clear the table body
     tableBody.innerHTML = '';
+    
+    // Loop through the alert data and create table rows
     data.forEach((alert, index) => {
         const row = tableBody.insertRow(index);
         row.id = `alert${index + 1}`;
         
+        // Create table cells for alert properties
         const levelCell = row.insertCell(0);
         levelCell.id = `alert${index + 1}-level`;
         levelCell.textContent = alert.Level; 

@@ -1,4 +1,25 @@
-#menu.py
+################################################################################
+# File: menu.py
+#
+# Version: [5.0]
+#
+# Description: This file contains the implementation of the Menu class, which
+#              provides common functions for the CLI (Command Line Interface) to
+#              use across different menus in the LIDS (Local Intrusion Detection
+#              System). It includes utility methods for obtaining and validating
+#              user input and stores shared system configuration attributes.
+#
+# Modification History:
+# [11/01/23] - [5.0] - [Lizbeth Jurado] - [File Description and Organization Set Up]
+#
+# Tasks:
+# - [Task 1]: Implement the 'update_system_config' class method to update shared
+#             system configuration attributes.
+# - [Task 2]: Implement the 'get_user_input' method to get and validate user input.
+# - [Task 3]: Implement the 'navigate_next_menu' method to navigate to the next
+#             appropriate menu based on user input.
+#
+################################################################################
 
 import config_parser
 """
@@ -17,8 +38,8 @@ class Menu():
     """A class for common functions the CLI will use across different menus.
     
     This class provides utility methods for obtaining and validating user input
-    when navigating through diffrent menu options in CLI.
-    It also stores shared system configuration attributes.
+    when navigating through different menu options in the CLI. It also stores shared
+    system configuration attributes.
     """
     host_name = ""
     ip_address = ""
@@ -30,7 +51,7 @@ class Menu():
         self.choice_set = {"Help", "Config", "Show PCAP", "Alert", "Exit","All PCAPs","Start Menu"}
 
     @classmethod
-    def update_system_config(cls,hostname, ip_address, mac_address, open_ports, whitelisted_ips):
+    def update_system_config(cls, hostname, ip_address, mac_address, open_ports, whitelisted_ips):
         """
         Updates the shared system configuration attributes.
 
@@ -46,36 +67,29 @@ class Menu():
         cls.mac_address = mac_address
         cls.open_ports = open_ports
         cls.whitelisted_ips = whitelisted_ips
-    
 
     def get_user_input(self, message: str, valid_input: set) -> str:
         """Gets and validates user input."""
         user_input = input(message)
         
-        
         while user_input not in valid_input:
-            print("Wrong input valid inputs are")
+            print("Wrong input. Valid inputs are:")
             for val_input in valid_input:
                 print(val_input)
             user_input = input(message)
-
         
         return user_input
-    
 
     def navigate_next_menu(self, menu_option_selected: str) -> None:
-        """Navigate to thje next menu based on the user's selection
+        """Navigate to the next menu based on the user's selection
         
-        This function takes a menu option and navigated to the next appropiate menu
+        This function takes a menu option and navigated to the next appropriate menu
         based on the user's input. The function supports options "Help", "Config", 
         "Show PCAP", and "Alert".
 
         Args:
             menu_option_selected (str): The menu option that the user has selected.
         """
-        
-    
-  
         match menu_option_selected:
             case _ if menu_option_selected == "Start Menu":
                 print('\n' * 24)
@@ -88,6 +102,7 @@ class Menu():
                 print(">> Help Menu")
                 menu = help_menu.HelpMenu()
                 menu.display_help()
+            
             case _ if menu_option_selected == "Config":
                 print('\n' * 24)
                 print(">> Configuring System")
@@ -120,11 +135,7 @@ class Menu():
                 ]
                 alert_men = alerts_menu.Alerts_CLI()
                 alert_men.display_Alerts(alertList)
-            case _ if menu_option_selected == "Start Menu":
-                main_menu_helper = main_menu.MainMenu()
-                main_menu_helper.show_menu()
-                
+            
             case _ if menu_option_selected == "Exit":
                 print("Exiting")
                 exit()
-                
