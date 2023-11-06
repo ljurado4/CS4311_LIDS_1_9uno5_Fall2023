@@ -8,7 +8,7 @@ def main():
     print('starting main_cli')
     alert_menu = menu.Menu()
     alert_menu.navigate_next_menu("Alert")
-    print('main ran')
+    #print('main ran')
 
 
 if __name__ == "__main__":

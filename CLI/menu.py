@@ -101,9 +101,9 @@ class Menu():
                 print(">> PCAP info")
                 alert_manager = alerts_manager.AlertManager()
                 print("IDENT")
-                print(alert_manager.identifierList)
+                print(alert_manager.identifierList)#add dummy data to the list
                 print("ALERTS")
-                print(alert_manager.sharedAlerts)
+                print(alert_manager.sharedAlerts)#add dumy data to the list
                 pcap_menu_display = pcap_menu.PcapMenu()
                 pcap_menu_display.handle_pcap_search(menu_option_selected)
             
