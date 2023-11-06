@@ -7,6 +7,7 @@ from tabulate import tabulate
 #import packets
 from backend import packets
 from backend import alerts_manager
+#from backend import db 
 
 from menu import Menu
 
