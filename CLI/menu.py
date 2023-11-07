@@ -41,7 +41,7 @@ class Menu():
     whitelisted_ips = []
     
     def __init__(self) -> None:
-        self.choice_set = {"Help", "Config", "Show PCAP", "Alert", "Exit","All PCAPs","Start Menu"}
+        self.choice_set = {"Help","help", "HELP", "Config", "config", "CONFIG",  "Show PCAP", "show pcap", "SHOW PCAP","Alert","alert", "ALERT", "Exit", "exit", "EXIT","All PCAPs", "all pcaps","ALL PCAPS","Start Menu","start menu","START MENU"}
 
     @classmethod
     def update_system_config(cls, hostname, ip_address, mac_address, open_ports, whitelisted_ips):
