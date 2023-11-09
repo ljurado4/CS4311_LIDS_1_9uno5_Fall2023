@@ -59,6 +59,16 @@ function populateTable(alerts) {
         typeAlertCell.textContent = alert.TypeAlert;
         descriptionCell.textContent = alert.Description;
 
+        if(alert.Level === 1){
+            levelCell.classList.add('level1')
+        } else if (alert.Level === 2){
+            levelCell.classList.add('level2')
+        } else if (alert.Level === 3){
+            levelCell.classList.add('level3')
+        }
+
+  
+
         if (descriptionCell.textContent.includes("Port")){
             console.log("Port Scan")
         }
