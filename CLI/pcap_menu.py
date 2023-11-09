@@ -17,7 +17,10 @@
 # - [Task 3]: Implement the 'handle_pcap_search' method to parse user commands and retrieve PCAP data.
 #
 ################################################################################
+import sys
+import os
 
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import menu
 from tabulate import tabulate
 #import packets

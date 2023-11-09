@@ -20,7 +20,7 @@
 # - [Task 4]: Create a route to retrieve and send the latest alerts via socket.io.
 # - [Task 5]: Implement a route for handling configuration data upload.
 # - [Task 6]: Establish a route to handle the disconnection logic.
-# - [Task 7]: Ensure proper error handling and user feedback through flash messages.
+# - [Task 7]: Ensure proper error handling and user feedback 'through flash messages.
 # - [Task 8]: Start the Flask server with the necessary debug configuration.
 # - [Task 9]: Maintain the server code with logging for debug purposes.
 #
