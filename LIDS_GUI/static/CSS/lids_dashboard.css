@@ -135,6 +135,16 @@ th {
     text-align: center;
     border-bottom: 2px solid rgb(173, 173, 173);
 }
+/* Setting colors for the varying levels */
+.level1{
+    background-color: greenyellow;
+}
+.level2{
+    background-color: yellow;
+}
+.level3{
+    background-color: red;
+}
 
 
 .table-container {

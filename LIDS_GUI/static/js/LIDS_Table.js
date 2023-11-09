@@ -67,6 +67,15 @@ function populateTable(alerts) {
         DestinationPortCell.textContent = alert.DestPort
         typeAlertCell.textContent = alert.TypeAlert
         descriptionCell.textContent = alert.Description;
+
+        if(alert.Level === 1){
+            levelCell.classList.add('level1')
+        } else if (alert.Level === 2){
+            levelCell.classList.add('level2')
+        } else if (alert.Level === 3){
+            levelCell.classList.add('level3')
+        }
+
   
 
         // Add a "Show PCAP" button to open PCAP data in a separate window
