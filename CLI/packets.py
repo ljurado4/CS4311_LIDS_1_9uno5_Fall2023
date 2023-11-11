@@ -36,7 +36,7 @@ class PackTime:
 
     def __init__(self):
         self.pack_time = None
-        base_path = "/Users/lizbethjurado/Git/CS4311_LIDS_19uno5_Fall2023/Traffic/" 
+        base_path = "/Users/shas/Git/traffic" 
         # TODO: Find a way to store files in a GitHub repo, giving too large error even with installing Git LFS
         self.files = [
             base_path + "7-17-EN.pcapng",

@@ -17,31 +17,57 @@
 
 import sys
 import os
-
+import threading
+import time
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import menu
-
-# Install 'tabulate' using `pip3 install tabulate`
-from tabulate import tabulate
-import threading
-from backend import packets,alerts_manager
-
+from backend import packets, alerts_manager
 
 class Alerts_CLI:
+    def __init__(self):
+        self.stop_streaming = False
+        self.input_buffer = []
+        self.lines_to_display = []
+        self.MAX_LINES = 100
+        self.user_typing_event = threading.Event()
+        self.alert_manager = alerts_manager.AlertManager()
+        self.instanceMenu = menu.Menu()
+        self.pack_time = packets.PackTime()
+        self.thread = threading.Thread(target=self.display_Alerts)
+
+    def display_Alerts(self):
+        while not self.stop_streaming:
+            if not self.user_typing_event.is_set():
+                alerts = self.alert_manager.get_alerts()
+                self.lines_to_display.extend(alerts)
+                self.lines_to_display = self.lines_to_display[-self.MAX_LINES:]
+                self.refresh_display()
+            time.sleep(1)
+
+    def refresh_display(self):
+        os.system('cls' if os.name == 'nt' else 'clear')
+        for line in self.lines_to_display:
+            print(line)
+        print("Type something (or 'q' to quit): " + ''.join(self.input_buffer), end='', flush=True)
+
+    def run(self):
+        self.thread.daemon = True
+        self.thread.start()
+
+        try:
+            while True:
+                self.user_typing_event.set()
+                user_input = input()
+                self.user_typing_event.clear()
+                self.lines_to_display.append("You typed: " + user_input)
+                thread2 = threading.Thread(target=self.instanceMenu.navigate_next_menu, args=(user_input,))
+                thread2.start()
+        finally:
+            self.stop_streaming = True
+            self.thread.join()
 
 
-    def display_Alerts(self,alertList):
-        
-        #print("Alerts")
-        # Alerts_CLI.py
 
-        # Display the alerts
-        for alert in alertList:
-            print(alert)
-
-        # Your other code...
-
-        
         # Todo 1
         # Consider moving this after configurations.
         # To access alerts post-sniffer run on a thread, use this.
@@ -67,9 +93,9 @@ class Alerts_CLI:
 
         
         
-        menu_helper = menu.Menu()
+        #menu_helper = menu.Menu()
         
         
-        next_menu = menu_helper.get_user_input(">> ",menu_helper.choice_set)
+       # next_menu = menu_helper.get_user_input(">> ",menu_helper.choice_set)
         
-        menu_helper.navigate_next_menu(next_menu)
+        #menu_helper.navigate_next_menu(next_menu)
