@@ -122,7 +122,7 @@ class Menu():
                     [2, "11.6578", "193.124.0.3", 4040, "Unknown host ping"],
                 ]
                 alert_men = alerts_menu.Alerts_CLI()
-                alert_men.display_Alerts(alertList)
+                alert_men.display_Alerts()
             
             case _ if menu_option_selected == "Exit":
                 print("Exiting")
