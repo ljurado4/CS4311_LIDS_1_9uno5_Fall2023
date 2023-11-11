@@ -1,36 +1,4 @@
-##################################################################
-# File: ipChecker.py
-#
-# Version: [5.0]
-#
-# Description: 
-# This module provides a class ip_Checker that is responsible for
-# parsing an XML file containing whitelisted IP addresses and
-# providing functionality to check if a given IP address is in the
-# whitelist.
-#
-# Modification History:
-# [11/02/23] - [5.0] - [Lizbeth Jurado] - [File Description and Organization Set Up]
-#
-# Tasks:
-# - [Task 1]: Implement the __init__ method to parse the XML file and
-#             populate the whitelist.
-# - [Task 2]: Develop the ip_in_List method to check if a given IP is
-#             in the whitelist.
-# - [Task 3]: Handle exceptions and errors in file parsing or IP checking.
-# - [Task 4]: Implement a mechanism to reload or refresh the whitelist
-#             without restarting the application.
-# - [Task 5]: Optimize the search algorithm for efficiency with large
-#             whitelists.
-# - [Task 6]: Add documentation to the class and methods.
-# - [Task 7]: Create unit tests to ensure the reliability of the IP checking.
-# - [Task 8]: Ensure that the module is secure and that it properly sanitizes
-#             any input it may receive, especially if used in a web context.
-# - [Task 9]: Consider using a more advanced XML parsing library if needed for
-#             complex XML structures or performance concerns.
-#
-##################################################################
-
+#ipChecker.py
 
 import xml.etree.ElementTree as ET
 
