@@ -1,5 +1,6 @@
-<!--##################################################################
-# File: LIDS_Main.html
+
+##################################################################
+# File: TestIPChecker.py
 #
 # Version: [5.0]
 #
@@ -7,11 +8,8 @@
 # Local Intrusion Detection System (LIDS). This page likely serves as an entry point to the system,
 # where users can upload a configuration file. 
 # 
-# @Author:Arturo Olmos
-# Formatted the basic structure for the page but not the styling
-#
 # Modification History:
-# [11/02/23] - [3.0] - [Lizbeth Jurado] - [File Description and Organization Set Up]
+# [11/02/23] - [5.0] - [Lizbeth Jurado] - [File Description and Organization Set Up]
 #
 # Tasks:
 # - [Task 1]: Complete the backend integration for the file upload form to ensure that the uploaded configuration file is received, validated, and processed by the server.
@@ -22,28 +20,18 @@
 # - [Task 6]: Implement error handling to gracefully inform the user of any issues with their upload, whether due to network problems, file issues, or server errors.
 # - [Task 7]: Ensure that accessibility standards are met so that all potential users can navigate and use the file upload feature effectively.
 #
-################################################################## -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LIDS</title>
-    <link rel="stylesheet" href="../static/css/main.css">
-</head>
-<body>
-    <h2>Welcome to LIDS</h2>
+##################################################################
 
-    <h3>Upload</h3>
-    <h3>Configuration File</h3>
-    <form id="fileUpload">
-        <label for="myFile">
-            Select a File
-            <input type="file" accept="text/xml" id="myFile" name="filename" style="display: none;">
-        </label>
-        
-    </form>
-    <script src="../static/js/LIDS_Main.js"></script>
-</body>
-</html>
+from ipChecker import ip_Checker
+
+checker = ip_Checker()
+
+
+# Simulate a packet with an IP to check
+packet_ip_to_check = "10.0.0.2"
+
+# Check if the IP is in the whitelist
+if checker.ip_in_List(packet_ip_to_check):
+    print(f"IP {packet_ip_to_check} is in the whitelist.")
+else:
+    print(f"IP {packet_ip_to_check} is not in the whitelist.")

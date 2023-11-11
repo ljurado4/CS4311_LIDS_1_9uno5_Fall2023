@@ -1,4 +1,19 @@
-/* main.css */
+/*##################################################################
+# File: main.css
+#
+# Version: [5.0]
+# Description: Main styles for the web application
+#
+# Modification History:
+# [11/01/23] - [5.0] - [Lizbeth Jurado] - [File Description and Organization Set Up]     
+#
+# Tasks:
+# - [Task 1]: Define styles for HTML and body elements
+# - [Task 2]: Specify styles for heading elements (h1, h2, h3)
+# - [Task 3]: Style the file upload container
+#
+################################################################## */
+
 html body {
     font-family: 'Arial', sans-serif;
     background-color: #CCCCCC;

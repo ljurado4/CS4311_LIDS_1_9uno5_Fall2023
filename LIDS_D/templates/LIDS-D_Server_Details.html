@@ -1,0 +1,37 @@
+<!--
+######################################################################
+# File: LIDS-D_Server_Details.html
+#
+# Version: [5.0]
+#
+# @Author:Arturo Olmos
+# Created the basic structure and styling for the page
+#
+# Description: This HTML file represents the server details view in the LIDS-D application. It displays server status information, including whether the server is started or stopped, the number of connected agents, and the external storage capacity.
+#
+# Modification History:
+# [11/01/23] - [5.0] - [Lizbeth Jurado] - [File Description and Organization Set Up]
+#
+######################################################################
+-->
+<!DOCTYPE html>
+<html lang="en">
+    {% include 'head.html' %}
+<body>
+    
+    <div class="contentBlock"  id="contentBlock">
+            <p class="server-info">
+                Server Started: 
+                <form action="/shutdown" method="post">
+                    <button onclick="shutdownServer()">Shutdown Server</button>
+                </form>  
+            </p>
+            <p class="agent-info">Agents Connected: <span id="agent_count">0</span></p>
+            <p class="storage-capacity" >LIDS-D External Storage Capacity:</p>
+    </div>
+    {% include 'sidebar.html' %}
+    <script src="../static/js/LIDS-D.js"></script>
+    <script src="../static/js/agent_counter.js"></script>
+    <script src="../static/js/shutdown.js"></script>
+</body>
+</html>

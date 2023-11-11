@@ -1,4 +1,33 @@
-/* lids_dashboard.css */
+/*##################################################################
+# File: lids_dashboard.css
+#
+# Version: [5.0]
+$
+# Description: Styles for the LIDS-D Dashboard Web Application
+#
+# @Author:Arturo Olmos
+# Created basic styling for the page
+#
+# Modification History:
+# [11/01/23] - [5.0] - [Lizbeth Jurado] - [File Description and Organization Set Up]     
+#
+# Tasks:
+# - [Task 1]: Define styles for XML File Text Area
+# - [Task 2]: Specify body styles
+# - [Task 3]: Style connect and disconnect buttons
+# - [Task 4]: Define header styles
+# - [Task 5]: Style forms for connection
+# - [Task 6]: Define left sidebar styles
+# - [Task 7]: Specify general table styles
+# - [Task 8]: Style sorting and filtering buttons
+# - [Task 9]: Define dropdown menu styles for table filters
+# - [Task 10]: Specify header title styles
+# - [Task 11]: Style connected display
+# - [Task 12]: Define right sidebar styles
+# - [Task 13]: Specify alert box table styles
+#
+################################################################## */
+
 .xmlFileTextArea{
     height: 91vh;
     border-radius: 3px;
@@ -9,7 +38,8 @@ body {
     font-family: 'Lato', sans-serif;
     background-color: white;
     margin: 0%;
-    vertical-align: top;
+    vertical-align:top;
+    font-size: 0;
 }
 
 .disconnectButton {
@@ -25,86 +55,99 @@ body {
 .header {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     background: rgb(173, 173, 173);
     height: auto;
     position: relative;
     font-size: 20px;
+    padding: 10px 20px;
 }
 
+form {
+    display: flex;
+    align-items: center;
+    gap: 10px;  
+}
+
+#ConnectButton {
+    background: lightgray;
+    width: 100px;
+    height: 30px;
+    border: 1px solid black;  
+    border-radius: 25px;
+    display: inline-block;
+    margin-left: 5%;
+}
+
+#IPAdressForm, #PortNumberForm {
+    padding: 8px;
+    border: 1px solid #AAA;
+    border-radius: 4px;
+}
+
+/*
+    @Author:Arturo Olmos
+    Styling for the left side bar containing buttons in dashboard
+*/
 .leftSidebar {
     height: 100vh;
-    width: 5%;
-    align-items: center;
+    width: 10%;
     border: none;
-    text-align: center;
     vertical-align: middle;
-    float: left;
     display: inline-block;
 }
 
+/*
+    @Author:Arturo Olmos
+    Styling for buttons in left sidebar
+*/
 .leftSidebarButton {
     background: #909090;
     border: none;
-    margin-top: 25%;
-    left: 25%;
+    margin-top: 20%;
+}
+
+/*
+    @Author:Arturo Olmos
+    Styling for table data tags
+*/
+td{
+    overflow-x: scroll;
+    max-width: 50px;
 }
 
 .dashboardButtonAction:hover {
     background: rgb(255, 255, 255);
 }
-
+/*
+    @Author:Arturo Olmos
+    Styling for images in left sidebar
+*/
 .leftSidebarImages {
-    mix-blend-mode: multiply;
-    height: 50%;
-    width: 50%;
+    margin-left: 30%;
+    height: 40%;
+    width: 40%;
 }
 
-/* General Table Styles */
-table {
-    overflow-y: auto;
-    border-collapse: collapse;
-    border: 1px solid rgb(173, 173, 173);
-    border-radius: 10px;
-    max-height: 92vh;
-    margin-top: 0%;
+th,td {
+    border-collapse: collapse;   
 }
-
-th,
-td {
-    border: 1px solid rgb(173, 173, 173);
-    padding: 8px;
-    text-align: left;
-    word-wrap: break-word;
-}
-
+/*
+    @Author:Arturo Olmos
+    Styling for table header 
+*/
 th {
-    background-color: rgb(173, 173, 173);
-    text-align: center;
-    border-bottom: 2px solid rgb(173, 173, 173);
+    border: None;
+    background: rgb(173, 173, 173);
 }
-
-
-.table-container {
-    justify-content: space-between;
-    width: 70%;
-    max-height: 60vh;
-    margin: 1% 0% 1vh 0%;
-    display: inline-block;
-    flex-direction: column;
-    align-items: center;
-}
-
-.notifications,
-.errors {
-    display: inline-block;
-    height: 45.5vh;
-    width: 20vw;
-}
-
-table.alertbox {
-    width: 100%;
-    position: relative;
-    display: block;
+/*
+    @Author:Arturo Olmos
+    Styling for header so that it stays in a single position when scrolling
+*/
+thead{
+    position: sticky; 
+    top: 0px; 
+    margin-top: 0;
 }
 
 .sort-button {
@@ -114,19 +157,9 @@ table.alertbox {
     z-index: 2;
 }
 
-
-.filter-button {
-    position: absolute;
-    right: 0;
-    top: 20px;
-    z-index: 1;
-}
-
-
 .dropdown {
     position: relative;
 }
-
 
 .dropdown-options {
     position: absolute;
@@ -167,10 +200,51 @@ table.alertbox {
     margin-right: 10px;
 }
 
+/*
+    @Author:Arturo Olmos
+    Styling for right sidebar so that it takes up remaining space
+*/
 .rightSidebar {
-    width: 24%;
+    height:100vh;
+    flex-grow: 1;
+    font-size: 15px;
+}
+
+/*
+    @Author:Arturo Olmos
+    Styling for table containers in the right side bar
+*/
+div.rightSidebarSC{
+    border: solid; 
+    width:90%;
+    margin-left:5%;
+    height:40vh;
+    margin-top:10%;
+    overflow: scroll;
+    border-radius: 10px;
+
+}
+ /*
+    @Author:Arturo Olmos
+    Styling for all tables
+*/
+table{
+    width: 100%;
+    border-collapse:collapse
+}
+
+ /*
+    @Author:Arturo Olmos
+    Styling for table container in the middle of dashboard
+*/
+div.tableContainer{
+    margin-top: 2.5%;
+    height: 80vh; 
+    width:65%;
     display: inline-block;
-    margin-top: 1%;
     vertical-align: top;
-    text-align: center;
+    overflow: scroll;
+    font-size: 15px; 
+    border: solid;
+    border-radius: 10px;
 }

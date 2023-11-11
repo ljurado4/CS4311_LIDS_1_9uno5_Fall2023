@@ -1,0 +1,26 @@
+<!--
+   ######################################################################
+   # File: LIDS-D_Start_Server.html
+   #
+   # Version: [5.0]
+   #
+   # Description: This HTML file represents the start server view in the LIDS-D application. It displays a confirmation message after successfully uploading a configuration file and provides a button to start the server. When the button is clicked, it triggers the 'startServer' function and creates a socket connection using the 'createSocket' function.
+   #
+   # Modification History:
+   # [11/01/23] - [5.0] - [Lizbeth Jurado] - [File Description and Organization Set Up]
+   #
+   ######################################################################
+-->
+<!DOCTYPE html>
+<html lang="en">
+    {% include 'head.html' %}
+<body>
+    
+    <div class="contentBlock" style="align-items: center;" id="contentBlock">
+        <p style="vertical-align: middle;">Config File has been successfully uploaded</p>
+        <button class="sortButtons" style="height: 100px;width: 200px;" onclick="startServer(); createSocket();">Start Server</button>
+    </div>
+    {% include 'sidebar.html' %}
+    <script src="../static/js/LIDS-D.js"></script>
+</body>
+</html>
