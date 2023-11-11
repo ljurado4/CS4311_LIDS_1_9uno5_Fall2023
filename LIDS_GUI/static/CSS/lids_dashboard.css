@@ -5,6 +5,9 @@
 $
 # Description: Styles for the LIDS-D Dashboard Web Application
 #
+# @Author:Arturo Olmos
+# Created basic styling for the page
+#
 # Modification History:
 # [11/01/23] - [5.0] - [Lizbeth Jurado] - [File Description and Organization Set Up]     
 #
@@ -35,7 +38,8 @@ body {
     font-family: 'Lato', sans-serif;
     background-color: white;
     margin: 0%;
-    vertical-align: top;
+    vertical-align:top;
+    font-size: 0;
 }
 
 .disconnectButton {
@@ -72,7 +76,7 @@ form {
     border: 1px solid black;  
     border-radius: 25px;
     display: inline-block;
-    margin: 5%;
+    margin-left: 5%;
 }
 
 #IPAdressForm, #PortNumberForm {
@@ -81,86 +85,69 @@ form {
     border-radius: 4px;
 }
 
+/*
+    @Author:Arturo Olmos
+    Styling for the left side bar containing buttons in dashboard
+*/
 .leftSidebar {
     height: 100vh;
-    width: 5%;
-    align-items: center;
+    width: 10%;
     border: none;
-    text-align: center;
     vertical-align: middle;
-    float: left;
     display: inline-block;
 }
 
+/*
+    @Author:Arturo Olmos
+    Styling for buttons in left sidebar
+*/
 .leftSidebarButton {
     background: #909090;
     border: none;
-    margin-top: 25%;
-    left: 25%;
+    margin-top: 20%;
+}
+
+/*
+    @Author:Arturo Olmos
+    Styling for table data tags
+*/
+td{
+    overflow-x: scroll;
+    max-width: 50px;
 }
 
 .dashboardButtonAction:hover {
     background: rgb(255, 255, 255);
 }
-
+/*
+    @Author:Arturo Olmos
+    Styling for images in left sidebar
+*/
 .leftSidebarImages {
-    mix-blend-mode: multiply;
-    height: 50%;
-    width: 50%;
-}
-
-/* General Table Styles */
-table {
-    overflow-y: auto;
-    border-collapse: collapse;
-    border: 1px solid rgb(173, 173, 173);
-    border-radius: 10px;
-    max-height: 92vh;
-    margin-top: 0%;
+    margin-left: 30%;
+    height: 40%;
+    width: 40%;
 }
 
 th,td {
-    border: 1px solid rgb(173, 173, 173);
-    padding: 8px;
-    text-align: left;
-    word-wrap: break-word;
-    max-width: 150px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    border-collapse: collapse;   
 }
-
+/*
+    @Author:Arturo Olmos
+    Styling for table header 
+*/
 th {
-    background-color: rgb(173, 173, 173);
-    text-align: center;
-    border-bottom: 2px solid rgb(173, 173, 173);
+    border: None;
+    background: rgb(173, 173, 173);
 }
-
-
-.table-container {
-    justify-content: space-between;
-    width: 70%;
-    max-height: 80vh;
-    margin: 1% 0% 1vh 0%;
-    display: inline-block;
-    flex-direction: column;
-    align-items: center;
-    overflow-x: auto;
-}
-
-.notifications,
-.errors {
-    display: inline-block;
-    height: 45.5vh;
-    width: 20vw;
-}
-
-table.alertbox {
-    width: 70%; /* adjusted width */
-    position: relative;
-    display: block;
-    overflow-x: visible;
-    margin: 1% 0% 1vh 5%; /* Adjust margin for positioning */
+/*
+    @Author:Arturo Olmos
+    Styling for header so that it stays in a single position when scrolling
+*/
+thead{
+    position: sticky; 
+    top: 0px; 
+    margin-top: 0;
 }
 
 .sort-button {
@@ -170,19 +157,9 @@ table.alertbox {
     z-index: 2;
 }
 
-
-.filter-button {
-    position: absolute;
-    right: 0;
-    top: 20px;
-    z-index: 1;
-}
-
-
 .dropdown {
     position: relative;
 }
-
 
 .dropdown-options {
     position: absolute;
@@ -223,16 +200,51 @@ table.alertbox {
     margin-right: 10px;
 }
 
+/*
+    @Author:Arturo Olmos
+    Styling for right sidebar so that it takes up remaining space
+*/
 .rightSidebar {
-    width: 24%;
-    display: inline-block;
-    margin-top: 1%;
-    vertical-align: top;
-    text-align: center;
+    height:100vh;
+    flex-grow: 1;
+    font-size: 15px;
 }
 
+/*
+    @Author:Arturo Olmos
+    Styling for table containers in the right side bar
+*/
+div.rightSidebarSC{
+    border: solid; 
+    width:90%;
+    margin-left:5%;
+    height:40vh;
+    margin-top:10%;
+    overflow: scroll;
+    border-radius: 10px;
 
-#alertBoxTable {
+}
+ /*
+    @Author:Arturo Olmos
+    Styling for all tables
+*/
+table{
     width: 100%;
-    overflow-x: auto;
+    border-collapse:collapse
+}
+
+ /*
+    @Author:Arturo Olmos
+    Styling for table container in the middle of dashboard
+*/
+div.tableContainer{
+    margin-top: 2.5%;
+    height: 80vh; 
+    width:65%;
+    display: inline-block;
+    vertical-align: top;
+    overflow: scroll;
+    font-size: 15px; 
+    border: solid;
+    border-radius: 10px;
 }

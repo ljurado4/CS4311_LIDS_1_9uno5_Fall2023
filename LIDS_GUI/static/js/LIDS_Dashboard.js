@@ -5,6 +5,9 @@
 #
 # Description: JavaScript file for managing the LIDS Dashboard web application.
 #
+# @Author:Arturo Olmos
+# Added functionality for the buttons on the left sidebar
+#
 # Modification History:
 # [11/01/23] - [3.0] - [Lizbeth Jurado] - [File Description and Organization Set Up]
 #
@@ -34,6 +37,8 @@ let xmlConfigState = "<textarea class = \"xmlFileTextArea\">File Name: " + windo
 
 // Forms for event listeners
 
+
+//@author Arturo Olmos
 // Handles event when user wants to see config file
 configFileForm.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -41,6 +46,7 @@ configFileForm.addEventListener("submit", (event) => {
     middleContainer.innerHTML = xmlConfigState;
 });
 
+//@author Arturo Olmos
 // Handles event when user wants to see alerts displayed
 alertsTableFrom.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -59,7 +65,7 @@ function toggleDropdown() {
 
 function filterByLevel(level) {
     let table = document.getElementById("alertBoxTable");
-    let rows = Array.from(table.rows).slice(1);  // skip the header
+    let rows = Array.from(table.rows).slice(3);  // skip the header
 
     rows.forEach(row => {
         const alertLevel = parseInt(row.cells[2].textContent.trim());

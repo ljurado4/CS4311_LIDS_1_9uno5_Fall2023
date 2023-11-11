@@ -5,6 +5,9 @@
 #
 # Description: JavaScript file for handling file upload and data processing in the LIDS Dashboard web application.
 #
+# @Authors:Arturo Olmos, Benjamin
+# Worked on the xml ingestion
+#
 # Modification History:
 # [11/01/23] - [3.0] - [Lizbeth Jurado] - [File Description and Organization Set Up]
 #
@@ -17,7 +20,10 @@
 #
 ################################################################## */
 
+
 const fileInput = document.getElementById('myFile');
+//@author Arturo Olmos & Benjamin 
+//handles the input of a xml file
 fileInput.onchange = async () => {
 
   // get uploaded file

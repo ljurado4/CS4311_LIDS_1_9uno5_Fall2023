@@ -24,6 +24,7 @@ const files = JSON.parse(filesAsString);
 
 const previousFilesContainer = document.getElementById("previousFilesSelection");
 
+/* @author Arturo Olmos */
 // Function to handle loading old configuration file
 function oldFileConfig(fileName) {
     // Implement a function to set up the old configuration
@@ -39,6 +40,7 @@ for (let fileName in files) {
     previousFilesContainer.innerHTML += fileButton;
 }
 
+/* @author Arturo Olmos */
 // Function to handle successful file submission
 function successfulFileSubmission(selectedFile, loadedFile) {
     // Store the new file uploaded to storage
@@ -90,6 +92,7 @@ function successfulFileSubmission(selectedFile, loadedFile) {
     window.location = "start_server_ui";
 }
 
+/* @author Arturo Olmos */
 // This will only be executed when a user uploads a file
 browseButton.onchange = async () => {
     // Get the uploaded file
