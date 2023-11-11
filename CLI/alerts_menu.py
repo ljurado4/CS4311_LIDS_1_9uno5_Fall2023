@@ -32,8 +32,15 @@ class Alerts_CLI:
 
     def display_Alerts(self,alertList):
         
-        print("Alerts")
-        
+        #print("Alerts")
+        # Alerts_CLI.py
+
+        # Display the alerts
+        for alert in alertList:
+            print(alert)
+
+        # Your other code...
+
         
         # Todo 1
         # Consider moving this after configurations.
@@ -41,13 +48,14 @@ class Alerts_CLI:
         # Ensure this runs throughout the CLI program, even if the user navigates other menus.
         # Find a way to always run a thread post-file execution or explore alternative methods.
         
-        pack_time = packets.PackTime()
-        thread = threading.Thread(target=pack_time.run_sniffer)
-        thread.start()
+        #pack_time = packets.PackTime()
+        #thread = threading.Thread(target=pack_time.run_sniffer)
+       # thread.start()
         
      
         # get alerts 
-        getter = alerts_manager.AlertManager().sharedAlerts
+       
+       # getter = alerts_manager.AlertManager().sharedAlerts
         
         
         # Display alerts
