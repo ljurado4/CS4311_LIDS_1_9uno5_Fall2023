@@ -32,18 +32,18 @@ class portDetection:
             time2 = self.timeChecker[srcIP]
             time_difference = time1 - time2
             time_difference_seconds = int(time_difference.total_seconds())
-            print(time_difference_seconds)
+            # print(time_difference_seconds)
             if time_difference_seconds <= timeAllowed:
-                print("Thresh")
+                # print("Thresh")
                 return threshold2
         elif self.connection_count[srcIP][0] >= threshold1:
             time1 = self.connection_count[srcIP][1] 
             time2 = self.timeChecker[srcIP]
             time_difference = time1 - time2
             time_difference_seconds = int(time_difference.total_seconds())
-            print(time_difference_seconds)
+            # print(time_difference_seconds)
             if time_difference_seconds <= timeAllowed:
-                print("thresh2")
+                # print("thresh2")
                 return threshold1
 
 
