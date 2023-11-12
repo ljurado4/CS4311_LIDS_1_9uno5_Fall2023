@@ -17,11 +17,15 @@
 
 from flask import Flask, render_template, request, jsonify
 from flask_cors import CORS
-
 from flask_socketio import SocketIO
 
 app = Flask(__name__)
-socketio = SocketIO(app)
+
+ssl_cert = "/media/sf_SW2/CS4311_LIDS_19uno5_Fall2023/cert.pem"
+ssl_key = "/media/sf_SW2/CS4311_LIDS_19uno5_Fall2023/key.pem"
+
+socketio = SocketIO(app, cors_allowed_origins="*", ssl_context=(ssl_cert, ssl_key))
+
 CORS(app, resources={r"/*": {"origins": "*"}})
 
 configuration = {}
@@ -156,10 +160,12 @@ def handle_LIDS_connect():
     
     client_protocol = request.environ.get('REMOTE_PORT')
     if not is_ip_whitelisted:
+        protocol = 'wss' if request.is_secure else 'ws'
         unrecognized_device_connected.append({
                 "ip": request.remote_addr,
                 "port": "NA" if not client_protocol else client_protocol,
-                "protocol": request.environ.get('HTTP_UPGRADE', 'http')
+                # "protocol": request.environ.get('HTTP_UPGRADE', 'https')
+                "protocol": protocol
                 
             })
                 
@@ -224,4 +230,4 @@ def shutdown():
     return render_template('LIDS-D_Config_server_View.html')
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5001)
+    app.run(debug=True, host='0.0.0.0', port=5001,ssl_context=(ssl_cert, ssl_key))

@@ -26,7 +26,7 @@
 #
 ##################################################################
 
-
+import os
 from flask import Flask, render_template, request, jsonify, flash
 from flask_cors import CORS
 from backend import packets,alerts_manager
@@ -34,7 +34,6 @@ import threading
 import logging
 import socketio
 import secrets
-
 
 
 app = Flask(__name__, template_folder='LIDS_GUI/templates', static_folder='LIDS_GUI/static')
@@ -47,7 +46,8 @@ thread.start()
 CORS(app)
 app.secret_key = secrets.token_urlsafe(16)
 
-sio = socketio.Client()
+sio = socketio.Client(ssl_verify=False)
+
 
 @app.route('/')
 def index():
@@ -71,7 +71,7 @@ def dashboard():
 
         try:
             
-            sio.connect(f'http://{ip_address}:{port_number}')
+            sio.connect(f'https://{ip_address}:{port_number}')
             flash(f'Successfully connection to server at IP: {ip_address} Port: {port_number}.', 'success')
         except Exception as e:
             flash(f'Failed connection server at IP: {ip_address} Port: {port_number}.', 'error')
