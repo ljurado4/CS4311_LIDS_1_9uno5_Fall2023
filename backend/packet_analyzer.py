@@ -31,7 +31,7 @@ class PacketAnalyzer:
         return self.portCheck.port_Checking(IP, destPort, timeOF, timeAllowed, threshold1, threshold2)
 
     def login_attempts(self, packet):
-         if 'SSH' or 'FTP' or 'RDP' in packet:
+        if 'SSH' or 'FTP' or 'RDP' in packet:
             return True
 
     def create_alert(self, packet, time, identifier, level, sourceIP, sourcePort,destIP,destPort,typeAlert,description):

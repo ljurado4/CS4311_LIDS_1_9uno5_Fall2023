@@ -29,11 +29,13 @@
 import os
 from flask import Flask, render_template, request, jsonify, flash
 from flask_cors import CORS
-from backend import packets,alerts_manager
+from backend import packets,alerts_manager, ipChecker
 import threading
 import logging
 import socketio
 import secrets
+from config_condition import config_condition
+
 
 
 app = Flask(__name__, template_folder='LIDS_GUI/templates', static_folder='LIDS_GUI/static')
@@ -113,7 +115,11 @@ def lids_main():
 @app.route('/configuration_data', methods=['POST'])
 def upload_xml_data():
     data = request.json
-
+    with config_condition:
+        ipChecker.ip_Checker.configuration = data
+        config_condition.notify_all()
+   
+    # print("config.configuration",config.configuration )
     return jsonify({"message": "Data processed!"})
 
 
