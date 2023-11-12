@@ -132,75 +132,14 @@
                         <tr>
                             <td>Notification 1</td>
                         </tr>
+                        </tr>
+                        {% for message in get_flashed_messages(category_filter=['success']) %}
                         <tr>
                             <td>{{ message }}</td>
                         </tr>
-                        <tr>
-                            <td>Error 1</td>
+                        {% endfor %}
                         </tr>
-                        <tr>
-                            <td>{{ message }}</td>
-                        </tr>
-                        <tr>
-                            <td>Error 1</td>
-                        </tr>
-                        <tr>
-                            <td>{{ message }}</td>
-                        </tr>
-                        <tr>
-                            <td>Error 1</td>
-                        </tr>
-                        <tr>
-                            <td>{{ message }}</td>
-                        </tr>
-                        <tr>
-                            <td>Error 1</td>
-                        </tr>
-                        <tr>
-                            <td>{{ message }}</td>
-                        </tr>
-                        <tr>
-                            <td>Error 1</td>
-                        </tr>
-                        <tr>
-                            <td>{{ message }}</td>
-                        </tr>
-                        <tr>
-                            <td>Error 1</td>
-                        </tr>
-                        <tr>
-                            <td>{{ message }}</td>
-                        </tr>
-                        <tr>
-                            <td>Error 1</td>
-                        </tr>
-                        <tr>
-                            <td>{{ message }}</td>
-                        </tr>
-                        <tr>
-                            <td>Error 1</td>
-                        </tr>
-                        <tr>
-                            <td>{{ message }}</td>
-                        </tr>
-                        <tr>
-                            <td>Error 1</td>
-                        </tr>
-                        <tr>
-                            <td>{{ message }}</td>
-                        </tr>
-                        <tr>
-                            <td>Error 1</td>
-                        </tr>
-                        <tr>
-                            <td>{{ message }}</td>
-                        </tr>
-                        <tr>
-                            <td>Error 1</td>
-                        </tr>
-                        <tr>
-                            <td>{{ message }}</td>
-                        </tr>
+                       
                     </tbody>
                 </table>
             </div>
@@ -216,51 +155,11 @@
                         <tr>
                             <td>Error 1</td>
                         </tr>
+                        {% for message in get_flashed_messages(category_filter=['error']) %}
                         <tr>
                             <td>{{ message }}</td>
                         </tr>
-                        <tr>
-                            <td>Error 1</td>
-                        </tr>
-                        <tr>
-                            <td>{{ message }}</td>
-                        </tr>
-                        <tr>
-                            <td>Error 1</td>
-                        </tr>
-                        <tr>
-                            <td>{{ message }}</td>
-                        </tr>
-                        <tr>
-                            <td>Error 1</td>
-                        </tr>
-                        <tr>
-                            <td>{{ message }}</td>
-                        </tr>
-                        <tr>
-                            <td>Error 1</td>
-                        </tr>
-                        <tr>
-                            <td>{{ message }}</td>
-                        </tr>
-                        <tr>
-                            <td>Error 1</td>
-                        </tr>
-                        <tr>
-                            <td>{{ message }}</td>
-                        </tr>
-                        <tr>
-                            <td>Error 1</td>
-                        </tr>
-                        <tr>
-                            <td>{{ message }}</td>
-                        </tr>
-                        <tr>
-                            <td>Error 1</td>
-                        </tr>
-                        <tr>
-                            <td>{{ message }}</td>
-                        </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>
