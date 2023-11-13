@@ -15,6 +15,7 @@ class portDetection:
         self.timeChecker = {}
         self.comboChecker = []
 
+    #Author Alejandro Hernandez
     def port_Checking(self,srcIP,destinationPort, timeOF, timeAllowed, threshold1, threshold2):
         key = f"{srcIP}:{destinationPort}"
 

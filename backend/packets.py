@@ -27,6 +27,8 @@ class PackTime:
     def __init__(self):
         self.pack_time = None
 
+    #Modified by Alejandro Hernanded 
+    
     def create_packet(self, in_packet):
         time = datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")
         if 'IP' in in_packet or "Src" in in_packet or "Source" in in_packet:
@@ -80,6 +82,8 @@ class PackTime:
             }
             self.packet_list.append(temp_packet_dict)
 
+    #modified by Alejandro Hernandez
+
     def packet_handler(self):
         while True:
             self.process_sem.acquire()
@@ -95,6 +99,8 @@ class PackTime:
                 self.packet_analyzer.analyze_packet(packet,time, self.identifier,packet["SourceIP"],packet["SourcePort"],packet["DestinationIP"],packet["DestinationPort"],packet["Protocol"])
             self.cap_sem.release()
 
+    #Modified by Alejandro Hernandez
+    
     def run_sniffer(self):
         # Wait for the configuration
         with config_condition:

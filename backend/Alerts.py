@@ -1,5 +1,6 @@
 #alerts.py
 
+#Author Alejandro Hernandez
 class Alerts:
     def __init__(self, time, identifier, level, sourceIP, sourcePort,destIP,destPort,typeAlert,description):
         self.time = time
