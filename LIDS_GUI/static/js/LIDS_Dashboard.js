@@ -37,23 +37,21 @@ let xmlConfigState = "<textarea class = \"xmlFileTextArea\">File Name: " + windo
 
 // Forms for event listeners
 
-
-//@author Arturo Olmos
-// Handles event when user wants to see config file
+// Handles event when the user wants to see the config file
 configFileForm.addEventListener("submit", (event) => {
     event.preventDefault();
     alertsTableState = middleContainer.innerHTML;
     middleContainer.innerHTML = xmlConfigState;
 });
 
-//@author Arturo Olmos
-// Handles event when user wants to see alerts displayed
+// Handles event when the user wants to see alerts displayed
 alertsTableFrom.addEventListener("submit", (event) => {
     event.preventDefault();
     xmlConfigState = middleContainer.innerHTML;
     middleContainer.innerHTML = alertsTableState;
 });
 
+// Function to toggle dropdown
 function toggleDropdown() {
     let dropdownContent = document.getElementById("sortByDropdownContent");
     if (dropdownContent.style.display === "none" || !dropdownContent.style.display) {
@@ -62,7 +60,8 @@ function toggleDropdown() {
         dropdownContent.style.display = "none";
     }
 }
-// @ Author: lizbeth Jurado
+
+// Function to filter alerts by level
 function filterAlerts(filters) {
     let table = document.getElementById("alertBoxTable");
     let rows = Array.from(table.rows).slice(3); // skip the header
@@ -71,7 +70,7 @@ function filterAlerts(filters) {
         let matchesFilter = true;
 
         // Filter by Level
-        if(filters.level !== undefined && filters.level !== 5) {
+        if (filters.level !== undefined && filters.level !== 5) {
             const alertLevel = parseInt(row.cells[2].textContent.trim());
             if (alertLevel > filters.level) {
                 matchesFilter = false;
@@ -79,27 +78,27 @@ function filterAlerts(filters) {
         }
 
         // Filter by Source IP
-        if(filters.sourceIP && row.cells[3].textContent.trim() !== filters.sourceIP) {
+        if (filters.sourceIP && row.cells[3].textContent.trim() !== filters.sourceIP) {
             matchesFilter = false;
         }
 
         // Filter by Source Port
-        if(filters.sourcePort && row.cells[4].textContent.trim() !== filters.sourcePort) {
+        if (filters.sourcePort && row.cells[4].textContent.trim() !== filters.sourcePort) {
             matchesFilter = false;
         }
 
         // Filter by Destination IP
-        if(filters.destinationIP && row.cells[5].textContent.trim() !== filters.destinationIP) {
+        if (filters.destinationIP && row.cells[5].textContent.trim() !== filters.destinationIP) {
             matchesFilter = false;
         }
 
         // Filter by Destination Port
-        if(filters.destinationPort && row.cells[6].textContent.trim() !== filters.destinationPort) {
+        if (filters.destinationPort && row.cells[6].textContent.trim() !== filters.destinationPort) {
             matchesFilter = false;
         }
 
         // Filter by Alert Type
-        if(filters.alertType && row.cells[7].textContent.trim() !== filters.alertType) {
+        if (filters.alertType && row.cells[7].textContent.trim() !== filters.alertType) {
             matchesFilter = false;
         }
 
@@ -107,7 +106,7 @@ function filterAlerts(filters) {
     });
 }
 
-
+// Function to toggle filter dropdown
 function toggleFilterDropdown() {
     let dropdownContent = document.getElementById("filterByDropdownContent");
     if (dropdownContent.style.display === "none" || !dropdownContent.style.display) {
@@ -117,9 +116,10 @@ function toggleFilterDropdown() {
     }
 }
 
+// Function to sort the alerts table
 function sortTable(n) {
     let table = document.getElementById("alertBoxTable");
-    let rows = Array.from(table.rows).slice(1);  // skip the header
+    let rows = Array.from(table.rows).slice(1); // skip the header
     rows.sort((r1, r2) => r1.cells[n].textContent.localeCompare(r2.cells[n].textContent));
     rows.forEach(row => table.tBodies[0].appendChild(row));
 }
@@ -182,9 +182,9 @@ function removeSort() {
     location.reload();
 }
 
-// Expose functions that you need globally.
+// Expose functions globally
 window.toggleDropdown = toggleDropdown;
 window.sortTable = sortTable;
 window.removeSort = removeSort;
-window.filterByLevel = filterByLevel;
+window.filterAlerts = filterAlerts;
 window.toggleFilterDropdown = toggleFilterDropdown;
