@@ -7,9 +7,7 @@
 #              which is responsible for parsing an XML configuration file and
 #              updating the system accordingly.
 #
-# Modification History:
-# [11/01/23] - [5.0] - [Lizbeth Jurado] - [File Description and Organization Set Up]
-#
+
 # Tasks:
 # - [Task 1]: Implement the 'configure' method to parse and update the system based
 #             on the provided XML configuration file.
@@ -19,7 +17,7 @@
 import menu
 import os
 import xml.etree.ElementTree as ET
-
+#modified by and author Benjamin Hansen
 class ConfigureCLI:
     """
     Command Line Interface configuration class.

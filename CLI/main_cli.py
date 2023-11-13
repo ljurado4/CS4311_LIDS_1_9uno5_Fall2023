@@ -7,17 +7,15 @@
 #              Interface) of LIDS (Local Intrusion Detection System). It initializes
 #              the system and starts the Alert menu.
 #
-# Modification History:
-# [11/01/23] - [5.0] - [Lizbeth Jurado] - [File Description and Organization Set Up]
-#
+
 # Tasks:
 # - [Task 1]: Implement the 'main' function to initialize the CLI and start the Alert menu.
 #
 ################################################################################
-
+#author Benjamin Hansen
 import menu
 import argparse
-
+#author Benjamin Hansen
 def main():
     alert_menu = menu.Menu()
     alert_menu.navigate_next_menu("Alert")

@@ -8,9 +8,7 @@
 #              a tabulated format. It provides functions to display all packets
 #              or filter packets based on specific criteria.
 #
-# Modification History:
-# [11/01/23] - [5.0] - [Lizbeth Jurado] - [File Description and Organization Set Up]
-#
+
 # Tasks:
 # - [Task 1]: Implement the '_print_pcap_table' method to print pcap data in a tabulated format.
 # - [Task 2]: Implement the 'display_matching_pcaps' method to display pcaps that match the search criteria.
@@ -19,7 +17,7 @@
 ################################################################################
 import sys
 import os
-
+#author Seth Velasco and modified Benjamin Hansen
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import menu
 from tabulate import tabulate
@@ -43,12 +41,12 @@ class PcapMenu:
         self.menu_helper = menu.Menu()
         self.valid_search_commands = [
             "Time", "Source","Destination","Protocol", "Length", "Description"]
-
+#author Benjamin Hansen
     def navigate_next_menu(self):
         menu_helper = menu.Menu()
         next_menu = menu_helper.get_user_input(">> ",menu_helper.choice_set)
         menu_helper.navigate_next_menu(next_menu)
-        
+#author Benjamin Hansen
     def _print_pcap_table(self, pcap_dictionary: dict):
         """
         Print a tabulated representation of the given pcap data.
@@ -60,7 +58,7 @@ class PcapMenu:
         data = [list(pcap.values()) for pcap in pcap_dictionary]
         table = tabulate(data, headers=header, tablefmt="fancy_grid")
         print(table)
-
+#author Benjamin Hansen
     def display_matching_pcaps(self, search_command: list):
         """
         Display pcaps that match the given search command and target value.
@@ -86,7 +84,7 @@ class PcapMenu:
         else:
             # Print a message if no matching pcap is found
             print("Unable to locate the specified PCAP file")
-
+#author Benjamin Hansen
     def handle_pcap_search(self, user_input: str):
         """Parses the user command to determine the PCAP search criteria and then 
         calls the appropriate function to retrieve PCAP data.
