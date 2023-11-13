@@ -1,4 +1,9 @@
-#packets.py
+##################################################################
+# File: packets.py
+#
+# Description:
+###################################################################
+
 import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -27,7 +32,7 @@ class PackTime:
     def __init__(self):
         self.pack_time = None
 
-    #Modified by Alejandro Hernanded 
+    # @Modified: Alejandro Hernanded 
     
     def create_packet(self, in_packet):
         time = datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")
@@ -82,7 +87,7 @@ class PackTime:
             }
             self.packet_list.append(temp_packet_dict)
 
-    #modified by Alejandro Hernandez
+    # @Modified: Alejandro Hernandez
 
     def packet_handler(self):
         while True:
@@ -99,7 +104,7 @@ class PackTime:
                 self.packet_analyzer.analyze_packet(packet,time, self.identifier,packet["SourceIP"],packet["SourcePort"],packet["DestinationIP"],packet["DestinationPort"],packet["Protocol"])
             self.cap_sem.release()
 
-    #Modified by Alejandro Hernandez
+    # @Modified: Alejandro Hernandez
     
     def run_sniffer(self):
         # Wait for the configuration
@@ -115,8 +120,13 @@ class PackTime:
             packet_handler_thread = th.Thread(target=self.packet_handler)
             packet_handler_thread.start()
 
+            # @ Modified: LizbethBranch
+            # For macOS
+            #capture = pyshark.LiveCapture(interface="en0")
+
             capture = pyshark.LiveCapture(interface="enp0s3")
             # capture = pyshark.LiveCapture()
+
             for in_packet in capture:
 
                 self.cap_sem.acquire()

@@ -1,21 +1,11 @@
 ################################################################################
 # File: menu.py
 #
-# Version: [5.0]
-#
 # Description: This file contains the implementation of the Menu class, which
 #              provides common functions for the CLI (Command Line Interface) to
 #              use across different menus in the LIDS (Local Intrusion Detection
 #              System). It includes utility methods for obtaining and validating
 #              user input and stores shared system configuration attributes.
-
-# Tasks:
-# - [Task 1]: Implement the 'update_system_config' class method to update shared
-#             system configuration attributes.
-# - [Task 2]: Implement the 'get_user_input' method to get and validate user input.
-# - [Task 3]: Implement the 'navigate_next_menu' method to navigate to the next
-#             appropriate menu based on user input.
-#
 ################################################################################
 
 import config_parser
@@ -23,7 +13,10 @@ import help_menu
 import pcap_menu
 import alerts_menu
 import main_menu
-#author Benjamin Hansen and modified 
+
+# @Author:Benjamin Hansen
+# @Modifier: Benjamin Hansen 
+
 class Menu():
     """A class for common functions the CLI will use across different menus.
     
@@ -57,7 +50,11 @@ class Menu():
         cls.mac_address = mac_address
         cls.open_ports = open_ports
         cls.whitelisted_ips = whitelisted_ips
-#author Benjamin Hansen and modified 
+        
+
+# @Author: Benjamin Hansen 
+# @Modified: Benjamin Hansen
+
     def get_user_input(self, message: str, valid_input: set) -> str:
         """Gets and validates user input."""
         user_input = input(message)
@@ -69,9 +66,13 @@ class Menu():
             user_input = input(message)
         
         return user_input
-#author Benjamin Hansen and modified 
+
+# @Author: Benjamin Hansen 
+# @Modified: Benjamin Hansen
+
     def navigate_next_menu(self, menu_option_selected: str) -> None:
         """Navigate to the next menu based on the user's selection
+
         
         This function takes a menu option and navigated to the next appropriate menu
         based on the user's input. The function supports options "Help", "Config", 
@@ -79,7 +80,7 @@ class Menu():
 
         Args:
             menu_option_selected (str): The menu option that the user has selected.
-        """
+       
         match menu_option_selected:
             case _ if menu_option_selected == "Start Menu":
                 print('\n' * 24)
@@ -120,7 +121,11 @@ class Menu():
                 ]
                 alert_men = alerts_menu.Alerts_CLI()
                 alert_men.display_Alerts()
-            
+
+            case _ if menu_option_selected == "Show PCAP HTML":
+                pcap_menu_instance.display_pcap_in_html()
+
             case _ if menu_option_selected == "Exit":
                 print("Exiting")
                 exit()
+                 """
