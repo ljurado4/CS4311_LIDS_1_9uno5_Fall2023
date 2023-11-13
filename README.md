@@ -25,36 +25,45 @@ LIDS is a Local Intrusion Detection System designed to monitor network activity 
 1. Clone the repository to your local machine.
 git clone https://github.com/ljurado4/CS4311_LIDS_19uno5_Fall2023.git
 
-2. Navigate to the project directory.
 
 
-3. **Set Up a Virtual Environment**:
+3. **Prerequisites**:
+   - Ensure you have Python installed 3.10.12 installed
+     ```
+     python --version  # Check your current Python version
+ 
+     ```
+
+3. Navigate to the project directory.
+
+4. **Set Up a Virtual Environment**:
    - Install `virtualenv`:
-pip3 install virtualenv
+pip3 install virtualenv==20.24.5
 
    - Create a new environment:
 virtualenv env
 
-4. **Install Flask and Required Packages**:
+5. **Install Flask and Required Packages**:
    - Install Flask:
-pip3 install flask
+pip3 install Flask==20.24.5
 
    - Install Flask-CORS:
-pip3 install flask-cors
+pip3 install flask-cors==4.0.0
 
-   - Install other required packages for the project:
-pip3 install -r requirements.txt
-
-   - Install the Flask-SQLAlchemy package:
-
-pip3 install Flask-SQLAlchemy
-pip3 install Flask-Migrate
-
-5. **Install Pyshark**:
+6. **Install Pyshark**:
    - Install Pyshark:
-pip3 install pyshark
+pip3 install pyshark==0.6
 
-6. **Activate the virtual environment**:
+7. **Install python-socketio**:
+   - Install SocketIO:
+pip3 install pip install python-socketio
+
+7. **Install Pyshark**:
+   - Install Pyshark:
+pip3 install pyshark==0.6
+
+
+7. **Activate the virtual environment**:
    - On Windows using CMD:
 .\env\Scripts\activate.bat
 
@@ -74,38 +83,7 @@ python3 main_cli.py --config_file=your_config.xml
 
 Once the environment is active:
 1. Navigate to the project folder.
-2. Start the Flask server by running `app.py`. (FYI macOS will require you to still run python3)
+2. Start the Flask server by running `python app.py`. (FYI macOS will require you to still run python3)
 
-python3 app.py
-=======
 
 Once the server is running, access the Web UI by navigating to `http://127.0.0.1:5000` in your web browser.
-
-#### Database Setup and Migration with Flask
-
-**Installation:**
-1. Install Flask-Migrate and Flask-SQLAlchemy: These tools help manage and migrate the database schema.
-pip3 install Flask-Migrate Flask-SQLAlchemy
-
-**Configuration:**
-Ensure you've set up your app's configuration to use the desired database. For instance, for SQLite in the `app.py` file:
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///lids.db'
-
-**Usage:**
-1. Initialize the Migration Environment:
-If you're setting up migrations for the first time, you need to initialize the migration environment. This will create a migrations folder which will contain versions of schema changes.
-flask db init
-
-2. Generate a Migration Script:
-After making changes to your model (i.e., the structure of your database tables), you can auto-generate a migration script using the following command:
-flask db migrate -m "Your message about the migration"
-
-3. Apply Migrations to the Database:
-To update your database schema according to the generated script, run:
-flask db upgrade
-
-
-Install the Flask-SQLAlchemy package:
-
-pip3 install Flask-SQLAlchemy
-pip3 install Flask-Migrate
