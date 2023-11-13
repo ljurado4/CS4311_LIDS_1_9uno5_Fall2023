@@ -92,7 +92,7 @@ class PackTime:
             #time = datetime.strptime(time0,"%Y-%m-%d %H:%M:%S.%f")
             if type(packet) == dict:
                 self.identifier += 1
-                self.packet_analyzer.analyze_packet(packet,time, self.identifier,packet["SourceIP"],packet["SourcePort"],packet["DestinationIP"],packet["DestinationPort"])
+                self.packet_analyzer.analyze_packet(packet,time, self.identifier,packet["SourceIP"],packet["SourcePort"],packet["DestinationIP"],packet["DestinationPort"],packet["Protocol"])
             self.cap_sem.release()
 
     def run_sniffer(self):

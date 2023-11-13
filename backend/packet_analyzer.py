@@ -7,10 +7,11 @@ class PacketAnalyzer:
         self.iC = ipChecker.ip_Checker()
         self.getAlerts = alerts_manager.AlertManager()
         self.portCheck = PortChecker.portDetection()
+        self.loginChecker = loginCheck.LoginCheck()
 
-    def analyze_packet(self, packet, time, identifier, sourceIP, sourcePort,destIP,destPort):
+    def analyze_packet(self, packet, time, identifier, sourceIP, sourcePort,destIP,destPort,protocol):
         # Check for each error 
-        if self.login_attempts(packet) == True:
+        if self.login_attempts(packet,protocol,destPort) == True:
             self.create_alert(packet, time, identifier, 3, sourceIP, sourcePort,destIP,destPort,"Failed Login Error","Multiple failed logins detected")
         res = self.port_scan_check(sourceIP, destPort, time)
         if res == "threshold2":
@@ -30,9 +31,10 @@ class PacketAnalyzer:
         timeOF = datetime.strptime(time,"%Y-%m-%d %H:%M:%S.%f")
         return self.portCheck.port_Checking(IP, destPort, timeOF, timeAllowed, threshold1, threshold2)
 
-    def login_attempts(self, packet):
-        if 'SSH' or 'FTP' or 'RDP' in packet:
-            return True
+    def login_attempts(self, packet,protocol,time,destPort):
+        timeAllowed = 700
+        timeOF = datetime.strptime(time,"%Y-%m-%d %H:%M:%S.%f")
+        return self.loginChecker.failedPssWrd(protocol,timeOF,timeAllowed,destPort)
 
     def create_alert(self, packet, time, identifier, level, sourceIP, sourcePort,destIP,destPort,typeAlert,description):
         # Capture PCAP data as a string from the packet
