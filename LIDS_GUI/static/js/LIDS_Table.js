@@ -6,9 +6,7 @@
 # Description: This JavaScript file is responsible for handling the 
 display of alerts in a table format within the LIDS Dashboard web application.
 #
-# Modification History:
-# [11/01/23] - [3.0] - [Lizbeth Jurado] - [File Description and Organization Set Up]
-#
+
 # Tasks:
 # - [Task 1]: Initialize and fetch the latest alerts when the document is loaded.
 # - [Task 2]: Set up a periodic interval to refresh and fetch the latest alerts every 20 seconds.
@@ -19,6 +17,8 @@ display of alerts in a table format within the LIDS Dashboard web application.
 # - [Task 7]: Handle potential errors that may occur during the alert fetching process.
 #
 ################################################################## */
+
+
 document.addEventListener("DOMContentLoaded", function () {
     fetchLatestAlerts();
 
@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
         sortAlertsByLevel();
     });
 });
-
+/*author and modified: Benjamin Hansen*/ 
 function fetchLatestAlerts() {
     fetch('/get_alerts')
         .then(response => response.json())
@@ -40,7 +40,7 @@ function fetchLatestAlerts() {
             console.error("There was an error fetching the alerts!", error);
         });
 }
-
+/*author and modified: Benjamin Hansen*/ 
 function populateTable(alerts) {
     const tbody = document.getElementById("alertBoxTable").getElementsByTagName("tbody")[0];
     tbody.innerHTML = ""; // Clear previous rows

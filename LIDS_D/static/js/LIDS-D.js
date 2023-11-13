@@ -10,9 +10,7 @@
    #   - Exporting alerts
    #   - Displaying alert details
    #
-   # Modification History:
-   # [11/01/23] - [5.0] - [Lizbeth Jurado] - [File Description and Organization Set Up]
-   #
+
    ######################################################################
 */
 
@@ -22,6 +20,7 @@ let maliciousPacketCount = 0
 // Adding initial HTML to display malicious packets found
 document.getElementById("mpd").innerHTML = "Malicious Packet Count:\n" + maliciousPacketCount.toString()
 
+// Author Arturo Olmos and modified Benjamin Hansen
 // Function to start the server
 function startServer() {
     fetch('/start_socket_server', {

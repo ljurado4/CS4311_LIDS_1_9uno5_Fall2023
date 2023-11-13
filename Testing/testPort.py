@@ -11,9 +11,7 @@
 # for a given IP address and port, as well as checks for unique connection
 # tracking.
 #
-# Modification History:
-# [11/02/23] - [5.0] - [Lizbeth Jurado] - [File Description and Organization Set Up]
-#
+
 # Tasks:
 # - [Task 1]: Test the update_connection_count method to ensure it correctly
 #             identifies when the connection count has not reached the threshold.

@@ -11,9 +11,7 @@
 # destination IP and port. Additionally, it captures live network traffic
 # using PyShark and allows for the inspection of these packets.
 
-# Modification History:
-# [11/02/23] - [5.0] - [Lizbeth Jurado] - [File Description and Organization Set Up]
-#
+
 # Tasks:
 # - [Task 1]: Define the destination IP address for the simulated packets.
 # - [Task 2]: Implement the packet crafting function to create TCP/IP packets

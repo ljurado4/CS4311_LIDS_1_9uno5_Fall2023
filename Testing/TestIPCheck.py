@@ -7,10 +7,7 @@
 # Description: The file has a template that appears to be the main or welcome page of a
 # Local Intrusion Detection System (LIDS). This page likely serves as an entry point to the system,
 # where users can upload a configuration file. 
-# 
-# Modification History:
-# [11/02/23] - [5.0] - [Lizbeth Jurado] - [File Description and Organization Set Up]
-#
+
 # Tasks:
 # - [Task 1]: Complete the backend integration for the file upload form to ensure that the uploaded configuration file is received, validated, and processed by the server.
 # - [Task 2]: Implement the functionality in LIDS_Main.js to handle the file upload interaction, such as file validation, providing user feedback, and possibly parsing the XML file client-side before sending it to the server.

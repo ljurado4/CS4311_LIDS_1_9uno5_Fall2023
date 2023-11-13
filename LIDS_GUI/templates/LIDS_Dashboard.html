@@ -9,9 +9,7 @@
 # @Author:Arturo Olmos
 # Formatted the basic structure for the page, and added styling to it as well
 #
-# Modification History:
-# [11/02/23] - [3.0] - [Lizbeth Jurado] - [File Description and Organization Set Up]
-#
+
 # Tasks:
 # - Task 1]: Implement the backend logic to handle the connection form submission, processing the IP address and port number to establish or terminate a connection.
 # - [Task 2]: Populate the alerts table with real-time data from the LIDS, ensuring that each entry accurately reflects an individual alert's details.
@@ -23,6 +21,7 @@
 ################################################################## -->
 <!DOCTYPE html>
 <html lang="en">
+
 
 <head>
     <meta charset="UTF-8">
@@ -63,6 +62,7 @@
             </form>
         </div>
         <!-- table container x overflow of text is handled inside the td tag -->
+        <!-- Modified Benjamin Hansen for to allow table to have real time data -->
         <div class="tableContainer" id="middleContainer" style="">
             <table id="alertBoxTable" >
                 <thead>
@@ -118,6 +118,7 @@
                 </tbody>
             </table>
         </div>
+        <!-- Modified Benjamin Hansen for to allow table to have real time data -->
         <!-- right side bar -->
         <div  class="rightSidebar" id="rightSidebar">
             <!-- container for notifications table -->
@@ -143,6 +144,7 @@
                     </tbody>
                 </table>
             </div>
+            <!-- Modified Benjamin Hansen for to allow table to have real time data -->
             <!-- container for errors table -->
             <div class="rightSidebarSC">
                 <table id="errorsTable" >

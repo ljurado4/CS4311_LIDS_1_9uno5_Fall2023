@@ -5,17 +5,15 @@
    #
    # Description: This file is esponsible for handling and displaying alerts data in an HTML table format.
    #
-   # Modification History:
-   # [11/01/23] - [5.0] - [Lizbeth Jurado] - [File Description and Organization Set Up]
-   #
-   ###################################################################### */
 
+   ###################################################################### */
+// Author and modified Benjamin Hansen
 // Construct the socket URL based on the current location
 var socketUrl = window.location.protocol + '//' + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
-
+// Author and modified Benjamin Hansen
 // Connect to the 'lids-d' socket.io namespace
 var socket = io.connect(socketUrl + '/lids-d');
-
+// Author and modified Benjamin Hansen
 // Function to update the HTML table with alert data
 function updateTable(data) {
     // Get the table body element
@@ -70,11 +68,11 @@ function updateTable(data) {
         descriptionCell.innerHTML = `<button id="alert${index + 1}-button" class="alertDescriptionButton" onclick="displayAlert(this.id)">${alert.Description}</button>`; 
      });
 }
-
+// Author and modified Benjamin Hansen
 // Socket.IO event listener for the 'new_alert_data' event
 socket.on('new_alert_data', function(data) {
     updateTable(data);
 });
-
+// Author and modified Benjamin Hansen
 // Initial fetch to get the latest alerts
 fetchLatestAlerts();

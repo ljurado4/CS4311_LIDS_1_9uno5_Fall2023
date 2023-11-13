@@ -10,9 +10,7 @@
 # provides a dashboard for real-time alerts, and allows configuration through
 # a web GUI. The server also integrates with socket.io for live data streaming.
 #
-# Modification History:
-# [11/02/23] - [5.0] - [Lizbeth Jurado] - [File Description and Organization Set Up]
-#
+
 # Tasks:
 # - [Task 1]: Set up the Flask application and configure cross-origin resource sharing (CORS).
 # - [Task 2]: Initialize the packet sniffer in a separate thread.
@@ -25,6 +23,10 @@
 # - [Task 9]: Maintain the server code with logging for debug purposes.
 #
 ##################################################################
+
+
+
+#author and modified: Benjamin Hansen
 
 import os
 from flask import Flask, render_template, request, jsonify, flash
@@ -50,7 +52,7 @@ app.secret_key = secrets.token_urlsafe(16)
 
 sio = socketio.Client(ssl_verify=False)
 
-
+#author and modified: Benjamin Hansen
 @app.route('/')
 def index():
     return render_template('LIDS_Main.html')
@@ -58,7 +60,7 @@ def index():
 
     
     
-    
+#author and modified: Benjamin Hansen  
 @app.route('/LIDS_Dashboard', methods=['GET', 'POST'])
 def dashboard():
     global client_socket
@@ -81,7 +83,7 @@ def dashboard():
         
     return render_template('LIDS_Dashboard.html')
 
-
+#author and modified: Benjamin Hansen
 @app.route('/get_alerts', methods=['GET'])
 def get_latest_alerts():
     getter = alerts_manager.AlertManager().sharedAlerts
@@ -107,11 +109,12 @@ def get_latest_alerts():
     return jsonify(alert_data)
 
 
-
+#author and modified: Benjamin Hansen
 @app.route('/LIDS_Main')
 def lids_main(): 
     return render_template('LIDS_Main.html')
 
+#author and modified: Benjamin Hansen
 @app.route('/configuration_data', methods=['POST'])
 def upload_xml_data():
     data = request.json
@@ -123,7 +126,7 @@ def upload_xml_data():
     return jsonify({"message": "Data processed!"})
 
 
-
+#author and modified: Benjamin Hansen
 @app.route('/disconnect', methods=['POST'])
 def disconnect():
     print("Disconnecting from server")
@@ -131,6 +134,6 @@ def disconnect():
     sio.disconnect()
     return render_template('LIDS_Main.html')
 
-
+#author and modified: Benjamin Hansen
 if __name__ == "__main__":
     app.run(debug=True)
