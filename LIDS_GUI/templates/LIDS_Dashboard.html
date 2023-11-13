@@ -50,45 +50,34 @@
                         src="../static/img/Config_File_Button_IMG.png">
                 </form>
             </div>
-            <tr>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th style="z-index: 10;">
-                    <div style="text-align: center; z-index: 10;">
-                        <div class="dropdown" style="z-index: 10;">
-                            <button id="filterByButton" onclick="toggleFilterDropdown()">Filter by Level</button>
-                            <div class="dropdown-options" id="filterByDropdownContent">
-                                <button onclick="filterByLevel(1); toggleFilterDropdown()">1</button>
-                                <button onclick="filterByLevel(2); toggleFilterDropdown()">1-2</button>
-                                <button onclick="filterByLevel(3); toggleFilterDropdown()">1-3</button>
-                                <button onclick="filterByLevel(4); toggleFilterDropdown()">1-4</button>
-                                <button onclick="filterByLevel(5); toggleFilterDropdown()">All</button>
-                            </div>
-                        </div>
-                    </div>
-                </th>
-                <th style="overflow: visible;">
-                    <div>
-                        <div class="dropdown">
-                            <button id="sortByButton" onclick="toggleDropdown()">Sort by</button>
-                            <div class="dropdown-options" id="sortByDropdownContent">
-                                <button onclick="sortTable(0); toggleDropdown()">Lvl</button>
-                                <button onclick="sortTable(1); toggleDropdown()">Time</button>
-                                <button onclick="sortTable(2); toggleDropdown()">IP</button>
-                                <button onclick="removeSort(); toggleDropdown()">None</button>
-                            </div>
-                        </div>
-                    </div>
-                </th>
-            </tr>
-            <!-- table container x overflow of text is handled inside the td tag -->
             <div class="tableContainer" id="middleContainer" style="">
-                <table id="alertBoxTable" >
+                <!-- Updated Filter Dropdown -->
+                <div class="dropdown">
+                    <button id="filterByButton" onclick="toggleFilterDropdown()">Filter Options</button>
+                    <div class="dropdown-options" id="filterByDropdownContent">
+                        <!-- Filter by Level -->
+                        <input type="number" id="filterLevel" placeholder="Level">
+                        
+                        <!-- Filter by Source IP -->
+                        <input type="text" id="filterSourceIP" placeholder="Source IP">
+    
+                        <!-- Filter by Source Port -->
+                        <input type="text" id="filterSourcePort" placeholder="Source Port">
+    
+                        <!-- Filter by Destination IP -->
+                        <input type="text" id="filterDestinationIP" placeholder="Destination IP">
+    
+                        <!-- Filter by Destination Port -->
+                        <input type="text" id="filterDestinationPort" placeholder="Destination Port">
+    
+                        <!-- Filter by Alert Type -->
+                        <input type="text" id="filterAlertType" placeholder="Alert Type">
+    
+                        <!-- Apply Filter Button -->
+                        <button onclick="applyFilters(); toggleFilterDropdown()">Apply Filters</button>
+                    </div>
+                </div>
+                <table id="alertBoxTable">
                     <thead>
                         <tr>
                             <th>Time</th>
@@ -100,7 +89,7 @@
                             <th>Destination Port</th>
                             <th>Alert Type</th>
                             <th>Description</th>
-                            <th>PCAP </th>
+                            <th>PCAP</th>
                         </tr>
                     </thead>
                     <tbody >
@@ -108,7 +97,7 @@
                 </table>
             </div>
             <!-- right side bar -->
-            <div  class="rightSidebar" id="rightSidebar">
+            <div class="rightSidebar" id="rightSidebar">
                 <!-- container for notifications table -->
                 <div class="rightSidebarSC">
                     <table id="notificationsTable">
@@ -121,16 +110,12 @@
                             <tr>
                                 <td>Notification 1</td>
                             </tr>
-                            </tr>
-                            
-                            </tr>
-                           
                         </tbody>
                     </table>
                 </div>
                 <!-- container for errors table -->
                 <div class="rightSidebarSC">
-                    <table id="errorsTable" >
+                    <table id="errorsTable">
                         <thead>
                             <tr>
                                 <th>Errors</th>
@@ -140,22 +125,34 @@
                             <tr>
                                 <td>Error 1</td>
                             </tr>
-                            
                             <tr>
                                 <td>Failed connection server at IP: 127.0.0.1 Port: 5000.</td>
                             </tr>
-                            
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
     
-    
         <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script src="../static/js/LIDS_Dashboard.js"></script>
         <script src="../static/js/LIDS_Table.js"></script>
+        <script>
+            // Function to collect filter values and call filterAlerts
+            function applyFilters() {
+                const filters = {
+                    level: document.getElementById('filterLevel').value,
+                    sourceIP: document.getElementById('filterSourceIP').value,
+                    sourcePort: document.getElementById('filterSourcePort').value,
+                    destinationIP: document.getElementById('filterDestinationIP').value,
+                    destinationPort: document.getElementById('filterDestinationPort').value,
+                    alertType: document.getElementById('filterAlertType').value
+                };
+                filterAlerts(filters);
+            }
+        </script>
     </body>
     
     </html>
+    

@@ -62,20 +62,51 @@ function toggleDropdown() {
         dropdownContent.style.display = "none";
     }
 }
-
-function filterByLevel(level) {
+// @ Author: lizbeth Jurado
+function filterAlerts(filters) {
     let table = document.getElementById("alertBoxTable");
-    let rows = Array.from(table.rows).slice(3);  // skip the header
+    let rows = Array.from(table.rows).slice(3); // skip the header
 
     rows.forEach(row => {
-        const alertLevel = parseInt(row.cells[2].textContent.trim());
-        if (alertLevel <= level || level === 5) {
-            row.style.display = "";
-        } else {
-            row.style.display = "none";
+        let matchesFilter = true;
+
+        // Filter by Level
+        if(filters.level !== undefined && filters.level !== 5) {
+            const alertLevel = parseInt(row.cells[2].textContent.trim());
+            if (alertLevel > filters.level) {
+                matchesFilter = false;
+            }
         }
+
+        // Filter by Source IP
+        if(filters.sourceIP && row.cells[3].textContent.trim() !== filters.sourceIP) {
+            matchesFilter = false;
+        }
+
+        // Filter by Source Port
+        if(filters.sourcePort && row.cells[4].textContent.trim() !== filters.sourcePort) {
+            matchesFilter = false;
+        }
+
+        // Filter by Destination IP
+        if(filters.destinationIP && row.cells[5].textContent.trim() !== filters.destinationIP) {
+            matchesFilter = false;
+        }
+
+        // Filter by Destination Port
+        if(filters.destinationPort && row.cells[6].textContent.trim() !== filters.destinationPort) {
+            matchesFilter = false;
+        }
+
+        // Filter by Alert Type
+        if(filters.alertType && row.cells[7].textContent.trim() !== filters.alertType) {
+            matchesFilter = false;
+        }
+
+        row.style.display = matchesFilter ? "" : "none";
     });
 }
+
 
 function toggleFilterDropdown() {
     let dropdownContent = document.getElementById("filterByDropdownContent");
