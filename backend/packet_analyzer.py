@@ -1,3 +1,4 @@
+#packet_analyzer.py
 from . import ipChecker, alerts_manager, loginCheck, PortChecker
 from datetime import datetime
 
@@ -7,7 +8,7 @@ class PacketAnalyzer:
         self.iC = ipChecker.ip_Checker()
         self.getAlerts = alerts_manager.AlertManager()
         self.portCheck = PortChecker.portDetection()
-
+    
     def analyze_packet(self, packet, time, identifier, sourceIP, sourcePort,destIP,destPort):
         # Check for each error 
         if self.login_attempts(packet) == True:
@@ -41,3 +42,34 @@ class PacketAnalyzer:
         self.getAlerts.create_alert(pcap_data,time, identifier, level, sourceIP, sourcePort,destIP,destPort,typeAlert,description)
         self.getAlerts.ident_list(pcap_data, identifier)
         alerts = self.getAlerts.get_alerts()
+
+    def read_pcap(self, pcap_file_path):
+        try:
+            # Open the pcap file with FileCapture
+            cap = pyshark.FileCapture(pcap_file_path, only_summaries=True)
+            packets_data = []
+
+            for packet in cap:
+                # Process each packet into a dictionary
+                packet_dict = {
+                    'number': packet.no,
+                    'time': packet.time,
+                    'source': packet.source,
+                    'destination': packet.destination,
+                    'protocol': packet.protocol,
+                    'length': packet.length,
+                    'info': packet.info
+                }
+                packets_data.append(packet_dict)
+
+            cap.close()
+            return packets_data
+
+        except Exception as e:
+            print(f"An error occurred while reading the pcap file: {e}")
+            return []
+
+    # format_for_frontend method
+    def format_for_frontend(self, packet_data):
+        # Convert packet data to JSON
+        return json.dumps(packet_data)

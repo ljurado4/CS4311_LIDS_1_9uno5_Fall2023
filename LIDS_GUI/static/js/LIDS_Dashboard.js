@@ -98,7 +98,53 @@ $(document).ready(() => {
     $.getJSON("https://api.ipify.org?format=json", (data) => {
         $("#headerTitle").text((i, originalText) => originalText + " " + data.ip);
     });
+
+    // Simulated example data for alerts with PCAP links
+    const exampleAlerts = [
+        {
+            // Populate other alert properties...
+            pcapLink: "https://example.com/pcap1.pcap", // Replace with actual PCAP link
+        },
+        {
+            // Populate other alert properties...
+            pcapLink: "https://example.com/pcap2.pcap", // Replace with actual PCAP link
+        },
+        // Add more alerts as needed...
+    ];
+
+    // Populate the table with example alerts (replace with your data retrieval logic)
+    populateTableWithData(exampleAlerts);
 });
+
+// Function to populate the alerts table with data, including PCAP links
+function populateTableWithData(alerts) {
+    const table = document.getElementById("alertBoxTable");
+    const tbody = table.querySelector("tbody");
+
+    // Clear existing rows
+    tbody.innerHTML = "";
+
+    // Iterate through alerts and populate rows
+    alerts.forEach((alert) => {
+        const row = document.createElement("tr");
+
+        // Populate other columns...
+        // For example:
+        // const timeCell = document.createElement("td");
+        // timeCell.textContent = alert.time;
+        // row.appendChild(timeCell);
+
+        // Create a cell for PCAP data
+        const pcapCell = document.createElement("td");
+        pcapCell.textContent = alert.pcapLink; // Replace with the actual PCAP data
+
+        // Append all cells to the row
+        row.appendChild(pcapCell);
+
+        // Append the row to the table body
+        tbody.appendChild(row);
+    });
+}
 
 // Function to remove sorting and reload the page
 function removeSort() {

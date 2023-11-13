@@ -73,8 +73,8 @@ class Menu():
         
         return user_input
 
-    def navigate_next_menu(self, menu_option_selected: str) -> None:
-        """Navigate to the next menu based on the user's selection
+   """ def navigate_next_menu(self, menu_option_selected: str) -> None:
+       Navigate to the next menu based on the user's selection
         
         This function takes a menu option and navigated to the next appropriate menu
         based on the user's input. The function supports options "Help", "Config", 
@@ -82,7 +82,7 @@ class Menu():
 
         Args:
             menu_option_selected (str): The menu option that the user has selected.
-        """
+       
         match menu_option_selected:
             case _ if menu_option_selected == "Start Menu":
                 print('\n' * 24)
@@ -123,7 +123,11 @@ class Menu():
                 ]
                 alert_men = alerts_menu.Alerts_CLI()
                 alert_men.display_Alerts()
-            
+
+            case _ if menu_option_selected == "Show PCAP HTML":
+                pcap_menu_instance.display_pcap_in_html()
+
             case _ if menu_option_selected == "Exit":
                 print("Exiting")
                 exit()
+                 """

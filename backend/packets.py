@@ -109,8 +109,8 @@ class PackTime:
             packet_handler_thread = th.Thread(target=self.packet_handler)
             packet_handler_thread.start()
 
-            # capture = pyshark.LiveCapture(interface="enp0s3")
-            capture = pyshark.LiveCapture()
+            capture = pyshark.LiveCapture(interface="en0")
+            #capture = pyshark.LiveCapture()
             for in_packet in capture:
 
                 self.cap_sem.acquire()
