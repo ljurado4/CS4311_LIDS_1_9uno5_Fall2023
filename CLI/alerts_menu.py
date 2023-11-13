@@ -35,6 +35,8 @@ class Alerts_CLI:
     #    self.pack_time = packets.PackTime()
     #    self.thread = threading.Thread(target=self.display_Alerts)#
     
+    #modified Alejandro Hernandez
+    
     def display_Alerts(self):
         pack_time = packets.PackTime()
         thread = threading.Thread(target=pack_time.run_sniffer)

@@ -27,6 +27,8 @@ import sys
 # Now you can import app.py as a module
 #import app
 
+#Modified by Alejandro Hernandez
+
 class ip_Checker:
     configuration = {}
     
