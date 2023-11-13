@@ -5,9 +5,9 @@
 #
 # Description: This JavaScript file is responsible for handling the 
 display of alerts in a table format within the LIDS Dashboard web application.
-#
-# @Modifier: Lizbeth Jurado PCAP
 ################################################################## */
+// @ Modifier: Lizbeth Jurado PCAP
+
 document.addEventListener("DOMContentLoaded", function () {
     fetchLatestAlerts();
 
@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
         sortAlertsByLevel();
     });
 });
-
+/*author and modified: Benjamin Hansen*/ 
 function fetchLatestAlerts() {
     fetch('/get_alerts')
         .then(response => response.json())
@@ -29,7 +29,7 @@ function fetchLatestAlerts() {
             console.error("There was an error fetching the alerts!", error);
         });
 }
-
+/*author and modified: Benjamin Hansen*/ 
 function populateTable(alerts) {
     const tbody = document.getElementById("alertBoxTable").getElementsByTagName("tbody")[0];
     tbody.innerHTML = ""; // Clear previous rows

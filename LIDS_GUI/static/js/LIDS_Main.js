@@ -8,9 +8,7 @@
 # @Authors:Arturo Olmos, Benjamin
 # Worked on the xml ingestion
 #
-# Modification History:
-# [11/01/23] - [3.0] - [Lizbeth Jurado] - [File Description and Organization Set Up]
-#
+
 # Tasks:
 # - [Task 1]: Listen for file input changes
 # - [Task 2]: Read the uploaded file and parse it as XML

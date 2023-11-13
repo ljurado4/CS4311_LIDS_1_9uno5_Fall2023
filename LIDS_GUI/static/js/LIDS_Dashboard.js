@@ -8,9 +8,6 @@
 # @Author:Arturo Olmos
 # Added functionality for the buttons on the left sidebar
 #
-# Modification History:
-# [11/01/23] - [3.0] - [Lizbeth Jurado] - [File Description and Organization Set Up]
-#
 # Tasks:
 # - [Task 1]: Get forms and define state variables
 # - [Task 2]: Handle events for showing the configuration file

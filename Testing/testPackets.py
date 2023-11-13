@@ -11,9 +11,7 @@
 # manager. The testing routine is essential for ensuring the reliability
 # and correctness of the packets handling and alert notification subsystem.
 #
-# Modification History:
-# [11/02/23] - [5.0] - [Lizbeth Jurado] - [File Description and Organization Set Up]
-#
+
 # Tasks:
 # - [Task 1]: Initialize and start a packet sniffing thread from the packets module.
 #             This task involves creating an instance of the PackTime class and running
@@ -41,6 +39,7 @@ import threading
 
 import time
 
+#modified Alejandro Hernandez
 
 if __name__ == "__main__":
 

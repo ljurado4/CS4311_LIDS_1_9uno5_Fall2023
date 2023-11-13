@@ -9,9 +9,7 @@
 #              display the main menu options and navigate to different menus based
 #              on user input.
 #
-# Modification History:
-# [11/01/23] - [5.0] - [Lizbeth Jurado] - [File Description and Organization Set Up]
-#
+
 # Tasks:
 # - [Task 1]: Implement the 'show_menu' method to display the main menu options and
 #             navigate to the next appropriate menu.
@@ -19,7 +17,7 @@
 ################################################################################
 
 import menu
-
+#author Benjamin Hansen
 class MainMenu:
     """
     Represents the main menu of the CLI.

@@ -6,15 +6,13 @@
 # Description: This file contains the implementation of the Alerts_CLI class,
 #              which is responsible for displaying alerts in a CLI interface.
 #
-# Modification History:
-# [11/01/2023] - [5.0] - [Lizbeth Jurado] - [File Description and Organization Set Up]
-#
+
 # Tasks:
 # - [Task 1]: Implement the display_Alerts method to display alerts in a tabular format.
 # - [Task 2]: Add functionality to get user input for navigating to the next menu.
 #
 ################################################################################
-
+#author Benjamin Hansen
 import sys
 import os
 import threading
@@ -22,7 +20,7 @@ import time
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import menu
 from backend import packets, alerts_manager
-
+#author Benjamin Hansen
 class Alerts_CLI:
     #def __init__(self):
     #    self.stop_streaming = False
@@ -35,6 +33,8 @@ class Alerts_CLI:
     #    self.pack_time = packets.PackTime()
     #    self.thread = threading.Thread(target=self.display_Alerts)#
     
+    #modified Alejandro Hernandez
+    #author Benjamin Hansen
     def display_Alerts(self):
         pack_time = packets.PackTime()
         thread = threading.Thread(target=pack_time.run_sniffer)

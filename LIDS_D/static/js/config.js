@@ -6,9 +6,7 @@
    #
    # Description: This JavaScript file handles file uploading, storage, and configuration data submission. 
    #
-   # Modification History:
-   # [11/01/23] - [5.0] - [Lizbeth Jurado] - [File Description and Organization Set Up]
-   #
+
    ######################################################################
 */
 let browseButton = document.getElementById("browseButton");

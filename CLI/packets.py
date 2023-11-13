@@ -7,10 +7,7 @@
 #              is responsible for capturing, processing, and analyzing network
 #              packets. It includes methods for capturing live packets, processing
 #              PCAP files, and detecting network alerts.
-#
-# Modification History:
-# [11/01/23] - [5.0] - [Lizbeth Jurado] - [File Description and Organization Set Up]
-#
+
 # Tasks:
 # - [Task 1]: Implement the 'alertDetector' method to detect network alerts.
 # - [Task 2]: Implement the 'create_packet' method to create custom packets.

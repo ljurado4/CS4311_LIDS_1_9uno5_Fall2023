@@ -1,6 +1,5 @@
 ##################################################################
 # File: app.py
-# Version: [5.0]
 #
 # Description:
 # This script serves as the core application server for a Flask-based
@@ -8,8 +7,11 @@
 # web routes, handles interactions with the backend for packet sniffing,
 # provides a dashboard for real-time alerts, and allows configuration through
 # a web GUI. The server also integrates with socket.io for live data streaming.
-
 ##################################################################
+
+
+
+#author and modified: Benjamin Hansen
 
 import os
 from flask import Flask, render_template, request, jsonify, flash
@@ -41,7 +43,7 @@ app.secret_key = secrets.token_urlsafe(16)
 
 sio = socketio.Client(ssl_verify=False)
 
-
+#author and modified: Benjamin Hansen
 @app.route('/')
 def index():
     return render_template('LIDS_Main.html')
@@ -49,7 +51,7 @@ def index():
 
     
     
-    
+#author and modified: Benjamin Hansen  
 @app.route('/LIDS_Dashboard', methods=['GET', 'POST'])
 def dashboard():
     global client_socket
@@ -72,7 +74,7 @@ def dashboard():
         
     return render_template('LIDS_Dashboard.html')
 
-
+#author and modified: Benjamin Hansen
 @app.route('/get_alerts', methods=['GET'])
 def get_latest_alerts():
     getter = alerts_manager.AlertManager().sharedAlerts
@@ -98,11 +100,12 @@ def get_latest_alerts():
     return jsonify(alert_data)
 
 
-
+#author and modified: Benjamin Hansen
 @app.route('/LIDS_Main')
 def lids_main(): 
     return render_template('LIDS_Main.html')
 
+#author and modified: Benjamin Hansen
 @app.route('/configuration_data', methods=['POST'])
 def upload_xml_data():
     data = request.json
@@ -114,7 +117,7 @@ def upload_xml_data():
     return jsonify({"message": "Data processed!"})
 
 
-
+#author and modified: Benjamin Hansen
 @app.route('/disconnect', methods=['POST'])
 def disconnect():
     print("Disconnecting from server")
@@ -122,7 +125,8 @@ def disconnect():
     sio.disconnect()
     return render_template('LIDS_Main.html')
 
-# @Modifier: Lizbeth Jurado created to handle pcap data
+
+# @Author Lizbeth Jurado created to handle pcap data
 @app.route('/display_pcap')
 def display_pcap():
     pcap_path = Alerts.get_pcap_file_path()
@@ -140,3 +144,4 @@ def get_pcap_data():
 
 if __name__ == '__main__':
     app.run(debug=True)
+

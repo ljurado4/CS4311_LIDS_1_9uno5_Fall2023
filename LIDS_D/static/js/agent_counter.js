@@ -7,11 +7,10 @@
    # namespace ('lids-d') and listening for the 'update_agent_count' event. When the event is received,
    # it updates the agent count displayed in the HTML document.
    #
-   # Modification History:
-   # [11/01/23] - [5.0] - [Lizbeth Jurado] - [File Description and Organization Set Up]
-   #
+
    ###################################################################### */
 
+// Author and modified Benjamin Hansen
 // Function to create a socket connection
 function createSocket() {
     // Construct the socket URL based on the current location
@@ -24,6 +23,6 @@ function createSocket() {
         document.getElementById('agent_count').innerText = count;
     });
 }
-
+// Author and modified Benjamin Hansen
 // Call the createSocket function when the window loads
 window.onload = createSocket();

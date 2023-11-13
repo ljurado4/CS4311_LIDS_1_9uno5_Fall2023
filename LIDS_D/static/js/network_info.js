@@ -7,16 +7,14 @@
    # Description: This JavaScript file handles socket communication for devices in the LIDS-D application. It receives updates about recognized and unrecognized devices, 
    # and updates the user interface accordingly.
    #
-   # Modification History:
-   # [11/01/23] - [5.0] - [Lizbeth Jurado] - [File Description and Organization Set Up]
-   #
+
    ######################################################################
 */
-
+// Author and modified Benjamin Hansen
 // Construct the socket URL based on the current location
 var socketUrl = window.location.protocol + '//' + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
 var socket = io.connect(socketUrl + '/lids-d');
-
+// Author and modified Benjamin Hansen
 // Socket.IO event listener for the 'update_devices' event
 socket.on('update_devices', function(data) {
     var recognizedDevices = data.recognized_devices;

@@ -1,17 +1,11 @@
 ################################################################################
 # File: pcap_menu.py
 #
-# Version: [5.0]
-#
 # Description: This file contains the implementation of the PcapMenu class, which
 #              is responsible for displaying and searching network packet data in
 #              a tabulated format. It provides functions to display all packets
 #              or filter packets based on specific criteria.
-#
-# Author : Lizbeth Jurado
-#
 ################################################################################
-# File: pcap_menu.py
 
 import sys
 import os
@@ -59,7 +53,9 @@ class PcapMenu:
         data = [list(pcap.values()) for pcap in pcap_dictionary]
         table = tabulate(data, headers=header, tablefmt="fancy_grid")
         print(table)
-
+        
+# @Author:Benjamin Hansen
+# @Mpodifier: Lizbeth Jurado
     def display_matching_pcaps(self, search_command: list):
         target_value = search_command[-1]
         search = search_command[0]
@@ -75,3 +71,4 @@ class PcapMenu:
             self._print_pcap_table(matching_pcaps)
         else:
             print("Unable to locate the specified PCAP file")
+

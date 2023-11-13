@@ -1,5 +1,6 @@
 ################################################################################
 # File: config_parser.py
+#
 # Description: This file contains the implementation of the ConfigureCLI class,
 #              which is responsible for parsing an XML configuration file and
 #              updating the system accordingly.
@@ -9,6 +10,8 @@
 import menu
 import os
 import xml.etree.ElementTree as ET
+# @mAuthor: Benjamin Hansen
+# @Mondifier: Benjamin Hansen
 
 class ConfigureCLI:
     """
