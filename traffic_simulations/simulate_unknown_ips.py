@@ -1,9 +1,8 @@
 # File: simulate_unkown_ips.py
 #
-# Description: 
-# This script is intended to simulate network traffic from random IP addresses to a specified destination, typically for the purpose of testing network intrusion detection systems or similar security mechanisms. It generates packets with random source IPs and sends them to a defined destination IP and port. Additionally, it captures live network trafficusing PyShark and allows for the inspection of these packets.
+# Description: This script is intended to simulate network traffic from random IP addresses to a specified destination, typically for the purpose of testing network intrusion detection systems or similar security mechanisms. It generates packets with random source IPs and sends them to a defined destination IP and port. Additionally, it captures live network trafficusing PyShark and allows for the inspection of these packets.
 #
-# @ Author:
+# @ Author: Benjamin Hansesn
 # @ Modified:
 
 
