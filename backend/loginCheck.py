@@ -1,9 +1,16 @@
+# File: loginCheck.py
+#
+# Description:This file contains functionality for monitoring and identifying failed login attempts in network packets, but the detailed use case and context may depend on how this class is used within a larger system.
+#
+# @ Author: Alejandro Hernandez
+# @ Modifier:
+
 class LoginCheck:
     
     def __init__(self):
         self.timeList = []
 
-    #Author Alejandro Hernandez
+# @ Author: Alejandro Hernandez
 
     def failedPssWrd(self, packet, protocol,timeOF,destPort,threshold):
         if protocol == "TCP":

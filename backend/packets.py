@@ -1,8 +1,12 @@
-##################################################################
 # File: packets.py
 #
-# Description:
-###################################################################
+# Description: Includes methods for creating and handling network packets. It also imports various modules and defines class attributes for managing packet data and synchronization.
+#
+# @ Author: 
+# @ Modifier:Alejandro Hernandez
+# @ Modifier:Lizbeth Jurado
+
+
 
 import sys
 import os
@@ -32,7 +36,7 @@ class PackTime:
     def __init__(self):
         self.pack_time = None
 
-    # @Modified: Alejandro Hernanded 
+# @ Modifier:Alejandro Hernandez
     
     def create_packet(self, in_packet):
         time = datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")
@@ -87,7 +91,7 @@ class PackTime:
             }
             self.packet_list.append(temp_packet_dict)
 
-    # @Modified: Alejandro Hernandez
+# @ Modifier:Alejandro Hernandez
 
     def packet_handler(self):
         while True:
@@ -104,7 +108,7 @@ class PackTime:
                 self.packet_analyzer.analyze_packet(packet,time, self.identifier,packet["SourceIP"],packet["SourcePort"],packet["DestinationIP"],packet["DestinationPort"],packet["Protocol"])
             self.cap_sem.release()
 
-    # @Modified: Alejandro Hernandez
+# @ Modifier:Alejandro Hernandez
     
     def run_sniffer(self):
         # Wait for the configuration
@@ -120,8 +124,8 @@ class PackTime:
             packet_handler_thread = th.Thread(target=self.packet_handler)
             packet_handler_thread.start()
 
-            # @ Modified: LizbethBranch
-            # For macOS
+# @ Modified: LizbethBranch
+# For macOS
             #capture = pyshark.LiveCapture(interface="en0")
 
             capture = pyshark.LiveCapture(interface="enp0s3")
