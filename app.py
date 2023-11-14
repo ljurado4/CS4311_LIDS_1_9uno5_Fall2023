@@ -1,17 +1,9 @@
-##################################################################
 # File: app.py
 #
-# Description:
-# This script serves as the core application server for a Flask-based
-# web interface of a Local Intrusion Detection System (LIDS). It manages
-# web routes, handles interactions with the backend for packet sniffing,
-# provides a dashboard for real-time alerts, and allows configuration through
-# a web GUI. The server also integrates with socket.io for live data streaming.
-##################################################################
-
-
-
-#author and modified: Benjamin Hansen
+# Description: This script serves as the core application server for a Flask-based web interface of a Local Intrusion Detection System (LIDS). It manages web routes, handles interactions with the backend for packet sniffing, provides a dashboard for real-time alerts, and allows configuration through a web GUI. The server also integrates with socket.io for live data streaming.
+# 
+#  @ Author: Benjamin Hansen
+#  @ Modified: Lizbeth Jurado
 
 import os
 from flask import Flask, render_template, request, jsonify, flash
@@ -28,8 +20,8 @@ from backend.Alerts import Alerts
 from flask import jsonify
 from backend.packet_analyzer import PacketAnalyzer
 
-
-pcap_file_path = "/Users/lizbethjurado/Git/CS4311_LIDS_19uno5_Fall2023/7-17-EN.pcapng"
+#  @ Author: Lizbeth Jurado
+pcap_file_path = "/Users/lizbethjurado/Git/CS4311_LIDS_1_9uno5_Fall2023/7-17-EN.pcapng"
 
 app = Flask(__name__, template_folder='LIDS_GUI/templates', static_folder='LIDS_GUI/static')
 
@@ -43,7 +35,8 @@ app.secret_key = secrets.token_urlsafe(16)
 
 sio = socketio.Client(ssl_verify=False)
 
-#author and modified: Benjamin Hansen
+#  @ Author: Benjamin Hansen
+#  @ Modified: Benjamin Hansen
 @app.route('/')
 def index():
     return render_template('LIDS_Main.html')
@@ -51,7 +44,8 @@ def index():
 
     
     
-#author and modified: Benjamin Hansen  
+#  @ Author: Benjamin Hansen
+#  @ Modified: Benjamin Hansen 
 @app.route('/LIDS_Dashboard', methods=['GET', 'POST'])
 def dashboard():
     global client_socket
@@ -74,7 +68,8 @@ def dashboard():
         
     return render_template('LIDS_Dashboard.html')
 
-#author and modified: Benjamin Hansen
+#  @ Author: Benjamin Hansen
+#  @ Modified: Benjamin Hansen
 @app.route('/get_alerts', methods=['GET'])
 def get_latest_alerts():
     getter = alerts_manager.AlertManager().sharedAlerts
@@ -100,12 +95,14 @@ def get_latest_alerts():
     return jsonify(alert_data)
 
 
-#author and modified: Benjamin Hansen
+#  @ Author: Benjamin Hansen
+#  @ Modified: Benjamin Hansen
 @app.route('/LIDS_Main')
 def lids_main(): 
     return render_template('LIDS_Main.html')
 
-#author and modified: Benjamin Hansen
+#  @ Author: Benjamin Hansen
+#  @ Modified: Benjamin Hansen
 @app.route('/configuration_data', methods=['POST'])
 def upload_xml_data():
     data = request.json
@@ -117,7 +114,8 @@ def upload_xml_data():
     return jsonify({"message": "Data processed!"})
 
 
-#author and modified: Benjamin Hansen
+#  @ Author: Benjamin Hansen
+#  @ Modified: Benjamin Hansen
 @app.route('/disconnect', methods=['POST'])
 def disconnect():
     print("Disconnecting from server")
@@ -126,7 +124,8 @@ def disconnect():
     return render_template('LIDS_Main.html')
 
 
-# @Author Lizbeth Jurado created to handle pcap data
+# @ Author: Lizbeth Jurado 
+# Created to handle pcap data
 @app.route('/display_pcap')
 def display_pcap():
     pcap_path = Alerts.get_pcap_file_path()
@@ -134,7 +133,8 @@ def display_pcap():
         return send_file(pcap_path, as_attachment=True)
     except FileNotFoundError:
         abort(404)  # File not found
-
+        
+# @ Author: Lizbeth Jurado 
 @app.route('/get_pcap_data')
 def get_pcap_data():
     analyzer = PacketAnalyzer()

@@ -1,10 +1,10 @@
-
-##################################################################
 # File: alerts_manager.py
 #
-# Description:
+# Description: This class is designed to manage and create alerts within a system and has some logging functionality.
 # 
-##################################################################
+# @ Author: Alejandro Hernandez
+# @ Modifier: Alejandro Hernandez
+
 import logging
 from backend import Alerts
 
@@ -14,7 +14,7 @@ class AlertManager:
 
     def __init__(self):
         self.alerts = []
- # @Author Alejandro Hernandez
+# @ Author: Alejandro Hernandez
 
     def setup_logging(self):
         # Set up logging to a file
@@ -30,12 +30,12 @@ class AlertManager:
         # Log the alert
         logging.info(f"Alert created: {description} at {time}")
     
-    #Author Alejandro Hernandez
+# @ Author: Alejandro Hernandez
     
     def ident_list(self, packet, identifier):
         self.identifierList.append({identifier: [packet]})
 
-    #@ Author Alejandro Hernandez
+# @ Author: Alejandro Hernandez
     
     def get_alerts(self):
         return self.alerts

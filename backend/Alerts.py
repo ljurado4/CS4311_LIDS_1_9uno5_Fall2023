@@ -1,9 +1,13 @@
-# alerts.py
+# File: alerts.py
+#
+# Description: This class is designed to manage and create alerts within a system and has some logging functionality.
+# 
+# @ Author: Alejandro Hernandez
+# @ Modifier: Lizbeth Jurado
 
-#author: Lizbeth Jurado
 
-#Author Alejandro Hernandez
 class Alerts:
+    # @ Modifier: Lizbeth Jurado
     # Hard-coded path to the PCAP file
     PCAP_FILE_PATH = '/Users/lizbethjurado/Git/CS4311_LIDS_19uno5_Fall2023/7-17-EN.pcapng'
 
@@ -24,6 +28,7 @@ class Alerts:
                 f"DestinationIP: {self.destIP}, DestinationPort: {self.destPort}, "
                 f"Type of Alert: {self.typeAlert}, Description: {self.description}")
 
+    # @ Modifier: Lizbeth Jurado
     # Method to return the path of the PCAP file
     @classmethod
     def get_pcap_file_path(cls):

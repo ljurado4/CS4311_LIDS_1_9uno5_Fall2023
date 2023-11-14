@@ -1,19 +1,9 @@
-######################################################################
 # File: app.py
 #
-# Version: [5.0]
+# Description: This app.py file serves as the main server script for a Local Intrusion Detection System (LIDS) web application built with Flask, a Python web framework. It uses Flask-SocketIO for real-time communication between the  server and clients and Flask-CORS for handling Cross-Origin Resource Sharing (CORS), allowing the web application to accept requests from different origins.
 #
-# Description: This app.py file serves as the main server script for a Local
-# Intrusion Detection System (LIDS) web application built with Flask, a Python 
-# web framework. It uses Flask-SocketIO for real-time communication between the 
-# server and clients and Flask-CORS for handling Cross-Origin Resource Sharing (CORS), 
-# allowing the web application to accept requests from different origins.
-#
-
-# 
-######################################################################
-
-#Author and modified Benjamin Hansen
+# @ Author: Benjamin Hansen
+# @ Modifier: Benjamin Hansen
 
 from flask import Flask, render_template, request, jsonify
 from flask_cors import CORS
@@ -35,7 +25,8 @@ recognized_device_connected = []
 unrecognized_device_connected = []
 alert_data = []
 
-#Author and modified Benjamin Hansen
+# @ Author: Benjamin Hansen
+# @ Modifier: Benjamin Hansen
 @socketio.on('Alert Data')
 def handle_response(alert):
     global alert_data
@@ -44,7 +35,8 @@ def handle_response(alert):
 
 
 
-#Author and modified Benjamin Hansen
+# @ Author: Benjamin Hansen
+# @ Modifier: Benjamin Hansen
 @app.route('/sort_alerts', methods=['GET'])
 def sort_alerts():
     global alert_data
@@ -62,34 +54,40 @@ def sort_alerts():
     return jsonify(flattened_data)
 
 
-#Author and modified Benjamin Hansen
+# @ Author: Benjamin Hansen
+# @ Modifier: Benjamin Hansen
 @app.route('/')
 def index():
     return render_template('LIDS-D_Config_server_View.html')
 
-#Author and modified Benjamin Hansen
+# @ Author: Benjamin Hansen
+# @ Modifier: Benjamin Hansen
 @app.route('/LIDS-D_Config_Server_View')
 def config_server():
     return render_template('LIDS-D_Config_server_View.html')
 
-#Author and modified Benjamin Hansen
+# @ Author: Benjamin Hansen
+# @ Modifier: Benjamin Hansen
 @app.route('/start_server_ui')
 def start_server_interface():
     return render_template('LIDS-D_Start_Server.html')
 
-#Author and modified Benjamin Hansen
+# @ Author: Benjamin Hansen
+# @ Modifier: Benjamin Hansen
 @app.route('/start_socket_server', methods=['POST'])
 def start_socket_server_action():
     global start_server
     start_server = True
     return jsonify({"message": "Server started"})
 
-#Author and modified Benjamin Hansen
+# @ Author: Benjamin Hansen
+# @ Modifier: Benjamin Hansen
 @app.route('/LIDS-D_Server_Details')
 def server_details():
     return render_template('LIDS-D_Server_Details.html')
 
-#Author and modified Benjamin Hansen
+# @ Author: Benjamin Hansen
+# @ Modifier: Benjamin Hansen
 @app.route('/LIDS-D_Network_Info_View')
 def network_info_view():
 
@@ -97,12 +95,14 @@ def network_info_view():
   
     return render_template('LIDS-D_Network_Info_View.html')
 
-#Author and modified Benjamin Hansen
+# @ Author: Benjamin Hansen
+# @ Modifier: Benjamin Hansen
 @app.route('/LIDS-D_Alerts_View')
 def alerts_view():
     return render_template('LIDS-D_Alerts_View.html')
 
-#Author and modified Benjamin Hansen
+# @ Author: Benjamin Hansen
+# @ Modifier: Benjamin Hansen
 @app.route('/configuration_data', methods=['POST'])
 def upload_xml_data():
     global configuration
@@ -112,7 +112,8 @@ def upload_xml_data():
     return "Data Processed"
 
 
-#Author and modified Benjamin Hansen
+# @ Author: Benjamin Hansen
+# @ Modifier: Benjamin Hansen
 @socketio.on('connect', namespace='/lids-d')
 def lids_client_namespace_connect():
     global connected_agents
@@ -129,7 +130,9 @@ def lids_client_namespace_connect():
 
     return True
 
-#Author and modified Benjamin Hansen
+# @ Author: Benjamin Hansen
+# @ Modifier: Benjamin Hansen
+
 @socketio.on('connect')
 def handle_LIDS_connect():
     global connected_agents 
@@ -185,7 +188,8 @@ def handle_LIDS_connect():
     
     return True
 
-#Author and modified Benjamin Hansen
+# @ Author: Benjamin Hansen
+# @ Modifier: Benjamin Hansen
 @socketio.on('disconnect')
 def handle_disconnect():
     print("Disconnecting")
@@ -211,7 +215,8 @@ def handle_disconnect():
     socketio.emit('update_devices', devices, namespace='/lids-d')
     
 
-#Author and modified Benjamin Hansen
+# @ Author: Benjamin Hansen
+# @ Modifier: Benjamin Hansen
 @app.route('/shutdown', methods=['POST'])
 def shutdown():
     global start_server, configuration ,connected_agents

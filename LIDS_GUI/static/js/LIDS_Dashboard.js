@@ -1,25 +1,13 @@
-/*######################################################################
+/*
 # File: LIDS_Dashboard.js
-#
-# Version: [5.0]
 #
 # Description: JavaScript file for managing the LIDS Dashboard web application.
 #
-# @Author:Arturo Olmos
+# @ Author:Arturo Olmos
 # Added functionality for the buttons on the left sidebar
-#
-# Tasks:
-# - [Task 1]: Get forms and define state variables
-# - [Task 2]: Handle events for showing the configuration file
-# - [Task 3]: Handle events for displaying alerts table
-# - [Task 4]: Define functions for toggling dropdowns
-# - [Task 5]: Define a function to filter alerts by level
-# - [Task 6]: Define a function for sorting the alerts table
-# - [Task 7]: Fetch the user's IP address and display it in the header
-# - [Task 8]: Define a function to remove sorting and reload the page
-# - [Task 9]: Expose necessary functions globally
-#
-######################################################################*/
+# @ Author:Lizbeth Jurado
+# Sorting functionality
+#*/
 
 // Get forms for event listeners
 const middleContainer = document.getElementById("middleContainer");
@@ -57,7 +45,7 @@ function toggleDropdown() {
         dropdownContent.style.display = "none";
     }
 }
-
+// @ Author:Lizbeth Jurado
 // Function to filter alerts by level
 function filterAlerts(filters) {
     let table = document.getElementById("alertBoxTable");
@@ -102,7 +90,7 @@ function filterAlerts(filters) {
         row.style.display = matchesFilter ? "" : "none";
     });
 }
-
+// @ modified:Lizbeth Jurado
 // Function to toggle filter dropdown
 function toggleFilterDropdown() {
     let dropdownContent = document.getElementById("filterByDropdownContent");
@@ -156,12 +144,6 @@ function populateTableWithData(alerts) {
     alerts.forEach((alert) => {
         const row = document.createElement("tr");
 
-        // Populate other columns...
-        // For example:
-        // const timeCell = document.createElement("td");
-        // timeCell.textContent = alert.time;
-        // row.appendChild(timeCell);
-
         // Create a cell for PCAP data
         const pcapCell = document.createElement("td");
         pcapCell.textContent = alert.pcapLink; // Replace with the actual PCAP data
@@ -173,12 +155,13 @@ function populateTableWithData(alerts) {
         tbody.appendChild(row);
     });
 }
-
+// @ Author:Lizbeth Jurado
 // Function to remove sorting and reload the page
 function removeSort() {
     location.reload();
 }
 
+// @ Modifier: Lizbeth Jurado
 // Expose functions globally
 window.toggleDropdown = toggleDropdown;
 window.sortTable = sortTable;
