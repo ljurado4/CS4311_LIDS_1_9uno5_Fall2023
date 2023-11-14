@@ -1,12 +1,9 @@
-################################################################################
-# File: menu.py
+#File: menu.py
 #
-# Description: This file contains the implementation of the Menu class, which
-#              provides common functions for the CLI (Command Line Interface) to
-#              use across different menus in the LIDS (Local Intrusion Detection
-#              System). It includes utility methods for obtaining and validating
-#              user input and stores shared system configuration attributes.
-################################################################################
+# Description: This file contains the implementation of the Menu class, which provides common functions for the CLI (Command Line Interface) to use across different menus in the LIDS (Local Intrusion Detection System). It includes utility methods for obtaining and validating user input and stores shared system configuration attributes.
+#
+# @ Author: Benjamin Hansen
+# @ Modifier: Benjamin Hansen 
 
 import config_parser
 import help_menu
@@ -14,8 +11,8 @@ import pcap_menu
 import alerts_menu
 import main_menu
 
-# @Author:Benjamin Hansen
-# @Modifier: Benjamin Hansen 
+# @ Author: Benjamin Hansen
+# @ Modifier: Benjamin Hansen 
 
 class Menu():
     """A class for common functions the CLI will use across different menus.
@@ -29,10 +26,15 @@ class Menu():
     mac_address = ""
     open_ports = []
     whitelisted_ips = []
-#author Benjamin Hansen and modified 
+
+ # @ Author: Benjamin Hansen
+# @ Modifier: Benjamin Hansen 
+
     def __init__(self) -> None:
         self.choice_set = {"Help", "Config", "Show PCAP", "Alert", "Exit","All PCAPs","Start Menu"}
-#author Benjamin Hansen and modified 
+
+# @ Author: Benjamin Hansen
+# @ Modifier: Benjamin Hansen 
     @classmethod
     def update_system_config(cls, hostname, ip_address, mac_address, open_ports, whitelisted_ips):
         """
@@ -52,8 +54,8 @@ class Menu():
         cls.whitelisted_ips = whitelisted_ips
         
 
-# @Author: Benjamin Hansen 
-# @Modified: Benjamin Hansen
+# @ Author: Benjamin Hansen 
+# @ Modified: Benjamin Hansen
 
     def get_user_input(self, message: str, valid_input: set) -> str:
         """Gets and validates user input."""
@@ -67,8 +69,8 @@ class Menu():
         
         return user_input
 
-# @Author: Benjamin Hansen 
-# @Modified: Benjamin Hansen
+# @ Author: Benjamin Hansen 
+# @ Modified: Benjamin Hansen
 
     def navigate_next_menu(self, menu_option_selected: str) -> None:
         """Navigate to the next menu based on the user's selection

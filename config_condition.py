@@ -1,11 +1,9 @@
-##################################################################
 # File: config_condition.py
 #
 # Description:
-###################################################################
-
-# @author:Benjamin Hansen
-# @Modified:Benjamin Hansen
+#
+# @ Author:Benjamin Hansen
+# @ Modified:Benjamin Hansen
 
 from threading import Condition
 

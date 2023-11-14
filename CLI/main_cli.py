@@ -1,21 +1,14 @@
-################################################################################
 # File: main_cli.py
 #
-# Version: [5.0]
-#
-# Description: This file serves as the entry point for the CLI (Command Line
-#              Interface) of LIDS (Local Intrusion Detection System). It initializes
-#              the system and starts the Alert menu.
-#
+# Description: This file serves as the entry point for the CLI (Command Line Interface) of LIDS (Local Intrusion Detection System). It initializes the system and starts the Alert menu.
+# 
+# @ Author: Benjamin Hansen
+# @ Modifier:
 
-# Tasks:
-# - [Task 1]: Implement the 'main' function to initialize the CLI and start the Alert menu.
-#
-################################################################################
-#author Benjamin Hansen
 import menu
 import argparse
-#author Benjamin Hansen
+
+# @ Author: Benjamin Hansen
 def main():
     alert_menu = menu.Menu()
     alert_menu.navigate_next_menu("Alert")

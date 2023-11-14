@@ -1,5 +1,9 @@
-#models.py
-#database tables
+# File: models.py
+#
+# Description: This class is designed to manage and create alerts within a system and has some logging functionality.
+#
+# @ Author:
+# @ Modifier:
 
 from datetime import datetime
 from . import db

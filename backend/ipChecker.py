@@ -1,33 +1,16 @@
-#ipChecker.py
+# File: ipChecker.py
+#
+# Description: Defines a Python class named ip_Checker that provides a method ip_in_List for checking if a given IP address is in a whitelist defined in a configuration dictionary.
+#
+# @ Author: 
+# @ Modifier: Alejandro Hernandez
 
 import xml.etree.ElementTree as ET
 
 import os
 import sys
 
-#current_directory = os.getcwd()
-#parent_directory = os.path.dirname(current_directory)
-#file_path = os.path.join(parent_directory, 'app.py')
-
-#import sys
-#sys.path.append('file_path')  # Add the path to the directory containing the module
-
-#from .. import app
-
-#import app
-
-#current_directory = os.path.dirname(os.path.abspath(__file__))
-
-# Get the parent directory (my_repo directory)
-#parent_directory = os.path.abspath(os.path.join(current_directory, '..'))
-
-# Add the parent directory to sys.path
-#sys.path.append(parent_directory)
-
-# Now you can import app.py as a module
-#import app
-
-#Modified by Alejandro Hernandez
+# @ Modifier: Alejandro Hernandez
 
 class ip_Checker:
     configuration = {}

@@ -1,5 +1,9 @@
-#db_utils.py
-#functions related to the database
+# File: db_utils.py
+#
+# Description: Sets up functions related to the database.
+#
+# @ Author:
+# @ Modifier: Lizbeth Jurado
 
 from . import db
 from .models import Alert
