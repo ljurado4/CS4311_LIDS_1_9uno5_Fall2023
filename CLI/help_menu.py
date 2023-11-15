@@ -1,23 +1,15 @@
 ################################################################################
 # File: help_menu.py
 #
-# Version: [5.0]
+# Description: This file contains the implementation of the HelpMenu class, which provides information about the commands that users can perform while using the CLI version of LIDS (Local Intrusion Detection System).
 #
-# Description: This file contains the implementation of the HelpMenu class, which
-#              provides information about the commands that users can perform while
-#              using the CLI version of LIDS (Local Intrusion Detection System).
-#
-# Modification History:
-# [11/01/23] - [5.0] - [Lizbeth Jurado] - [File Description and Organization Set Up]
-#
-# Tasks:
-# - [Task 1]: Implement the 'display_help' method to display information about
-#             available system commands and their functions.
-#
-################################################################################
+# @ Author: Benjamin Hansen
+# @ Modifier: Seth Velasco 
 
 import menu
 
+# @ Author: Benjamin Hansen
+# @ Modifier: Seth Velasco 
 class HelpMenu:
     
     def display_help(self):

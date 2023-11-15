@@ -1,36 +1,9 @@
-##################################################################
 # File: testPort.py
 #
-# Version: [5.0]
+# Description: This script contains a suite of unit tests for the PortDetection class of the backend module. It aims to verify the functionality of connection count updating and threshold checking. The tests include scenarios where the connection count is below, reaches, and exceeds a specified threshold for a given IP address and port, as well as checks for unique connection tracking.
 #
-# Description: 
-# This script contains a suite of unit tests for the PortDetection class
-# of the backend module. It aims to verify the functionality of connection
-# count updating and threshold checking. The tests include scenarios where
-# the connection count is below, reaches, and exceeds a specified threshold
-# for a given IP address and port, as well as checks for unique connection
-# tracking.
-#
-# Modification History:
-# [11/02/23] - [5.0] - [Lizbeth Jurado] - [File Description and Organization Set Up]
-#
-# Tasks:
-# - [Task 1]: Test the update_connection_count method to ensure it correctly
-#             identifies when the connection count has not reached the threshold.
-# - [Task 2]: Test the update_connection_count method to verify it appropriately
-#             flags when the threshold is exactly reached.
-# - [Task 3]: Test the update_connection_count method to check the handling of
-#             unique connections for different IP and port combinations, ensuring
-#             that each is counted separately.
-# - [Task 4]: Refactor the test cases to account for any edge cases or additional
-#             functionalities that may be added to the PortDetection class in the future.
-# - [Task 5]: Document each test case with comments to clarify the purpose and expected
-#             outcomes for future maintenance and review.
-#
-##################################################################
-
-# Rest of the script...
-
+# @ Author: 
+# @ Modified: 
 
 import unittest
 from backend.PortChecker import PortDetection  # Import the portDetection class from your actual module

@@ -6,9 +6,7 @@
    #
    # Description: This JavaScript file handles file uploading, storage, and configuration data submission. 
    #
-   # Modification History:
-   # [11/01/23] - [5.0] - [Lizbeth Jurado] - [File Description and Organization Set Up]
-   #
+
    ######################################################################
 */
 let browseButton = document.getElementById("browseButton");
@@ -24,6 +22,7 @@ const files = JSON.parse(filesAsString);
 
 const previousFilesContainer = document.getElementById("previousFilesSelection");
 
+/* @author Arturo Olmos */
 // Function to handle loading old configuration file
 function oldFileConfig(fileName) {
     // Implement a function to set up the old configuration
@@ -39,6 +38,7 @@ for (let fileName in files) {
     previousFilesContainer.innerHTML += fileButton;
 }
 
+/* @author Arturo Olmos */
 // Function to handle successful file submission
 function successfulFileSubmission(selectedFile, loadedFile) {
     // Store the new file uploaded to storage
@@ -90,6 +90,7 @@ function successfulFileSubmission(selectedFile, loadedFile) {
     window.location = "start_server_ui";
 }
 
+/* @author Arturo Olmos */
 // This will only be executed when a user uploads a file
 browseButton.onchange = async () => {
     // Get the uploaded file

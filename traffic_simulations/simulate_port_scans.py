@@ -1,34 +1,12 @@
-##################################################################
 # File: simulate_port_scans.py
 #
-# Version: [5.0]
 #
 # Description: 
-# This script is designed to simulate a port scan on a specified IP
-# address using Scapy, a powerful interactive packet manipulation tool.
-# The script attempts to connect to ports ranging from 1 to 1024 and
-# identifies which ports are open by examining the responses.
+# This script is designed to simulate a port scan on a specified IP address using Scapy, a powerful interactive packet manipulation tool. The script attempts to connect to ports ranging from 1 to 1024 and identifies which ports are open by examining the responses.
 #
-# The use of this script should be authorized and compliant with all
-# applicable laws and regulations as port scanning can be considered
-# invasive and may be illegal on networks without explicit permission.
-#
-# Modification History:
-# [11/02/23] - [5.0] - [Lizbeth Jurado] - [File Description and Organization Set Up]
-#
-# Tasks:
-# - [Task 1]: Define the target IP address and port range for the scan.
-# - [Task 2]: Implement a loop to iterate through the specified range of ports.
-# - [Task 3]: Craft and send a SYN packet to each port using Scapy.
-# - [Task 4]: Analyze the responses to determine if a port is open (SYN-ACK received).
-# - [Task 5]: Print out the open ports to the user.
-# - [Task 6]: Handle exceptions and errors that may occur during the scan process.
-# - [Task 7]: Ensure the script adheres to ethical guidelines and legal requirements.
-# - [Task 8]: Document the function and script usage with appropriate comments.
-#
-##################################################################
+# @ Author :
+# @ Modified:
 
-# Rest of the script...
 
 
 from scapy.all import IP, TCP, sr1

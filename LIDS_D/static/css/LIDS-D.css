@@ -1,18 +1,13 @@
-/*################################################################################
+/*
 # File: LIDS_D.css
 #
-# Version: [5.0]
-#
-# Description: This CSS file contains the styling rules for the LIDS_D web interface.
-#              It defines the layout, colors, and formatting of various elements
-#              on the web pages.
-#
-# Modification History:
-# [11/01/23] - [5.0] - [Lizbeth Jurado] - [File Description and Organization Set Up]
-#
-################################################################################ */
+# Description: This CSS file contains the styling rules for the LIDS_D web interface. It defines the layout, colors, and formatting of various elements on the web pages.
+# 
+# @ Author: Arturo Olmos 
+# Resetting default styles for  
 
-/* Resetting default styles for body */
+*/
+
 body{
     margin: 0;
     padding: 0;
@@ -21,16 +16,19 @@ body{
     display: flex; 
 }
 
+/* @ Author: Arturo Olmos  */
 /* Styling for buttons */
 button{
     cursor: pointer;
 }
 
+/* @ Author: Arturo Olmos  */
 /* Styling for table cells */
 td{
     border: solid;
 }
 
+/* @ Author: Arturo Olmos */
 /* Styling for the right sidebar */
 div.righTabBar{
     background-color: blue;
@@ -43,6 +41,7 @@ div.righTabBar{
     text-align: right;
 }
 
+/* @ Author: Arturo Olmos */
 /* Styling for buttons in the right sidebar */
 .rightTabBarButtons{
     background-color: white;
@@ -53,6 +52,7 @@ div.righTabBar{
     border-radius: 10px;
 }
 
+/* @ Author: Arturo Olmos */
 /* Styling for content block */
 div.contentBlock{
     height: 100vh;
@@ -67,11 +67,13 @@ div.contentBlock{
     flex-flow: column;
 }
 
+/* @ Author: Arturo Olmos */
 /* Styling for forms in the right sidebar */
 form.rightTabBarFroms{
     height: 20%;
 }
 
+/* @ Author: Arturo Olmos */
 /* Styling for network map button */
 input.networkMapButton{
     border-radius: 20px; 
@@ -79,6 +81,7 @@ input.networkMapButton{
     background-color: lightgray;
 }
 
+/* @ Author: Arturo Olmos */
 /* Styling for config browse section */
 div.configBrowseDiv{
     height: 20vh;
@@ -93,6 +96,7 @@ div.configBrowseDiv{
     align-items: center;
 }
 
+/* @ Author: Arturo Olmos */
 /* Styling for text in config browse section */
 p.configBrowseDivText{
     height: auto;
@@ -105,12 +109,14 @@ p.configBrowseDivText{
     padding-left: 50px;
 }
 
+/* @ Author: Arturo Olmos */
 /* Styling for config browse button */
 .configBrowseButton{
     background-color: lightgray;
     border-radius: 5px;
 }
 
+/* @ Author: Arturo Olmos */
 /* Styling for previous config file section */
 div.previousCofigFileDiv{
     height:79vh;
@@ -118,6 +124,7 @@ div.previousCofigFileDiv{
     text-align: left;
 }
 
+/* @ Author: Arturo Olmos */
 /* Styling for text in previous config file section */
 p.previousCofigFileDivText{
     height: auto;
@@ -126,6 +133,7 @@ p.previousCofigFileDivText{
     width: auto;
 }
 
+/* @ Author: Arturo Olmos */
 /* Styling for alerts title */
 div.alertsTitle{
     width: 100%;
@@ -134,6 +142,7 @@ div.alertsTitle{
     text-align: left;
 }
 
+/* @ Author: Arturo Olmos */
 /* Styling for sorting buttons in alerts section */
 div.VASortButtons{
     height:5vh;
@@ -144,6 +153,7 @@ div.VASortButtons{
     justify-content: space-between;
 }
 
+/* @ Author: Arturo Olmos */
 /* Styling for sorting buttons */
 button.sortButtons{
     display: inline-block;
@@ -154,6 +164,7 @@ button.sortButtons{
     box-shadow: 0 2px 4px darkslategray;
 }
 
+/* @ Author: Arturo Olmos */
 /* Styling for alerts table */
 table.alertsTable{
     width: 100%;
@@ -162,18 +173,21 @@ table.alertsTable{
     font-size: 20px;
 }
 
+/* @ Author: Arturo Olmos */
 /* Styling for network info table */
 table.networkInfoTable{
     max-height: 24.5vh;
     overflow-y: auto;
 }
 
+/* @ Author: Arturo Olmos */
 /* Styling for table headers */
 th{
     background-color: lightgray;
     border: solid;
 }
 
+/* @ Author: Arturo Olmos */
 /* Styling for devices display box */
 div.devicesDisplayBox{
     height: 55vh;
@@ -182,6 +196,7 @@ div.devicesDisplayBox{
     border: solid;
 }
 
+/* @ Author: Arturo Olmos */
 /* Styling for network header */
 p.networkHeader{
     font-size: 30px;
@@ -189,6 +204,7 @@ p.networkHeader{
     margin: 0;
 }
 
+/* @ Author: Arturo Olmos */
 /* Styling for devices table */
 table.devicesTable{
     font-size: 20px;
@@ -197,6 +213,7 @@ table.devicesTable{
     border-collapse: collapse;
 }
 
+/* @ Author: Arturo Olmos */
 /* Sticky table header */
 th { 
     position: sticky; 
@@ -204,6 +221,7 @@ th {
     margin-top: 0;
 } 
 
+/* @ Author: Arturo Olmos */
 /* Styling for scrollable container */
 div.scrollableContainer{
     width: 100%;
@@ -211,6 +229,7 @@ div.scrollableContainer{
     flex-grow: 1;
 }
 
+/* @ Author: Arturo Olmos */
 /* Styling for previous file button */
 button.prevFileButton{
     margin-left: 150px;
@@ -222,7 +241,7 @@ button.prevFileButton{
     border: none;
     background-color: white;
 }
-
+/* @ Author: Arturo Olmos */
 /* Styling for open button */
 .open-button {
     border: none;
@@ -236,6 +255,7 @@ button.prevFileButton{
     box-shadow: 0 2px 4px darkslategray;
 }
 
+/* @ Author: Arturo Olmos */
 /* Styling for popup form */
 .form-popup {
     display: none;
@@ -248,6 +268,7 @@ button.prevFileButton{
     height: 50%;
 }
 
+/* @ Author: Arturo Olmos */
 /* Styling for form container */
 .form-container {
     max-width: 100%;
@@ -256,16 +277,19 @@ button.prevFileButton{
     background-color: white;
 }
 
+/* @ Author: Arturo Olmos */
 /* Styling for cancel button in the form */
 .form-container .cancel {
     background-color: red;
 }
 
+/* @ Author: Arturo Olmos */
 /* Styling for links */
 a {
     text-decoration: none;
 }
 
+/* @ Author: Arturo Olmos */
 /* Styling for links on hover */
 a:hover {
     color: white;
@@ -273,6 +297,7 @@ a:hover {
     cursor: pointer;
 }
 
+/* @ Author: Arturo Olmos */
 /* Styling for visited links */
 a:visited {
     color: white;
@@ -280,6 +305,7 @@ a:visited {
     cursor: pointer;
 }
 
+/* @ Author: Arturo Olmos */
 /* Styling for navigation menu */
 ul.nav {
     list-style-type: none;
@@ -290,6 +316,7 @@ ul.nav {
     background-color: lightslategray;
 }
 
+/* @ Author: Arturo Olmos */
 /* Styling for content block */
 div.contentBlock{
     height: 100vh;
@@ -305,6 +332,7 @@ div.contentBlock{
     align-items: center; 
 }
 
+/* @ Author: Arturo Olmos */
 /* Styling for server info and storage capacity sections */
 .server-info, .storage-capacity {
     margin: 0; 

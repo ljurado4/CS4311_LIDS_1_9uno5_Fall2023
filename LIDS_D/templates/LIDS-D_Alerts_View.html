@@ -1,15 +1,17 @@
 <!--
-   ######################################################################
-   # File: LIDS-D_Alerts_View.html
-   #
-   # Version: [5.0]
-   #
-   # Description: This HTML file represents the view for displaying alerts in the LIDS-D application. It includes the structure for sorting, exporting alerts, and displaying the alert table.
-   #
-   # Modification History:
-   # [11/01/23] - [5.0] - [Lizbeth Jurado] - [File Description and Organization Set Up]
-   #
-   ######################################################################
+######################################################################
+# File: LIDS-D_Alerts_View.html
+#
+# Version: [5.0]
+#
+# Description: This HTML file represents the view for displaying alerts in the LIDS-D application. It includes the structure for sorting, exporting alerts, and displaying the alert table.
+#
+# @Author:Arturo Olmos
+# Created the basic structure and styling for the page
+
+#
+
+######################################################################
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -46,16 +48,18 @@
             <button class="sortButtons">Source</button>
         </div>
         <br>
-
+        <!-- Modified Benjamin Hansen restructured table to allow for real time data table display -->
         <div class="scrollableContainer">
             <table class="alertsTable" id="TableID" >
                 <thead>
                     <tr>
-                        <th>Level</th>
                         <th>Time</th>
-                        <th>IP</th>
-                        <th>Port</th>
                         <th>Identifier</th>
+                        <th>Level</th>
+                        <th>SourceIP</th>
+                        <th>SourcePort</th>
+                        <th>DestIP</th>
+                        <th>DestPort</th>
                         <th>Description</th>
                     </tr>
                 </thead>

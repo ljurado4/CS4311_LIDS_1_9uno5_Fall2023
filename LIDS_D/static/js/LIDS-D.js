@@ -10,9 +10,7 @@
    #   - Exporting alerts
    #   - Displaying alert details
    #
-   # Modification History:
-   # [11/01/23] - [5.0] - [Lizbeth Jurado] - [File Description and Organization Set Up]
-   #
+
    ######################################################################
 */
 
@@ -22,6 +20,7 @@ let maliciousPacketCount = 0
 // Adding initial HTML to display malicious packets found
 document.getElementById("mpd").innerHTML = "Malicious Packet Count:\n" + maliciousPacketCount.toString()
 
+// Author Arturo Olmos and modified Benjamin Hansen
 // Function to start the server
 function startServer() {
     fetch('/start_socket_server', {
@@ -41,6 +40,7 @@ function startServer() {
     });
 }
 
+/* @author Arturo Olmos */
 // Function to display a popup
 function pop(){
     var popup = document.getElementById("popup");
@@ -50,16 +50,19 @@ function pop(){
     console.log("f")
 }
 
+/* @author Arturo Olmos */
 // Function to open a form
 function openForm() {
     document.getElementById("myForm").style.display = "block";
 }
 
+/* @author Arturo Olmos */
 // Function to close a form
 function closeForm() {
     document.getElementById("myForm").style.display = "none";
 }
 
+/* @author Arturo Olmos */
 // Function to export alerts
 function exportAlerts(event){
     event.preventDefault()
@@ -139,6 +142,7 @@ function exportAlerts(event){
     download()
 }
 
+/* @author Arturo Olmos */
 // Function to display alert details
 function displayAlert(alertID){
     const alertInfo = alertID.split("-")

@@ -1,24 +1,13 @@
-/*##################################################################
+/*
 # File: LIDS_Table.js
 #
-# Version: [5.0]
+# Description: This JavaScript file is responsible for handling the display of alerts in a table format within the LIDS Dashboard web application.
 #
-# Description: This JavaScript file is responsible for handling the 
-display of alerts in a table format within the LIDS Dashboard web application.
-#
-# Modification History:
-# [11/01/23] - [3.0] - [Lizbeth Jurado] - [File Description and Organization Set Up]
-#
-# Tasks:
-# - [Task 1]: Initialize and fetch the latest alerts when the document is loaded.
-# - [Task 2]: Set up a periodic interval to refresh and fetch the latest alerts every 20 seconds.
-# - [Task 3]: Implement an event listener for the "Sort Alerts" button, enabling the sorting of alerts by level.
-# - [Task 4]: Fetch the latest alerts from the backend server.
-# - [Task 5]: Populate the table with the fetched alert data.
-# - [Task 6]: Provide functionality to open PCAP (Packet Capture) data in a separate window for each alert.
-# - [Task 7]: Handle potential errors that may occur during the alert fetching process.
-#
-################################################################## */
+# @ Author: Benjamin Hansen
+# @ Modifier: Benjamin Hansen
+# @ Modifier: Lizbeth Jurado PCAP
+*/
+
 document.addEventListener("DOMContentLoaded", function () {
     fetchLatestAlerts();
 
@@ -29,7 +18,8 @@ document.addEventListener("DOMContentLoaded", function () {
         sortAlertsByLevel();
     });
 });
-
+// @ Author: Benjamin Hansen
+// @ Modifier: Benjamin Hansen
 function fetchLatestAlerts() {
     fetch('/get_alerts')
         .then(response => response.json())
@@ -40,7 +30,8 @@ function fetchLatestAlerts() {
             console.error("There was an error fetching the alerts!", error);
         });
 }
-
+// @ Author: Benjamin Hansen
+// @ Modifier: Benjamin Hansen
 function populateTable(alerts) {
     const tbody = document.getElementById("alertBoxTable").getElementsByTagName("tbody")[0];
     tbody.innerHTML = ""; // Clear previous rows
@@ -59,13 +50,13 @@ function populateTable(alerts) {
         let descriptionCell = row.insertCell(8);
 
         timeCell.textContent = alert.Time;
-        identifierCell.textContent = alert.Identifier
+        identifierCell.textContent = alert.Identifier;
         levelCell.textContent = alert.Level;
-        sourceIPCell.textContent = alert.SourceIP
-        sourcePortCell.textContent = alert.SourcePort
-        DestinationIPCell.textContent = alert.DestIP
-        DestinationPortCell.textContent = alert.DestPort
-        typeAlertCell.textContent = alert.TypeAlert
+        sourceIPCell.textContent = alert.SourceIP;
+        sourcePortCell.textContent = alert.SourcePort;
+        DestinationIPCell.textContent = alert.DestIP;
+        DestinationPortCell.textContent = alert.DestPort;
+        typeAlertCell.textContent = alert.TypeAlert;
         descriptionCell.textContent = alert.Description;
 
         if(alert.Level === 1){
@@ -81,9 +72,9 @@ function populateTable(alerts) {
         // Add a "Show PCAP" button to open PCAP data in a separate window
         let pcapCell = row.insertCell(9);
         let showPcapButton = document.createElement("button");
-        showPcapButton.textContent = "Show PCAP";
+        showPcapButton.textContent = "PCAP";
         showPcapButton.addEventListener("click", function () {
-            showPcapData(alert.PCAPData); // Pass the PCAP data here
+            showPcapData(alert.Identifier); // Pass the alert identifier to retrieve PCAP data
         });
         pcapCell.appendChild(showPcapButton);
     });
@@ -101,17 +92,17 @@ function sortAlertsByLevel() {
             console.error("There was an error sorting alerts by level!", error);
         });
 }
-
-function showPcapData(pcapData) {
-    // Open a new window
-    const pcapWindow = window.open("", "PCAP Data", "width=600,height=400");
-    
-    // Check if the pcapData is a string (text)
-    if (typeof pcapData === 'string') {
-        // Display the text in the new window
-        pcapWindow.document.write("<pre>" + pcapData + "</pre>");
-    } else {
-        // Handle other data types or formats if needed
-        pcapWindow.document.write("Invalid PCAP Data");
-    }
+//@ Author: Lizbeth Jurado
+function showPcapData(identifier) {
+    fetch(`/show_pcap/${identifier}`) // Use path parameter to match the Flask route
+        .then(response => response.text())
+        .then(pcapData => {
+            let pcapTab = window.open("", "_blank");
+            pcapTab.document.write(`<pre>${pcapData}</pre>`);
+        })
+        .catch(error => {
+            console.error("There was an error fetching the PCAP data!", error);
+        });
 }
+
+

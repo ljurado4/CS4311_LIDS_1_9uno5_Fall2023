@@ -1,50 +1,41 @@
-##################################################################
 # File: loginCheck.py
 #
-# Version: [5.0]
+# Description:This file contains functionality for monitoring and identifying failed login attempts in network packets, but the detailed use case and context may depend on how this class is used within a larger system.
 #
-# Description: 
-# This module provides the loginCheck class which is used to check
-# for failed login attempts over various protocols such as SSH, RDP,
-# and FTP by analyzing packet data.
-#
-# Modification History:
-# [11/02/23] - [5.0] - [Lizbeth Jurado] - [File Description and Organization Set Up]
-#
-# Tasks:
-# - [Task 1]: Define the class constructor to accept a list of ports
-#             relevant to the protocols to be checked.
-# - [Task 2]: Implement the failedPssWrd method to parse packet data
-#             for failed login attempts.
-# - [Task 3]: Ensure the method accounts for different protocol packet
-#             structures and authentication failure messages.
-# - [Task 4]: Expand the method to cover more protocols if necessary.
-# - [Task 5]: Add error handling and input validation to prevent
-#             crashes and ensure secure operations.
-# - [Task 6]: Create a logging mechanism to record detected authentication
-#             failures for further analysis.
-# - [Task 7]: Optimize performance to handle a high volume of packets.
-# - [Task 8]: Document the class and its methods clearly for future maintenance.
-# - [Task 9]: Write unit tests to verify the functionality under various scenarios.
-# - [Task 10]: Consider integration with alerting systems to notify admins of
-#              detected authentication failures in real-time.
-#
-##################################################################
+# @ Author: Alejandro Hernandez
+# @ Modifier:
 
-class loginCheck:
-    def __init__(self,portList):
-        self.portList = portList
+class LoginCheck:
+    
+    def __init__(self):
+        self.timeList = []
 
-    def failedPssWrd(self, packet):
-        if "SSH" in packet:
+# @ Author: Alejandro Hernandez
+
+    def failedPssWrd(self, packet, protocol,timeOF,destPort,threshold):
+        if protocol == "TCP":
+            if destPort == '3389':
+                self.timeList.append(timeOF)
+                time1 = self.timeList[len(self.timeList)-1]
+                time2 = self.timeList[len(self.timeList)-2]
+                time_difference = time2 - time1
+                time_difference_seconds = int(time_difference.total_seconds())
+                if time_difference_seconds <= threshold:
+                    return True
+        
+        if protocol == "SSH":
             ssh_display = packet.ssh.display.lower()
-            return "authentication failed" in ssh_display
+            if "authentication failed" in ssh_display or'51' in ssh_display or '51'in packet.ssh.get('msg_code'):
+                return True
 
-
-        if "RDP" in packet:
+        if protocol == "RDP":
             rdp_status = packet.rdp.status.lower()
-            return "authentication failure" in rdp_status
+            if "authentication failure" in rdp_status:
+                return True
 
-        if "FTP" in packet:
+        if protocol == "FTP":
             ftp_response_msg = packet.ftp.response_msg.lower()
-            return "login failed" in ftp_response_msg
+            if "login failed" in ftp_response_msg or '530' in ftp_response_msg or '530' in packet.ftp.get('response_code'):
+                return True
+        
+    
