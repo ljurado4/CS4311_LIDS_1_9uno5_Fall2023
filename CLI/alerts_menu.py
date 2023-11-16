@@ -1,19 +1,10 @@
-################################################################################
 # File: alerts_menu.py
 #
-# Version: [5.0]
+# Description: Displaying alerts through a command-line interface (CLI). The class includes a method called display_Alerts that initiates the capture of network packets and then prints a list of alerts obtained from an AlertManager
 #
-# Description: This file contains the implementation of the Alerts_CLI class,
-#              which is responsible for displaying alerts in a CLI interface.
-#
-# Modification History:
-# [11/01/2023] - [5.0] - [Lizbeth Jurado] - [File Description and Organization Set Up]
-#
-# Tasks:
-# - [Task 1]: Implement the display_Alerts method to display alerts in a tabular format.
-# - [Task 2]: Add functionality to get user input for navigating to the next menu.
-#
-################################################################################
+# @ Author: Benjamin Hansen
+# @ Modifier: Alejandro Hernandez
+
 
 import sys
 import os
@@ -23,7 +14,9 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import menu
 from backend import packets, alerts_manager
 
+# @ Author: Benjamin Hansen
 class Alerts_CLI:
+<<<<<<< HEAD
 <<<<<<< HEAD
     def __init__(self):
         self.stop_streaming = False
@@ -79,6 +72,12 @@ class Alerts_CLI:
     #    self.pack_time = packets.PackTime()
     #    self.thread = threading.Thread(target=self.display_Alerts)#
     
+=======
+
+# @ Author: Benjamin Hansen
+# @ Modifier: Alejandro Hernandez
+
+>>>>>>> c60afdbbcf112d267e305114e1f43fccba511c31
     def display_Alerts(self):
         pack_time = packets.PackTime()
         thread = threading.Thread(target=pack_time.run_sniffer)
@@ -94,6 +93,7 @@ class Alerts_CLI:
         next_menu = menu_helper.get_user_input(">> ",menu_helper.choice_set)
         
         menu_helper.navigate_next_menu(next_menu)
+<<<<<<< HEAD
 
     #     while not self.stop_streaming:
     #         if not self.user_typing_event.is_set():
@@ -193,3 +193,5 @@ class Alerts_CLI:
         
     #     menu_helper.navigate_next_menu(next_menu)
 >>>>>>> 62fa2d62cd435ade65ea262397353ec5a718c228
+=======
+>>>>>>> c60afdbbcf112d267e305114e1f43fccba511c31

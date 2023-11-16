@@ -1,26 +1,10 @@
-################################################################################
-# File: packets.py
+# File: CLI/packets.py
 #
-# Version: [5.0]
+# Description: This file contains the implementation of the PackTime class, which is responsible for capturing, processing, and analyzing network packets. It includes methods for capturing live packets, processing PCAP files, and detecting network alerts.
 #
-# Description: This file contains the implementation of the PackTime class, which
-#              is responsible for capturing, processing, and analyzing network
-#              packets. It includes methods for capturing live packets, processing
-#              PCAP files, and detecting network alerts.
-#
-# Modification History:
-# [11/01/23] - [5.0] - [Lizbeth Jurado] - [File Description and Organization Set Up]
-#
-# Tasks:
-# - [Task 1]: Implement the 'alertDetector' method to detect network alerts.
-# - [Task 2]: Implement the 'create_packet' method to create custom packets.
-# - [Task 3]: Implement the 'packet_handler' method to handle packets, including
-#             alert detection and processing.
-# - [Task 4]: Implement the 'process_pcap_files' method to process PCAP files.
-# - [Task 5]: Implement the 'run_sniffer' method to capture live packets and
-#             initiate packet processing.
-#
-################################################################################
+# @ Author: Lizbeth Jurado
+# @ Modifier: 
+
 
 import pyshark
 from datetime import datetime
@@ -34,6 +18,7 @@ class PackTime:
     cap_sem = Semaphore(1)
     process_sem = Semaphore(0)
 
+# @ Author: Lizbeth Jurado
     def __init__(self):
         self.pack_time = None
         base_path = "/Users/shas/Git/traffic" 
@@ -47,12 +32,13 @@ class PackTime:
             base_path + "sv_day1traffic.pcapng",
             base_path + "vd_07.17.23.pcapng"
         ]
-
+# @ Author: Lizbeth Jurado
     def alertDetector(self, packet):
         # TODO: Implement alert detection
         
         return False
 
+# @ Author: Lizbeth Jurado
     def create_packet(self, in_packet):
         time = datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")
         if 'IP' in in_packet:
@@ -60,6 +46,7 @@ class PackTime:
             dst = in_packet.ip.dst
             # TODO: Packet creation logic
 
+# @ Author: Lizbeth Jurado
     def packet_handler(self):
         while True:
             self.process_sem.acquire()
@@ -80,7 +67,7 @@ class PackTime:
                 print("Packet: ", packet)
 
             self.cap_sem.release()
-
+# @ Author: Lizbeth Jurado
     def process_pcap_files(self):
         for file in self.files:
             cap = pyshark.FileCapture(file)
@@ -88,7 +75,7 @@ class PackTime:
                 # Existing packet handling logic
       
                 print(packet)
-
+# @ Author: Lizbeth Jurado
     def run_sniffer(self):
         packet_handler_thread = th.Thread(target=self.packet_handler)
         packet_handler_thread.start()

@@ -1,28 +1,17 @@
-/*##################################################################
+/*
 # File: LIDS_Main.js
-#
-# Version: [5.0]
 #
 # Description: JavaScript file for handling file upload and data processing in the LIDS Dashboard web application.
 #
-# @Authors:Arturo Olmos, Benjamin
+# @ Authors:Arturo Olmos
 # Worked on the xml ingestion
-#
-# Modification History:
-# [11/01/23] - [3.0] - [Lizbeth Jurado] - [File Description and Organization Set Up]
-#
-# Tasks:
-# - [Task 1]: Listen for file input changes
-# - [Task 2]: Read the uploaded file and parse it as XML
-# - [Task 3]: Extract and organize data from the XML file
-# - [Task 4]: Send the extracted data to the backend
-# - [Task 5]: Handle the response from the backend
-#
-################################################################## */
+# @ Author Benjamin Hansesn
+# @ Modifier:
+*/
 
 
 const fileInput = document.getElementById('myFile');
-//@author Arturo Olmos & Benjamin 
+//# @ Authors:Arturo Olmos @ Author Benjamin Hansesn
 //handles the input of a xml file
 fileInput.onchange = async () => {
 

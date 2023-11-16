@@ -1,5 +1,16 @@
-#packets.py
+# File: packets.py
+#
+# Description: Includes methods for creating and handling network packets. It also imports various modules and defines class attributes for managing packet data and synchronization.
+#
+# @ Author: 
+# @ Modifier:Alejandro Hernandez
+# @ Modifier:Lizbeth Jurado
 
+
+
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import pyshark
 from datetime import datetime
 import threading as th
@@ -7,8 +18,9 @@ from threading import Semaphore
 import os
 import asyncio
 import webbrowser
-from . import packet_analyzer
+from . import packet_analyzer,ipChecker
 import time
+from config_condition import config_condition
 
 class PackTime:
     packet_list = []
@@ -24,6 +36,8 @@ class PackTime:
     def __init__(self):
         self.pack_time = None
 
+# @ Modifier:Alejandro Hernandez
+    
     def create_packet(self, in_packet):
         time = datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")
         if 'IP' in in_packet or "Src" in in_packet or "Source" in in_packet:
@@ -77,6 +91,8 @@ class PackTime:
             }
             self.packet_list.append(temp_packet_dict)
 
+# @ Modifier:Alejandro Hernandez
+
     def packet_handler(self):
         while True:
             self.process_sem.acquire()
@@ -89,10 +105,17 @@ class PackTime:
             #time = datetime.strptime(time0,"%Y-%m-%d %H:%M:%S.%f")
             if type(packet) == dict:
                 self.identifier += 1
-                self.packet_analyzer.analyze_packet(packet,time, self.identifier,packet["SourceIP"],packet["SourcePort"],packet["DestinationIP"],packet["DestinationPort"])
+                self.packet_analyzer.analyze_packet(packet,time, self.identifier,packet["SourceIP"],packet["SourcePort"],packet["DestinationIP"],packet["DestinationPort"],packet["Protocol"])
             self.cap_sem.release()
 
+# @ Modifier:Alejandro Hernandez
+    
     def run_sniffer(self):
+        # Wait for the configuration
+        with config_condition:
+            config_condition.wait()  # Wait for notification
+            config = ipChecker.ip_Checker.configuration
+            
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
 
@@ -101,7 +124,13 @@ class PackTime:
             packet_handler_thread = th.Thread(target=self.packet_handler)
             packet_handler_thread.start()
 
-            capture = pyshark.LiveCapture()
+# @ Modified: LizbethBranch
+# For macOS
+            #capture = pyshark.LiveCapture(interface="en0")
+
+            capture = pyshark.LiveCapture(interface="enp0s3")
+            # capture = pyshark.LiveCapture()
+
             for in_packet in capture:
 
                 self.cap_sem.acquire()
