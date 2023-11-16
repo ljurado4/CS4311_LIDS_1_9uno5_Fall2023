@@ -29,7 +29,8 @@ class Alerts_CLI(Menu):
 
         print("Debugged Display alerts")
         lstAlerts = alerts_manager.AlertManager().sharedAlerts
-        print("Printing list alerts ",lstAlerts) # printing list 
+        # print("Printing list alerts ",lstAlerts)
+        #format this were using tabulate 
         for i in lstAlerts:
 
             print(i)

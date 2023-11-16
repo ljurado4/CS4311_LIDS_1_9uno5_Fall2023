@@ -111,25 +111,36 @@ class PackTime:
 # @ Modifier:Alejandro Hernandez
     
     def run_sniffer(self):
+        
+       #Todo find a way for this to work for both CLI and GUI to wait for configuration before packet capture
         # Wait for the configuration
         with config_condition:
             config_condition.wait()  # Wait for notification
             config = ipChecker.ip_Checker.configuration
-            
+
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
 
         try:
+            
+
 
             packet_handler_thread = th.Thread(target=self.packet_handler)
             packet_handler_thread.start()
+            
+            
+
+
 
 # @ Modified: LizbethBranch
 # For macOS
             #capture = pyshark.LiveCapture(interface="en0")
 
-            capture = pyshark.LiveCapture(interface="enp0s3")
-            # capture = pyshark.LiveCapture()
+            # capture = pyshark.LiveCapture(interface="enp0s3")
+            capture = pyshark.LiveCapture()
+                
+
+
 
             for in_packet in capture:
 

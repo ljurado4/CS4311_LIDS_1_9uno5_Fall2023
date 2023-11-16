@@ -5,9 +5,18 @@
 # @ Author: Benjamin Hansen
 # @ Modifier:
 
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+import time
 from menu import Menu
 import argparse
 from config_parser import ConfigureCLI
+from backend import packets
+import threading
+from config_condition import config_condition
+
+
 
 
 # @ Author: Benjamin Hansen
@@ -31,6 +40,16 @@ if __name__ == "__main__":
     
     configure_system = ConfigureCLI()
     configure_system.configure(args.config_file)
+
+
+
+    pack_time = packets.PackTime()
+    thread = threading.Thread(target=pack_time.run_sniffer)
+    thread.start()
+    
+    
+    with config_condition:
+        config_condition.notify_all()
     
     cli_main = MainCLI(args.config_file)
     cli_main.run()
