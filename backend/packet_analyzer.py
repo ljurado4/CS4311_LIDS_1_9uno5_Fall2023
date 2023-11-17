@@ -8,16 +8,18 @@
 
 from . import ipChecker, alerts_manager, loginCheck, PortChecker
 from datetime import datetime
+import pyshark
 
 class PacketAnalyzer:
     def __init__(self):
+        self.loginCheck = loginCheck.LoginCheck()
         self.packetAnalyzer = None
         self.iC = ipChecker.ip_Checker()
         self.getAlerts = alerts_manager.AlertManager()
         self.portCheck = PortChecker.portDetection()
 
 # @ Author: Alejandro Hernandez
-    def analyze_packet(self, packet, time, identifier, sourceIP, sourcePort,destIP,destPort):
+    def analyze_packet(self, packet, time, identifier, sourceIP, sourcePort,destIP,destPort,protocol):
 
         # Check for each error 
         if self.login_attempts(packet,protocol,destPort,time) == True:
@@ -48,7 +50,7 @@ class PacketAnalyzer:
     def login_attempts(self, packet,protocol,destPort,time):
         threshold = 700
         timeOF = datetime.strptime(time,"%Y-%m-%d %H:%M:%S.%f")
-        return self.loginChecker.failedPssWrd(packet,protocol,timeOF,destPort,threshold)
+        return self.loginCheck.failedPssWrd(packet,protocol,timeOF,destPort,threshold)
 
 # @ Author: Alejandro Hernandez
     
