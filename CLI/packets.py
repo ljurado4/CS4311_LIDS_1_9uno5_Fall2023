@@ -1,55 +1,36 @@
-################################################################################
 # File: CLI/packets.py
 #
-# Version: [5.0]
+# Description: This file contains the implementation of the PackTime class, which is responsible for capturing, processing, and analyzing network packets. It includes methods for capturing live packets, processing PCAP files, and detecting network alerts.
 #
-# Description: This file contains the implementation of the PackTime class, which
-#              is responsible for capturing, processing, and analyzing network
-#              packets. It includes methods for capturing live packets, processing
-#              PCAP files, and detecting network alerts.
+# @ Author: Lizbeth Jurado
+# @ Modifier: 
 
-# Tasks:
-# - [Task 1]: Implement the 'alertDetector' method to detect network alerts.
-# - [Task 2]: Implement the 'create_packet' method to create custom packets.
-# - [Task 3]: Implement the 'packet_handler' method to handle packets, including
-#             alert detection and processing.
-# - [Task 4]: Implement the 'process_pcap_files' method to process PCAP files.
-# - [Task 5]: Implement the 'run_sniffer' method to capture live packets and
-#             initiate packet processing.
-#
-################################################################################
-
+from menu import Menu
 import pyshark
 from datetime import datetime
 import threading as th
 from threading import Semaphore
 from flask import Flask, jsonify
 
-class PackTime:
+class PackTime(Menu):
     packet_list = []
     packets_captured = 0
     cap_sem = Semaphore(1)
     process_sem = Semaphore(0)
 
+# @ Author: Lizbeth Jurado
+# @ Modified: Benjamin Hansen (added super init)
     def __init__(self):
-        self.pack_time = None
-        base_path = "/Users/lizbethjurado/Git/CS4311_LIDS_19uno5_Fall2023/Traffic/" 
-        # TODO: Find a way to store files in a GitHub repo, giving too large error even with installing Git LFS
-        self.files = [
-            base_path + "7-17-EN.pcapng",
-            base_path + "AA_Day1_Traffic.pcapng",
-            base_path + "cvi.pcapng",
-            base_path + "eth0-LDV-wireshark.pcapng",
-            base_path + "nmap scan.pcapng",
-            base_path + "sv_day1traffic.pcapng",
-            base_path + "vd_07.17.23.pcapng"
-        ]
+        super().__init__()
 
+
+# @ Author: Lizbeth Jurado
     def alertDetector(self, packet):
         # TODO: Implement alert detection
         
         return False
 
+# @ Author: Lizbeth Jurado
     def create_packet(self, in_packet):
         time = datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")
         if 'IP' in in_packet:
@@ -57,6 +38,7 @@ class PackTime:
             dst = in_packet.ip.dst
             # TODO: Packet creation logic
 
+# @ Author: Lizbeth Jurado
     def packet_handler(self):
         while True:
             self.process_sem.acquire()
@@ -77,7 +59,7 @@ class PackTime:
                 print("Packet: ", packet)
 
             self.cap_sem.release()
-
+# @ Author: Lizbeth Jurado
     def process_pcap_files(self):
         for file in self.files:
             cap = pyshark.FileCapture(file)
@@ -85,7 +67,7 @@ class PackTime:
                 # Existing packet handling logic
       
                 print(packet)
-
+# @ Author: Lizbeth Jurado
     def run_sniffer(self):
         packet_handler_thread = th.Thread(target=self.packet_handler)
         packet_handler_thread.start()

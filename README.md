@@ -45,7 +45,7 @@ virtualenv env
 
 5. **Install Flask and Required Packages**:
    - Install Flask:
-pip3 install Flask==20.24.5
+pip3 install Flask==3.0.0
 
    - Install Flask-CORS:
 pip3 install flask-cors==4.0.0

@@ -1,28 +1,55 @@
-################################################################################
 # File: main_cli.py
 #
-# Version: [5.0]
-#
-# Description: This file serves as the entry point for the CLI (Command Line
-#              Interface) of LIDS (Local Intrusion Detection System). It initializes
-#              the system and starts the Alert menu.
-#
+# Description: This file serves as the entry point for the CLI (Command Line Interface) of LIDS (Local Intrusion Detection System). It initializes the system and starts the Alert menu.
+# 
+# @ Author: Benjamin Hansen
+# @ Modifier:
 
-# Tasks:
-# - [Task 1]: Implement the 'main' function to initialize the CLI and start the Alert menu.
-#
-################################################################################
-#author Benjamin Hansen
-import menu
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+import time
+from menu import Menu
 import argparse
-#author Benjamin Hansen
-def main():
-    alert_menu = menu.Menu()
-    alert_menu.navigate_next_menu("Alert")
+from config_parser import ConfigureCLI
+from backend import packets
+import threading
+from config_condition import config_condition
+
+
+
+
+# @ Author: Benjamin Hansen
+class MainCLI(Menu):
+
+    # @ Author: Benjamin Hansen
+    def __init__(self,config_file):
+        super().__init__()
+        self.config_file = config_file
+
+    # @ Author: Benjamin Hansen
+    def run(self):
+        super().navigate_next_menu("Alert")
+
 
 if __name__ == "__main__":
-    
+
     parser = argparse.ArgumentParser(description="CLI for LIDS.")
     parser.add_argument("--config_file", required=True, help="configuration file name (e.g. config.xml)")
     args = parser.parse_args()
-    main()
+    
+    configure_system = ConfigureCLI()
+    configure_system.configure(args.config_file)
+
+
+
+    pack_time = packets.PackTime()
+    thread = threading.Thread(target=pack_time.run_sniffer)
+    thread.start()
+    
+    
+    with config_condition:
+        config_condition.notify_all()
+    
+    cli_main = MainCLI(args.config_file)
+    cli_main.run()
