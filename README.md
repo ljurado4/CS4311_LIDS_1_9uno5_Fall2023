@@ -56,11 +56,7 @@ pip3 install pyshark==0.6
 
 7. **Install python-socketio**:
    - Install SocketIO:
-pip3 install pip3 install python-socketio
-
-7. **Install Pyshark**:
-   - Install Pyshark:
-pip3 install pyshark==0.6
+pip3 install python-socketio
 
 8. **Install tcpdump**:
    - Install tcpdump:
