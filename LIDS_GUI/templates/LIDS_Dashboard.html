@@ -100,40 +100,46 @@
                 </table>
             </div>
             <!-- right side bar -->
-            <div class="rightSidebar" id="rightSidebar">
-                <!-- container for notifications table -->
+            <div id="rightSidebar" class="rightSidebar">
                 <div class="rightSidebarSC">
                     <table id="notificationsTable">
                         <thead>
                             <tr>
-                                <th>Notifications</th>
+                                <th >Notifications</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>Notification 1</td>
                             </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <!-- container for errors table -->
-                <div class="rightSidebarSC">
-                    <table id="errorsTable">
-                        <thead>
+                            {% for message in get_flashed_messages(category_filter=['success']) %}
                             <tr>
-                                <th>Errors</th>
+                                <td>{{ message }}</td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Error 1</td>
-                            </tr>
-                            <tr>
-                                <td>Failed connection server at IP: 127.0.0.1 Port: 5000.</td>
+                            {% endfor %}
                             </tr>
                         </tbody>
                     </table>
-                </div>
+            </div>
+            <div class="rightSidebarSC">
+                <table id="errorsTable">
+                    <thead>
+                        <tr>
+                            <th>Errors</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Error 1</td>
+                        </tr>
+                        {% for message in get_flashed_messages(category_filter=['error']) %}
+                        <tr>
+                            <td>{{ message }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
             </div>
         </div>
     

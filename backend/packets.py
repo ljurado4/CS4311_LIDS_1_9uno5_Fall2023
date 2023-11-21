@@ -129,8 +129,9 @@ class PackTime:
 # For macOS
             capture = pyshark.LiveCapture(interface="en0")
 
-            #capture = pyshark.LiveCapture(interface="enp0s3")
-            #capture = pyshark.LiveCapture()
+            capture = pyshark.LiveCapture(interface="enp0s3")
+           
+            # capture = pyshark.LiveCapture()
 
             for in_packet in capture:
 
