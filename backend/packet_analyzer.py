@@ -20,6 +20,7 @@ class PacketAnalyzer:
     def analyze_packet(self, packet, time, identifier, sourceIP, sourcePort,destIP,destPort):
 
         # Check for each error 
+                                    #,protocol
         if self.login_attempts(packet,protocol,destPort,time) == True:
             self.create_alert(packet, time, identifier, 3, sourceIP, sourcePort,destIP,destPort,"Failed Login Error","Multiple failed logins detected")
         res = self.port_scan_check(sourceIP, destPort, time)

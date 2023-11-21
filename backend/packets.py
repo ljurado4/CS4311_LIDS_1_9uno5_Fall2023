@@ -2,9 +2,10 @@
 #
 # Description: Includes methods for creating and handling network packets. It also imports various modules and defines class attributes for managing packet data and synchronization.
 #
-# @ Author: 
+# @ Author:
 # @ Modifier:Alejandro Hernandez
 # @ Modifier:Lizbeth Jurado
+# @ Modifier: Seth Velasco
 
 
 
@@ -104,7 +105,7 @@ class PackTime:
             time = datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")
             #time = datetime.strptime(time0,"%Y-%m-%d %H:%M:%S.%f")
             if type(packet) == dict:
-                self.identifier += 1
+                self.identifier += 1                                                                                                                                                                
                 self.packet_analyzer.analyze_packet(packet,time, self.identifier,packet["SourceIP"],packet["SourcePort"],packet["DestinationIP"],packet["DestinationPort"],packet["Protocol"])
             self.cap_sem.release()
 
@@ -126,10 +127,10 @@ class PackTime:
 
 # @ Modified: LizbethBranch
 # For macOS
-            #capture = pyshark.LiveCapture(interface="en0")
+            capture = pyshark.LiveCapture(interface="en0")
 
-            capture = pyshark.LiveCapture(interface="enp0s3")
-            # capture = pyshark.LiveCapture()
+            #capture = pyshark.LiveCapture(interface="enp0s3")
+            #capture = pyshark.LiveCapture()
 
             for in_packet in capture:
 
