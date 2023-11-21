@@ -21,7 +21,11 @@ from flask import jsonify
 from backend.packet_analyzer import PacketAnalyzer
 
 
-app = Flask(__name__, template_folder='LIDS_GUI/templates', static_folder='LIDS_GUI/static')
+basedir = os.path.abspath(os.path.dirname(__file__))
+template_dir = os.path.join(basedir, 'LIDS_GUI', 'templates')
+static_dir = os.path.join(basedir, 'LIDS_GUI', 'static')
+
+app = Flask(__name__, template_folder=template_dir, static_folder=static_dir)
 
 pack_time = packets.PackTime()
 thread = threading.Thread(target=pack_time.run_sniffer)
@@ -61,7 +65,9 @@ def dashboard():
             sio.connect(f'https://{ip_address}:{port_number}')
             flash(f'Successfully connection to server at IP: {ip_address} Port: {port_number}.', 'success')
         except Exception as e:
-            flash(f'Failed connection server at IP: {ip_address} Port: {port_number}.', 'error')
+            error_message = str(e)
+            logging.error(f'Failed to connect to server at IP: {ip_address} Port: {port_number}. Error: {error_message}')
+            flash(f'Failed to connect to server at IP: {ip_address} Port: {port_number}. Error: {error_message}', 'error')
 
         
     return render_template('LIDS_Dashboard.html')
@@ -141,5 +147,5 @@ def get_pcap_data():
     return jsonify(formatted_data)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0',port=50000)
 

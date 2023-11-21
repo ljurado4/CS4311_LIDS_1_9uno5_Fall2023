@@ -62,6 +62,10 @@ pip3 install pip3 install python-socketio
    - Install Pyshark:
 pip3 install pyshark==0.6
 
+8. **Install tcpdump**:
+   - Install tcpdump:
+sudo apt-get install tcpdump
+
 
 7. **Activate the virtual environment**:
    - On Windows using CMD:
