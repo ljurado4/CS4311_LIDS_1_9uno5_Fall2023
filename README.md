@@ -19,9 +19,13 @@ LIDS is a Local Intrusion Detection System designed to monitor network activity 
 
 ### Installation
 **Prerequisites**:
-   Ensure you have Python installed 3.10.12 installed
+   1. Ensure you have Python installed 3.10.12 installed
    ```
    python --version  # Check your current Python version
+   ```
+   2. Ensure ´install.sh' has execution permissions.
+   ```
+   chmod +x install.sh
    ```
 
 #### Automated Installation
