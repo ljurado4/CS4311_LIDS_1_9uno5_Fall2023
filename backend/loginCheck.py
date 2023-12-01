@@ -25,7 +25,7 @@ class LoginCheck:
         
         if protocol == "SSH":
             ssh_display = packet.ssh.display.lower()
-            if "authentication failed" in ssh_display or'51' in ssh_display or '51'in packet.ssh.get('msg_code'):
+            if "authentication failed" in ssh_display or'51' in ssh_display or '51'in packet.ssh.get('msg_code','N/A') or "SSH_MSG_USERAUTH_FAILURE" in packet.ssh.get('msg_code','N/A'):
                 return True
 
         if protocol == "RDP":
@@ -35,7 +35,7 @@ class LoginCheck:
 
         if protocol == "FTP":
             ftp_response_msg = packet.ftp.response_msg.lower()
-            if "login failed" in ftp_response_msg or '530' in ftp_response_msg or '530' in packet.ftp.get('response_code'):
+            if "login failed" in ftp_response_msg or '530' in ftp_response_msg or '530' in packet.ftp.get('response_code','N/A'):
                 return True
         
     

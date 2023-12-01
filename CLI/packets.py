@@ -5,33 +5,25 @@
 # @ Author: Lizbeth Jurado
 # @ Modifier: 
 
-
+from menu import Menu
 import pyshark
 from datetime import datetime
 import threading as th
 from threading import Semaphore
 from flask import Flask, jsonify
 
-class PackTime:
+class PackTime(Menu):
     packet_list = []
     packets_captured = 0
     cap_sem = Semaphore(1)
     process_sem = Semaphore(0)
 
 # @ Author: Lizbeth Jurado
+# @ Modified: Benjamin Hansen (added super init)
     def __init__(self):
-        self.pack_time = None
-        base_path = "/Users/lizbethjurado/Git/CS4311_LIDS_19uno5_Fall2023/Traffic/" 
-        # TODO: Find a way to store files in a GitHub repo, giving too large error even with installing Git LFS
-        self.files = [
-            base_path + "7-17-EN.pcapng",
-            base_path + "AA_Day1_Traffic.pcapng",
-            base_path + "cvi.pcapng",
-            base_path + "eth0-LDV-wireshark.pcapng",
-            base_path + "nmap scan.pcapng",
-            base_path + "sv_day1traffic.pcapng",
-            base_path + "vd_07.17.23.pcapng"
-        ]
+        super().__init__()
+
+
 # @ Author: Lizbeth Jurado
     def alertDetector(self, packet):
         # TODO: Implement alert detection

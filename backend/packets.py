@@ -5,9 +5,6 @@
 # @ Author: 
 # @ Modifier:Alejandro Hernandez
 # @ Modifier:Lizbeth Jurado
-
-
-
 import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -24,6 +21,7 @@ from config_condition import config_condition
 
 class PackTime:
     packet_list = []
+    packet_list_Keep = []
     checker = False
     ipList = []
     ipDouble = []
@@ -35,6 +33,7 @@ class PackTime:
 
     def __init__(self):
         self.pack_time = None
+
 
 # @ Modifier:Alejandro Hernandez
     
@@ -50,32 +49,43 @@ class PackTime:
                 dst_port = in_packet.tcp.dstport
                 if 'SYN' in flags:
                     description = 'TCP Handshake SYN'
+                    handShake = True
                 else:
                     description = 'Other TCP Packet'
+                    handShake = False
             elif 'UDP' in in_packet:
                 src_port = in_packet.udp.srcport
                 dst_port = in_packet.udp.dstport
                 protocol = 'UDP'
                 description = 'UDP Packet'
+                if in_packet.transport_layer == 'UDP':
+                    handShake = True
+                else:
+                    handShake = False
             elif 'ICMP' in in_packet:
                 protocol = 'ICMP'
                 description = 'ICMP Packet'
                 src_port = "321"
                 dst_port = "123"
+                handShake = False
             elif 'SSH' in in_packet:
                 protocol = 'SSH'
                 description = 'SSH Packet'
+                handShake = False
             elif 'RDP' in in_packet:
                 protocol = 'RDP'
                 description = 'RDP Packet'
+                handShake = False
             elif 'FTP' in in_packet:
                 protocol = 'FTP'
                 description = 'FTP Packet'
+                handShake = False
             else:
                 protocol = 'Other'
                 description = "Unknown/Other Protocol"
                 src_port = "321"
                 dst_port = "123"
+                handshake = False
             packet_length = int(in_packet.length)
             pcap_data = str(in_packet)  # Capture PCAP data as a string
             temp_packet_dict = {
@@ -87,9 +97,11 @@ class PackTime:
                 "Description": description,
                 "SourcePort": src_port,
                 "DestinationPort": dst_port,
-                "PCAPData": pcap_data  # Add the actual PCAP data here
+                "PCAPData": pcap_data,  # Add the actual PCAP data here
+                "HandShake" : handShake
             }
             self.packet_list.append(temp_packet_dict)
+            PackTime.packet_list_Keep.append(temp_packet_dict)
 
 # @ Modifier:Alejandro Hernandez
 
@@ -105,7 +117,7 @@ class PackTime:
             #time = datetime.strptime(time0,"%Y-%m-%d %H:%M:%S.%f")
             if type(packet) == dict:
                 self.identifier += 1
-                self.packet_analyzer.analyze_packet(packet,time, self.identifier,packet["SourceIP"],packet["SourcePort"],packet["DestinationIP"],packet["DestinationPort"],packet["Protocol"])
+                self.packet_analyzer.analyze_packet(packet,time, self.identifier,packet["SourceIP"],packet["SourcePort"],packet["DestinationIP"],packet["DestinationPort"],packet["Protocol"],packet["HandShake"], PackTime.packet_list_Keep)
             self.cap_sem.release()
 
 # @ Modifier:Alejandro Hernandez
@@ -128,8 +140,9 @@ class PackTime:
 # For macOS
             #capture = pyshark.LiveCapture(interface="en0")
 
-            capture = pyshark.LiveCapture(interface="enp0s3")
-            # capture = pyshark.LiveCapture()
+            #capture = pyshark.LiveCapture(interface="enp0s3")
+           
+            capture = pyshark.LiveCapture()
 
             for in_packet in capture:
 
