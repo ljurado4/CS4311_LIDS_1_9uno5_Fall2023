@@ -35,8 +35,7 @@ git clone https://github.com/ljurado4/CS4311_LIDS_19uno5_Fall2023.git
 cd CS4311_LIDS_19uno5_Fall2023
 ```
 
-3. **Run Automated Installation**
-   - Run `install.sh`:
+3. Run `install.sh`.
 ```
 ./install.sh
 ```
