@@ -11,8 +11,8 @@ from flask_socketio import SocketIO
 
 app = Flask(__name__)
 
-ssl_cert = "/media/sf_SW2/CS4311_LIDS_19uno5_Fall2023/cert.pem"
-ssl_key = "/media/sf_SW2/CS4311_LIDS_19uno5_Fall2023/key.pem"
+ssl_cert = "/Users/jandr/Capstone2/CS4311_LIDS_1_9uno5_Fall2023/cert.pem"
+ssl_key = "/Users/jandr/Capstone2/CS4311_LIDS_1_9uno5_Fall2023/key.pem"
 
 socketio = SocketIO(app, cors_allowed_origins="*", ssl_context=(ssl_cert, ssl_key))
 
