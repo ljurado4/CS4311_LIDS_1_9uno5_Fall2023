@@ -29,8 +29,8 @@ class PacketAnalyzer:
             self.create_alert(packet, time, identifier, 3, sourceIP, sourcePort,destIP,destPort,"Port Scan Error","Port Scan surpassing threshold2")
         elif res == "threshold1":
             self.create_alert(packet, time, identifier, 2, sourceIP, sourcePort,destIP,destPort,"Port Scan Error","Port Scan surpassing threshold1")
-        elif self.ip_check(sourceIP) == False:
-            self.create_alert(packet, time, identifier, 1, sourceIP, sourcePort,destIP,destPort,"Unknown IP Error","Source IP detected that is not appart of approved IP list")
+        #elif self.ip_check(sourceIP) == False:
+            #self.create_alert(packet, time, identifier, 1, sourceIP, sourcePort,destIP,destPort,"Unknown IP Error","Source IP detected that is not appart of approved IP list")
 
 # @ Author: Alejandro Hernandez
     
@@ -39,10 +39,11 @@ class PacketAnalyzer:
 
 # @ Author: Alejandro Hernandez
     def port_scan_check(self, IP, destPort, time, handshake, packetList):
-        threshold1 = -1
-        threshold2 = 0
+        threshold1 = 150
+        threshold2 = 500
         timeAllowed = 700
         timeOF = datetime.strptime(time,"%Y-%m-%d %H:%M:%S.%f")
+        print("here")
         if handshake == True:
             return self.portCheck.port_Checking(IP, destPort, timeOF, timeAllowed, threshold1, threshold2, packetList)
     
@@ -62,7 +63,7 @@ class PacketAnalyzer:
         self.getAlerts.create_alert(pcap_data,time, identifier, level, sourceIP, sourcePort,destIP,destPort,typeAlert,description)
         self.getAlerts.ident_list(pcap_data, identifier)
         alerts = self.getAlerts.get_alerts()
-        
+
 # @ Author: Lizbeth Jurado
     def read_pcap(self, pcap_file_path):
         try:
