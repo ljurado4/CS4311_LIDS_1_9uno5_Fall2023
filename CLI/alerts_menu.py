@@ -10,6 +10,7 @@ import sys
 import os
 import threading
 import time
+from tabulate import tabulate
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from menu import Menu
 from backend import packets, alerts_manager
@@ -29,11 +30,18 @@ class Alerts_CLI(Menu):
 
         print("Debugged Display alerts")
         lstAlerts = alerts_manager.AlertManager().sharedAlerts
-        # print("Printing list alerts ",lstAlerts)
-        #format this were using tabulate 
-        for i in lstAlerts:
+        #print("Printing list alerts ",lstAlerts) 
+        print("List of Alerts")
+        
+        # printing list 
+        columns = ["time", "identifier", "level", "sourceIP", "sourcePort", "destIP", "destPort", "typeAlert", "description"]
 
-            print(i)
+        # Generate a table from the list of dictionaries
+        table = tabulate(lstAlerts, headers=columns, tablefmt="pretty")
+        print(table)
+        #for i in lstAlerts:
+
+         #   print(i)
         
         next_menu = self.get_user_input(">> ",self.choice_set)  
         self.navigate_next_menu(next_menu)

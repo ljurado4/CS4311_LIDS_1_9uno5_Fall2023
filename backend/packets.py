@@ -5,9 +5,6 @@
 # @ Author: 
 # @ Modifier:Alejandro Hernandez
 # @ Modifier:Lizbeth Jurado
-
-
-
 import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -24,6 +21,7 @@ from config_condition import config_condition
 
 class PackTime:
     packet_list = []
+    packet_list_Keep = []
     checker = False
     ipList = []
     ipDouble = []
@@ -36,6 +34,7 @@ class PackTime:
     def __init__(self):
         self.pack_time = None
 
+
 # @ Modifier:Alejandro Hernandez
     
     def create_packet(self, in_packet):
@@ -43,39 +42,59 @@ class PackTime:
         if 'IP' in in_packet or "Src" in in_packet or "Source" in in_packet:
             src = in_packet.ip.src
             dst = in_packet.ip.dst
+            handShake = False
             if 'TCP' in in_packet:
+                flags = in_packet.tcp.flags
                 protocol = 'TCP'
                 flags = in_packet.tcp.flags
                 src_port = in_packet.tcp.srcport
                 dst_port = in_packet.tcp.dstport
+                if in_packet.tcp.flags_fin == 1 or in_packet.tcp.flags_fin in in_packet or in_packet.tcp.flags_push in in_packet or in_packet.tcp.flags_push == 1 or in_packet.tcp.flags_reset == 1 or in_packet.tcp.flags_reset in in_packet or in_packet.tcp.flags_urg == 1 or in_packet.tcp.flags_urg in in_packet or in_packet.tcp.flags_ack == 1 or in_packet.tcp.flags_ack in in_packet:
+                    handShake = True
                 if 'SYN' in flags:
                     description = 'TCP Handshake SYN'
+                    handShake = True
                 else:
                     description = 'Other TCP Packet'
+                    handShake = False
             elif 'UDP' in in_packet:
                 src_port = in_packet.udp.srcport
                 dst_port = in_packet.udp.dstport
                 protocol = 'UDP'
                 description = 'UDP Packet'
+                if in_packet.transport_layer == 'UDP':
+                    handShake = True
+                else:
+                    handShake = False
             elif 'ICMP' in in_packet:
                 protocol = 'ICMP'
                 description = 'ICMP Packet'
                 src_port = "321"
                 dst_port = "123"
+                handShake = True
             elif 'SSH' in in_packet:
                 protocol = 'SSH'
                 description = 'SSH Packet'
+                handShake = False
             elif 'RDP' in in_packet:
                 protocol = 'RDP'
                 description = 'RDP Packet'
+                handShake = False
             elif 'FTP' in in_packet:
                 protocol = 'FTP'
                 description = 'FTP Packet'
+                handShake = False
+            elif 'SCTP' in in_packet:
+                protocol = 'SCTP'
+                description = 'SCTP Packet'
+                if in_packet.sctp.chunk_type in in_packet or packet.sctp.chunk_type in in_packet:
+                    handShake = True
             else:
                 protocol = 'Other'
                 description = "Unknown/Other Protocol"
                 src_port = "321"
                 dst_port = "123"
+                handshake = False
             packet_length = int(in_packet.length)
             pcap_data = str(in_packet)  # Capture PCAP data as a string
             temp_packet_dict = {
@@ -87,9 +106,11 @@ class PackTime:
                 "Description": description,
                 "SourcePort": src_port,
                 "DestinationPort": dst_port,
-                "PCAPData": pcap_data  # Add the actual PCAP data here
+                "PCAPData": pcap_data,  # Add the actual PCAP data here
+                "HandShake" : handShake
             }
             self.packet_list.append(temp_packet_dict)
+            PackTime.packet_list_Keep.append(temp_packet_dict)
 
 # @ Modifier:Alejandro Hernandez
 
@@ -105,42 +126,32 @@ class PackTime:
             #time = datetime.strptime(time0,"%Y-%m-%d %H:%M:%S.%f")
             if type(packet) == dict:
                 self.identifier += 1
-                self.packet_analyzer.analyze_packet(packet,time, self.identifier,packet["SourceIP"],packet["SourcePort"],packet["DestinationIP"],packet["DestinationPort"],packet["Protocol"])
+                self.packet_analyzer.analyze_packet(packet,time, self.identifier,packet["SourceIP"],packet["SourcePort"],packet["DestinationIP"],packet["DestinationPort"],packet["Protocol"],packet["HandShake"], PackTime.packet_list_Keep)
             self.cap_sem.release()
 
 # @ Modifier:Alejandro Hernandez
     
     def run_sniffer(self):
-        
-       #Todo find a way for this to work for both CLI and GUI to wait for configuration before packet capture
         # Wait for the configuration
         with config_condition:
             config_condition.wait()  # Wait for notification
             config = ipChecker.ip_Checker.configuration
-
+            
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
 
         try:
-            
-
 
             packet_handler_thread = th.Thread(target=self.packet_handler)
             packet_handler_thread.start()
-            
-            
-
-
 
 # @ Modified: LizbethBranch
 # For macOS
             #capture = pyshark.LiveCapture(interface="en0")
 
-            # capture = pyshark.LiveCapture(interface="enp0s3")
+            #capture = pyshark.LiveCapture(interface="enp0s3")
+           
             capture = pyshark.LiveCapture()
-                
-
-
 
             for in_packet in capture:
 
