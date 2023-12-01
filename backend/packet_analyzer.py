@@ -21,31 +21,33 @@ class PacketAnalyzer:
 # @ Author: Alejandro Hernandez
     def analyze_packet(self, packet, time, identifier, sourceIP, sourcePort,destIP,destPort,protocol,handshake,packetList):
 
-        # Check for each error 
         if self.login_attempts(packet,protocol,destPort,time) == True:
             self.create_alert(packet, time, identifier, 3, sourceIP, sourcePort,destIP,destPort,"Failed Login Error","Multiple failed logins detected")
-        if self.login_attempts == False:
+
+        if self.ip_check(sourceIP) == False:
+
             res = self.port_scan_check(sourceIP, destPort, time, handshake, packetList)
-            if res == "threshold2":
-                self.create_alert(packet, time, identifier, 3, sourceIP, sourcePort,destIP,destPort,"Port Scan Error","Port Scan surpassing threshold2")
-            elif res == "threshold1":
+            if res == "threshold1":
                 self.create_alert(packet, time, identifier, 2, sourceIP, sourcePort,destIP,destPort,"Port Scan Error","Port Scan surpassing threshold1")
-        #elif self.ip_check(sourceIP) == False:
-            #self.create_alert(packet, time, identifier, 1, sourceIP, sourcePort,destIP,destPort,"Unknown IP Error","Source IP detected that is not appart of approved IP list")
+        elif self.ip_check(sourceIP) == False:
+            self.create_alert(packet, time, identifier, 1, sourceIP, sourcePort,destIP,destPort,"Unknown IP Error","Source IP detected that is not appart of approved IP list")
 
 # @ Author: Alejandro Hernandez
     
     def ip_check(self, IP):
+        # print("IP check ",IP)
         return self.iC.ip_in_List(IP)
 
 # @ Author: Alejandro Hernandez
     def port_scan_check(self, IP, destPort, time, handshake, packetList):
-        threshold1 = 150
-        threshold2 = 500
+        threshold1 = 300
         timeAllowed = 700
         timeOF = datetime.strptime(time,"%Y-%m-%d %H:%M:%S.%f")
+        # print("Reach")
+        # print("port_scan_check")
         if handshake == True:
-            return self.portCheck.port_Checking(IP, destPort, timeOF, timeAllowed, threshold1, threshold2, packetList)
+            # print("handshake")
+            return self.portCheck.port_Checking(IP, destPort, timeOF, timeAllowed, threshold1, packetList)
     
 # @ Author: Alejandro Hernandez
     
