@@ -43,7 +43,7 @@ class PacketAnalyzer:
         threshold2 = 500
         timeAllowed = 700
         timeOF = datetime.strptime(time,"%Y-%m-%d %H:%M:%S.%f")
-        print("here")
+        # print("here")
         if handshake == True:
             return self.portCheck.port_Checking(IP, destPort, timeOF, timeAllowed, threshold1, threshold2, packetList)
     

@@ -43,16 +43,24 @@ class PackTime:
             src = in_packet.ip.src
             dst = in_packet.ip.dst
             handShake = False
+            # print()
             if 'TCP' in in_packet:
+                # print("TCP")
+                
                 protocol = 'TCP'
                 flags = in_packet.tcp.flags
+                flags2 = int(in_packet.tcp.flags,16)
                 src_port = in_packet.tcp.srcport
                 dst_port = in_packet.tcp.dstport
                 if in_packet.tcp.flags_fin == 1 or in_packet.tcp.flags_push == 1 or in_packet.tcp.flags_reset == 1 or in_packet.tcp.flags_urg == 1 or in_packet.tcp.flags_ack == 1:
                     handShake = True
-                if 'SYN' in flags:
+                if in_packet.tcp.flags_syn == '1' and in_packet.tcp.flags_ack == '0':
+                    # print("True")
+                    handShake = True
+                if flags2 and 0x02:
                     description = 'TCP Handshake SYN'
                     handShake = True
+                    # print("True")
                 else:
                     description = 'Other TCP Packet'
                     handShake = False
@@ -86,7 +94,7 @@ class PackTime:
             elif 'SCTP' in in_packet:
                 protocol = 'SCTP'
                 description = 'SCTP Packet'
-                if in_packet.sctp.chunk_type in in_packet or packet.sctp.chunk_type in in_packet:
+                if in_packet.sctp.chunk_type in in_packet or in_packet.sctp.chunk_type in in_packet:
                     handShake = True
             else:
                 protocol = 'Other'
@@ -108,6 +116,8 @@ class PackTime:
                 "PCAPData": pcap_data,  # Add the actual PCAP data here
                 "HandShake" : handShake
             }
+
+            
             self.packet_list.append(temp_packet_dict)
             PackTime.packet_list_Keep.append(temp_packet_dict)
 
