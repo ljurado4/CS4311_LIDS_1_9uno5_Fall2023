@@ -18,7 +18,7 @@ class portDetection:
 # @ Author:Alejandro Hernandez
     def port_Checking(self,srcIP, destinationPort, timeOf, timeAllowed, threshold1, threshold2, packetList):
         
-        print("here2")
+
         unique_destination_ports = set(d["DestinationPort"] for d in packetList if d["SourceIP"] == srcIP)
         different_Destination = len(unique_destination_ports)
 

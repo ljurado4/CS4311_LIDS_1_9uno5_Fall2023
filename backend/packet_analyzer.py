@@ -24,11 +24,12 @@ class PacketAnalyzer:
         # Check for each error 
         if self.login_attempts(packet,protocol,destPort,time) == True:
             self.create_alert(packet, time, identifier, 3, sourceIP, sourcePort,destIP,destPort,"Failed Login Error","Multiple failed logins detected")
-        res = self.port_scan_check(sourceIP, destPort, time, handshake, packetList)
-        if res == "threshold2":
-            self.create_alert(packet, time, identifier, 3, sourceIP, sourcePort,destIP,destPort,"Port Scan Error","Port Scan surpassing threshold2")
-        elif res == "threshold1":
-            self.create_alert(packet, time, identifier, 2, sourceIP, sourcePort,destIP,destPort,"Port Scan Error","Port Scan surpassing threshold1")
+        if self.login_attempts == False:
+            res = self.port_scan_check(sourceIP, destPort, time, handshake, packetList)
+            if res == "threshold2":
+                self.create_alert(packet, time, identifier, 3, sourceIP, sourcePort,destIP,destPort,"Port Scan Error","Port Scan surpassing threshold2")
+            elif res == "threshold1":
+                self.create_alert(packet, time, identifier, 2, sourceIP, sourcePort,destIP,destPort,"Port Scan Error","Port Scan surpassing threshold1")
         #elif self.ip_check(sourceIP) == False:
             #self.create_alert(packet, time, identifier, 1, sourceIP, sourcePort,destIP,destPort,"Unknown IP Error","Source IP detected that is not appart of approved IP list")
 
@@ -43,7 +44,6 @@ class PacketAnalyzer:
         threshold2 = 500
         timeAllowed = 700
         timeOF = datetime.strptime(time,"%Y-%m-%d %H:%M:%S.%f")
-        # print("here")
         if handshake == True:
             return self.portCheck.port_Checking(IP, destPort, timeOF, timeAllowed, threshold1, threshold2, packetList)
     
