@@ -4,7 +4,7 @@
 # Description: Sets up the virtual environment, installs dependencies, prepares the system for running LIDS.
 #
 # Author: Raul Tinajero
-# Modifier: 
+# Modifier: Lizbeth Jurado
 
 # Function to check if a command exists
 command_exists() {
@@ -21,6 +21,7 @@ else
     pip3 install virtualenv==20.24.5 --user
 fi
 
+# Modifier: Lizbeth Jurado
 # Set up virtual environment
 echo "Setting up virtual environment..."
 virtualenv env
@@ -64,3 +65,10 @@ if [[ "$OSTYPE" == "linux-gnu"* || "$OSTYPE" == "darwin"* ]]; then
 fi
 
 echo "Installation completed."
+
+# Author: Lizbeth Jurado
+# Kill any Python process using port 5000
+echo "Ensuring port 5000 is free for LIDS..."
+lsof -i :5000 | grep Python | awk '{print $2}' | xargs kill -9
+
+echo "System ready for LIDS."
