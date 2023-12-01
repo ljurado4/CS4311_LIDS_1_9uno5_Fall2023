@@ -11,7 +11,7 @@ pip3 install virtualenv==20.24.5
 virtualenv env
 
 # Install Flask and required packages
-pip3 install flask
+pip3 install flask = 3.0.0
 pip3 install flask-cors==4.0.0
 
 # Install Pyshark
@@ -19,6 +19,9 @@ pip3 install pyshark==0.6
 
 # Install SocketIO
 pip3 install python-socketio
+
+# Install tcdump using administrator credentials
+sudo apt-get install tcpdump
 
 # Activate virtual environment according to O.S.
 case "$OSTYPE" in
