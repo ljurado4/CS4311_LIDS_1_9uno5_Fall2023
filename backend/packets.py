@@ -42,11 +42,14 @@ class PackTime:
         if 'IP' in in_packet or "Src" in in_packet or "Source" in in_packet:
             src = in_packet.ip.src
             dst = in_packet.ip.dst
+            handShake = False
             if 'TCP' in in_packet:
                 protocol = 'TCP'
                 flags = in_packet.tcp.flags
                 src_port = in_packet.tcp.srcport
                 dst_port = in_packet.tcp.dstport
+                if in_packet.tcp.flags_fin == 1 or in_packet.tcp.flags_push == 1 or in_packet.tcp.flags_reset == 1 or in_packet.tcp.flags_urg == 1 or in_packet.tcp.flags_ack == 1:
+                    handShake = True
                 if 'SYN' in flags:
                     description = 'TCP Handshake SYN'
                     handShake = True
@@ -58,10 +61,10 @@ class PackTime:
                 dst_port = in_packet.udp.dstport
                 protocol = 'UDP'
                 description = 'UDP Packet'
-                if in_packet.transport_layer == 'UDP':
-                    handShake = True
-                else:
-                    handShake = False
+                #if in_packet.transport_layer == 'UDP':
+                 #   handShake = True
+                #else:
+                 #   handShake = False
             elif 'ICMP' in in_packet:
                 protocol = 'ICMP'
                 description = 'ICMP Packet'
@@ -80,6 +83,11 @@ class PackTime:
                 protocol = 'FTP'
                 description = 'FTP Packet'
                 handShake = False
+            elif 'SCTP' in in_packet:
+                protocol = 'SCTP'
+                description = 'SCTP Packet'
+                if in_packet.sctp.chunk_type in in_packet or packet.sctp.chunk_type in in_packet:
+                    handShake = True
             else:
                 protocol = 'Other'
                 description = "Unknown/Other Protocol"

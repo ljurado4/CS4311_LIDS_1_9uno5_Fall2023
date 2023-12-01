@@ -14,61 +14,45 @@ LIDS is a Local Intrusion Detection System designed to monitor network activity 
 2. [Usage](#usage)
    - [CLI](#cli)
    - [Web UI](#web-ui)
-   - [Database Setup and Migration with Flask](#database-setup-and-migration-with-flask)
-3. [Troubleshooting](#troubleshooting)
-4. [Contributing](#contributing)
 
 ---
 
 ### Installation
+**Prerequisites**:
+   Ensure you have Python installed 3.10.12 installed
+   ```
+   python --version  # Check your current Python version
+   ```
+
+#### Automated Installation
+The installation script (`install.sh`) is provided in the root of this project to simplify installation. This script sets up the virtual environment, installs the necessary dependencies, and prepares the system for running this code. 
 
 1. Clone the repository to your local machine.
+```
 git clone https://github.com/ljurado4/CS4311_LIDS_19uno5_Fall2023.git
+```
 
+2. Navigate to the project directory.
+```
+cd CS4311_LIDS_19uno5_Fall2023
+```
 
+3. Run `install.sh`.
+```
+./install.sh
+```
 
-3. **Prerequisites**:
-   - Ensure you have Python installed 3.10.12 installed
-     ```
-     python --version  # Check your current Python version
- 
-     ```
-
-3. Navigate to the project directory.
-
-4. **Set Up a Virtual Environment**:
-   - Install `virtualenv`:
-pip3 install virtualenv==20.24.5
-
-   - Create a new environment:
-virtualenv env
-
-5. **Install Flask and Required Packages**:
-   - Install Flask:
-pip3 install Flask==3.0.0
-
-   - Install Flask-CORS:
-pip3 install flask-cors==4.0.0
-
-6. **Install Pyshark**:
-   - Install Pyshark:
-pip3 install pyshark==0.6
-
-7. **Install python-socketio**:
-   - Install SocketIO:
-pip3 install python-socketio
-
-8. **Install tcpdump**:
-   - Install tcpdump:
-sudo apt-get install tcpdump
-
-
-7. **Activate the virtual environment**:
+#### Activate the virtual environment manually
+In case `install.sh` is unable to recognize the O.S. of your machine, run the corresponding command:
+**Activate the virtual environment**:
    - On Windows using CMD:
+```
 .\env\Scripts\activate.bat
-
+```
    - On Mac or Linux:
+```
 source env/bin/activate
+```
 
 ---
 
@@ -84,6 +68,6 @@ python3 main_cli.py --config_file=your_config.xml
 Once the environment is active:
 1. Navigate to the project folder.
 2. Start the Flask server by running `python app.py`. (FYI macOS will require you to still run python3)
-
+=======
 
 Once the server is running, access the Web UI by navigating to `http://127.0.0.1:5000` in your web browser.
