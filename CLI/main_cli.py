@@ -34,12 +34,24 @@ class MainCLI(Menu):
 
 if __name__ == "__main__":
 
-    parser = argparse.ArgumentParser(description="CLI for LIDS.")
-    parser.add_argument("--config_file", required=True, help="configuration file name (e.g. config.xml)")
-    args = parser.parse_args()
+   #parser = argparse.ArgumentParser(description="CLI for LIDS.")
+    #parser.add_argument("--config_file", required=True, help="configuration file name (e.g. config.xml)")
+    #args = parser.parse_args()
     
+    #configure_system = ConfigureCLI()
+    #configure_system.configure(args.config_file)
+
+    parser = argparse.ArgumentParser(description="CLI for LIDS.")
+    parser.add_argument("--config_file", required=True, help="Configuration file name (e.g., config.xml)")
+    # Add arguments for config_dir_path and xsd_file_path
+    parser.add_argument("--config_dir_path", required=True, help="Directory path of the configuration file")
+    parser.add_argument("--xsd_file_path", required=True, help="Path of the XSD schema file")
+
+    args = parser.parse_args()
+
     configure_system = ConfigureCLI()
-    configure_system.configure(args.config_file)
+    # Pass the additional arguments to the configure method
+    configure_system.configure(args.config_file,args.xsd_file_path)
 
 
 

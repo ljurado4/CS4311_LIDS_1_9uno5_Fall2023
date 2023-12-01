@@ -10,6 +10,7 @@
 from menu import Menu
 import os
 import xml.etree.ElementTree as ET
+from lxml import etree
 
 # @ Author: Benjamin Hansen
 
@@ -24,6 +25,18 @@ class ConfigureCLI(Menu):
     def __init__(self) -> None:
         super().__init__()
 
+    
+
+    def validate_xml(self, xml_file_path, xsd_file_path):
+        """
+        Validate the XML file against the XSD schema.
+        """
+        xmlschema_doc = etree.parse(xsd_file_path)
+        xmlschema = etree.XMLSchema(xmlschema_doc)
+    
+        xml_doc = etree.parse(xml_file_path)
+        return xmlschema.validate(xml_doc)
+
 
     def find_config_file_path(self, filename):
         """
@@ -37,7 +50,7 @@ class ConfigureCLI(Menu):
         return None 
     
     
-    def configure(self, config_file_name: str) -> None:
+    def configure(self, config_file_name: str, config_dir_path: str, xsd_file_path: str) -> None:
         """
         Parses the provided XML configuration file and updates the system.
 
@@ -46,8 +59,17 @@ class ConfigureCLI(Menu):
 
         """
 
-        config_file_path = self.find_config_file_path(config_file_name)
-        print("config_file_path",config_file_path)
+       # config_file_path = self.find_config_file_path(config_file_name)
+       # print("config_file_path",config_file_path)
+        config_file_path = self.find_config_file_path(config_file_name, config_dir_path)
+        if config_file_path is None:
+            print("Configuration file not found.")
+            return
+
+        if not self.validate_xml(config_file_path, xsd_file_path):
+            print("XML file is not valid according to the schema.")
+            return
+    
 
         tree = ET.parse(config_file_path)
         root = tree.getroot()
