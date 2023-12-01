@@ -3,21 +3,22 @@
 #
 # Description: Styles for the LIDS-D Dashboard Web Application
 #
-# @Author:Arturo Olmos
+# @Author:Arturo Olmos, Raul Tinajero Olivas
 # @ Modifier:
 */
 
-.xmlFileTextArea{
+.xmlFileTextArea {
     height: 91vh;
     border-radius: 3px;
     width: 100%;
     overflow: auto;
 }
+
 body {
     font-family: 'Lato', sans-serif;
     background-color: white;
     margin: 0%;
-    vertical-align:top;
+    vertical-align: top;
     font-size: 0;
 }
 
@@ -45,20 +46,21 @@ body {
 form {
     display: flex;
     align-items: center;
-    gap: 10px;  
+    gap: 10px;
 }
 
 #ConnectButton {
     background: lightgray;
     width: 100px;
     height: 30px;
-    border: 1px solid black;  
+    border: 1px solid black;
     border-radius: 25px;
     display: inline-block;
     margin-left: 5%;
 }
 
-#IPAdressForm, #PortNumberForm {
+#IPAdressForm,
+#PortNumberForm {
     padding: 8px;
     border: 1px solid #AAA;
     border-radius: 4px;
@@ -90,7 +92,7 @@ form {
     @Author:Arturo Olmos
     Styling for table data tags
 */
-td{
+td {
     overflow-x: scroll;
     max-width: 50px;
 }
@@ -98,6 +100,7 @@ td{
 .dashboardButtonAction:hover {
     background: rgb(255, 255, 255);
 }
+
 /*
     @Author:Arturo Olmos
     Styling for images in left sidebar
@@ -108,9 +111,11 @@ td{
     width: 40%;
 }
 
-th,td {
-    border-collapse: collapse;   
+th,
+td {
+    border-collapse: collapse;
 }
+
 /*
     @Author:Arturo Olmos
     Styling for table header 
@@ -119,13 +124,14 @@ th {
     border: None;
     background: rgb(173, 173, 173);
 }
+
 /*
     @Author:Arturo Olmos
     Styling for header so that it stays in a single position when scrolling
 */
-thead{
-    position: sticky; 
-    top: 0px; 
+thead {
+    position: sticky;
+    top: 0px;
     margin-top: 0;
 }
 
@@ -184,7 +190,7 @@ thead{
     Styling for right sidebar so that it takes up remaining space
 */
 .rightSidebar {
-    height:100vh;
+    height: 100vh;
     flex-grow: 1;
     font-size: 15px;
 }
@@ -193,37 +199,38 @@ thead{
     @Author:Arturo Olmos
     Styling for table containers in the right side bar
 */
-div.rightSidebarSC{
-    border: solid; 
-    width:90%;
-    margin-left:5%;
-    height:40vh;
-    margin-top:10%;
+div.rightSidebarSC {
+    border: solid;
+    width: 90%;
+    margin-left: 5%;
+    height: 40vh;
+    margin-top: 10%;
     overflow: scroll;
     border-radius: 10px;
 
 }
- /*
+
+/*
     @Author:Arturo Olmos
     Styling for all tables
 */
-table{
+table {
     width: 100%;
-    border-collapse:collapse
+    border-collapse: collapse
 }
 
- /*
+/*
     @Author:Arturo Olmos
     Styling for table container in the middle of dashboard
 */
-div.tableContainer{
+div.tableContainer {
     margin-top: 2.5%;
-    height: 80vh; 
-    width:65%;
+    height: 80vh;
+    width: 65%;
     display: inline-block;
     vertical-align: top;
     overflow: scroll;
-    font-size: 15px; 
+    font-size: 15px;
     border: solid;
     border-radius: 10px;
 }
