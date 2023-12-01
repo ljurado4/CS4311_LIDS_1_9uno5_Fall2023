@@ -44,11 +44,12 @@ class PackTime:
             dst = in_packet.ip.dst
             handShake = False
             if 'TCP' in in_packet:
+                flags = in_packet.tcp.flags
                 protocol = 'TCP'
                 flags = in_packet.tcp.flags
                 src_port = in_packet.tcp.srcport
                 dst_port = in_packet.tcp.dstport
-                if in_packet.tcp.flags_fin == 1 or in_packet.tcp.flags_push == 1 or in_packet.tcp.flags_reset == 1 or in_packet.tcp.flags_urg == 1 or in_packet.tcp.flags_ack == 1:
+                if in_packet.tcp.flags_fin == 1 or in_packet.tcp.flags_fin in in_packet or in_packet.tcp.flags_push in in_packet or in_packet.tcp.flags_push == 1 or in_packet.tcp.flags_reset == 1 or in_packet.tcp.flags_reset in in_packet or in_packet.tcp.flags_urg == 1 or in_packet.tcp.flags_urg in in_packet or in_packet.tcp.flags_ack == 1 or in_packet.tcp.flags_ack in in_packet:
                     handShake = True
                 if 'SYN' in flags:
                     description = 'TCP Handshake SYN'
@@ -61,16 +62,16 @@ class PackTime:
                 dst_port = in_packet.udp.dstport
                 protocol = 'UDP'
                 description = 'UDP Packet'
-                #if in_packet.transport_layer == 'UDP':
-                 #   handShake = True
-                #else:
-                 #   handShake = False
+                if in_packet.transport_layer == 'UDP':
+                    handShake = True
+                else:
+                    handShake = False
             elif 'ICMP' in in_packet:
                 protocol = 'ICMP'
                 description = 'ICMP Packet'
                 src_port = "321"
                 dst_port = "123"
-                handShake = False
+                handShake = True
             elif 'SSH' in in_packet:
                 protocol = 'SSH'
                 description = 'SSH Packet'
