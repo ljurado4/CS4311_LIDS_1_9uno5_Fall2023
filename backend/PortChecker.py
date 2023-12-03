@@ -7,39 +7,51 @@
 
 
 from datetime import datetime
+from . import packets, packet_analyzer
 
 
 class portDetection:
+    
     def __init__(self):
         self.connection_count = {}
         self.timeChecker = {}
         self.comboChecker = []
-
-# @ Author:Alejandro Hernandez
-    def port_Checking(self,srcIP, destinationPort, timeOf, timeAllowed, threshold1, threshold2, packetList):
         
 
-        unique_destination_ports = set(d["DestinationPort"] for d in packetList if d["SourceIP"] == srcIP)
-        different_Destination = len(unique_destination_ports)
-
-
+# @ Author:Alejandro Hernandez
+    def port_Checking(self,srcIP, destinationPort, timeOf, timeAllowed, threshold1):
+        
         firstTime = None
-
-        for d in packetList:
+        unique_destination_ports = set(d["DestinationPort"] for d in packets.PackTime.packet_list_Keep if d["SourceIP"] == srcIP)
+        different_Destination = len(unique_destination_ports)
+        
+        
+        for d in packets.PackTime.packet_list_Keep:
             if d["SourceIP"] == srcIP and firstTime is None:
                 firstTime = d["Time"]
                 break 
+        if different_Destination >= threshold1:
+            new_packet_list = []
+
+            for i in range(len(packets.PackTime.packet_list_Keep)):
+                if packets.PackTime.packet_list_Keep[i]["SourceIP"] != srcIP:
+                    new_packet_list.append(packets.PackTime.packet_list_Keep[i])
+                    
         
+            
+            packets.PackTime.packet_list_Keep = new_packet_list
+        
+       
+            
+
         
         firstTimeFR = datetime.strptime(firstTime,"%Y-%m-%d %H:%M:%S.%f")
         timeDifference = timeOf - firstTimeFR
         timeDifferenceSeconds = int(timeDifference.total_seconds())
-
-
-        if different_Destination >= threshold2 and timeDifferenceSeconds <= timeAllowed:
-            return "threshold2"
+   
         
-        elif different_Destination >= threshold1 and timeDifferenceSeconds <= timeAllowed:
+        
+        if different_Destination >= threshold1 and timeDifferenceSeconds <= timeAllowed:
             return "threshold1"
 
         else:

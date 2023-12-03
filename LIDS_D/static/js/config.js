@@ -32,7 +32,7 @@ function oldFileConfig(fileName) {
 // Create a button for each of the previous files stored
 for (let fileName in files) {
     let fileButton = "<button class=\"prevFileButton\" value=\"" + fileName + "\" onclick=\"oldFileConfig(value)\">";
-    fileButton += "<img style=\"height:20vh\" src=\"fileImage.jpg\"></img>";
+    fileButton += "<img style=\"height:20vh\" src=\"../img/fileImage.jpg\"></img>";
     fileButton += "<p style=\"width:100%;text-align:center;\">" + fileName + "</p>";
     fileButton += "</button>";
     previousFilesContainer.innerHTML += fileButton;
