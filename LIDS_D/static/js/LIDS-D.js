@@ -69,78 +69,78 @@ function exportAlerts(event){
     let file = null
     const fileType = document.querySelector('#FileType');
     let exportAlertsFileName = "ExportedAlerts." + fileType.value
+    let alertsToText = ""
+
     if(fileType.value == "csv"){
-        var table = document.getElementById("alertsTable");
-        console.log(table)
-        let csvTableContents = ""
-        for (var i = 0, row; row = table.rows[i]; i++) {
-            if(i == 0){
-                continue
-            }
-            // Iterate through rows
-            // Rows would be accessed using the "row" variable assigned in the for loop
-            let rowContent = ""
-            rowContent += row.cells[0].innerHTML + ","  + row.cells[1].innerHTML + "," + row.cells[2].innerHTML + "," + row.cells[3].innerHTML + "," +row.cells[4].innerHTML
+      var table = document.getElementById("alertsTable");
+      console.log(table)
+      for (var i = 0, row; row = table.rows[i]; i++) {
+        if(i == 0){
+            continue
+          }
+      //iterate through rows
+      //rows would be accessed using the "row" variable assigned in the for loop
+        let rowContent = ""
+        rowContent += row.cells[0].innerHTML + ","  + row.cells[1].innerHTML + "," + row.cells[2].innerHTML + "," + row.cells[3].innerHTML + "," +row.cells[4].innerHTML
+        alertsToText += rowContent + "\n"
+      }
+    }else if(fileType.value == "json"){
+      var table = document.getElementById("alertsTable");
+      for (var i = 0, row; row = table.rows[i]; i++) {
+        if(i == 0){
+          continue
         }
-        file = new File([csvTableContents], exportAlertsFileName, {
-            type: 'text/' + fileType.value,
-        })
-    } else if(fileType.value == "json"){
-        let objects = ""
-        var table = document.getElementById("alertsTable");
-        for (var i = 0, row; row = table.rows[i]; i++) {
-            if(i == 0){
-                continue
-            }
-            // Iterate through rows
-            // Rows would be accessed using the "row" variable assigned in the for loop
-            let jsonObject = {
-                "Level":row.cells[0].innerHTML,
-                "Time":row.cells[1].innerHTML,
-                "IP":row.cells[2].innerHTML,
-                "Port":row.cells[3].innerHTML,
-                "Protocol":row.cells[4].innerHTML,
-            }
-            objects += JSON.stringify(jsonObject) + "\n"
+        //iterate through rows
+        //rows would be accessed using the "row" variable assigned in the for loop
+
+        let jsonObject = {
+          "Level":row.cells[0].innerHTML,
+          "Time":row.cells[1].innerHTML,
+          "IP":row.cells[2].innerHTML,
+          "Port":row.cells[3].innerHTML,
+          "Protocol":row.cells[4].innerHTML,
         }
-        file = new File([objects], exportAlertsFileName, {
-            type: 'text/' + fileType.value,
-        })
-    } else if(fileType.value == "xml"){ // XML export
-        let xmlText = "<?xml version=\"1.0\"?>\n"
-        xmlText += "<Alerts>\n"
-        var table = document.getElementById("alertsTable");
-        for (var i = 0, row; row = table.rows[i]; i++) {
-            if(i == 0){
-                continue
-            }
-            // Iterate through rows
-            // Rows would be accessed using the "row" variable assigned in the for loop
-            xmlText += "  <Alert " + i.toString() + ">\n"
-            xmlText += "    <Level>" + row.cells[0].innerHTML + "</Level>\n"
-            xmlText += "    <Time>" + row.cells[1].innerHTML + "</Time>\n"
-            xmlText += "    <IP>" + row.cells[2].innerHTML + "</IP>\n"
-            xmlText += "    <Port>" + row.cells[3].innerHTML + "</Port>\n"
-            xmlText += "    <Protocol>" + row.cells[4].innerHTML + "/<Protocol>\n"
-            xmlText += "  </Alert " + i.toString() + ">\n"
+        alertsToText += JSON.stringify(jsonObject) + "\n"
+      }
+    }else if(fileType.value == "xml"){//xml export
+      alertsToText = "<?xml version=\"1.0\"?>\n"
+      alertsToText += "<Alerts>\n"
+      var table = document.getElementById("alertsTable");
+      for (var i = 0, row; row = table.rows[i]; i++) {
+        if(i == 0){
+          continue
         }
-        xmlText += "</Alerts>\n"
-        file = new File([xmlText], exportAlertsFileName, {
-            type: 'text/' + fileType.value,
-        })
+        //iterate through rows
+        //rows would be accessed using the "row" variable assigned in the for loop
+        alertsToText += "  <Alert " + i.toString() + ">\n"
+        alertsToText += "    <Level>" + row.cells[0].innerHTML + "</Level>\n"
+        alertsToText += "    <Time>" + row.cells[1].innerHTML + "</Time>\n"
+        alertsToText += "    <IP>" + row.cells[2].innerHTML + "</IP>\n"
+        alertsToText += "    <Port>" + row.cells[3].innerHTML + "</Port>\n"
+        alertsToText += "    <Protocol>" + row.cells[4].innerHTML + "/<Protocol>\n"
+        alertsToText += "  </Alert " + i.toString() + ">\n"
+      }
+      alertsToText += "</Alerts>\n"
     }
+    //create file object with desired file contents and extension type
+    file = new File([alertsToText], exportAlertsFileName, {
+      type: 'text/' + fileType.value,
+    })
+    //function used to download alert locally
     function download() {
-        const link = document.createElement('a')
-        const url = URL.createObjectURL(file)
-        link.href = url
-        link.download = file.name
-        document.body.appendChild(link)
-        link.click()
-        document.body.removeChild(link)
-        window.URL.revokeObjectURL(url)
+      const link = document.createElement('a')
+      const url = URL.createObjectURL(file)
+    
+      link.href = url
+      link.download = file.name
+      document.body.appendChild(link)
+      link.click()
+    
+      document.body.removeChild(link)
+      window.URL.revokeObjectURL(url)
     }
     download()
-}
+  }
 
 /* @author Arturo Olmos */
 // Function to display alert details
