@@ -11,8 +11,8 @@ from flask_socketio import SocketIO
 
 app = Flask(__name__)
 
-ssl_cert = "/Users/Benja/OneDrive/Documents/SW2/CS4311_LIDS_19uno5_Fall2023/cert.pem"
-ssl_key = "/Users/Benja/OneDrive/Documents/SW2/CS4311_LIDS_19uno5_Fall2023/key.pem"
+ssl_cert = "/Users/User/Documents/SW2/CS4311_LIDS_19uno5_Fall2023/cert.pem"
+ssl_key = "/Users/User/Documents/SW2/CS4311_LIDS_19uno5_Fall2023/key.pem"
 
 
 socketio = SocketIO(app, cors_allowed_origins="*", ssl_context=(ssl_cert, ssl_key))
@@ -35,7 +35,7 @@ def handle_response(alert):
     socketio.emit('new_alert_data', alert, namespace='/lids-d')
 
 
-
+# 
 # @ Author: Benjamin Hansen
 # @ Modifier: Benjamin Hansen
 @app.route('/sort_alerts', methods=['GET'])
