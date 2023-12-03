@@ -148,12 +148,22 @@ function exportAlerts(event){
 function displayAlert(alertID){
     const alertInfo = alertID.split("-")
     let row = document.getElementById(alertInfo[0])
-    let descriptionCell = row.cells[5]
-    let button = descriptionCell.getElementsByTagName("button")
-    let myWindow = window.open("", "MyWindow", "");
-    let alertDisplay = "Level: " +  row.cells[0].innerHTML + "<br>Time: " + row.cells[1].innerHTML	+ "<br>IP: " + row.cells[2].innerHTML + "<br>Port: " + row.cells[3].innerHTML +	"<br>Protocol: " + row.cells[4].innerHTML + "<br>Description: " + button[0].innerHTML
-    myWindow.innerHTML = ""
-    myWindow.document.write("<p>" + alertDisplay + "</p>");
-    // Delete myWindow
-    window.location.reload()
+    let myWindow = window.open("");
+    //contents alert, ready to be displayed in new window
+    let alertDisplay =  "Time:" + row.cells[0].innerHTML + 
+    "<br>Identifier:" + row.cells[1].innerHTML + 
+    "<br>Level:" + row.cells[2].innerHTML + 
+    "<br>SourceIP:" + row.cells[3].innerHTML +
+    "<br>SourcePort:" + row.cells[4].innerHTML + 
+    "<br>DestIP:" + row.cells[5].innerHTML +
+    "<br>DestPort:" + row.cells[6].innerHTML +
+    "<br>AlertType:" + row.cells[7].innerHTML + 
+    "<br>Description:" + row.cells[8].getElementsByTagName("button")[0].innerHTML
+    let style = "font-size: 48px;" + 
+    "text-align: center;" +
+    "background-color: #CCCCCC;"
+    myWindow.document.body.style = style
+    myWindow.document.body.innerHTML = alertDisplay
+   
+    
 }

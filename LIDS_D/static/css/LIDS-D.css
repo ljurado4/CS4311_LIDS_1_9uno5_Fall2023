@@ -341,3 +341,11 @@ div.contentBlock{
     align-items: center;
     width: 100%; 
 }
+.alertDescriptionButton{
+    background-color: white;
+    border: None;
+    font-size: 17px;
+    box-shadow: none;
+    height: 100%;
+    width: 100%;
+}
