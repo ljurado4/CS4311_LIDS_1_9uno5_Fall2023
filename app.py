@@ -114,7 +114,7 @@ def upload_xml_data():
         ipChecker.ip_Checker.configuration = data
         config_condition.notify_all()
    
-    # print("config.configuration",config.configuration )
+    print("config.configuration",data)
     return jsonify({"message": "Data processed!"})
 
 

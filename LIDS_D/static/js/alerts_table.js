@@ -73,5 +73,4 @@ function updateTable(data) {
 socket.on('new_alert_data', function(data) {
     updateTable(data);
 });
-// Author and modified Benjamin Hansen
-// Initial fetch to get the latest alerts
+

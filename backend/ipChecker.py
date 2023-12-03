@@ -18,6 +18,10 @@ class ip_Checker:
     def ip_in_List(self, packet_ip):
         
         for k,dic in ip_Checker.configuration.items():
-            if packet_ip in dic['whitelist']:
+            white_list =  set(dic['whitelist'].split(','))
+            # print("Whitelist",white_list)
+            # print("packet_ip",packet_ip)
+            if packet_ip in white_list:
                 return True
+            # sys.exit(0)
         return False
