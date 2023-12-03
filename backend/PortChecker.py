@@ -7,6 +7,7 @@
 
 
 from datetime import datetime
+from . import packets
 
 
 class portDetection:
@@ -16,12 +17,24 @@ class portDetection:
         self.comboChecker = []
 
 # @ Author:Alejandro Hernandez
-    def port_Checking(self,srcIP, destinationPort, timeOf, timeAllowed, threshold1, threshold2, packetList):
+    def port_Checking(self,srcIP, destinationPort, timeOf, timeAllowed, threshold1, packetList):
         
+
         unique_destination_ports = set(d["DestinationPort"] for d in packetList if d["SourceIP"] == srcIP)
         different_Destination = len(unique_destination_ports)
+        if different_Destination:
+            
+            print("different_Destination",different_Destination)
 
-
+        if different_Destination >= threshold1:
+            new_packet_list = []
+            for i in range(len(packetList)):
+                if packetList[i]["SourceIP"] != srcIP:
+                    new_packet_list.append(packetList[i])
+        
+            packets.PackTime.packet_list = new_packet_list
+                
+    
         firstTime = None
 
         for d in packetList:
@@ -35,10 +48,8 @@ class portDetection:
         timeDifferenceSeconds = int(timeDifference.total_seconds())
 
 
-        if different_Destination >= threshold2 and timeDifferenceSeconds <= timeAllowed:
-            return "threshold2"
-        
-        elif different_Destination >= threshold1 and timeDifferenceSeconds <= timeAllowed:
+
+        if different_Destination >= threshold1 and timeDifferenceSeconds <= timeAllowed:
             return "threshold1"
 
         else:

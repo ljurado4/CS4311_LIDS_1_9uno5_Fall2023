@@ -3,24 +3,33 @@
 #
 # Description: Styles for the LIDS-D Dashboard Web Application
 #
-# @Author:Arturo Olmos
+# @Author:Arturo Olmos, Raul Tinajero Olivas
 # @ Modifier:
 */
 
-.xmlFileTextArea{
-    height: 91vh;
+.xmlFileTextArea {
+    height: 91%;
     border-radius: 3px;
     width: 100%;
     overflow: auto;
 }
+
+/*
+    @Author: Raul Tinajero Olivas
+    Styling for dashboard body
+*/
 body {
     font-family: 'Lato', sans-serif;
     background-color: white;
     margin: 0%;
-    vertical-align:top;
+    vertical-align: top;
     font-size: 0;
 }
 
+/*
+    @Author: Raul Tinajero Olivas
+    Styling for header disconnect button
+*/
 .disconnectButton {
     background: lightgray;
     width: 100px;
@@ -31,6 +40,10 @@ body {
     margin: 5%;
 }
 
+/*
+    @Author: Raul Tinajero Olivas
+    Styling for header
+*/
 .header {
     display: flex;
     align-items: center;
@@ -42,23 +55,36 @@ body {
     padding: 10px 20px;
 }
 
+/*
+    @Author: Raul Tinajero Olivas
+    General styling for forms
+*/
 form {
     display: flex;
     align-items: center;
-    gap: 10px;  
+    gap: 10px;
 }
 
+/*
+    @Author: Raul Tinajero Olivas
+    Styling for header connection button
+*/
 #ConnectButton {
     background: lightgray;
     width: 100px;
     height: 30px;
-    border: 1px solid black;  
+    border: black;
     border-radius: 25px;
     display: inline-block;
     margin-left: 5%;
 }
 
-#IPAdressForm, #PortNumberForm {
+/*
+    @Author: Raul Tinajero Olivas
+    Styling for header forms
+*/
+#IPAdressForm,
+#PortNumberForm {
     padding: 8px;
     border: 1px solid #AAA;
     border-radius: 4px;
@@ -69,7 +95,7 @@ form {
     Styling for the left side bar containing buttons in dashboard
 */
 .leftSidebar {
-    height: 100vh;
+    height: 100%;
     width: 10%;
     border: none;
     vertical-align: middle;
@@ -90,14 +116,19 @@ form {
     @Author:Arturo Olmos
     Styling for table data tags
 */
-td{
-    overflow-x: scroll;
+td {
     max-width: 50px;
 }
 
+/*
+    @Author: Raul Tinajero Olivas
+    Styling for mouse hovering
+*/
+#ConnectButton:hover, 
 .dashboardButtonAction:hover {
     background: rgb(255, 255, 255);
 }
+
 /*
     @Author:Arturo Olmos
     Styling for images in left sidebar
@@ -108,9 +139,15 @@ td{
     width: 40%;
 }
 
-th,td {
-    border-collapse: collapse;   
+/*
+    @Author: Raul Tinajero Olivas
+    Styling foundation for dashboard tables
+*/
+th,
+td {
+    border-collapse: collapse;
 }
+
 /*
     @Author:Arturo Olmos
     Styling for table header 
@@ -119,16 +156,21 @@ th {
     border: None;
     background: rgb(173, 173, 173);
 }
+
 /*
     @Author:Arturo Olmos
     Styling for header so that it stays in a single position when scrolling
 */
-thead{
-    position: sticky; 
-    top: 0px; 
+thead {
+    position: sticky;
+    top: 0px;
     margin-top: 0;
 }
 
+/*
+    @Author: Raul Tinajero Olivas
+    Styling for sort button in Alert Box
+*/
 .sort-button {
     position: absolute;
     right: 0;
@@ -136,10 +178,18 @@ thead{
     z-index: 2;
 }
 
+/*
+    @Author: Raul Tinajero Olivas
+    Dropdown styling for Alert Box options
+*/
 .dropdown {
     position: relative;
 }
 
+/*
+    @Author: Raul Tinajero Olivas
+    Styling for dropdown options
+*/
 .dropdown-options {
     position: absolute;
     top: 100%;
@@ -149,10 +199,14 @@ thead{
     z-index: 1;
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
     background-color: white;
-    border: 1px solid rgb(173, 173, 173);
+    border: 1px solid #AAA;
     border-radius: 5px;
 }
 
+/*
+    @Author: Raul Tinajero Olivas
+    Styling for button within dropdown
+*/
 .dropdown-options button {
     display: block;
     width: 100%;
@@ -162,10 +216,18 @@ thead{
     padding: 8px 12px;
 }
 
+/*
+    @Author: Raul Tinajero Olivas
+    Styling for dropdown button hovering
+*/
 .dropdown-options button:hover {
     background-color: #b9b9b9;
 }
 
+/*
+    @Author: Raul Tinajero Olivas
+    Styling for header title (LIDS IP_ADDR)
+*/
 .headerTitle {
     flex: 1;
     text-align: center;
@@ -173,6 +235,10 @@ thead{
     text-align: right;
 }
 
+/*
+    @Author: Raul Tinajero Olivas
+    Styling for header connection image
+*/
 .connectedDisplay {
     width: 40%;
     text-align: right;
@@ -184,46 +250,47 @@ thead{
     Styling for right sidebar so that it takes up remaining space
 */
 .rightSidebar {
-    height:100vh;
+    height: 90%;
     flex-grow: 1;
     font-size: 15px;
 }
 
 /*
     @Author:Arturo Olmos
+    @Modifier: Raul Tinajero Olivas
     Styling for table containers in the right side bar
 */
-div.rightSidebarSC{
-    border: solid; 
-    width:90%;
-    margin-left:5%;
-    height:40vh;
-    margin-top:10%;
-    overflow: scroll;
+div.rightSidebarSC {
+    width: 90%;
+    margin-left: 5%;
+    height: 37%;
+    margin-top: 10%;
+    overflow: auto;
+    border: 2px solid #AAA;
     border-radius: 10px;
-
 }
- /*
+
+/*
     @Author:Arturo Olmos
     Styling for all tables
 */
-table{
+table {
     width: 100%;
-    border-collapse:collapse
+    border-collapse: collapse
 }
 
- /*
+/*
     @Author:Arturo Olmos
     Styling for table container in the middle of dashboard
 */
-div.tableContainer{
+div.tableContainer {
     margin-top: 2.5%;
-    height: 80vh; 
-    width:65%;
+    height: 80%;
+    width: 65%;
     display: inline-block;
     vertical-align: top;
-    overflow: scroll;
-    font-size: 15px; 
-    border: solid;
+    overflow: auto;
+    font-size: 15px;
+    border: 2px solid #AAA;
     border-radius: 10px;
 }

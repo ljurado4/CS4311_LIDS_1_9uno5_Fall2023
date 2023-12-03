@@ -3,122 +3,122 @@
     #
     # Description: The file serves as the front-end template for a Local Intrusion Detection System (LIDS) Dashboard.It is designed to provide a user interface for monitoring network activity and handling intrusion alerts.
     #
-    # @ Author: Arturo Olmos
+    # @ Author: Arturo Olmos, Raul Tinajero
     # Formatted the basic structure for the page, and added styling to it as well
     # @ Modifier: Lizbeht Jurado 
     #
  -->
-    <!DOCTYPE html>
-    <html lang="en">
-    
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="../static/css/lids_dashboard.css">
-        <title>LIDS Dashboard</title>
-    </head>
-    
-    <body>
-        <div class="header">
-            <form action="/LIDS_Dashboard" method="post">
-                <input type="text" name="IPInput" placeholder="IP Address" id="IPAdressForm">
-                <input type="text" name="PortInput" placeholder="Port Number" id="PortNumberForm">
-                <input type="submit" value="Connect" id="ConnectButton">
-            </form>
-            <div class="headerTitle" id="headerTitle">LIDS</div>
-            <div class="connectedDisplay" id="connectedDisplay">Connected
-                <img style="mix-blend-mode: multiply;height: 25px;width: 50px;vertical-align:text-bottom;"
-                    src="../static/img/Display_Box_Buttons.png">
-              
-              <!-- @Modifier: Lizbeht Jurado -->
-                <form action="/disconnect" method="post" style="display:inline-block" id="disconnectButtonForm">
-                    <input class="disconnectButton dashboardButtonAction" type="submit" value="Disconnect">
-                </form>
-            </div>
-        </div>
-        <!-- content block is used to contain the left and right sidebars as well as the table in the middle -->
-        <div id="contentBlock" style="border: solid;width: 100%;height: 100vh;vertical-align: top;display: flex;">
-            <!-- left side bar -->
-            <div class="leftSidebar" id="leftSidebar" style="vertical-align: top;">
-                <form id="configFileForm">
-                    <input type="image" class="leftSidebarButton dashboardButtonAction leftSidebarImages"
-                        src="../static/img/Display_Box_Buttons.png">
-                </form>
-                <br style="line-height: 20px;">
-                <form id="alertsTableForm">
-                    <input type="image" class="leftSidebarButton dashboardButtonAction leftSidebarImages"
-                        src="../static/img/Config_File_Button_IMG.png">
-                </form>
-            </div>
-            <div class="tableContainer" id="middleContainer" style="">
-                <!-- Updated Filter Dropdown -->
-                <div class="dropdown">
-                    <button id="filterByButton" onclick="toggleFilterDropdown()">Filter Options</button>
-                    <div class="dropdown-options" id="filterByDropdownContent">
-                        <!-- Filter by Level -->
-                        <input type="number" id="filterLevel" placeholder="Level">
-                        
-                        <!-- Filter by Source IP -->
-                        <input type="text" id="filterSourceIP" placeholder="Source IP">
-    
-                        <!-- Filter by Source Port -->
-                        <input type="text" id="filterSourcePort" placeholder="Source Port">
-    
-                        <!-- Filter by Destination IP -->
-                        <input type="text" id="filterDestinationIP" placeholder="Destination IP">
-    
-                        <!-- Filter by Destination Port -->
-                        <input type="text" id="filterDestinationPort" placeholder="Destination Port">
-    
-                        <!-- Filter by Alert Type -->
-                        <input type="text" id="filterAlertType" placeholder="Alert Type">
-    
-                        <!-- Apply Filter Button -->
-                        <button onclick="applyFilters(); toggleFilterDropdown()">Apply Filters</button>
-                    </div>
-                </div>
-                <table id="alertBoxTable">
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/CSS/lids_dashboard.css">
+    <title>LIDS Dashboard</title>
+</head>
+
+<body>
+    <div class="header">
+        <form action="/LIDS_Dashboard" method="post">
+            <input type="text" name="IPInput" placeholder="IP Address" id="IPAdressForm">
+            <input type="text" name="PortInput" placeholder="Port Number" id="PortNumberForm">
+            <input type="submit" value="Connect" id="ConnectButton">
+        </form>
+        <div class="headerTitle" id="headerTitle">LIDS</div>
+        <div class="connectedDisplay" id="connectedDisplay">Connected
+            <img style="mix-blend-mode: multiply;height: 25px;width: 25px;vertical-align:text-bottom;"
+                src="../static/img/connected_logo.png">
+
+            <!-- @Modifier: Lizbeht Jurado -->
+            <form action="/disconnect" method="post" style="display:inline-block" id="disconnectButtonForm">
+                <input class="disconnectButton dashboardButtonAction" type="submit" value="Disconnect">
+            </form>
+        </div>
+    </div>
+    <!-- content block is used to contain the left and right sidebars as well as the table in the middle -->
+    <div id="contentBlock" style="width: 100%;height: 100vh;vertical-align: top;display: flex;">
+        <!-- left side bar -->
+        <div class="leftSidebar" id="leftSidebar" style="vertical-align: top;">
+            <form id="configFileForm">
+                <input type="image" class="leftSidebarButton dashboardButtonAction leftSidebarImages"
+                    src="../static/img/Display.png">
+            </form>
+            <br style="line-height: 20px;">
+            <form id="alertsTableForm">
+                <input type="image" class="leftSidebarButton dashboardButtonAction leftSidebarImages"
+                    src="../static/img/config.png">
+            </form>
+        </div>
+        <div class="tableContainer" id="middleContainer" style="">
+            <!-- Updated Filter Dropdown -->
+            <div class="dropdown">
+                <button id="filterByButton" onclick="toggleFilterDropdown()">Filter Options</button>
+                <div class="dropdown-options" id="filterByDropdownContent">
+                    <!-- Filter by Level -->
+                    <input type="number" id="filterLevel" placeholder="Level">
+
+                    <!-- Filter by Source IP -->
+                    <input type="text" id="filterSourceIP" placeholder="Source IP">
+
+                    <!-- Filter by Source Port -->
+                    <input type="text" id="filterSourcePort" placeholder="Source Port">
+
+                    <!-- Filter by Destination IP -->
+                    <input type="text" id="filterDestinationIP" placeholder="Destination IP">
+
+                    <!-- Filter by Destination Port -->
+                    <input type="text" id="filterDestinationPort" placeholder="Destination Port">
+
+                    <!-- Filter by Alert Type -->
+                    <input type="text" id="filterAlertType" placeholder="Alert Type">
+
+                    <!-- Apply Filter Button -->
+                    <button onclick="applyFilters(); toggleFilterDropdown()">Apply Filters</button>
+                </div>
+            </div>
+            <table id="alertBoxTable">
+
+                <thead>
+                    <tr>
+                        <th>Time</th>
+                        <th>Identifier</th>
+                        <th>Level</th>
+                        <th>Source IP</th>
+                        <th>Source Port</th>
+                        <th>Destination IP</th>
+                        <th>Destination Port</th>
+                        <th>Alert Type</th>
+                        <th>Description</th>
+                        <th>PCAP</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        <!-- right side bar -->
+        <div id="rightSidebar" class="rightSidebar">
+            <div class="rightSidebarSC">
+                <table id="notificationsTable">
                     <thead>
                         <tr>
-                            <th>Time</th>
-                            <th>Identifier</th>
-                            <th>Level</th>
-                            <th>Source IP</th>
-                            <th>Source Port</th>
-                            <th>Destination IP</th>
-                            <th>Destination Port</th>
-                            <th>Alert Type</th>
-                            <th>Description</th>
-                            <th>PCAP</th>
+                            <th>Notifications</th>
                         </tr>
                     </thead>
-                    <tbody >
+                    <tbody>
+                        <tr>
+                            <td>Notification 1</td>
+                        </tr>
+                        {% for message in get_flashed_messages(category_filter=['success']) %}
+                        <tr>
+                            <td>{{ message }}</td>
+                        </tr>
+                        {% endfor %}
+                        </tr>
                     </tbody>
                 </table>
-            </div>
-            <!-- right side bar -->
-            <div id="rightSidebar" class="rightSidebar">
-                <div class="rightSidebarSC">
-                    <table id="notificationsTable">
-                        <thead>
-                            <tr>
-                                <th >Notifications</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Notification 1</td>
-                            </tr>
-                            {% for message in get_flashed_messages(category_filter=['success']) %}
-                            <tr>
-                                <td>{{ message }}</td>
-                            </tr>
-                            {% endfor %}
-                            </tr>
-                        </tbody>
-                    </table>
             </div>
             <div class="rightSidebarSC">
                 <table id="errorsTable">
@@ -139,28 +139,27 @@
                     </tbody>
                 </table>
             </div>
-            </div>
         </div>
-    
-        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <script src="../static/js/LIDS_Dashboard.js"></script>
-        <script src="../static/js/LIDS_Table.js"></script>
-        <script>
-            // Function to collect filter values and call filterAlerts
-            function applyFilters() {
-                const filters = {
-                    level: document.getElementById('filterLevel').value,
-                    sourceIP: document.getElementById('filterSourceIP').value,
-                    sourcePort: document.getElementById('filterSourcePort').value,
-                    destinationIP: document.getElementById('filterDestinationIP').value,
-                    destinationPort: document.getElementById('filterDestinationPort').value,
-                    alertType: document.getElementById('filterAlertType').value
-                };
-                filterAlerts(filters);
-            }
-        </script>
-    </body>
-    
-    </html>
-    
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../static/js/LIDS_Dashboard.js"></script>
+    <script src="../static/js/LIDS_Table.js"></script>
+    <script>
+        // Function to collect filter values and call filterAlerts
+        function applyFilters() {
+            const filters = {
+                level: document.getElementById('filterLevel').value,
+                sourceIP: document.getElementById('filterSourceIP').value,
+                sourcePort: document.getElementById('filterSourcePort').value,
+                destinationIP: document.getElementById('filterDestinationIP').value,
+                destinationPort: document.getElementById('filterDestinationPort').value,
+                alertType: document.getElementById('filterAlertType').value
+            };
+            filterAlerts(filters);
+        }
+    </script>
+</body>
+
+</html>

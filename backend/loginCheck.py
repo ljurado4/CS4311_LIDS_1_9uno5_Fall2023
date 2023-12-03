@@ -15,6 +15,7 @@ class LoginCheck:
     def failedPssWrd(self, packet, protocol,timeOF,destPort,threshold):
         if protocol == "TCP":
             if destPort == '3389':
+                print("Fail1")
                 self.timeList.append(timeOF)
                 time1 = self.timeList[len(self.timeList)-1]
                 time2 = self.timeList[len(self.timeList)-2]
@@ -24,16 +25,19 @@ class LoginCheck:
                     return True
         
         if protocol == "SSH":
+            print("Fail2")
             ssh_display = packet.ssh.display.lower()
             if "authentication failed" in ssh_display or'51' in ssh_display or '51'in packet.ssh.get('msg_code','N/A') or "SSH_MSG_USERAUTH_FAILURE" in packet.ssh.get('msg_code','N/A'):
                 return True
 
         if protocol == "RDP":
+            print("Fail3")
             rdp_status = packet.rdp.status.lower()
             if "authentication failure" in rdp_status:
                 return True
 
         if protocol == "FTP":
+            print("Fail4")
             ftp_response_msg = packet.ftp.response_msg.lower()
             if "login failed" in ftp_response_msg or '530' in ftp_response_msg or '530' in packet.ftp.get('response_code','N/A'):
                 return True
