@@ -73,13 +73,13 @@ function exportAlerts(event){
     var table = document.getElementById("alertsTable");
     console.log(fileType.value)
     if(fileType.value == "csv"){
-      alertsToText  += "Time,Identifier,Level,SourceIP,SourcePort,DestIP,DestPort,Description\n"
+      alertsToText  += "Time,Identifier,Level,SourceIP,SourcePort,DestIP,DestPort,Alert Type,Description\n"
       for (var i = 0, row; row = table.rows[i]; i++) {
         console.log("hhhh")
       //iterate through rows
       //rows would be accessed using the "row" variable assigned in the for loop
         let rowContent = ""
-        rowContent += row.cells[0].innerHTML + ","  + row.cells[1].innerHTML + "," + row.cells[2].innerHTML + "," + row.cells[3].innerHTML + "," +row.cells[4].innerHTML + "," +row.cells[5].innerHTML + "," +row.cells[6].innerHTML + "," + row.cells[7].getElementsByTagName("button")[0].innerHTML
+        rowContent += row.cells[0].innerHTML + ","  + row.cells[1].innerHTML + "," + row.cells[2].innerHTML + "," + row.cells[3].innerHTML + "," +row.cells[4].innerHTML + "," +row.cells[5].innerHTML + "," +row.cells[6].innerHTML + "," + row.cells[7].innerHTML + "," + row.cells[8].getElementsByTagName("button")[0].innerHTML
         alertsToText += rowContent + "\n"
       }
       console.log(alertsToText)
@@ -97,7 +97,8 @@ function exportAlerts(event){
           "SourcePort":row.cells[4].innerHTML,
           "DestIP":row.cells[5].innerHTML,
           "DestPort":row.cells[6].innerHTML,
-          "Description":row.cells[7].getElementsByTagName("button")[0].innerHTML,
+          "AlertType":row.cells[7].innerHTML,
+          "Description":row.cells[8].getElementsByTagName("button")[0].innerHTML,
         }
         alertsToText += JSON.stringify(jsonObject) + "\n"
       }
@@ -113,10 +114,11 @@ function exportAlerts(event){
         alertsToText += "    <Identifier>" + row.cells[1].innerHTML + "</Identifier>\n"
         alertsToText += "    <Level>" + row.cells[2].innerHTML + "</Level>\n"
         alertsToText += "    <SourceIP>" + row.cells[3].innerHTML + "</SourceIP>\n"
-        alertsToText += "    <SourcePort>" + row.cells[4].innerHTML + "/<SourcePort>\n"
-        alertsToText += "    <DestIP>" + row.cells[5].innerHTML + "/<DestIP>\n"
-        alertsToText += "    <DestPort>" + row.cells[6].innerHTML + "/<DestPort>\n"
-        alertsToText += "    <Description>" + row.cells[7].getElementsByTagName("button")[0].innerHTML + "/<Description>\n"
+        alertsToText += "    <SourcePort>" + row.cells[4].innerHTML + "</SourcePort>\n"
+        alertsToText += "    <DestIP>" + row.cells[5].innerHTML + "</DestIP>\n"
+        alertsToText += "    <DestPort>" + row.cells[6].innerHTML + "</DestPort>\n"
+        alertsToText += "    <AlertType>" + row.cells[7].innerHTML + "</AlertType>\n"
+        alertsToText += "    <Description>" + row.cells[8].getElementsByTagName("button")[0].innerHTML + "/<Description>\n"
         alertsToText += "  </Alert " + i.toString() + ">\n"
       }
       alertsToText += "</Alerts>\n"
