@@ -75,4 +75,3 @@ socket.on('new_alert_data', function(data) {
 });
 // Author and modified Benjamin Hansen
 // Initial fetch to get the latest alerts
-fetchLatestAlerts();
