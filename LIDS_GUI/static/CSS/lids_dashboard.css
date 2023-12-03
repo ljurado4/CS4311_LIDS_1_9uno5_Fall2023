@@ -123,13 +123,13 @@ th {
     @Author:Seth Velasco
     Setting colors for the varying levels 
 */
-.level1{
+.level1Default{
     background-color: greenyellow;
 }
-.level2{
+.level2Default{
     background-color: yellow;
 }
-.level3{
+.level3Default{
     background-color: red;
 }
 /* The same colors but for the Protanopia Color blindess  */
