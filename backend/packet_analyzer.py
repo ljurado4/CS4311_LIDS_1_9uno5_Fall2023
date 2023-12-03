@@ -19,32 +19,35 @@ class PacketAnalyzer:
         self.portCheck = PortChecker.portDetection()
 
 # @ Author: Alejandro Hernandez
-    def analyze_packet(self, packet, time, identifier, sourceIP, sourcePort,destIP,destPort,protocol):
+    def analyze_packet(self, packet, time, identifier, sourceIP, sourcePort,destIP,destPort,protocol,handshake,packetList):
 
-        # Check for each error 
-                                    #,protocol
         if self.login_attempts(packet,protocol,destPort,time) == True:
             self.create_alert(packet, time, identifier, 3, sourceIP, sourcePort,destIP,destPort,"Failed Login Error","Multiple failed logins detected")
-        res = self.port_scan_check(sourceIP, destPort, time)
-        if res == "threshold2":
-            self.create_alert(packet, time, identifier, 3, sourceIP, sourcePort,destIP,destPort,"Port Scan Error","Port Scan surpassing threshold2")
-        elif res == "threshold1":
-            self.create_alert(packet, time, identifier, 2, sourceIP, sourcePort,destIP,destPort,"Port Scan Error","Port Scan surpassing threshold1")
+
+        if self.ip_check(sourceIP) == False:
+
+            res = self.port_scan_check(sourceIP, destPort, time, handshake, packetList)
+            if res == "threshold1":
+                self.create_alert(packet, time, identifier, 2, sourceIP, sourcePort,destIP,destPort,"Port Scan Error","Port Scan surpassing threshold1")
         elif self.ip_check(sourceIP) == False:
             self.create_alert(packet, time, identifier, 1, sourceIP, sourcePort,destIP,destPort,"Unknown IP Error","Source IP detected that is not appart of approved IP list")
 
 # @ Author: Alejandro Hernandez
     
     def ip_check(self, IP):
+        # print("IP check ",IP)
         return self.iC.ip_in_List(IP)
 
 # @ Author: Alejandro Hernandez
-    def port_scan_check(self, IP, destPort, time):
-        threshold1 = -1
-        threshold2 = 0
+    def port_scan_check(self, IP, destPort, time, handshake, packetList):
+        threshold1 = 300
         timeAllowed = 700
         timeOF = datetime.strptime(time,"%Y-%m-%d %H:%M:%S.%f")
-        return self.portCheck.port_Checking(IP, destPort, timeOF, timeAllowed, threshold1, threshold2)
+        # print("Reach")
+        # print("port_scan_check")
+        if handshake == True:
+            # print("handshake")
+            return self.portCheck.port_Checking(IP, destPort, timeOF, timeAllowed, threshold1, packetList)
     
 # @ Author: Alejandro Hernandez
     
@@ -62,6 +65,7 @@ class PacketAnalyzer:
         self.getAlerts.create_alert(pcap_data,time, identifier, level, sourceIP, sourcePort,destIP,destPort,typeAlert,description)
         self.getAlerts.ident_list(pcap_data, identifier)
         alerts = self.getAlerts.get_alerts()
+
 # @ Author: Lizbeth Jurado
     def read_pcap(self, pcap_file_path):
         try:
