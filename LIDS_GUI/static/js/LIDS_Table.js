@@ -14,9 +14,9 @@ document.addEventListener("DOMContentLoaded", function () {
     setInterval(fetchLatestAlerts, 20000);
 
     // Event listener for the "Sort Alerts" button
-    document.getElementById("sortAlertsButton").addEventListener("click", function () {
-        sortAlertsByLevel();
-    });
+    // document.getElementById("sortAlertsButton").addEventListener("click", function () {
+    //     sortAlertsByLevel();
+    // });
 });
 // @ Author: Benjamin Hansen
 // @ Modifier: Benjamin Hansen
@@ -59,6 +59,10 @@ function populateTable(alerts) {
         typeAlertCell.textContent = alert.TypeAlert;
         descriptionCell.textContent = alert.Description;
 
+        if (descriptionCell.textContent.includes("Port")){
+            console.log("Port Scan")
+        }
+        
         // Add a "Show PCAP" button to open PCAP data in a separate window
         let pcapCell = row.insertCell(9);
         let showPcapButton = document.createElement("button");

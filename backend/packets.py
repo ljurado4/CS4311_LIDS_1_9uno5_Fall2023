@@ -29,6 +29,8 @@ class PackTime:
     packets_captured = 0
     cap_sem = Semaphore(1)
     process_sem = Semaphore(0)
+    
+    
     packet_analyzer = packet_analyzer.PacketAnalyzer()
 
     def __init__(self):
@@ -117,7 +119,7 @@ class PackTime:
             }
 
             
-            self.packet_list.append(temp_packet_dict)
+            PackTime.packet_list.append(temp_packet_dict)
             PackTime.packet_list_Keep.append(temp_packet_dict)
 
 # @ Modifier:Alejandro Hernandez
@@ -126,15 +128,15 @@ class PackTime:
         while True:
             self.process_sem.acquire()
             self.cap_sem.acquire()
-            if not self.packet_list:
+            if not PackTime.packet_list:
                 self.cap_sem.release()
                 break
-            packet = self.packet_list.pop(0)
+            packet = PackTime.packet_list.pop(0)
             time = datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")
             #time = datetime.strptime(time0,"%Y-%m-%d %H:%M:%S.%f")
             if type(packet) == dict:
                 self.identifier += 1
-                self.packet_analyzer.analyze_packet(packet,time, self.identifier,packet["SourceIP"],packet["SourcePort"],packet["DestinationIP"],packet["DestinationPort"],packet["Protocol"],packet["HandShake"], PackTime.packet_list_Keep)
+                self.packet_analyzer.analyze_packet(packet,time, self.identifier,packet["SourceIP"],packet["SourcePort"],packet["DestinationIP"],packet["DestinationPort"],packet["Protocol"],packet["HandShake"])
             self.cap_sem.release()
 
 # @ Modifier:Alejandro Hernandez
@@ -165,7 +167,7 @@ class PackTime:
 
                 self.cap_sem.acquire()
                 packet = self.create_packet(in_packet)
-                self.packet_list.append(packet)
+                PackTime.packet_list.append(packet)
                 self.process_sem.release()
                 self.cap_sem.release()
 

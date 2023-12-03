@@ -9,8 +9,10 @@
 from . import ipChecker, alerts_manager, loginCheck, PortChecker
 from datetime import datetime
 import pyshark
-
+import threading
+from threading import Semaphore
 class PacketAnalyzer:
+    sem = Semaphore(1)
     def __init__(self):
         self.loginCheck = loginCheck.LoginCheck()
         self.packetAnalyzer = None
@@ -19,18 +21,21 @@ class PacketAnalyzer:
         self.portCheck = PortChecker.portDetection()
 
 # @ Author: Alejandro Hernandez
-    def analyze_packet(self, packet, time, identifier, sourceIP, sourcePort,destIP,destPort,protocol,handshake,packetList):
+    def analyze_packet(self, packet, time, identifier, sourceIP, sourcePort,destIP,destPort,protocol,handshake):
 
         if self.login_attempts(packet,protocol,destPort,time) == True:
             self.create_alert(packet, time, identifier, 3, sourceIP, sourcePort,destIP,destPort,"Failed Login Error","Multiple failed logins detected")
+            print("Failed login")
 
         if self.ip_check(sourceIP) == False:
 
-            res = self.port_scan_check(sourceIP, destPort, time, handshake, packetList)
+            res = self.port_scan_check(sourceIP, destPort, time, handshake)
             if res == "threshold1":
                 self.create_alert(packet, time, identifier, 2, sourceIP, sourcePort,destIP,destPort,"Port Scan Error","Port Scan surpassing threshold1")
-        elif self.ip_check(sourceIP) == False:
+                print("Port Checker")
+        if self.ip_check(sourceIP) == False:
             self.create_alert(packet, time, identifier, 1, sourceIP, sourcePort,destIP,destPort,"Unknown IP Error","Source IP detected that is not appart of approved IP list")
+            
 
 # @ Author: Alejandro Hernandez
     
@@ -39,15 +44,15 @@ class PacketAnalyzer:
         return self.iC.ip_in_List(IP)
 
 # @ Author: Alejandro Hernandez
-    def port_scan_check(self, IP, destPort, time, handshake, packetList):
-        threshold1 = 300
+    def port_scan_check(self, IP, destPort, time, handshake):
+        threshold1 = 500
         timeAllowed = 700
         timeOF = datetime.strptime(time,"%Y-%m-%d %H:%M:%S.%f")
         # print("Reach")
         # print("port_scan_check")
         if handshake == True:
             # print("handshake")
-            return self.portCheck.port_Checking(IP, destPort, timeOF, timeAllowed, threshold1, packetList)
+            return self.portCheck.port_Checking(IP, destPort, timeOF, timeAllowed, threshold1)
     
 # @ Author: Alejandro Hernandez
     
