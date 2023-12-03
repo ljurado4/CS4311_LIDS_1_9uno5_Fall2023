@@ -6,6 +6,7 @@
 #  @ Modified: Lizbeth Jurado
 
 import os
+import csv
 from flask import Flask, render_template, request, jsonify, flash
 from flask_cors import CORS
 from backend import packets,alerts_manager, ipChecker
@@ -142,10 +143,44 @@ def display_pcap():
 @app.route('/get_pcap_data')
 def get_pcap_data():
     analyzer = PacketAnalyzer()
-    pcap_data = analyzer.read_pcap()  # You would need to implement this method
+    pcap_data = analyzer.read_pcap() 
     formatted_data = analyzer.format_for_frontend(pcap_data)
     return jsonify(formatted_data)
 
-if __name__ == '__main__':
-    app.run(debug=True, host = "0.0.0.0")
+# @ Author: Lizbeth Jurado Showing filtered alerts on a new page
+@app.route('/filtered_alerts', methods=['GET', 'POST'])
+def filtered_alerts():
+    if request.method == 'POST':
+        level = request.form.get('level')
+        filtered_alerts = [alert for alert in alerts_manager.AlertManager().sharedAlerts if alert.level == level]
+        session['filtered_alerts'] = [alert.to_dict() for alert in filtered_alerts]  # Convert to dict for serialization
+        return render_template('filtered_alerts.html', alerts=filtered_alerts)
+    else:
+        # If it's a GET request, just display the page with filtering options
+        return render_template('filter_alerts.html')  
 
+# @ Author: Lizbeth Jurado New route for exporting filtered alerts
+@app.route('/export_filtered_alerts', methods=['POST'])
+def export_filtered_alerts():
+    # Get the filtered alerts from the session or recreate them from the form submission
+    filtered_alerts_dicts = session.get('filtered_alerts', [])
+    # Define the path for the new CSV file
+    csv_file_path = os.path.join(basedir, 'static', 'exports', 'filtered_alerts.csv')
+    
+    # Check if we have any alerts to export
+    if not filtered_alerts_dicts:
+        flash('No alerts to export.', 'warning')
+        return redirect(url_for('dashboard'))
+    
+    fieldnames = ['time', 'identifier', 'level', 'sourceIP', 'sourcePort', 'destIP', 'destPort', 'typeAlert', 'description']
+    
+    with open(csv_file_path, mode='w', newline='') as file:
+        writer = csv.DictWriter(file, fieldnames=fieldnames)
+        writer.writeheader()
+        for alert_dict in filtered_alerts_dicts:
+            writer.writerow(alert_dict)
+    
+    return send_file(csv_file_path, as_attachment=True)
+
+if __name__ == '__main__':
+    app.run(debug=True, host="0.0.0.0")

@@ -5,7 +5,6 @@
 # @ Author: Alejandro Hernandez
 # @ Modifier: Lizbeth Jurado
 
-
 class Alerts:
     # @ Modifier: Lizbeth Jurado
     # Hard-coded path to the PCAP file
@@ -28,8 +27,21 @@ class Alerts:
                 f"DestinationIP: {self.destIP}, DestinationPort: {self.destPort}, "
                 f"Type of Alert: {self.typeAlert}, Description: {self.description}")
 
-    # @ Modifier: Lizbeth Jurado
-    # Method to return the path of the PCAP file
+    # @ Modifier: Lizbeth Jurado convert the instance to a dictionary for serialization
+    def to_dict(self):
+        return {
+            'time': self.time,
+            'identifier': self.identifier,
+            'level': self.level,
+            'sourceIP': self.sourceIP,
+            'sourcePort': self.sourcePort,
+            'destIP': self.destIP,
+            'destPort': self.destPort,
+            'typeAlert': self.typeAlert,
+            'description': self.description
+        }
+
+    # @ Modifier: Lizbeth Jurado return the path of the PCAP file
     @classmethod
     def get_pcap_file_path(cls):
         return cls.PCAP_FILE_PATH
