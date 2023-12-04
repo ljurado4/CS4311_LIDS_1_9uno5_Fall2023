@@ -34,12 +34,6 @@ class MainCLI(Menu):
 
 if __name__ == "__main__":
 
-   #parser = argparse.ArgumentParser(description="CLI for LIDS.")
-    #parser.add_argument("--config_file", required=True, help="configuration file name (e.g. config.xml)")
-    #args = parser.parse_args()
-    
-    #configure_system = ConfigureCLI()
-    #configure_system.configure(args.config_file)
 
     parser = argparse.ArgumentParser(description="CLI for LIDS.")
     parser.add_argument("--config_file", required=True, help="Configuration file name (e.g., config.xml)")

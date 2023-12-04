@@ -32,6 +32,7 @@ alert_data = []
 def handle_response(alert):
     global alert_data
     alert_data.append(alert)
+    print("Received alerts",alert)
     socketio.emit('new_alert_data', alert, namespace='/lids-d')
 
 
@@ -150,7 +151,7 @@ def handle_LIDS_connect():
     
     for k, dic in configuration.items():
         
-        white_lst = dic['whitelist']
+        white_lst = set(dic['whitelist'].split(','))
         
         if client_ip in white_lst:
             is_ip_whitelisted  = True
