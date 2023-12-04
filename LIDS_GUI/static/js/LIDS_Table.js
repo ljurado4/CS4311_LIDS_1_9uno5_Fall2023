@@ -74,9 +74,8 @@ function populateTable(alerts) {
 
         // Add a "Show PCAP" button to open PCAP data in a separate window
         let pcapCell = row.insertCell(9)
-        let displayPCAPButton = "<button class = \"alertDescriptionButton\" onclick = \"displayAlert(\"Alert" + idNum.toString() + "\")\">PCAP</button>"
+        let displayPCAPButton = "<button class = \"alertDescriptionButton\" onclick = \"displayAlert(" + row.id + ")\">PCAP</button>"
         pcapCell.innerHTML = displayPCAPButton
-        idNum++
     });
 }
 
@@ -107,7 +106,7 @@ function showPcapData(identifier) {
 /* @author Arturo Olmos */
 // Function to display alert details
 function displayAlert(alertID){
-    let row = document.getElementById(alertID)
+    let row = alertID
     let myWindow = window.open("");
     //contents alert, ready to be displayed in new window
     let alertDisplay =  "Time:" + row.cells[0].innerHTML + 
@@ -123,7 +122,6 @@ function displayAlert(alertID){
     "text-align: center;" +
     "background-color: #CCCCCC;"
     //add attributes to new window
-    myWindow.document.title = alertID.toString()
     myWindow.document.body.style = style
     myWindow.document.body.innerHTML = alertDisplay   
 }
