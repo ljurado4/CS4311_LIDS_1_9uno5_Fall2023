@@ -8,8 +8,11 @@ import pyshark
 import threading
 import os
 from datetime import datetime
+#import sys
+#sys.path.append(r'C:\\Users\\velas\\OneDrive\\Documents\\Fall23\\SWE2Project\\CS4311_LIDS_19uno5_Fall2023')
 from backend.packet_analyzer import PacketAnalyzer
 from backend.alerts_manager import AlertManager
+import json
 
 class LNIDSPacketCapture:
     def __init__(self, interface, external_storage_path):
