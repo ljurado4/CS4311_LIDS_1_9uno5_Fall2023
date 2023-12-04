@@ -19,6 +19,7 @@ class portDetection:
         
 
 # @ Author:Alejandro Hernandez
+# Checks if port scan occurs by checking unique destination ports for a given ip and checking againist threshold for different destinations and amount of time
     def port_Checking(self,srcIP, destinationPort, timeOf, timeAllowed, threshold1):
         
         firstTime = None

@@ -20,6 +20,7 @@ class AlertManager:
         # Set up logging to a file
         logging.basicConfig(filename='alerts.log', level=logging.INFO)
 
+    #Creates the alerts with given alert data
     def create_alert(self, pcap_data, time, identifier, level, sourceIP, sourcePort, destIP, destPort, typeAlert, description):
 
         alert = Alerts.Alerts(time, identifier, level, sourceIP, sourcePort, destIP, destPort, typeAlert, description)
@@ -31,11 +32,11 @@ class AlertManager:
         logging.info(f"Alert created: {description} at {time}")
     
 # @ Author: Alejandro Hernandez
-    
+# Append alerts to identifier list
     def ident_list(self, packet, identifier):
         self.identifierList.append({identifier: [packet]})
 
 # @ Author: Alejandro Hernandez
-    
+# Gets all generated alerts
     def get_alerts(self):
         return self.alerts
