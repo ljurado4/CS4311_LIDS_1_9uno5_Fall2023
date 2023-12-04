@@ -28,10 +28,10 @@ class Alerts_CLI(Menu):
     def display_Alerts(self):
         
 
-        print("Debugged Display alerts")
+     
         lstAlerts = alerts_manager.AlertManager().sharedAlerts
         #print("Printing list alerts ",lstAlerts) 
-        print("List of Alerts")
+       
         
         # printing list 
         columns = ["time", "identifier", "level", "sourceIP", "sourcePort", "destIP", "destPort", "typeAlert", "description"]
@@ -39,11 +39,6 @@ class Alerts_CLI(Menu):
         # Generate a table from the list of dictionaries
         table = tabulate(lstAlerts, headers=columns, tablefmt="pretty")
         print(table)
-        #for i in lstAlerts:
 
-         #   print(i)
-        
         next_menu = self.get_user_input(">> ",self.choice_set)  
         self.navigate_next_menu(next_menu)
-        
-        menu_helper.navigate_next_menu(next_menu)

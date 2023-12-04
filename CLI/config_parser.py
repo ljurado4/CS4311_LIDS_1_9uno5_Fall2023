@@ -29,7 +29,7 @@ class ConfigureCLI(Menu):
 
 
 
-    def find_config_file_path(self, filename):
+    def find_path(self, filename):
         """
         Searches the entire file system for a file with the specified name.
         """
@@ -61,9 +61,9 @@ class ConfigureCLI(Menu):
             config_file_name (str): The name of the XML configuration file.
 
         """
-        xsd_path ='/Users/shas/Git/CS4311_LIDS_1_9uno5_Fall2023/CLI/ schema.xsd' #path to XSD file
+        xsd_path = self.find_path('schema.xsd') #path to XSD file
 
-        config_file_path = self.find_config_file_path(config_file_name)
+        config_file_path = self.find_path(config_file_name)
         print("config_file_path",config_file_path)
 
        
