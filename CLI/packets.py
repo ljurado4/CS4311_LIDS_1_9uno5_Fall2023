@@ -2,7 +2,7 @@
 #
 # Description: This file contains the implementation of the PackTime class, which is responsible for capturing, processing, and analyzing network packets. It includes methods for capturing live packets, processing PCAP files, and detecting network alerts.
 #
-# @ Author: Lizbeth Jurado
+# @ Author: Lizbeth Jurado, Seth Velasco
 # @ Modifier: 
 
 from menu import Menu
@@ -21,9 +21,18 @@ class PackTime(Menu):
 # @ Author: Lizbeth Jurado
 # @ Modified: Benjamin Hansen (added super init)
     def __init__(self):
-        super().__init__()
-
-
+        self.pack_time = None
+        base_path = "/Users/shas/Git/traffic" 
+        # TODO: Find a way to store files in a GitHub repo, giving too large error even with installing Git LFS
+        self.files = [
+            base_path + "7-17-EN.pcapng",
+            base_path + "AA_Day1_Traffic.pcapng",
+            base_path + "cvi.pcapng",
+            base_path + "eth0-LDV-wireshark.pcapng",
+            base_path + "nmap scan.pcapng",
+            base_path + "sv_day1traffic.pcapng",
+            base_path + "vd_07.17.23.pcapng"
+        ]
 # @ Author: Lizbeth Jurado
     def alertDetector(self, packet):
         # TODO: Implement alert detection
@@ -38,7 +47,7 @@ class PackTime(Menu):
             dst = in_packet.ip.dst
             # TODO: Packet creation logic
 
-# @ Author: Lizbeth Jurado
+# @ Author: Lizbeth Jurado, Seth Velasco
     def packet_handler(self):
         while True:
             self.process_sem.acquire()
@@ -67,7 +76,7 @@ class PackTime(Menu):
                 # Existing packet handling logic
       
                 print(packet)
-# @ Author: Lizbeth Jurado
+# @ Author: Lizbeth Jurado, Seth Velasco
     def run_sniffer(self):
         packet_handler_thread = th.Thread(target=self.packet_handler)
         packet_handler_thread.start()

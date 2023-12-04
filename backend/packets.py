@@ -2,9 +2,13 @@
 #
 # Description: Includes methods for creating and handling network packets. It also imports various modules and defines class attributes for managing packet data and synchronization.
 #
-# @ Author: 
+# @ Author:
 # @ Modifier:Alejandro Hernandez
 # @ Modifier:Lizbeth Jurado
+# @ Modifier: Seth Velasco
+
+
+
 import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -149,7 +153,7 @@ class PackTime:
             
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
-
+        print('before sniff')
         try:
 
             packet_handler_thread = th.Thread(target=self.packet_handler)
@@ -157,11 +161,11 @@ class PackTime:
 
 # @ Modified: LizbethBranch
 # For macOS
-            #capture = pyshark.LiveCapture(interface="en0")
+            capture = pyshark.LiveCapture(interface="en0")
 
             #capture = pyshark.LiveCapture(interface="enp0s3")
            
-            capture = pyshark.LiveCapture()
+            #capture = pyshark.LiveCapture()
 
             for in_packet in capture:
 

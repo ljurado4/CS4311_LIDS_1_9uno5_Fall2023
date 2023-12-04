@@ -156,7 +156,87 @@ th {
     border: None;
     background: rgb(173, 173, 173);
 }
+/* Setting colors for the varying levels */
+.level1{
+    background-color: greenyellow;
+}
+.level2{
+    background-color: yellow;
+}
+.level3{
+    background-color: red;
+}
 
+/*
+    @Author:Seth Velasco
+    Setting colors for the varying levels 
+*/
+.level1Default{
+    background-color: greenyellow;
+}
+.level2Default{
+    background-color: yellow;
+}
+.level3Default{
+    background-color: red;
+}
+/* The same colors but for the Protanopia Color blindess  */
+.level1Protanopia{
+    background-color: rgb(255, 231, 110);
+}
+.level2Protanopia{
+    background-color: rgb(255,247,216);
+}
+.level3Protanopia{
+    background-color: rgb(144,129,33);
+}
+/* The same colors, but for the Deuteranopia colorblindess*/
+.level1Deuteranopia{
+    background-color: rgb(255,226,189);
+}
+.level2Deuteranopia{
+    background-color: rgb(255,245,233);
+}
+.level3Deuteranopia{
+    background-color: rgb(162,122,0);
+}
+/* The same colors, but for the Tritanopia colorblindness */
+.level1Tritanopia{
+    background-color: rgb(200,237,255);
+}
+.level2Tritanopia{
+    background-color: rgb(255,244,249);
+}
+.level3Tritanopia{
+    background-color: rgb(253,24,0);
+}
+
+
+.table-container {
+    justify-content: space-between;
+    width: 70%;
+    max-height: 80vh;
+    margin: 1% 0% 1vh 0%;
+    display: inline-block;
+    flex-direction: column;
+    align-items: center;
+    overflow-x: auto;
+}
+
+.notifications,
+.errors {
+    display: inline-block;
+    height: 45.5vh;
+    width: 20vw;
+}
+
+table.alertbox {
+    width: 70%; /* adjusted width */
+    position: relative;
+    display: block;
+    overflow-x: visible;
+    margin: 1% 0% 1vh 5%; /* Adjust margin for positioning */
+}
 /*
     @Author:Arturo Olmos
     Styling for header so that it stays in a single position when scrolling

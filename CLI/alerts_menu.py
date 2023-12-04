@@ -46,5 +46,4 @@ class Alerts_CLI(Menu):
         next_menu = self.get_user_input(">> ",self.choice_set)  
         self.navigate_next_menu(next_menu)
         
-
-
+        menu_helper.navigate_next_menu(next_menu)
