@@ -1,7 +1,6 @@
 
 # Application Security and Development Security Technical Implementation Guide
 
-
 ## | ID | Description | Mitigating Reason |
 ## | --- | --- | --- |
 1. | V-222400 | Validity periods must be verified on all application messages using WS-Security or SAML assertions. | Not Applicable; Our implementation does not contain SOAP Capabilities.|
@@ -21,8 +20,8 @@
 8. | V-222609 | The application must not be subject to input handling vulnerabilities. | Applicable; our implementation deals with common input handling vulnerabilities.|
 
 9. | V-222608 | The application must not be vulnerable to XML-oriented attacks. | Applicable; our implementation validates the XML file against a defined schema, ensuring only well formed and schema compliant XML data is processed.|
-##### REVISAR 
-10. | V-222602 | The application must protect from Cross-Site Scripting (XSS) vulnerabilities.| |
+ 
+10. | V-222602 | The application must protect from Cross-Site Scripting (XSS) vulnerabilities.|Applicable; as our current version, specific XSS protection mechanisms have not been implemented.|
 
 11. | V-222601 | The application must not store sensitive information in hidden fields. | Not applicable; our implementation does not request any sensitive information from the user.|
 
