@@ -2,8 +2,9 @@
 #
 # Description: This class is designed to manage and create alerts within a system and has some logging functionality.
 #
-# @ Author:
-# @ Modifier:
+# @ Modifier: Lizbeth Jurado
+# @ Modifier: Sandra Barbra
+# @ Modifier:Tomas Sandoval
 
 from datetime import datetime
 from . import db
