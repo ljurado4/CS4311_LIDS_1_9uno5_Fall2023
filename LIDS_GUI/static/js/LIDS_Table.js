@@ -35,7 +35,7 @@ function fetchLatestAlerts() {
 function populateTable(alerts) {
     const tbody = document.getElementById("alertBoxTable").getElementsByTagName("tbody")[0];
     tbody.innerHTML = ""; // Clear previous rows
-
+    
     alerts.forEach(alert => {
         let row = tbody.insertRow();
 
