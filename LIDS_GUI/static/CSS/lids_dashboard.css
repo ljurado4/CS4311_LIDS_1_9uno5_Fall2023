@@ -376,3 +376,15 @@ div.tableContainer {
     border: 2px solid #AAA;
     border-radius: 10px;
 }
+/*
+    @Author:Arturo Olmos
+    Styling for table buttons
+*/
+.alertDescriptionButton{
+    background-color: white;
+    border: None;
+    font-size: 17px;
+    box-shadow: none;
+    height: 100%;
+    width: 100%;
+}

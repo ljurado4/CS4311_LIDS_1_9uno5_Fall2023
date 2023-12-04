@@ -35,9 +35,10 @@ function fetchLatestAlerts() {
 function populateTable(alerts) {
     const tbody = document.getElementById("alertBoxTable").getElementsByTagName("tbody")[0];
     tbody.innerHTML = ""; // Clear previous rows
-    
+    let idNum = 1
     alerts.forEach(alert => {
         let row = tbody.insertRow();
+        row.id = "Alert" + idNum.toString()
 
         let timeCell = row.insertCell(0);
         let identifierCell = row.insertCell(1);
@@ -70,13 +71,32 @@ function populateTable(alerts) {
   
 
         // Add a "Show PCAP" button to open PCAP data in a separate window
-        let pcapCell = row.insertCell(9);
-        let showPcapButton = document.createElement("button");
-        showPcapButton.textContent = "PCAP";
-        showPcapButton.addEventListener("click", function () {
-            showPcapData(alert.Identifier); // Pass the alert identifier to retrieve PCAP data
-        });
-        pcapCell.appendChild(showPcapButton);
+        let pcapCell = row.insertCell(9)
+        let showPcapButton = document.createElement("button")
+        showPcapButton.textContent = "PCAP"
+        showPcapButton.classList.add("alertDescriptionButton")
+        showPcapButton.onclick = function(){
+            let row = document.getElementById(row.id)
+            let myWindow = window.open("",alertInfo);
+            //contents alert, ready to be displayed in new window
+            let alertDisplay =  "Time:" + row.cells[0].innerHTML + 
+            "<br>Identifier:" + row.cells[1].innerHTML + 
+            "<br>Level:" + row.cells[2].innerHTML + 
+            "<br>SourceIP:" + row.cells[3].innerHTML +
+            "<br>SourcePort:" + row.cells[4].innerHTML + 
+            "<br>DestIP:" + row.cells[5].innerHTML +
+            "<br>DestPort:" + row.cells[6].innerHTML +
+            "<br>AlertType:" + row.cells[7].innerHTML + 
+            "<br>Description:" + row.cells[8].getElementsByTagName("button")[0].innerHTML
+            let style = "font-size: 48px;" + 
+            "text-align: center;" +
+            "background-color: #CCCCCC;"
+            //add attributes to new window
+            myWindow.document.title = "Alert " + alertInfo[0].slice(5) + " Information"
+            myWindow.document.body.style = style
+            myWindow.document.body.innerHTML = alertDisplay   
+        }
+        pcapCell.appendChild(showPcapButton)
     });
 }
 
@@ -103,6 +123,11 @@ function showPcapData(identifier) {
         .catch(error => {
             console.error("There was an error fetching the PCAP data!", error);
         });
+}
+/* @author Arturo Olmos */
+// Function to display alert details
+function displayAlert(alertID){
+    
 }
 
 
