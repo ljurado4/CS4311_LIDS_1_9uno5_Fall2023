@@ -4,6 +4,8 @@
 #
 # @ Author: Alejandro Hernandez
 # @ Modifier: Lizbeth Jurado
+# @ Modifier: Sandra Barbra
+# @ Modifier:Tomas Sandoval
 
 
 from . import ipChecker, alerts_manager, loginCheck, PortChecker
@@ -74,6 +76,8 @@ class PacketAnalyzer:
         alerts = self.getAlerts.get_alerts()
 
 # @ Author: Lizbeth Jurado
+# @ Modifier: Sandra Barbra
+# @ Modifier:Tomas Sandoval
     def read_pcap(self, pcap_file_path):
         try:
             # Open the pcap file with FileCapture
