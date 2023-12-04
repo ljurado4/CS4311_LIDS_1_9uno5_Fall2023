@@ -161,7 +161,7 @@ class PackTime:
 
 # @ Modified: LizbethBranch
 # For macOS
-            #capture = pyshark.LiveCapture(interface="en0")
+            # capture = pyshark.LiveCapture(interface="en0")
 
             #capture = pyshark.LiveCapture(interface="enp0s3")
            

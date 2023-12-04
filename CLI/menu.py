@@ -6,18 +6,6 @@
 
 # @ Author: Benjamin Hansen
 # @ Modifier: Benjamin Hansen 
-import config_parser
-"""
-from CLI.help_menu import HelpMenu
-from CLI.pcap_menu import PcapMenu
-from CLI.alerts_menu import Alerts_CLI
-from CLI.main_menu import MainMenu
-"""
-import help_menu
-import pcap_menu
-import alerts_menu
-import main_menu
-from backend import alerts_manager
 
 class Menu():
     """A class for common functions the CLI will use across different menus.

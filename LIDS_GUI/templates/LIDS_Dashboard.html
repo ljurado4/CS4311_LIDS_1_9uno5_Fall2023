@@ -7,7 +7,7 @@
     # Formatted the basic structure for the page, and added styling to it as well
     # @ Modifier: Lizbeht Jurado
     # @ Modifier: Seth Velasco 
-    #
+    # @ Modifier Benjamin Hansen
  -->
 <!DOCTYPE html>
 <html lang="en">
@@ -43,13 +43,13 @@
         <!-- left side bar -->
         <div class="leftSidebar" id="leftSidebar" style="vertical-align: top;">
             <form id="configFileForm">
-                <input type="image" class="leftSidebarButton dashboardButtonAction leftSidebarImages"
-                    src="../static/img/Display.png">
+                <input type="image" class="leftSidebarButton dashboardButtonAction leftSidebarImages" 
+                    src="../static/img/Display.png" onclick="viewAlerts(event)">
             </form>
             <br style="line-height: 20px;">
             <form id="alertsTableForm">
                 <input type="image" class="leftSidebarButton dashboardButtonAction leftSidebarImages"
-                    src="../static/img/config.png">
+                    src="../static/img/config.png" onclick="viewXML(event)">
             </form>
         </div>
         <div class="tableContainer" id="middleContainer" style="">
@@ -86,7 +86,7 @@
                 <button id="Tritanopia" onclick="applyColorblind('Tritanopia')">Tritanopia</button>
             </div>
             <table id="alertBoxTable">
-
+                <!-- @Modifier Benjamin Hansen-->
                 <thead>
                     <tr>
                         <th>Time</th>
