@@ -21,6 +21,7 @@ class PacketAnalyzer:
         self.portCheck = PortChecker.portDetection()
 
 # @ Author: Alejandro Hernandez
+# Receives packet data and calls methods to check if packet should cause an alert
     def analyze_packet(self, packet, time, identifier, sourceIP, sourcePort,destIP,destPort,protocol,handshake):
 
         if self.login_attempts(packet,protocol,destPort,time) == True:
@@ -38,12 +39,13 @@ class PacketAnalyzer:
             
 
 # @ Author: Alejandro Hernandez
-    
+# Calls method to check if packet contains unknown ip returns false if alert should be created
     def ip_check(self, IP):
         # print("IP check ",IP)
         return self.iC.ip_in_List(IP)
 
 # @ Author: Alejandro Hernandez
+# calls method to check if a port scan has occured, will return "threshold1" if alert should be created, creates destination threshold and time threshold
     def port_scan_check(self, IP, destPort, time, handshake):
         threshold1 = 500
         timeAllowed = 700
@@ -55,7 +57,7 @@ class PacketAnalyzer:
             return self.portCheck.port_Checking(IP, destPort, timeOF, timeAllowed, threshold1)
     
 # @ Author: Alejandro Hernandez
-    
+# calls method to check if a mutiple failed login alerts should be created returns true if an alert should be created, creates time threshold 
     def login_attempts(self, packet,protocol,destPort,time):
         threshold = 700
         timeOF = datetime.strptime(time,"%Y-%m-%d %H:%M:%S.%f")

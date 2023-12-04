@@ -14,7 +14,9 @@ import sys
 
 class ip_Checker:
     configuration = {}
-    
+
+
+#Checks if an ip is in the whitelist    
     def ip_in_List(self, packet_ip):
         
         for k,dic in ip_Checker.configuration.items():

@@ -11,6 +11,7 @@ class Alerts:
     # Hard-coded path to the PCAP file
     PCAP_FILE_PATH = '/Users/lizbethjurado/Git/CS4311_LIDS_19uno5_Fall2023/7-17-EN.pcapng'
 
+#Defines what constitutes an alert
     def __init__(self, time, identifier, level, sourceIP, sourcePort, destIP, destPort, typeAlert, description):
         self.time = time
         self.identifier = identifier

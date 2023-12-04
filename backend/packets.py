@@ -42,7 +42,7 @@ class PackTime:
 
 
 # @ Modifier:Alejandro Hernandez
-    
+# Creates dictionary with all the packet data
     def create_packet(self, in_packet):
         time = datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")
         if 'IP' in in_packet or "Src" in in_packet or "Source" in in_packet:
@@ -127,7 +127,7 @@ class PackTime:
             PackTime.packet_list_Keep.append(temp_packet_dict)
 
 # @ Modifier:Alejandro Hernandez
-
+# Establishes time stamp and sends packet to be analyzed
     def packet_handler(self):
         while True:
             self.process_sem.acquire()
@@ -144,7 +144,7 @@ class PackTime:
             self.cap_sem.release()
 
 # @ Modifier:Alejandro Hernandez
-    
+# Method to capture live traffic  
     def run_sniffer(self):
         # Wait for the configuration
         with config_condition:
