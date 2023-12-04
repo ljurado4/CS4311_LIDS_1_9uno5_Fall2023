@@ -23,18 +23,18 @@ let xmlConfigState = "<textarea class = \"xmlFileTextArea\">File Name: " + windo
 // Forms for event listeners
 
 // Handles event when the user wants to see the config file
-configFileForm.addEventListener("submit", (event) => {
+function viewXML(event){
     event.preventDefault();
     alertsTableState = middleContainer.innerHTML;
     middleContainer.innerHTML = xmlConfigState;
-});
+}
 
 // Handles event when the user wants to see alerts displayed
-alertsTableFrom.addEventListener("submit", (event) => {
+function viewAlerts(event) {
     event.preventDefault();
     xmlConfigState = middleContainer.innerHTML;
     middleContainer.innerHTML = alertsTableState;
-});
+};
 
 // Function to toggle dropdown
 function toggleDropdown() {
