@@ -40,7 +40,7 @@ function populateTable(alerts) {
     alerts.forEach(alert => {
         let row = tbody.insertRow();
         row.id = "Alert" + idNum.toString()
-        idNum++
+        
 
         let timeCell = row.insertCell(0);
         let identifierCell = row.insertCell(1);
@@ -74,8 +74,9 @@ function populateTable(alerts) {
 
         // Add a "Show PCAP" button to open PCAP data in a separate window
         let pcapCell = row.insertCell(9)
-        let displayPCAPButton = "<button class = \"alertDescriptionButton\" onclick = \"displayAlert(" + row.id + ")\">PCAP</button>"
+        let displayPCAPButton = "<button class = \"alertDescriptionButton\" onclick = \"displayAlert(\"Alert" + idNum.toString() + "\")\">PCAP</button>"
         pcapCell.innerHTML = displayPCAPButton
+        idNum++
     });
 }
 
