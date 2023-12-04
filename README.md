@@ -75,3 +75,6 @@ Once the environment is active:
 =======
 
 Once the server is running, access the Web UI by navigating to `http://127.0.0.1:5000` in your web browser.
+
+### Video Demo
+https://drive.google.com/file/d/1jeXo2xKE-I-CS_Y7VUTt1GTSCpqCsb1U/view?usp=share_link
