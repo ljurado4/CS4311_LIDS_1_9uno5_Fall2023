@@ -148,7 +148,7 @@ function exportAlerts(event){
 function displayAlert(alertID){
     const alertInfo = alertID.split("-")
     let row = document.getElementById(alertInfo[0])
-    let myWindow = window.open("");
+    let myWindow = window.open("",alertInfo);
     //contents alert, ready to be displayed in new window
     let alertDisplay =  "Time:" + row.cells[0].innerHTML + 
     "<br>Identifier:" + row.cells[1].innerHTML + 
@@ -162,8 +162,8 @@ function displayAlert(alertID){
     let style = "font-size: 48px;" + 
     "text-align: center;" +
     "background-color: #CCCCCC;"
+    //add attributes to new window
+    myWindow.document.title = "Alert " + alertInfo[0].slice(5) + " Information"
     myWindow.document.body.style = style
-    myWindow.document.body.innerHTML = alertDisplay
-   
-    
+    myWindow.document.body.innerHTML = alertDisplay   
 }
