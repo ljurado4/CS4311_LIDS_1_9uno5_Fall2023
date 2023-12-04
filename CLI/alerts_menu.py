@@ -3,7 +3,9 @@
 # Description: Displaying alerts through a command-line interface (CLI). The class includes a method called display_Alerts that initiates the capture of network packets and then prints a list of alerts obtained from an AlertManager
 
 # @ Author: Benjamin Hansen
-# @ Modifier: Alejandro Hernandez, Thomas Sandoval, Sandra Barba
+# @ Modifier: Alejandro Hernandez
+# @ Modifier: Thomas Sandoval
+# @ Modifier: Sandra Barba
 
 
 import sys
