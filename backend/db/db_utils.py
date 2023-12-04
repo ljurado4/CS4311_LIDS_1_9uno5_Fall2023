@@ -2,7 +2,8 @@
 #
 # Description: Sets up functions related to the database.
 #
-# @ Author:
+# @ Modifier: Sandra Barbra
+# @ Modifier:Tomas Sandoval
 # @ Modifier: Lizbeth Jurado
 
 from . import db
