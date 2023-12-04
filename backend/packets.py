@@ -2,9 +2,13 @@
 #
 # Description: Includes methods for creating and handling network packets. It also imports various modules and defines class attributes for managing packet data and synchronization.
 #
-# @ Author: 
+# @ Author:
 # @ Modifier:Alejandro Hernandez
 # @ Modifier:Lizbeth Jurado
+# @ Modifier: Seth Velasco
+
+
+
 import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))

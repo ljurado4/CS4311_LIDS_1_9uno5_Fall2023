@@ -2,7 +2,7 @@
 #
 # Description: This file contains the implementation of the PackTime class, which is responsible for capturing, processing, and analyzing network packets. It includes methods for capturing live packets, processing PCAP files, and detecting network alerts.
 #
-# @ Author: Lizbeth Jurado
+# @ Author: Lizbeth Jurado, Seth Velasco
 # @ Modifier: 
 
 from menu import Menu
@@ -38,7 +38,7 @@ class PackTime(Menu):
             dst = in_packet.ip.dst
             # TODO: Packet creation logic
 
-# @ Author: Lizbeth Jurado
+# @ Author: Lizbeth Jurado, Seth Velasco
     def packet_handler(self):
         while True:
             self.process_sem.acquire()
@@ -67,7 +67,7 @@ class PackTime(Menu):
                 # Existing packet handling logic
       
                 print(packet)
-# @ Author: Lizbeth Jurado
+# @ Author: Lizbeth Jurado, Seth Velasco
     def run_sniffer(self):
         packet_handler_thread = th.Thread(target=self.packet_handler)
         packet_handler_thread.start()

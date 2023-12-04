@@ -69,10 +69,6 @@ function populateTable(alerts) {
 
   
 
-        if (descriptionCell.textContent.includes("Port")){
-            console.log("Port Scan")
-        }
-        
         // Add a "Show PCAP" button to open PCAP data in a separate window
         let pcapCell = row.insertCell(9);
         let showPcapButton = document.createElement("button");

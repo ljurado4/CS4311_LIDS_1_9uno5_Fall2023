@@ -5,7 +5,8 @@
     #
     # @ Author: Arturo Olmos, Raul Tinajero
     # Formatted the basic structure for the page, and added styling to it as well
-    # @ Modifier: Lizbeht Jurado 
+    # @ Modifier: Lizbeht Jurado
+    # @ Modifier: Seth Velasco 
     #
  -->
 <!DOCTYPE html>
@@ -77,6 +78,12 @@
                     <!-- Apply Filter Button -->
                     <button onclick="applyFilters(); toggleFilterDropdown()">Apply Filters</button>
                 </div>
+            </div>
+            <div>
+                <button id="Default" onclick="applyColorblind('Default')">Default</button>
+                <button id="Protanopia" onclick="applyColorblind('Protanopia')">Protanopia</button>
+                <button id="Deuteranopia" onclick="applyColorblind('Deuteranopia')">Deuteranopia</button>
+                <button id="Tritanopia" onclick="applyColorblind('Tritanopia')">Tritanopia</button>
             </div>
             <table id="alertBoxTable">
 
@@ -159,6 +166,25 @@
             };
             filterAlerts(filters);
         }
+        function applyColorblind(selectedOption) {
+                //finish this method within the html script
+                const tbody = document.getElementById("alertBoxTable").getElementsByTagName("tbody")[0];
+                const rows = tbody.getElementsByTagName("tr");
+
+                for (let i = 0; i < rows.length; i++) {
+                    const levelCell = rows[i].getElementsByTagName("td")[2];
+                    //console.log(levelCell);
+                    classAttribute = levelCell.getAttribute('class');
+                    //console.log(classAttribute);
+                    if (classAttribute[5] === '1') {
+                        levelCell.setAttribute('class','level1' + selectedOption);
+                    }else if (classAttribute[5] === '2') {
+                        levelCell.setAttribute('class','level2' + selectedOption);
+                    }else if (classAttribute[5] === '3') {
+                        levelCell.setAttribute('class','level3' + selectedOption);
+                    }
+                };
+            };
     </script>
 </body>
 
