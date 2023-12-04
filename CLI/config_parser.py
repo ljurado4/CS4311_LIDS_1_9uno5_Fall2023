@@ -79,7 +79,7 @@ class ConfigureCLI(Menu):
             tree = etree.parse(config_file_path)
             root = tree.getroot()
         #tree = ET.parse(config_file_path)
-       # tree = parse(config_file_path)
+        #tree = parse(config_file_path)
         #root = tree.getroot()
         
             for system in root.findall('system'):

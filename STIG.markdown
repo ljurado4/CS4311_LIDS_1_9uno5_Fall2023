@@ -19,7 +19,7 @@
 7. | V-222577 | The application must not expose session IDs. | Not Applicable; Our implementation does not store session IDs.|
 
 8. | V-222609 | The application must not be subject to input handling vulnerabilities. | Applicable; our implementation deals with common input handling vulnerabilities.|
-##### REVISAR 
+
 9. | V-222608 | The application must not be vulnerable to XML-oriented attacks. | Applicable; our implementation validates the XML file against a defined schema, ensuring only well formed and schema compliant XML data is processed.|
 ##### REVISAR 
 10. | V-222602 | The application must protect from Cross-Site Scripting (XSS) vulnerabilities.| |
