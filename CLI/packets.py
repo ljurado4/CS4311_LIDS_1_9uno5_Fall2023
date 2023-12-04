@@ -21,9 +21,24 @@ class PackTime(Menu):
 # @ Author: Lizbeth Jurado
 # @ Modified: Benjamin Hansen (added super init)
     def __init__(self):
+<<<<<<< HEAD
+        self.pack_time = None
+        base_path = "/Users/shas/Git/traffic" 
+        # TODO: Find a way to store files in a GitHub repo, giving too large error even with installing Git LFS
+        self.files = [
+            base_path + "7-17-EN.pcapng",
+            base_path + "AA_Day1_Traffic.pcapng",
+            base_path + "cvi.pcapng",
+            base_path + "eth0-LDV-wireshark.pcapng",
+            base_path + "nmap scan.pcapng",
+            base_path + "sv_day1traffic.pcapng",
+            base_path + "vd_07.17.23.pcapng"
+        ]
+=======
         super().__init__()
 
 
+>>>>>>> 72844b86731595f992e6c5b5b1bbd06d5bb39539
 # @ Author: Lizbeth Jurado
     def alertDetector(self, packet):
         # TODO: Implement alert detection

@@ -5,6 +5,7 @@
 
 # @ Author: Benjamin Hansen
 # @ Modifier: Benjamin Hansen
+# @ Modifier: Sandra Barba
 
 from menu import Menu
 import os
@@ -51,6 +52,7 @@ class ConfigureCLI(Menu):
     
     
     
+
     def configure(self, config_file_name: str) -> None:
         """
         Parses the provided XML configuration file and updates the system.
@@ -91,8 +93,33 @@ class ConfigureCLI(Menu):
             print(f"Open Ports: {ports}")
             print(f"Whitelisted IPs: {whitelist}")
 
-            
-            Menu.update_system_config(name, ip, mac, ports, whitelist)
+        if not self.validate_xml(config_file_path, xsd_path):
+            print("XML file is not valid according to the schema.")
+            return
+        
+
+        if config_file_path and self.validate_xml(config_file_path, xsd_path):
+            tree = etree.parse(config_file_path)
+            root = tree.getroot()
+        #tree = ET.parse(config_file_path)
+        #tree = parse(config_file_path)
+        #root = tree.getroot()
+        
+            for system in root.findall('system'):
+                name = system.find('name').text
+                ip = system.find('ip').text
+                mac = system.find('mac').text
+                ports = system.find('ports').text.split(',')
+                whitelist = system.find('whitelist').text.split(',')
+                
+                print(f"Hostname: {name}")
+                print(f"IP Address: {ip}")
+                print(f"MAC Address: {mac}")
+                print(f"Open Ports: {ports}")
+                print(f"Whitelisted IPs: {whitelist}")
+
+                
+                Menu.update_system_config(name, ip, mac, ports, whitelist)
             
         
     def configure_handler(self,config_file: str) -> None:
