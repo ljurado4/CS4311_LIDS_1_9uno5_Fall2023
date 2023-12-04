@@ -3,12 +3,16 @@ import socketio
 class LIDSSocketClient:
     def __init__(self, server_url, namespace):
         self.server_url = server_url
-        self.namespace = namespace
         self.sio = socketio.Client()
 
     def start(self):
-        self.sio.connect(self.server_url, namespaces=[self.namespace])
-        print(f"Connected to {self.server_url} with namespace {self.namespace}")
+        try:
+            
+            self.sio.connect(self.server_url)
+            print(f"Connected to {self.server_url}")
+        except Exception as e:
+            error_message = str(e)
+            print("Failed to connect to server")
 
     def send_alert_data(self, event, data):
         self.sio.emit(event, data, namespace=self.namespace)
@@ -20,11 +24,11 @@ class LIDSSocketClient:
 
 
 if __name__ == "__main__":
-    client = LIDSSocketClient('http://', '/lids-d')
+    client = LIDSSocketClient('http://')
     client.start()
 
 
-    client.send_event('your_event', {'data': 'data'})
+    
 
 
     client.stop()
