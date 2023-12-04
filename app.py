@@ -127,7 +127,10 @@ def disconnect():
     sio.disconnect()
     return render_template('LIDS_Main.html')
 
-
+@app.route('/LIDS_XML_View')
+def viewXMLFile():
+    print("Hello")
+    return render_template('LIDS_XML_View.html')
 # @ Author: Lizbeth Jurado 
 # Created to handle pcap data
 @app.route('/display_pcap')

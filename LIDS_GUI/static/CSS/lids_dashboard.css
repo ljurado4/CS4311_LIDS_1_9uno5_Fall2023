@@ -6,9 +6,11 @@
 # @Author:Arturo Olmos, Raul Tinajero Olivas
 # @ Modifier:
 */
-
+/*
+@author:Arturo Olmos
+*/
 .xmlFileTextArea {
-    height: 91%;
+    height: 100%;
     border-radius: 3px;
     width: 100%;
     overflow: auto;

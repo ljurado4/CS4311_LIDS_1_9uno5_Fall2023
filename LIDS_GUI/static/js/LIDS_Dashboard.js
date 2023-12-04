@@ -18,22 +18,21 @@ const disconnectForm = document.querySelector("#disconnectButtonForm");
 // State variables for HTML
 let alertsTableState = middleContainer.innerHTML;
 // Formatting XML file output
-let xmlConfigState = "<textarea class = \"xmlFileTextArea\">File Name: " + window.localStorage.getItem("xmlFileName") + "\n" + window.localStorage.getItem("xmlFile") + "</textarea>";
 
+let xmlConfigState = "<textarea class = \"xmlFileTextArea\">File Name: " + window.localStorage.getItem("xmlFileName") + "\n" + window.localStorage.getItem("xmlFile") + "</textarea>";
 // Forms for event listeners
 
 // Handles event when the user wants to see the config file
 function viewXML(event){
     event.preventDefault();
-    alertsTableState = middleContainer.innerHTML;
-    middleContainer.innerHTML = xmlConfigState;
+    console.log("hello")
+    window.location = "LIDS_XML_View"
 }
 
 // Handles event when the user wants to see alerts displayed
 function viewAlerts(event) {
     event.preventDefault();
-    xmlConfigState = middleContainer.innerHTML;
-    middleContainer.innerHTML = alertsTableState;
+    window.location = "LIDS_Dashboard"
 };
 
 // Function to toggle dropdown
