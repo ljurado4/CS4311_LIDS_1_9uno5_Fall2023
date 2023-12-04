@@ -4,6 +4,8 @@
 # 
 # @ Author: Alejandro Hernandez
 # @ Modifier: Lizbeth Jurado
+# @ Modifier: Sandra Barbra
+# @ Modifier:Tomas Sandoval
 
 
 class Alerts:
@@ -30,6 +32,8 @@ class Alerts:
                 f"Type of Alert: {self.typeAlert}, Description: {self.description}")
 
     # @ Modifier: Lizbeth Jurado
+    # @ Modifier: Sandra Barbra
+    # @ Modifier:Tomas Sandoval
     # Method to return the path of the PCAP file
     @classmethod
     def get_pcap_file_path(cls):
