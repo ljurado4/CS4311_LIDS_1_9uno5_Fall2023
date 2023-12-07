@@ -1,13 +1,13 @@
 import socketio
 import time
-
+# @ Author: Benjamin Hansen
 class LIDSSocketClient:
     
     """
     A client class for connecting to a server via Socket.IO.
     """
 
-
+    # @ Author: Benjamin Hansen
     def __init__(self, server_url):
         """
         Initialize the client with the given server URL.
@@ -18,7 +18,7 @@ class LIDSSocketClient:
         self.server_url = server_url
         self.sio = socketio.Client(ssl_verify=False)
         self.connected_server = False
-
+# @ Author: Benjamin Hansen
     def start(self):
         """
         Connects to the server and sets the connection status.
@@ -33,7 +33,7 @@ class LIDSSocketClient:
             error_message = str(e)
             print(f'Failed to connect to server {error_message}')
 
-
+# @ Author: Benjamin Hansen
     def send_alert_data(self,alerts_data):
         """
         Sends alert data to the server.
@@ -46,7 +46,7 @@ class LIDSSocketClient:
             return
         self.sio.emit("Alert Data", alerts_data)
         print(f"Sent event Alert Data with data: {alerts_data}")
-
+# @ Author: Benjamin Hansen
     def stop(self):
         """
         Disconnects from the server.
@@ -54,7 +54,7 @@ class LIDSSocketClient:
         self.sio.disconnect()
         print("Disconnected from server")
 
-
+# @ Author: Benjamin Hansen
 if __name__ == "__main__":
     # Example usage of the LIDSSocketClient
     client = LIDSSocketClient('https://192.168.1.136:5001')
