@@ -7,6 +7,7 @@
 # Added functionality for the buttons on the left sidebar
 # @ Author:Lizbeth Jurado
 # Sorting functionality
+# # Modifier: Seth Velasco
 #*/
 
 // Get forms for event listeners

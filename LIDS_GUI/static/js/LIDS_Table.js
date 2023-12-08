@@ -6,6 +6,7 @@
 # @ Author: Benjamin Hansen
 # @ Modifier: Benjamin Hansen
 # @ Modifier: Lizbeth Jurado PCAP
+# @ Modifier: Seth Velasco
 */
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -33,6 +34,7 @@ function fetchLatestAlerts() {
 // @ Author: Benjamin Hansen
 // @ Modifier: Benjamin Hansen
 // @modifier: Arturo Olmos
+// @Modifier: Seth Velasco
 function populateTable(alerts) {
     const tbody = document.getElementById("alertBoxTable").getElementsByTagName("tbody")[0];
     tbody.innerHTML = ""; // Clear previous rows
